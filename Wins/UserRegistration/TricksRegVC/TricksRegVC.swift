@@ -6,4 +6,8 @@
 //  Copyright © 2020 Hope To. All rights reserved.
 //
 
-import Foundation
+import UIKit
+
+class TricksRegVC: Registration{
+    
+}
