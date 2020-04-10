@@ -20,6 +20,11 @@
 		5C1C1D81243D1DFD008BDC58 /* UserInfoRegProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C1C1D80243D1DFD008BDC58 /* UserInfoRegProtocol.swift */; };
 		5C1C1D83243D24B6008BDC58 /* UserInfoRegRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C1C1D82243D24B6008BDC58 /* UserInfoRegRouter.swift */; };
 		5C6C0944243E7868007C2022 /* TricksRegVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C6C0943243E7868007C2022 /* TricksRegVC.swift */; };
+		5C70DF1F243FD5A200C4A998 /* TrickRegProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C70DF1E243FD5A200C4A998 /* TrickRegProtocol.swift */; };
+		5C70DF21243FD76200C4A998 /* TrickRegConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C70DF20243FD76200C4A998 /* TrickRegConfigurator.swift */; };
+		5C70DF23243FD79800C4A998 /* TrickRegPresentor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C70DF22243FD79800C4A998 /* TrickRegPresentor.swift */; };
+		5C70DF25243FD7CA00C4A998 /* TrickRegInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C70DF24243FD7CA00C4A998 /* TrickRegInteractor.swift */; };
+		5C70DF27243FD7F200C4A998 /* TrickRegRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C70DF26243FD7F200C4A998 /* TrickRegRouter.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +43,11 @@
 		5C1C1D80243D1DFD008BDC58 /* UserInfoRegProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoRegProtocol.swift; sourceTree = "<group>"; };
 		5C1C1D82243D24B6008BDC58 /* UserInfoRegRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoRegRouter.swift; sourceTree = "<group>"; };
 		5C6C0943243E7868007C2022 /* TricksRegVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TricksRegVC.swift; sourceTree = "<group>"; };
+		5C70DF1E243FD5A200C4A998 /* TrickRegProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrickRegProtocol.swift; sourceTree = "<group>"; };
+		5C70DF20243FD76200C4A998 /* TrickRegConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrickRegConfigurator.swift; sourceTree = "<group>"; };
+		5C70DF22243FD79800C4A998 /* TrickRegPresentor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrickRegPresentor.swift; sourceTree = "<group>"; };
+		5C70DF24243FD7CA00C4A998 /* TrickRegInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrickRegInteractor.swift; sourceTree = "<group>"; };
+		5C70DF26243FD7F200C4A998 /* TrickRegRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrickRegRouter.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -108,6 +118,11 @@
 			isa = PBXGroup;
 			children = (
 				5C6C0943243E7868007C2022 /* TricksRegVC.swift */,
+				5C70DF1E243FD5A200C4A998 /* TrickRegProtocol.swift */,
+				5C70DF20243FD76200C4A998 /* TrickRegConfigurator.swift */,
+				5C70DF22243FD79800C4A998 /* TrickRegPresentor.swift */,
+				5C70DF24243FD7CA00C4A998 /* TrickRegInteractor.swift */,
+				5C70DF26243FD7F200C4A998 /* TrickRegRouter.swift */,
 			);
 			path = TricksRegVC;
 			sourceTree = "<group>";
@@ -186,11 +201,16 @@
 				45107DFA241FEC5F007A978D /* ViewController.swift in Sources */,
 				5C1C1D7F243D1D1C008BDC58 /* UserInfoRegInteractor.swift in Sources */,
 				45107DF6241FEC5F007A978D /* AppDelegate.swift in Sources */,
+				5C70DF21243FD76200C4A998 /* TrickRegConfigurator.swift in Sources */,
 				5C1C1D83243D24B6008BDC58 /* UserInfoRegRouter.swift in Sources */,
 				5C1C1D7D243D1BD7008BDC58 /* UserInfoRegPresentor.swift in Sources */,
+				5C70DF1F243FD5A200C4A998 /* TrickRegProtocol.swift in Sources */,
 				5C6C0944243E7868007C2022 /* TricksRegVC.swift in Sources */,
+				5C70DF25243FD7CA00C4A998 /* TrickRegInteractor.swift in Sources */,
 				5C04838C243E7EAB00B0B8C4 /* SceneDelegate.swift in Sources */,
+				5C70DF27243FD7F200C4A998 /* TrickRegRouter.swift in Sources */,
 				5C1C1D7B243D1995008BDC58 /* UserInfoRegistrationConfigurator.swift in Sources */,
+				5C70DF23243FD79800C4A998 /* TrickRegPresentor.swift in Sources */,
 				5C1C1D81243D1DFD008BDC58 /* UserInfoRegProtocol.swift in Sources */,
 				45107E0D241FF721007A978D /* UserInfoRegistration.swift in Sources */,
 			);
