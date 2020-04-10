@@ -7,3 +7,19 @@
 //
 
 import Foundation
+
+class TrickRegPresentor: TrickRegPresentorProtocol{
+    
+    var interactor: TrickRegInteractorProtocol!
+    var router: TrickRegRouterProtocol!
+    var view: TrickRegViewProtocol!
+    
+    func configureView() {
+        self.view.setUpUI()
+    }
+    
+    required init(view: TrickRegViewProtocol) {
+        self.view = view
+    }
+    
+}
