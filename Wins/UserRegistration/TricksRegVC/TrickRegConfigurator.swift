@@ -17,6 +17,6 @@ class TrickRegConfigurator: TrickRegConfiguratorProtocol{
         
         vc.presenter = presenter
         presenter.interactor = interactor
-        presenter.router = router
+        presenter.router = router 
     }
 }
