@@ -66,6 +66,7 @@ extension UserInfoRegistrationVC: UserInfoRegViewProtocol{
 
 extension UserInfoRegistrationVC{
     func setUpUI(){
+        self.navigationController?.navigationBar.isHidden = true
         
         let header = RegHeaderView(step: .tricks, parentView: self.view)
         
