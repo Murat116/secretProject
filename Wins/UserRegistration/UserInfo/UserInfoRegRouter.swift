@@ -22,7 +22,7 @@ class UserInfoRegRouter: UserInfoRegRouterProtocol{
     
     func openNextStep() {
         let nextStepVC = TricksRegVC()
-        self.viewController.present(nextStepVC, animated: true, completion: self.closeCurrentViewController)
+        self.viewController.present(nextStepVC, animated: true, completion: nil)
       }
     
     func openPhotoPicker() {

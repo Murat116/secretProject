@@ -8,6 +8,163 @@
 
 import UIKit
 
-class TricksRegVC: Registration{
+class TricksRegVC: ViewController{
     
+    var presenter: TrickRegPresentorProtocol!
+    var configurator: TrickRegConfiguratorProtocol = TrickRegConfigurator()
+    
+    var stackView = UIStackView()
+    var nextVcBtn = UIButton()
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        self.configurator.configure(with: self)
+        self.presenter.configureView()
+    }
+}
+
+extension TricksRegVC: TrickRegViewProtocol{
+    func setUpUI() {
+        let header = RegHeaderView(step: .tricks, parentView: self.view)
+        
+        self.view.backgroundColor = UIColor(red: 0.11, green: 0.11, blue: 0.11, alpha: 1)
+        
+        self.view.addSubview(self.stackView)
+        self.view.addSubview(self.nextVcBtn)
+        
+        self.nextVcBtn.translatesAutoresizingMaskIntoConstraints = false
+        self.stackView.translatesAutoresizingMaskIntoConstraints = false
+        
+        //Возможно надо было делать как TableView и Cell а не кастомные View но когда я к этому пришел было лень уже переписывать так что если вдруг потом захочеться вперед на танке
+        self.stackView.leftAnchor.constraint(equalTo: self.view.leftAnchor,constant:  33).isActive = true
+        self.stackView.rightAnchor.constraint(equalTo: self.view.rightAnchor, constant: -33).isActive = true
+        self.stackView.topAnchor.constraint(equalTo: header.bottomAnchor, constant: 40).isActive = true
+        self.stackView.bottomAnchor.constraint(greaterThanOrEqualTo: self.nextVcBtn.topAnchor, constant:  -20).isActive = true
+        
+        self.stackView.axis = .vertical
+        self.stackView.alignment = .center
+        self.stackView.distribution = .equalCentering
+        self.stackView.spacing = 20
+        
+        self.nextVcBtn.rightAnchor.constraint(equalTo: self.view.rightAnchor, constant: -33).isActive = true
+        self.nextVcBtn.leftAnchor.constraint(equalTo: self.view.leftAnchor, constant:  33).isActive = true
+        self.nextVcBtn.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor).isActive = true
+        self.nextVcBtn.heightAnchor.constraint(equalToConstant: 56).isActive = true
+        
+        self.nextVcBtn.backgroundColor = UIColor(red: 0.131, green: 0.309, blue: 0.939, alpha: 1)
+        self.nextVcBtn.layer.cornerRadius = 6
+        
+        self.nextVcBtn.setTitle("Next", for: .normal)
+        self.nextVcBtn.titleLabel?.font = UIFont.systemFont(ofSize: 18)
+        
+        self.nextVcBtn.addTarget(self, action: #selector(self.nextVC), for: .touchUpInside)
+        
+        self.addTrics(number: 5)
+    }
+    
+    func addTrics(number: Int){
+        for i in 0..<number{
+            guard let trick =  Tricks(rawValue: i) else { continue }
+            let view = TricksRegVC.CheckBoxView(trick: trick)
+            self.stackView.addArrangedSubview(view)
+            view.rightAnchor.constraint(equalTo: self.stackView.rightAnchor).isActive = true
+            view.leftAnchor.constraint(equalTo: self.stackView.leftAnchor).isActive = true
+        }
+    }
+    
+    @objc func nextVC(){
+        
+    }
+}
+
+extension TricksRegVC{
+    class CheckBoxView: UIView{
+        let box = UIView()
+        let label = UILabel()
+        let cross = UIView()
+        
+        
+        var isSelect: Bool = false{
+            didSet{
+                self.cross.isHidden = !self.isSelect
+                self.label.textColor = self.isSelect ? .white : UIColor(red: 0.314, green: 0.314, blue: 0.314, alpha: 1)
+            }
+        }
+        
+        func setUp(with name: String){
+            self.layer.borderColor = UIColor(red: 0.314, green: 0.314, blue: 0.314, alpha: 1).cgColor
+            self.layer.borderWidth = 1
+            self.layer.cornerRadius = 6
+            self.heightAnchor.constraint(equalToConstant: 60).isActive = true
+            
+            self.addSubview(self.box)
+            self.box.translatesAutoresizingMaskIntoConstraints = false
+            self.box.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
+            self.box.leftAnchor.constraint(equalTo: self.leftAnchor, constant:  20).isActive = true
+            self.box.heightAnchor.constraint(equalToConstant: 22).isActive = true
+            self.box.widthAnchor.constraint(equalTo: self.box.heightAnchor).isActive = true
+            
+            self.box.layer.borderColor = UIColor(red: 0.314, green: 0.314, blue: 0.314, alpha: 1).cgColor
+            self.box.layer.borderWidth = 1
+            self.box.layer.cornerRadius = 6
+            
+            self.addSubview(self.label)
+            self.label.translatesAutoresizingMaskIntoConstraints = false
+            self.label.centerYAnchor.constraint(equalTo: self.box.centerYAnchor).isActive = true
+            self.label.leftAnchor.constraint(equalTo: self.box.rightAnchor, constant: 10).isActive = true
+            
+            self.label.font = UIFont.systemFont(ofSize: 18)
+            self.label.textColor = UIColor(red: 0.314, green: 0.314, blue: 0.314, alpha: 1)
+            
+            self.label.text = name
+            
+            let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.isTaped))
+            self.addGestureRecognizer(tapRecognizer)
+            
+            self.addSubview(self.cross)
+            self.cross.translatesAutoresizingMaskIntoConstraints = false
+            self.cross.centerYAnchor.constraint(equalTo: self.box.centerYAnchor).isActive = true
+            self.cross.centerXAnchor.constraint(equalTo: self.box.centerXAnchor).isActive = true
+            self.cross.heightAnchor.constraint(equalTo: self.box.heightAnchor).isActive = true
+            self.cross.widthAnchor.constraint(equalTo: self.box.widthAnchor).isActive = true
+
+            func addCrossPart(crossPart: UIView, rotate: CGFloat){
+                self.cross.addSubview(crossPart)
+                crossPart.translatesAutoresizingMaskIntoConstraints = false
+                crossPart.centerXAnchor.constraint(equalTo: self.cross.centerXAnchor).isActive = true
+                crossPart.centerYAnchor.constraint(equalTo: self.cross.centerYAnchor).isActive  = true
+                crossPart.heightAnchor.constraint(equalTo: self.cross.heightAnchor, constant: -2).isActive = true
+                crossPart.widthAnchor.constraint(equalToConstant: 2).isActive = true
+                
+                crossPart.backgroundColor = UIColor(red: 0.129, green: 0.31, blue: 0.937, alpha: 1)
+                
+                crossPart.transform = CGAffineTransform(rotationAngle: rotate)
+            }
+            
+            let crosPart1 = UIView()
+            let crosPart2 = UIView()
+            
+            addCrossPart(crossPart: crosPart1, rotate: CGFloat.pi / 4)
+            addCrossPart(crossPart: crosPart2, rotate: -(CGFloat.pi / 4))
+            
+            self.cross.isHidden = true
+        }
+        
+        @objc func isTaped(){
+            self.isSelect = !self.isSelect
+        }
+        
+        init(trick: Tricks) {
+            super.init(frame: CGRect.zero)
+            self.setUp(with: trick.trick.name)
+        }
+        
+        override init(frame: CGRect) {
+            super.init(frame: frame)
+        }
+        
+        required init?(coder: NSCoder) {
+            fatalError("init(coder:) has not been implemented")
+        }
+    }
 }
