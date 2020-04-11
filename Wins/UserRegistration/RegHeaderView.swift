@@ -1,42 +1,50 @@
 //
-//  Registration.swift
+//  RegHeaderView.swift
 //  Wins
 //
-//  Created by Мурат Камалов on 16.03.2020.
+//  Created by Мурат Камалов on 11.04.2020.
 //  Copyright © 2020 Hope To. All rights reserved.
 //
 
 import UIKit
 
-class Registration: UIViewController{
+class RegHeaderView: UIView{
     private var cross = UILabel()
     private var steps = UILabel()
     private var progressBar = UIProgressView()
     private var titleVC = UILabel()
 
     var stepsType: Steps = .sport
-
-    var bottomAnchorTitle: NSLayoutYAxisAnchor? = nil
-
-    static func show(steps: Steps, from parent: UIViewController){
-        let instanse = Registration()
-        instanse.stepsType = steps
-        parent.present(instanse, animated: true, completion: nil)
+    var parentView: UIView!
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
     }
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    
+    init(step: Steps, parentView: UIView) {
+        super.init(frame: .zero)
+        self.parentView = parentView
         self.setUp()
-        self.configure(step: self.stepsType)
+        self.configure(step: step)
     }
-
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     func setUp(){
-        self.view.addSubview(self.cross)
-        self.view.backgroundColor = UIColor(red: 0.11, green: 0.11, blue: 0.11, alpha: 1)
+        self.parentView.addSubview(self)
+        self.translatesAutoresizingMaskIntoConstraints = false
+        
+        self.addSubview(self.cross)
+        self.backgroundColor = UIColor(red: 0.11, green: 0.11, blue: 0.11, alpha: 1)
+        self.rightAnchor.constraint(equalTo: self.parentView.rightAnchor, constant: 0).isActive = true
+        self.leftAnchor.constraint(equalTo: self.parentView.leftAnchor, constant: 0).isActive = true
+        self.topAnchor.constraint(equalTo: self.parentView.safeAreaLayoutGuide.topAnchor, constant: 0).isActive = true
 
         self.cross.translatesAutoresizingMaskIntoConstraints = false
-        self.cross.leftAnchor.constraint(equalTo: self.view.leftAnchor, constant: 33).isActive = true
-        self.cross.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: 30).isActive = true
+        self.cross.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 33).isActive = true
+        self.cross.topAnchor.constraint(equalTo: self.topAnchor, constant: 30).isActive = true
         self.cross.widthAnchor.constraint(equalToConstant: 20).isActive = true
         self.cross.heightAnchor.constraint(equalTo: self.cross.widthAnchor).isActive = true
 
@@ -46,8 +54,8 @@ class Registration: UIViewController{
 
         self.cross.transform = CGAffineTransform(rotationAngle: .pi / 4)
 
-        self.view.addSubview(self.steps)
-        self.view.addSubview(self.progressBar)
+        self.addSubview(self.steps)
+        self.addSubview(self.progressBar)
         self.steps.translatesAutoresizingMaskIntoConstraints = false
         self.steps.leftAnchor.constraint(equalTo: self.cross.rightAnchor, constant: 39).isActive = true
         self.steps.rightAnchor.constraint(equalTo: self.progressBar.leftAnchor, constant: -10).isActive = true
@@ -58,20 +66,20 @@ class Registration: UIViewController{
 
 
         self.progressBar.translatesAutoresizingMaskIntoConstraints = false
-        self.progressBar.rightAnchor.constraint(equalTo: self.view.rightAnchor, constant: 0).isActive = true
+        self.progressBar.rightAnchor.constraint(equalTo: self.rightAnchor, constant: 0).isActive = true
         self.progressBar.centerYAnchor.constraint(equalTo: self.cross.centerYAnchor).isActive = true
         self.progressBar.widthAnchor.constraint(greaterThanOrEqualToConstant: 220).isActive = true
 
         self.progressBar.progressTintColor = UIColor(red: 0.129, green: 0.31, blue: 0.937, alpha: 1)
 
-        self.view.addSubview(self.titleVC)
+        self.addSubview(self.titleVC)
         self.titleVC.translatesAutoresizingMaskIntoConstraints = false
         self.titleVC.topAnchor.constraint(equalTo: self.cross.bottomAnchor, constant: 31).isActive = true
         self.titleVC.leftAnchor.constraint(equalTo: self.cross.leftAnchor).isActive = true
-        self.titleVC.rightAnchor.constraint(equalTo: self.view.rightAnchor, constant: 33).isActive = true
-
-        self.bottomAnchorTitle = self.titleVC.bottomAnchor
-
+        self.titleVC.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -33).isActive = true
+        
+        self.bottomAnchor.constraint(equalTo: self.titleVC.bottomAnchor).isActive = true
+    
         self.titleVC.font = UIFont.systemFont(ofSize: 36)
         self.titleVC.textColor = .white
 
@@ -86,6 +94,7 @@ class Registration: UIViewController{
         self.titleVC.text = step.title
     }
 }
+
 
 enum Steps: Float, CaseIterable{
     case sport = 0.33
@@ -106,6 +115,4 @@ enum Steps: Float, CaseIterable{
             return "Какие трюки умеешь?"
         }
     }
-
-    
 }

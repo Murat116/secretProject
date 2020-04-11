@@ -8,7 +8,7 @@
 
 import UIKit
 
-class UserInfoRegistrationVC: Registration{
+class UserInfoRegistrationVC: ViewController{
 
     static func show(parent: UIViewController){
 //        let instanse = UserInfoRegistration()
@@ -56,27 +56,23 @@ class UserInfoRegistrationVC: Registration{
         self.configurator.configure(with: self)
         self.presenter.configureView()
     }
-    
-    override func setUp() {
-        super.setUp()
-        self.setUpUI()
-    }
-
-    
 }
 
 extension UserInfoRegistrationVC: UserInfoRegViewProtocol{
-    func setUp(with step: Int) {
-        self.stepsType = .userInfo
-        self.configure(step: self.stepsType)
+    func setUp() {
+        self.setUpUI()
     }
 }
 
 extension UserInfoRegistrationVC{
     func setUpUI(){
         
+        let header = RegHeaderView(step: .tricks, parentView: self.view)
+        
+        self.view.backgroundColor = UIColor(red: 0.11, green: 0.11, blue: 0.11, alpha: 1)
+        
         //переписать на что - то более гибкое
-        self.textFiledSetUp(field: self.nameField, with: self.bottomAnchorTitle!,constant: 30, and: .name)
+        self.textFiledSetUp(field: self.nameField, with: header.bottomAnchor,constant: 30, and: .name)
         self.textFiledSetUp(field: self.cityFiled, with: self.nameField.bottomAnchor, and: .city)
         self.textFiledSetUp(field: self.ageField, with: self.cityFiled.bottomAnchor, and: .age)
 

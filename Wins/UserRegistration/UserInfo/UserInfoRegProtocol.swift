@@ -26,7 +26,7 @@ protocol UserInfoRegInteractorProtocol: class {
 }
 
 protocol UserInfoRegViewProtocol: class {
-    func setUp(with step: Int)
+    func setUp()
 }
 
 protocol UserInfoRegRouterProtocol: class {

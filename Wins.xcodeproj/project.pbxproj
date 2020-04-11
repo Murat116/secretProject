@@ -11,7 +11,6 @@
 		45107DFA241FEC5F007A978D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45107DF9241FEC5F007A978D /* ViewController.swift */; };
 		45107DFF241FEC64007A978D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 45107DFE241FEC64007A978D /* Assets.xcassets */; };
 		45107E02241FEC64007A978D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 45107E00241FEC64007A978D /* LaunchScreen.storyboard */; };
-		45107E0A241FECC0007A978D /* Registration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45107E09241FECC0007A978D /* Registration.swift */; };
 		45107E0D241FF721007A978D /* UserInfoRegistration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45107E0C241FF721007A978D /* UserInfoRegistration.swift */; };
 		5C04838C243E7EAB00B0B8C4 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C04838B243E7EAB00B0B8C4 /* SceneDelegate.swift */; };
 		5C1C1D7B243D1995008BDC58 /* UserInfoRegistrationConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C1C1D7A243D1995008BDC58 /* UserInfoRegistrationConfigurator.swift */; };
@@ -25,6 +24,8 @@
 		5C70DF23243FD79800C4A998 /* TrickRegPresentor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C70DF22243FD79800C4A998 /* TrickRegPresentor.swift */; };
 		5C70DF25243FD7CA00C4A998 /* TrickRegInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C70DF24243FD7CA00C4A998 /* TrickRegInteractor.swift */; };
 		5C70DF27243FD7F200C4A998 /* TrickRegRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C70DF26243FD7F200C4A998 /* TrickRegRouter.swift */; };
+		5CA0920024422EF800D38C98 /* RegHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CA091FF24422EF800D38C98 /* RegHeaderView.swift */; };
+		5CD39E33244222E40053896E /* TricksModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CD39E32244222E40053896E /* TricksModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,7 +35,6 @@
 		45107DFE241FEC64007A978D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		45107E01241FEC64007A978D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		45107E03241FEC64007A978D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		45107E09241FECC0007A978D /* Registration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Registration.swift; sourceTree = "<group>"; };
 		45107E0C241FF721007A978D /* UserInfoRegistration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoRegistration.swift; sourceTree = "<group>"; };
 		5C04838B243E7EAB00B0B8C4 /* SceneDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		5C1C1D7A243D1995008BDC58 /* UserInfoRegistrationConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoRegistrationConfigurator.swift; sourceTree = "<group>"; };
@@ -48,6 +48,8 @@
 		5C70DF22243FD79800C4A998 /* TrickRegPresentor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrickRegPresentor.swift; sourceTree = "<group>"; };
 		5C70DF24243FD7CA00C4A998 /* TrickRegInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrickRegInteractor.swift; sourceTree = "<group>"; };
 		5C70DF26243FD7F200C4A998 /* TrickRegRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrickRegRouter.swift; sourceTree = "<group>"; };
+		5CA091FF24422EF800D38C98 /* RegHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegHeaderView.swift; sourceTree = "<group>"; };
+		5CD39E32244222E40053896E /* TricksModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TricksModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,6 +85,7 @@
 				45107DF5241FEC5F007A978D /* AppDelegate.swift */,
 				45107DF9241FEC5F007A978D /* ViewController.swift */,
 				5C04838B243E7EAB00B0B8C4 /* SceneDelegate.swift */,
+				5CD39E34244222EC0053896E /* Model */,
 				45107E0B241FF700007A978D /* UserRegistration */,
 				45107DFE241FEC64007A978D /* Assets.xcassets */,
 				45107E00241FEC64007A978D /* LaunchScreen.storyboard */,
@@ -94,7 +97,7 @@
 		45107E0B241FF700007A978D /* UserRegistration */ = {
 			isa = PBXGroup;
 			children = (
-				45107E09241FECC0007A978D /* Registration.swift */,
+				5CA091FF24422EF800D38C98 /* RegHeaderView.swift */,
 				5C1C1D79243D195C008BDC58 /* UserInfo */,
 				5C6C0945243E7882007C2022 /* TricksRegVC */,
 			);
@@ -125,6 +128,14 @@
 				5C70DF26243FD7F200C4A998 /* TrickRegRouter.swift */,
 			);
 			path = TricksRegVC;
+			sourceTree = "<group>";
+		};
+		5CD39E34244222EC0053896E /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				5CD39E32244222E40053896E /* TricksModel.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -197,13 +208,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				45107E0A241FECC0007A978D /* Registration.swift in Sources */,
 				45107DFA241FEC5F007A978D /* ViewController.swift in Sources */,
 				5C1C1D7F243D1D1C008BDC58 /* UserInfoRegInteractor.swift in Sources */,
 				45107DF6241FEC5F007A978D /* AppDelegate.swift in Sources */,
 				5C70DF21243FD76200C4A998 /* TrickRegConfigurator.swift in Sources */,
 				5C1C1D83243D24B6008BDC58 /* UserInfoRegRouter.swift in Sources */,
 				5C1C1D7D243D1BD7008BDC58 /* UserInfoRegPresentor.swift in Sources */,
+				5CD39E33244222E40053896E /* TricksModel.swift in Sources */,
 				5C70DF1F243FD5A200C4A998 /* TrickRegProtocol.swift in Sources */,
 				5C6C0944243E7868007C2022 /* TricksRegVC.swift in Sources */,
 				5C70DF25243FD7CA00C4A998 /* TrickRegInteractor.swift in Sources */,
@@ -212,6 +223,7 @@
 				5C1C1D7B243D1995008BDC58 /* UserInfoRegistrationConfigurator.swift in Sources */,
 				5C70DF23243FD79800C4A998 /* TrickRegPresentor.swift in Sources */,
 				5C1C1D81243D1DFD008BDC58 /* UserInfoRegProtocol.swift in Sources */,
+				5CA0920024422EF800D38C98 /* RegHeaderView.swift in Sources */,
 				45107E0D241FF721007A978D /* UserInfoRegistration.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -23,7 +23,7 @@ class UserInfoRegPresentor: UserInfoRegPresenterProtocol{
     var interactor: UserInfoRegInteractorProtocol!
     
     func configureView() {
-        self.view.setUp(with: 2)
+        self.view.setUp()
     }
     
     required init(view: UserInfoRegViewProtocol) {
