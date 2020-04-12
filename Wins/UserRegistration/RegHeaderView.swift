@@ -14,6 +14,8 @@ class RegHeaderView: UIView{
     private var progressBar = UIProgressView()
     private var titleVC = UILabel()
 
+    private var stepLeftAnchor: NSLayoutConstraint? = nil
+    
     var stepsType: Steps = .sport
     var parentView: UIView!
     
@@ -57,7 +59,9 @@ class RegHeaderView: UIView{
         self.addSubview(self.steps)
         self.addSubview(self.progressBar)
         self.steps.translatesAutoresizingMaskIntoConstraints = false
-        self.steps.leftAnchor.constraint(equalTo: self.cross.rightAnchor, constant: 39).isActive = true
+        self.stepLeftAnchor = self.steps.leftAnchor.constraint(equalTo: self.cross.rightAnchor, constant: 39)
+        self.stepLeftAnchor?.isActive = true
+
         self.steps.rightAnchor.constraint(equalTo: self.progressBar.leftAnchor, constant: -10).isActive = true
         self.steps.centerYAnchor.constraint(equalTo: self.cross.centerYAnchor).isActive = true
 
@@ -92,6 +96,11 @@ class RegHeaderView: UIView{
         self.steps.text = step.text
         self.progressBar.progress = step.rawValue
         self.titleVC.text = step.title
+        if step == .sport{
+            self.stepLeftAnchor?.isActive = false
+            self.steps.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 33).isActive = true
+            self.cross.isHidden = true
+        }
     }
 }
 

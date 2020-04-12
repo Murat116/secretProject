@@ -25,6 +25,13 @@
 		5C70DF25243FD7CA00C4A998 /* TrickRegInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C70DF24243FD7CA00C4A998 /* TrickRegInteractor.swift */; };
 		5C70DF27243FD7F200C4A998 /* TrickRegRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C70DF26243FD7F200C4A998 /* TrickRegRouter.swift */; };
 		5CA0920024422EF800D38C98 /* RegHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CA091FF24422EF800D38C98 /* RegHeaderView.swift */; };
+		5CA092042442460800D38C98 /* SportsRegVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CA092032442460800D38C98 /* SportsRegVC.swift */; };
+		5CA092072442462900D38C98 /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CA092062442462900D38C98 /* RootViewController.swift */; };
+		5CA0920A2442480E00D38C98 /* SportRegProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CA092092442480E00D38C98 /* SportRegProtocol.swift */; };
+		5CA0920C2442481F00D38C98 /* SportRegConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CA0920B2442481F00D38C98 /* SportRegConfigurator.swift */; };
+		5CA0920E2442483000D38C98 /* SportRegPresentor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CA0920D2442483000D38C98 /* SportRegPresentor.swift */; };
+		5CA092102442484100D38C98 /* SportRegInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CA0920F2442484100D38C98 /* SportRegInteractor.swift */; };
+		5CA092122442484D00D38C98 /* SportRegRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CA092112442484D00D38C98 /* SportRegRouter.swift */; };
 		5CD39E33244222E40053896E /* TricksModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CD39E32244222E40053896E /* TricksModel.swift */; };
 /* End PBXBuildFile section */
 
@@ -49,6 +56,13 @@
 		5C70DF24243FD7CA00C4A998 /* TrickRegInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrickRegInteractor.swift; sourceTree = "<group>"; };
 		5C70DF26243FD7F200C4A998 /* TrickRegRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrickRegRouter.swift; sourceTree = "<group>"; };
 		5CA091FF24422EF800D38C98 /* RegHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegHeaderView.swift; sourceTree = "<group>"; };
+		5CA092032442460800D38C98 /* SportsRegVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SportsRegVC.swift; sourceTree = "<group>"; };
+		5CA092062442462900D38C98 /* RootViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootViewController.swift; sourceTree = "<group>"; };
+		5CA092092442480E00D38C98 /* SportRegProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SportRegProtocol.swift; sourceTree = "<group>"; };
+		5CA0920B2442481F00D38C98 /* SportRegConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SportRegConfigurator.swift; sourceTree = "<group>"; };
+		5CA0920D2442483000D38C98 /* SportRegPresentor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SportRegPresentor.swift; sourceTree = "<group>"; };
+		5CA0920F2442484100D38C98 /* SportRegInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SportRegInteractor.swift; sourceTree = "<group>"; };
+		5CA092112442484D00D38C98 /* SportRegRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SportRegRouter.swift; sourceTree = "<group>"; };
 		5CD39E32244222E40053896E /* TricksModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TricksModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -85,6 +99,7 @@
 				45107DF5241FEC5F007A978D /* AppDelegate.swift */,
 				45107DF9241FEC5F007A978D /* ViewController.swift */,
 				5C04838B243E7EAB00B0B8C4 /* SceneDelegate.swift */,
+				5CA092082442462F00D38C98 /* RootVC */,
 				5CD39E34244222EC0053896E /* Model */,
 				45107E0B241FF700007A978D /* UserRegistration */,
 				45107DFE241FEC64007A978D /* Assets.xcassets */,
@@ -98,6 +113,7 @@
 			isa = PBXGroup;
 			children = (
 				5CA091FF24422EF800D38C98 /* RegHeaderView.swift */,
+				5CA092052442460D00D38C98 /* Sports */,
 				5C1C1D79243D195C008BDC58 /* UserInfo */,
 				5C6C0945243E7882007C2022 /* TricksRegVC */,
 			);
@@ -128,6 +144,27 @@
 				5C70DF26243FD7F200C4A998 /* TrickRegRouter.swift */,
 			);
 			path = TricksRegVC;
+			sourceTree = "<group>";
+		};
+		5CA092052442460D00D38C98 /* Sports */ = {
+			isa = PBXGroup;
+			children = (
+				5CA092032442460800D38C98 /* SportsRegVC.swift */,
+				5CA092092442480E00D38C98 /* SportRegProtocol.swift */,
+				5CA0920B2442481F00D38C98 /* SportRegConfigurator.swift */,
+				5CA0920D2442483000D38C98 /* SportRegPresentor.swift */,
+				5CA0920F2442484100D38C98 /* SportRegInteractor.swift */,
+				5CA092112442484D00D38C98 /* SportRegRouter.swift */,
+			);
+			path = Sports;
+			sourceTree = "<group>";
+		};
+		5CA092082442462F00D38C98 /* RootVC */ = {
+			isa = PBXGroup;
+			children = (
+				5CA092062442462900D38C98 /* RootViewController.swift */,
+			);
+			path = RootVC;
 			sourceTree = "<group>";
 		};
 		5CD39E34244222EC0053896E /* Model */ = {
@@ -208,15 +245,21 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5CA092042442460800D38C98 /* SportsRegVC.swift in Sources */,
 				45107DFA241FEC5F007A978D /* ViewController.swift in Sources */,
+				5CA092072442462900D38C98 /* RootViewController.swift in Sources */,
 				5C1C1D7F243D1D1C008BDC58 /* UserInfoRegInteractor.swift in Sources */,
 				45107DF6241FEC5F007A978D /* AppDelegate.swift in Sources */,
 				5C70DF21243FD76200C4A998 /* TrickRegConfigurator.swift in Sources */,
+				5CA092102442484100D38C98 /* SportRegInteractor.swift in Sources */,
 				5C1C1D83243D24B6008BDC58 /* UserInfoRegRouter.swift in Sources */,
 				5C1C1D7D243D1BD7008BDC58 /* UserInfoRegPresentor.swift in Sources */,
+				5CA0920E2442483000D38C98 /* SportRegPresentor.swift in Sources */,
 				5CD39E33244222E40053896E /* TricksModel.swift in Sources */,
+				5CA0920A2442480E00D38C98 /* SportRegProtocol.swift in Sources */,
 				5C70DF1F243FD5A200C4A998 /* TrickRegProtocol.swift in Sources */,
 				5C6C0944243E7868007C2022 /* TricksRegVC.swift in Sources */,
+				5CA092122442484D00D38C98 /* SportRegRouter.swift in Sources */,
 				5C70DF25243FD7CA00C4A998 /* TrickRegInteractor.swift in Sources */,
 				5C04838C243E7EAB00B0B8C4 /* SceneDelegate.swift in Sources */,
 				5C70DF27243FD7F200C4A998 /* TrickRegRouter.swift in Sources */,
@@ -225,6 +268,7 @@
 				5C1C1D81243D1DFD008BDC58 /* UserInfoRegProtocol.swift in Sources */,
 				5CA0920024422EF800D38C98 /* RegHeaderView.swift in Sources */,
 				45107E0D241FF721007A978D /* UserInfoRegistration.swift in Sources */,
+				5CA0920C2442481F00D38C98 /* SportRegConfigurator.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

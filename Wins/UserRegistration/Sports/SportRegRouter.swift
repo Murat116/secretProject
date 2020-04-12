@@ -6,4 +6,17 @@
 //  Copyright © 2020 Hope To. All rights reserved.
 //
 
-import Foundation
+class SportRegRouter: SportRegRouterProtocol{
+    weak var view: SportsRegVC!
+    
+    func nextView() {
+        let userInfoReg = UserInfoRegistrationVC()
+        view.present(userInfoReg, animated: true)
+    }
+    
+    required init(vc: SportsRegVC) {
+        self.view = vc
+    }
+    
+    
+}

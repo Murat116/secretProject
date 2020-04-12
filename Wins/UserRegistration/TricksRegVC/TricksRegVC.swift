@@ -73,7 +73,7 @@ extension TricksRegVC: TrickRegViewProtocol{
     }
     
     @objc func nextVC(){
-        
+        self.presenter.router.endRegistration()
     }
 }
 

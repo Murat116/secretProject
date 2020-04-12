@@ -68,7 +68,7 @@ extension UserInfoRegistrationVC{
     func setUpUI(){
         self.navigationController?.navigationBar.isHidden = true
         
-        let header = RegHeaderView(step: .tricks, parentView: self.view)
+        let header = RegHeaderView(step: .userInfo, parentView: self.view)
         
         self.view.backgroundColor = UIColor(red: 0.11, green: 0.11, blue: 0.11, alpha: 1)
         
