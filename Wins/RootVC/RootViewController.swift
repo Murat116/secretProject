@@ -13,9 +13,10 @@ class RootViewController: UIViewController{
         super.viewDidLoad()
         let isGuest = true
         if isGuest{
-            let registrationVC = SportsRegVC()
-            self.show(registrationVC, sender: self)
-//            self.present(registrationVC, animated: true, completion: nil)
+//            SportsRegVC.show(parent: self) {
+//                self.dismiss(animated: true, completion: nil)
+//            }
+            UserInfoRegistrationVC.show(parent: self)
         }
         
     }

@@ -10,8 +10,15 @@ class SportRegRouter: SportRegRouterProtocol{
     weak var view: SportsRegVC!
     
     func nextView() {
-        let userInfoReg = UserInfoRegistrationVC()
-        view.present(userInfoReg, animated: true)
+        if self.view.isRegistration{
+            UserInfoRegistrationVC.show(parent: view, firstView: self)
+        }else{
+            self.view.dismiss(animated: true, completion: view.complition)
+        }
+    }
+    
+    func endRegistration(){
+        self.view.complition!()
     }
     
     required init(vc: SportsRegVC) {

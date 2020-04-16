@@ -16,6 +16,14 @@ class TricksRegVC: ViewController{
     var stackView = UIStackView()
     var nextVcBtn = UIButton()
     
+    var userRegRouter: UserInfoRegRouterProtocol!
+    
+    static func show(parent:UIViewController, userRegRouter: UserInfoRegRouterProtocol? = nil){
+        let nextStepVC = TricksRegVC()
+        nextStepVC.userRegRouter = userRegRouter
+        parent.present(nextStepVC, animated: true, completion: nil)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.configurator.configure(with: self)

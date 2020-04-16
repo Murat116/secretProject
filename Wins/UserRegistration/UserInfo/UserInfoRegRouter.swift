@@ -9,7 +9,7 @@
 import Foundation
 
 class UserInfoRegRouter: UserInfoRegRouterProtocol{
-
+    
     weak var viewController: UserInfoRegistrationVC!
     
     init(viewController: UserInfoRegistrationVC) {
@@ -17,16 +17,24 @@ class UserInfoRegRouter: UserInfoRegRouterProtocol{
     }
     
     func closeCurrentViewController() {
-        self.viewController.dismiss(animated: true, completion: nil)
+        self.viewController.sportRegRouter?.endRegistration()
     }
     
     func openNextStep() {
-        let nextStepVC = TricksRegVC()
-        self.viewController.present(nextStepVC, animated: true, completion: nil)
-      }
+        TricksRegVC.show(parent: self.viewController, userRegRouter: self)
+    }
+    
+    func endRegistration(){
+        self.viewController.sportRegRouter?.endRegistration()
+    }
     
     func openPhotoPicker() {
         //
+    }
+    
+    func openSportVC() {
+        let sportVC =  SportsRegVC()
+        viewController.present(sportVC, animated: true, completion: nil)
     }
     
     

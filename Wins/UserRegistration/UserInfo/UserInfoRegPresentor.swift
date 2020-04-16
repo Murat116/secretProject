@@ -8,6 +8,13 @@
 
 
 class UserInfoRegPresentor: UserInfoRegPresenterProtocol{
+    weak var view: UserInfoRegViewProtocol!
+    var router: UserInfoRegRouterProtocol!
+    var interactor: UserInfoRegInteractorProtocol!
+    
+    func openSportVC() {
+        self.router.openSportVC()
+    }
     
     func nextBtnAction() {
         //открывать третий шаг
@@ -16,11 +23,6 @@ class UserInfoRegPresentor: UserInfoRegPresenterProtocol{
     func openPhotoPicker() {
         //открывать фото пикер
     }
-    
-    
-    weak var view: UserInfoRegViewProtocol!
-    var router: UserInfoRegRouterProtocol!
-    var interactor: UserInfoRegInteractorProtocol!
     
     func configureView() {
         self.view.setUp()

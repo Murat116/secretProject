@@ -12,6 +12,17 @@ class SportsRegVC: UIViewController{
     var configurator: SportRegConfiguratorProtocol = SportRegConfigurator()
     var presenter: SportRegPresentorProtocol!
     
+    var complition: (() -> ())? = nil
+    var isRegistration: Bool = false
+    
+    static func show(parent: UIViewController, with complition: (() -> ())? = nil){
+        let vc = SportsRegVC()
+        vc.isRegistration = !(parent is UserInfoRegistrationVC)
+        vc.complition = complition
+        vc.navigationController?.popViewController(animated: true)
+        parent.present(vc, animated: true, completion: nil)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         

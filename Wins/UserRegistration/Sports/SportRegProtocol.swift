@@ -27,6 +27,7 @@ protocol SportRegInteractorProtocol:class {
 
 protocol SportRegRouterProtocol: class{
     func nextView()
+    func endRegistration()
 }
 
 protocol SportRegViewProtocol: class{

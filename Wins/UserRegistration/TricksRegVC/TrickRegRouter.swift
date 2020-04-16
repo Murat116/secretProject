@@ -12,7 +12,7 @@ class TrickRegRouter: TrickRegRouterProtocol{
     weak var vc: TricksRegVC!
     
     func endRegistration() {
-        
+        self.vc.userRegRouter.endRegistration()
     }
     
     required init(_ vc: TricksRegVC){

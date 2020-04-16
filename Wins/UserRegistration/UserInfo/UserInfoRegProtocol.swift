@@ -15,6 +15,8 @@ protocol UserInfoRegPresenterProtocol: class {
     
     func nextBtnAction()
     func openPhotoPicker()
+    
+    func openSportVC()
 }
 
 protocol UserInfoRegConfiguratorProtocol {
@@ -33,4 +35,7 @@ protocol UserInfoRegRouterProtocol: class {
     func closeCurrentViewController()
     func openNextStep()
     func openPhotoPicker()
+    func openSportVC()
+    
+    func endRegistration()
 }
