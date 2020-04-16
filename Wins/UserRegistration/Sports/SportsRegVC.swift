@@ -9,14 +9,16 @@
 import UIKit
 
 class SportsRegVC: UIViewController{
-    var configurator: SportRegConfiguratorProtocol = SportRegConfigurator()
-    var presenter: SportRegPresentorProtocol!
+    
+    var output: SportRegViewProtocolOutput!
     
     var complition: (() -> ())? = nil
     var isRegistration: Bool = false
     
+    var sportType: SportType = .skate
+    
     static func show(parent: UIViewController, with complition: (() -> ())? = nil){
-        let vc = SportsRegVC()
+        let vc = SportRegAssembly.configureModule()
         vc.isRegistration = !(parent is UserInfoRegistrationVC)
         vc.complition = complition
         vc.navigationController?.popViewController(animated: true)
@@ -26,33 +28,35 @@ class SportsRegVC: UIViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.configurator.configure(with: self)
-        self.presenter.configure()
     }
 }
 
-extension SportsRegVC: SportRegViewProtocol{
+extension SportsRegVC: SportRegViewProtocolInput{
+    func configure(with type: SportType) {
+        self.sportType = type
+    }
+    
     func setUP() {
         let header = RegHeaderView(step: .sport, parentView: self.view)
         
         self.navigationController?.navigationBar.isHidden = true
         self.view.backgroundColor = UIColor(red: 0.11, green: 0.11, blue: 0.11, alpha: 1)
         
-        let skate = SportBtn(type: .skate, presentor: self.presenter)
+        let skate = SportBtn(type: .skate, presentor: self.output)
         self.view.addSubview(skate)
         skate.translatesAutoresizingMaskIntoConstraints = false
         skate.topAnchor.constraint(equalTo: header.bottomAnchor, constant: 38).isActive = true
         skate.rightAnchor.constraint(equalTo: self.view.rightAnchor, constant: -33).isActive = true
         skate.leftAnchor.constraint(equalTo: self.view.leftAnchor, constant: 33).isActive = true
         
-        let scoot = SportBtn(type: .scoot, presentor: self.presenter)
+        let scoot = SportBtn(type: .scoot, presentor: self.output)
         self.view.addSubview(scoot)
         scoot.translatesAutoresizingMaskIntoConstraints = false
         scoot.topAnchor.constraint(equalTo: skate.bottomAnchor, constant: 38).isActive = true
         scoot.rightAnchor.constraint(equalTo: self.view.rightAnchor, constant: -33).isActive = true
         scoot.leftAnchor.constraint(equalTo: self.view.leftAnchor, constant: 33).isActive = true
         
-        let bmx = SportBtn(type: .bmx, presentor: self.presenter)
+        let bmx = SportBtn(type: .bmx, presentor: self.output)
         self.view.addSubview(bmx)
         bmx.translatesAutoresizingMaskIntoConstraints = false
         bmx.topAnchor.constraint(equalTo: scoot.bottomAnchor, constant: 38).isActive = true
@@ -65,10 +69,10 @@ extension SportsRegVC: SportRegViewProtocol{
 extension SportsRegVC{
     class SportBtn: UIView{
     
-        var presentor: SportRegPresentorProtocol!
+        var presentor: SportRegViewProtocolOutput!
         var type: SportType!
         
-        init(type: SportType, presentor: SportRegPresentorProtocol) {
+        init(type: SportType, presentor: SportRegViewProtocolOutput) {
             super.init(frame: .zero)
             
             self.type = type
@@ -115,20 +119,19 @@ extension SportsRegVC{
         
         
     }
-    
-    enum SportType: String{
-        case skate = "Skate"
-        case scoot = "Scoot"
-        case bmx = "BMX"
-        
-        var image: UIImage?{
-            return UIImage(named: "Registration/Sports/\(self.rawValue)")
-        }
-        
-        var text: String{
-            return self.rawValue
-        }
-    }
 }
 
 
+enum SportType: String{
+    case skate = "Skate"
+    case scoot = "Scoot"
+    case bmx = "BMX"
+    
+    var image: UIImage?{
+        return UIImage(named: "Registration/Sports/\(self.rawValue)")
+    }
+    
+    var text: String{
+        return self.rawValue
+    }
+}

@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -28,15 +28,19 @@
 		5CA092042442460800D38C98 /* SportsRegVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CA092032442460800D38C98 /* SportsRegVC.swift */; };
 		5CA092072442462900D38C98 /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CA092062442462900D38C98 /* RootViewController.swift */; };
 		5CA0920A2442480E00D38C98 /* SportRegProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CA092092442480E00D38C98 /* SportRegProtocol.swift */; };
-		5CA0920C2442481F00D38C98 /* SportRegConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CA0920B2442481F00D38C98 /* SportRegConfigurator.swift */; };
+		5CA0920C2442481F00D38C98 /* SportRegAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CA0920B2442481F00D38C98 /* SportRegAssembly.swift */; };
 		5CA0920E2442483000D38C98 /* SportRegPresentor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CA0920D2442483000D38C98 /* SportRegPresentor.swift */; };
 		5CA092102442484100D38C98 /* SportRegInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CA0920F2442484100D38C98 /* SportRegInteractor.swift */; };
 		5CA092122442484D00D38C98 /* SportRegRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CA092112442484D00D38C98 /* SportRegRouter.swift */; };
+		5CC8A62A2448EDD300ED0720 /* USRDefKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CC8A6292448EDD300ED0720 /* USRDefKeys.swift */; };
 		5CD39E33244222E40053896E /* TricksModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CD39E32244222E40053896E /* TricksModel.swift */; };
 		5CEA0DF92447BA760068A975 /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CEA0DF82447BA760068A975 /* UserModel.swift */; };
+		5CFBDB3C2448C58300588978 /* PodFile in Resources */ = {isa = PBXBuildFile; fileRef = 5CFBDB3B2448C58300588978 /* PodFile */; };
+		76837F62DA2DC1F2098E549E /* Pods_Wins.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 63D750BBCBA4F1568B123A58 /* Pods_Wins.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		42BDF2F513D222C6CE80DAD3 /* Pods-Wins.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Wins.release.xcconfig"; path = "Target Support Files/Pods-Wins/Pods-Wins.release.xcconfig"; sourceTree = "<group>"; };
 		45107DF2241FEC5F007A978D /* Wins.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Wins.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		45107DF5241FEC5F007A978D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		45107DF9241FEC5F007A978D /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -44,6 +48,7 @@
 		45107E01241FEC64007A978D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		45107E03241FEC64007A978D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		45107E0C241FF721007A978D /* UserInfoRegistration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoRegistration.swift; sourceTree = "<group>"; };
+		580D8E3408BCDA387F5E4976 /* Pods-Wins.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Wins.debug.xcconfig"; path = "Target Support Files/Pods-Wins/Pods-Wins.debug.xcconfig"; sourceTree = "<group>"; };
 		5C04838B243E7EAB00B0B8C4 /* SceneDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		5C1C1D7A243D1995008BDC58 /* UserInfoRegistrationConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoRegistrationConfigurator.swift; sourceTree = "<group>"; };
 		5C1C1D7C243D1BD7008BDC58 /* UserInfoRegPresentor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoRegPresentor.swift; sourceTree = "<group>"; };
@@ -60,12 +65,15 @@
 		5CA092032442460800D38C98 /* SportsRegVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SportsRegVC.swift; sourceTree = "<group>"; };
 		5CA092062442462900D38C98 /* RootViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootViewController.swift; sourceTree = "<group>"; };
 		5CA092092442480E00D38C98 /* SportRegProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SportRegProtocol.swift; sourceTree = "<group>"; };
-		5CA0920B2442481F00D38C98 /* SportRegConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SportRegConfigurator.swift; sourceTree = "<group>"; };
+		5CA0920B2442481F00D38C98 /* SportRegAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SportRegAssembly.swift; sourceTree = "<group>"; };
 		5CA0920D2442483000D38C98 /* SportRegPresentor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SportRegPresentor.swift; sourceTree = "<group>"; };
 		5CA0920F2442484100D38C98 /* SportRegInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SportRegInteractor.swift; sourceTree = "<group>"; };
 		5CA092112442484D00D38C98 /* SportRegRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SportRegRouter.swift; sourceTree = "<group>"; };
+		5CC8A6292448EDD300ED0720 /* USRDefKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = USRDefKeys.swift; sourceTree = "<group>"; };
 		5CD39E32244222E40053896E /* TricksModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TricksModel.swift; sourceTree = "<group>"; };
 		5CEA0DF82447BA760068A975 /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
+		5CFBDB3B2448C58300588978 /* PodFile */ = {isa = PBXFileReference; lastKnownFileType = text; path = PodFile; sourceTree = "<group>"; };
+		63D750BBCBA4F1568B123A58 /* Pods_Wins.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Wins.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,6 +81,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				76837F62DA2DC1F2098E549E /* Pods_Wins.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -82,8 +91,11 @@
 		45107DE9241FEC5F007A978D = {
 			isa = PBXGroup;
 			children = (
+				5CFBDB3B2448C58300588978 /* PodFile */,
 				45107DF4241FEC5F007A978D /* Wins */,
 				45107DF3241FEC5F007A978D /* Products */,
+				936D674DDE816FF754BD5295 /* Pods */,
+				D823DC60D61886AAE107DE62 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -153,10 +165,10 @@
 			children = (
 				5CA092032442460800D38C98 /* SportsRegVC.swift */,
 				5CA092092442480E00D38C98 /* SportRegProtocol.swift */,
-				5CA0920B2442481F00D38C98 /* SportRegConfigurator.swift */,
 				5CA0920D2442483000D38C98 /* SportRegPresentor.swift */,
 				5CA0920F2442484100D38C98 /* SportRegInteractor.swift */,
 				5CA092112442484D00D38C98 /* SportRegRouter.swift */,
+				5CA0920B2442481F00D38C98 /* SportRegAssembly.swift */,
 			);
 			path = Sports;
 			sourceTree = "<group>";
@@ -174,8 +186,26 @@
 			children = (
 				5CD39E32244222E40053896E /* TricksModel.swift */,
 				5CEA0DF82447BA760068A975 /* UserModel.swift */,
+				5CC8A6292448EDD300ED0720 /* USRDefKeys.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		936D674DDE816FF754BD5295 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				580D8E3408BCDA387F5E4976 /* Pods-Wins.debug.xcconfig */,
+				42BDF2F513D222C6CE80DAD3 /* Pods-Wins.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		D823DC60D61886AAE107DE62 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				63D750BBCBA4F1568B123A58 /* Pods_Wins.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -185,9 +215,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 45107E06241FEC64007A978D /* Build configuration list for PBXNativeTarget "Wins" */;
 			buildPhases = (
+				BAAA4E0F2A5A633879CB5369 /* [CP] Check Pods Manifest.lock */,
 				45107DEE241FEC5F007A978D /* Sources */,
 				45107DEF241FEC5F007A978D /* Frameworks */,
 				45107DF0241FEC5F007A978D /* Resources */,
+				5B018AE2AAEA130F946097BA /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -236,12 +268,55 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5CFBDB3C2448C58300588978 /* PodFile in Resources */,
 				45107E02241FEC64007A978D /* LaunchScreen.storyboard in Resources */,
 				45107DFF241FEC64007A978D /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		5B018AE2AAEA130F946097BA /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Wins/Pods-Wins-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Wins/Pods-Wins-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Wins/Pods-Wins-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		BAAA4E0F2A5A633879CB5369 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Wins-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		45107DEE241FEC5F007A978D /* Sources */ = {
@@ -268,11 +343,12 @@
 				5C04838C243E7EAB00B0B8C4 /* SceneDelegate.swift in Sources */,
 				5C70DF27243FD7F200C4A998 /* TrickRegRouter.swift in Sources */,
 				5C1C1D7B243D1995008BDC58 /* UserInfoRegistrationConfigurator.swift in Sources */,
+				5CC8A62A2448EDD300ED0720 /* USRDefKeys.swift in Sources */,
 				5C70DF23243FD79800C4A998 /* TrickRegPresentor.swift in Sources */,
 				5C1C1D81243D1DFD008BDC58 /* UserInfoRegProtocol.swift in Sources */,
 				5CA0920024422EF800D38C98 /* RegHeaderView.swift in Sources */,
 				45107E0D241FF721007A978D /* UserInfoRegistration.swift in Sources */,
-				5CA0920C2442481F00D38C98 /* SportRegConfigurator.swift in Sources */,
+				5CA0920C2442481F00D38C98 /* SportRegAssembly.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -406,6 +482,7 @@
 		};
 		45107E07241FEC64007A978D /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 580D8E3408BCDA387F5E4976 /* Pods-Wins.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -424,6 +501,7 @@
 		};
 		45107E08241FEC64007A978D /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 42BDF2F513D222C6CE80DAD3 /* Pods-Wins.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;

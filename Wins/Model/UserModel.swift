@@ -21,27 +21,27 @@ class User: NSObject{
     dynamic var instagram: String = ""
     dynamic var vkonakte: String = ""
     
-    dynamic var sport: Sports = Sports()
+    dynamic var skateTrick: [Trick] = []
+    dynamic var scootTrick: [Trick] = []
+    dynamic var bmxTrick: [Trick] = []
+    
     dynamic var standIsRegular: Bool = true
     
     dynamic var totalStats: TotalStats = TotalStats()
-    dynamic var promotionalСodes: [String] = []
+    dynamic var promotionalСodes: [Promocodes] = []
     
-}
-
-struct Sports{
-    var type: SportType = .skateboarding
-    var tricks = [Trick]()
-    
-    enum SportType: Int{
-        case skateboarding = 0
-        case bmx = 1
-        case scoot = 2
-    }
 }
 
 struct TotalStats {
     var technicality: Float = 0
     var stability: Float = 0
     var percentageеTricksLearned: Float = 0
+}
+
+struct Promocodes{
+    var promocode: String
+    var trikName: Trick
+    var boardshop: String
+    var startDate: Date
+    var endDate: Date
 }

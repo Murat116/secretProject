@@ -17,7 +17,7 @@ class UserInfoRegRouter: UserInfoRegRouterProtocol{
     }
     
     func closeCurrentViewController() {
-        self.viewController.sportRegRouter?.endRegistration()
+//        self.viewController.sportRegRouter?.endRegistration()
     }
     
     func openNextStep() {
@@ -25,7 +25,7 @@ class UserInfoRegRouter: UserInfoRegRouterProtocol{
     }
     
     func endRegistration(){
-        self.viewController.sportRegRouter?.endRegistration()
+//        self.viewController.sportRegRouter?.endRegistration()
     }
     
     func openPhotoPicker() {

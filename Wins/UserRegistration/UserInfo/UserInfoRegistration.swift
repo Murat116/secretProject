@@ -10,9 +10,8 @@ import UIKit
 
 class UserInfoRegistrationVC: ViewController{
 
-    static func show(parent: UIViewController, firstView: SportRegRouterProtocol? = nil){
+    static func show(parent: UIViewController){
         let instanse = UserInfoRegistrationVC()
-        instanse.sportRegRouter = firstView
         instanse.isRegistration = parent is SportsRegVC
         parent.present(instanse, animated: true, completion: nil)
     }
@@ -22,7 +21,6 @@ class UserInfoRegistrationVC: ViewController{
     var configurator: UserInfoRegConfiguratorProtocol = UserInfoRegConfigirator()
     var presenter: UserInfoRegPresenterProtocol!
     
-    var sportRegRouter: SportRegRouterProtocol? = nil
     
     var isRegistration: Bool = true
     

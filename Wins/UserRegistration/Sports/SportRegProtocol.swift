@@ -6,30 +6,26 @@
 //  Copyright © 2020 Hope To. All rights reserved.
 //
 
-import UIKit
 
-protocol SportRegConfiguratorProtocol {
-    func configure(with VC: SportsRegVC)
+
+protocol SportRegInteractorProtocolOutput:class {
+    func saveUserData(with type: SportType)
 }
 
-protocol SportRegPresentorProtocol:class{
-    var interactor: SportRegInteractorProtocol! { get set }
-    var router: SportRegRouterProtocol! { get set }
-    var view: SportRegViewProtocol! { get set}
-    
-    func configure()
-    func sportIsSelected(with type: SportsRegVC.SportType)
+protocol SportRegInteractorProtocolInput: class{
+    func getUserSport() -> SportType
 }
 
-protocol SportRegInteractorProtocol:class {
-    func saveUserData()
+protocol SportRegViewProtocolInput: class{
+    func setUP()
+    func configure(with type: SportType)
 }
 
-protocol SportRegRouterProtocol: class{
+protocol SportRegViewProtocolOutput: class{
+    func sportIsSelected(with type: SportType)
+}
+
+protocol SportRegRouterProtocolInput: class{
     func nextView()
     func endRegistration()
-}
-
-protocol SportRegViewProtocol: class{
-    func setUP()
 }
