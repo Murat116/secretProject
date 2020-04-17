@@ -14,6 +14,7 @@ protocol SportRegInteractorProtocolOutput:class {
 
 protocol SportRegInteractorProtocolInput: class{
     func getUserSport() -> SportType
+    func saveData() //delete after test
 }
 
 protocol SportRegViewProtocolInput: class{

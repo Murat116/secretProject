@@ -9,6 +9,9 @@
 import Foundation
 
 class UserInfoRegInteractor: UserInfoRegInteractorProtocol{
+    
+    var datamanager = DataManager()
+    
     func saveUserData() {
         //сохранить дату в realm
     }
@@ -17,6 +20,8 @@ class UserInfoRegInteractor: UserInfoRegInteractorProtocol{
     
     required init(presenter: UserInfoRegPresenterProtocol) {
         self.presenter = presenter
+        let data = datamanager.getUser()!.description
+        print(data)
     }
 }
 

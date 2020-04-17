@@ -33,6 +33,7 @@
 		5CA092102442484100D38C98 /* SportRegInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CA0920F2442484100D38C98 /* SportRegInteractor.swift */; };
 		5CA092122442484D00D38C98 /* SportRegRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CA092112442484D00D38C98 /* SportRegRouter.swift */; };
 		5CC8A62A2448EDD300ED0720 /* USRDefKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CC8A6292448EDD300ED0720 /* USRDefKeys.swift */; };
+		5CC8A62C244901F200ED0720 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CC8A62B244901F200ED0720 /* DataManager.swift */; };
 		5CD39E33244222E40053896E /* TricksModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CD39E32244222E40053896E /* TricksModel.swift */; };
 		5CEA0DF92447BA760068A975 /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CEA0DF82447BA760068A975 /* UserModel.swift */; };
 		5CFBDB3C2448C58300588978 /* PodFile in Resources */ = {isa = PBXBuildFile; fileRef = 5CFBDB3B2448C58300588978 /* PodFile */; };
@@ -70,6 +71,7 @@
 		5CA0920F2442484100D38C98 /* SportRegInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SportRegInteractor.swift; sourceTree = "<group>"; };
 		5CA092112442484D00D38C98 /* SportRegRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SportRegRouter.swift; sourceTree = "<group>"; };
 		5CC8A6292448EDD300ED0720 /* USRDefKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = USRDefKeys.swift; sourceTree = "<group>"; };
+		5CC8A62B244901F200ED0720 /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 		5CD39E32244222E40053896E /* TricksModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TricksModel.swift; sourceTree = "<group>"; };
 		5CEA0DF82447BA760068A975 /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
 		5CFBDB3B2448C58300588978 /* PodFile */ = {isa = PBXFileReference; lastKnownFileType = text; path = PodFile; sourceTree = "<group>"; };
@@ -184,8 +186,9 @@
 		5CD39E34244222EC0053896E /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				5CD39E32244222E40053896E /* TricksModel.swift */,
 				5CEA0DF82447BA760068A975 /* UserModel.swift */,
+				5CC8A62B244901F200ED0720 /* DataManager.swift */,
+				5CD39E32244222E40053896E /* TricksModel.swift */,
 				5CC8A6292448EDD300ED0720 /* USRDefKeys.swift */,
 			);
 			path = Model;
@@ -348,6 +351,7 @@
 				5C1C1D81243D1DFD008BDC58 /* UserInfoRegProtocol.swift in Sources */,
 				5CA0920024422EF800D38C98 /* RegHeaderView.swift in Sources */,
 				45107E0D241FF721007A978D /* UserInfoRegistration.swift in Sources */,
+				5CC8A62C244901F200ED0720 /* DataManager.swift in Sources */,
 				5CA0920C2442481F00D38C98 /* SportRegAssembly.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

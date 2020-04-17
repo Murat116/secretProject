@@ -9,11 +9,17 @@ import Foundation
 
 class SportRegInteractor{
     
+    var dataMngr = DataManager()
+    
     weak var output: SportRegInteractorProtocolOutput!
     
 }
 
 extension SportRegInteractor: SportRegInteractorProtocolInput{
+    func saveData() {
+        self.dataMngr.createUser(login: "Murat", password: "12345", sportType: .skate)
+    }
+    
     func getUserSport() -> SportType {
         guard let sportTypeValue = UserDefaults.standard.value(forKey: USRDefKeys.sportType) as? String,
             let type = SportType(rawValue: sportTypeValue) else { return .skate}

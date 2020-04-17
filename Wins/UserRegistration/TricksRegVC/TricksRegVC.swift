@@ -72,7 +72,7 @@ extension TricksRegVC: TrickRegViewProtocol{
     
     func addTrics(number: Int){
         for i in 0..<number{
-            guard let trick =  Tricks(rawValue: i) else { continue }
+            guard let trick =  SkateTricks(rawValue: i) else { continue }
             let view = TricksRegVC.CheckBoxView(trick: trick)
             self.stackView.addArrangedSubview(view)
             view.rightAnchor.constraint(equalTo: self.stackView.rightAnchor).isActive = true
@@ -162,9 +162,9 @@ extension TricksRegVC{
             self.isSelect = !self.isSelect
         }
         
-        init(trick: Tricks) {
+        init(trick: SkateTricks) {
             super.init(frame: CGRect.zero)
-            self.setUp(with: trick.trick.name)
+            self.setUp(with: trick.parametrs.name)
         }
         
         override init(frame: CGRect) {

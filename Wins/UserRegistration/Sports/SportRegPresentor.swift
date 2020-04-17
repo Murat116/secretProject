@@ -37,5 +37,7 @@ extension SportRegPresentor: SportRegViewProtocolOutput{
 extension SportRegPresentor: SportRegInteractorProtocolOutput{
     func saveUserData(with type: SportType) {
         UserDefaults.standard.set(type.rawValue, forKey: USRDefKeys.sportType)
+        self.interactor.saveData()
+        
     }
 }

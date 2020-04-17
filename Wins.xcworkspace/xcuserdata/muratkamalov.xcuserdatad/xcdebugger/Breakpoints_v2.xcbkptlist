@@ -7,16 +7,16 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "2812B956-64AC-49DD-9059-7ECDFF6441AA"
+            uuid = "0F298F18-F850-430E-A6F6-20F806251D59"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Wins/UserRegistration/Sports/SportRegPresentor.swift"
+            filePath = "Wins/Model/DataManager.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "39"
-            endingLineNumber = "39"
-            landmarkName = "saveUserData(with:)"
+            startingLineNumber = "45"
+            endingLineNumber = "45"
+            landmarkName = "createUser(login:password:sportType:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

@@ -121,7 +121,7 @@ extension SportsRegVC{
     }
 }
 
-
+import RealmSwift
 enum SportType: String{
     case skate = "Skate"
     case scoot = "Scoot"
@@ -133,5 +133,14 @@ enum SportType: String{
     
     var text: String{
         return self.rawValue
+    }
+    
+    var tricks: [Trick]{
+        switch self {
+        case .skate:
+            return SkateTricks.defaultSkateTrick
+        default:
+            return []
+        }
     }
 }

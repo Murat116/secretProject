@@ -7,9 +7,10 @@
 //
 
 import Foundation
+import RealmSwift
 
 @objcMembers
-class User: NSObject{
+class User: Object{
     dynamic var login: String = ""
     dynamic var password: String = ""
     
@@ -21,27 +22,33 @@ class User: NSObject{
     dynamic var instagram: String = ""
     dynamic var vkonakte: String = ""
     
-    dynamic var skateTrick: [Trick] = []
-    dynamic var scootTrick: [Trick] = []
-    dynamic var bmxTrick: [Trick] = []
+    dynamic var skateTrick = List<Trick>()
+    dynamic var scootTrick = List<Trick>()
+    dynamic var bmxTrick = List<Trick>()
     
     dynamic var standIsRegular: Bool = true
     
-    dynamic var totalStats: TotalStats = TotalStats()
-    dynamic var promotionalСodes: [Promocodes] = []
+    dynamic var totalStats: TotalStats? = TotalStats()
+    dynamic var promotionalСodes = List<Promocodes>()
+    
+    override var description: String{
+        return "\(self.login),\(self.password),\(self.skateTrick.last?.name)"
+    }
     
 }
 
-struct TotalStats {
-    var technicality: Float = 0
-    var stability: Float = 0
-    var percentageеTricksLearned: Float = 0
+@objcMembers
+class TotalStats: Object {
+    dynamic var technicality: Float = 0
+    dynamic var stability: Float = 0
+    dynamic var percentageеTricksLearned: Float = 0
 }
 
-struct Promocodes{
-    var promocode: String
-    var trikName: Trick
-    var boardshop: String
-    var startDate: Date
-    var endDate: Date
+@objcMembers
+class Promocodes: Object{
+    dynamic var promocode: String = ""
+    dynamic var trikName: Trick? = Trick()
+    dynamic var boardshop: String = ""
+    dynamic var startDate: Date = Date()
+    dynamic var endDate: Date = Date()
 }
