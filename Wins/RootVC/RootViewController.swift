@@ -62,7 +62,11 @@ extension RootViewController{
 }
 
 extension RootViewController: RootViewInpit{
-    func configure(with model: User) {
+    func configure(with model: User?) {
+        guard let model = model else {
+            self.output.goToReg()
+            return
+        }
         self.headerView.configure(with: model)
     }
 }
@@ -134,10 +138,10 @@ extension RootViewController{
             self.technicalLabel.text = "Technical skill: \(user.totalStats?.technicality ?? 0)"
             
             guard let imageData = user.avatarImageData,
-            let image = UIImage(data: imageData) else { return }
+                let image = UIImage(data: imageData) else { return }
             
             self.avatar.setImage(image, for: [])
-
+            
         }
         
         private override init(frame: CGRect) {

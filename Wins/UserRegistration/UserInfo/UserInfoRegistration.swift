@@ -8,7 +8,7 @@
 
 import UIKit
 
-class UserInfoRegistrationVC: ViewController{
+class UserInfoRegistrationVC: UIViewController{
 
     static func show(parent: UIViewController){
         let instanse = UserInfoRegistrationAssembly.configureModule()

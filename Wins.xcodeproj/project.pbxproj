@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		45107DF6241FEC5F007A978D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45107DF5241FEC5F007A978D /* AppDelegate.swift */; };
-		45107DFA241FEC5F007A978D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45107DF9241FEC5F007A978D /* ViewController.swift */; };
 		45107DFF241FEC64007A978D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 45107DFE241FEC64007A978D /* Assets.xcassets */; };
 		45107E02241FEC64007A978D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 45107E00241FEC64007A978D /* LaunchScreen.storyboard */; };
 		45107E0D241FF721007A978D /* UserInfoRegistration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45107E0C241FF721007A978D /* UserInfoRegistration.swift */; };
@@ -49,7 +48,6 @@
 		42BDF2F513D222C6CE80DAD3 /* Pods-Wins.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Wins.release.xcconfig"; path = "Target Support Files/Pods-Wins/Pods-Wins.release.xcconfig"; sourceTree = "<group>"; };
 		45107DF2241FEC5F007A978D /* Wins.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Wins.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		45107DF5241FEC5F007A978D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		45107DF9241FEC5F007A978D /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		45107DFE241FEC64007A978D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		45107E01241FEC64007A978D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		45107E03241FEC64007A978D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -123,7 +121,6 @@
 			isa = PBXGroup;
 			children = (
 				45107DF5241FEC5F007A978D /* AppDelegate.swift */,
-				45107DF9241FEC5F007A978D /* ViewController.swift */,
 				5C04838B243E7EAB00B0B8C4 /* SceneDelegate.swift */,
 				5CD39E34244222EC0053896E /* Model */,
 				5CA092082442462F00D38C98 /* RootVC */,
@@ -342,7 +339,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				5CA092042442460800D38C98 /* SportsRegVC.swift in Sources */,
-				45107DFA241FEC5F007A978D /* ViewController.swift in Sources */,
 				5CA092072442462900D38C98 /* RootViewController.swift in Sources */,
 				5C1C1D7F243D1D1C008BDC58 /* UserInfoRegInteractor.swift in Sources */,
 				5C7895F1244B580A00410A37 /* RootVCAssembly.swift in Sources */,

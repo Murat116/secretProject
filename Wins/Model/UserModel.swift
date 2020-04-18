@@ -13,6 +13,7 @@ import RealmSwift
 class User: Object{
     dynamic var login: String? = nil
     dynamic var password: String = ""
+    dynamic var id: String = ""
     
     dynamic var name: String = "Guest"
     dynamic var city: String? = nil

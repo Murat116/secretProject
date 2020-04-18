@@ -24,7 +24,6 @@ class Trick: Object {
         }
     }
     dynamic var tries: Int = 0
-    dynamic var id: Int = 0
 }
 
 enum SkateTricks: Int, CaseIterable{

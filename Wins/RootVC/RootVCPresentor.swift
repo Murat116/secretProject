@@ -21,7 +21,7 @@ extension RootVCPresentor: RootViewOutput{
 }
 
 extension RootVCPresentor: RootInteractorOutput{
-    func configure(with model: User) {
+    func configure(with model: User?) {
         self.view.configure(with: model)
     }
 }

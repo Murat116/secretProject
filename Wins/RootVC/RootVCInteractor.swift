@@ -12,7 +12,7 @@ class RootVCInteractor{
     weak var output: RootInteractorOutput!
     
     func getUserData(){
-        let user = DataManager._shared.getUser() ?? User()
+        let user = DataManager._shared.getUser()
         self.output.configure(with: user)
     }
 }

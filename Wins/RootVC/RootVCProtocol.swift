@@ -7,19 +7,21 @@
 //
 
 protocol RootViewInpit: class {
-    func configure(with model: User)
+    func configure(with model: User?)
 }
 
 protocol RootViewOutput: class{
     func goToSettings()
+    func goToReg()
 }
 
 protocol RootInteractorOutput: class{
-    func configure(with model: User)
+    func configure(with model: User?)
 }
 
 protocol RootRouterInput: class{
     func goToSettings()
+    func goToReg()
 }
 
 
