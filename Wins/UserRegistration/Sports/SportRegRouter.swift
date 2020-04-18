@@ -14,12 +14,12 @@ class SportRegRouter{
 }
 
 extension SportRegRouter: SportRegRouterProtocolInput{
+    func dismiss() {
+        self.view.dismiss(animated: true, completion: nil)
+    }
+    
     func nextView() {
-        if self.view.isRegistration{
-            UserInfoRegistrationVC.show(parent: view)
-        }else{
-            self.view.dismiss(animated: true, completion: view.complition)
-        }
+        UserInfoRegistrationVC.show(parent: view)
     }
     
     func endRegistration() {

@@ -22,7 +22,8 @@ class SportRegPresentor {
     func configure() {
         self.view.setUP()
         let sportType = self.interactor.getUserSport()
-        self.view.configure(with: sportType)
+        let isUser = self.interactor.isUser()
+        self.view.configure(with: sportType, and: isUser)
     }
     
 }
@@ -30,7 +31,11 @@ class SportRegPresentor {
 extension SportRegPresentor: SportRegViewProtocolOutput{
     func sportIsSelected(with type: SportType) {
         self.saveUserData(with: type)
-        self.router.nextView()
+        if self.view.isUser{
+            self.router.dismiss()
+        }else{
+            self.router.nextView()
+        }
     }
 }
 
@@ -38,7 +43,6 @@ extension SportRegPresentor: SportRegInteractorProtocolOutput{
     
     func saveUserData(with type: SportType) {
         UserDefaults.standard.set(type.rawValue, forKey: USRDefKeys.sportType)
-        self.interactor.saveData()
         
     }
 }

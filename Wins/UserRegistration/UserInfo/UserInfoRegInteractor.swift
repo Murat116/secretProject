@@ -25,7 +25,7 @@ extension UserInfoRegInteractor: UserInfoRegInteractorProtocolInput{
     func saveUserData(with user: User) {
         let dataMng = DataManager._shared
         dataMng.saveName(user.name)
-        dataMng.saveCity(user.city)
+        dataMng.saveCity(user.city ?? "")
         dataMng.saveAge(user.age)
         dataMng.saveStand(user.standIsRegular ? 0 : 1)
         dataMng.saveSocialNet(user.facebook, type: .facebook)

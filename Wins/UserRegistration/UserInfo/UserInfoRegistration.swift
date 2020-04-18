@@ -60,6 +60,7 @@ class UserInfoRegistrationVC: ViewController{
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.setUp()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -79,8 +80,11 @@ extension UserInfoRegistrationVC: UserInfoRegViewProtocolInput{
         
         self.stand.selectedSegmentIndex = user.standIsRegular ? 0 : 1
         
-        let imageData = user.avatarImageData
-        self.image = UIImage(data: imageData)
+        if let imageData = user.avatarImageData{
+            self.image = UIImage(data: imageData)?.withRenderingMode(.alwaysTemplate)
+        }else{
+            self.image = UIImage(named: "Registration/avatar")?.withRenderingMode(.alwaysTemplate)
+        }
         
     }
     

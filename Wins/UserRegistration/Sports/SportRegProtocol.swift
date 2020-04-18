@@ -14,12 +14,14 @@ protocol SportRegInteractorProtocolOutput:class {
 
 protocol SportRegInteractorProtocolInput: class{
     func getUserSport() -> SportType
-    func saveData() //delete after test
+    func isUser() -> Bool
+    
 }
 
 protocol SportRegViewProtocolInput: class{
     func setUP()
-    func configure(with type: SportType)
+    func configure(with type: SportType,and isUser: Bool)
+    var isUser: Bool { get set }
 }
 
 protocol SportRegViewProtocolOutput: class{
@@ -29,4 +31,5 @@ protocol SportRegViewProtocolOutput: class{
 protocol SportRegRouterProtocolInput: class{
     func nextView()
     func endRegistration()
+    func dismiss()
 }

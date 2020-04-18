@@ -32,8 +32,7 @@ extension UserInfoRegRouter: UserInfoRegRouterProtocolInput{
     }
     
     func openSportVC() {
-        let sportVC =  SportsRegVC()
-        view.present(sportVC, animated: true, completion: nil)
+        SportsRegVC.show(parent: self.view)
     }
     
     

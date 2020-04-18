@@ -24,6 +24,11 @@
 		5C70DF25243FD7CA00C4A998 /* TrickRegInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C70DF24243FD7CA00C4A998 /* TrickRegInteractor.swift */; };
 		5C70DF27243FD7F200C4A998 /* TrickRegRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C70DF26243FD7F200C4A998 /* TrickRegRouter.swift */; };
 		5C7895ED244A274800410A37 /* userInfoRegistrationAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C7895EC244A274800410A37 /* userInfoRegistrationAssembly.swift */; };
+		5C7895EF244B554B00410A37 /* RootVCProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C7895EE244B554B00410A37 /* RootVCProtocol.swift */; };
+		5C7895F1244B580A00410A37 /* RootVCAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C7895F0244B580A00410A37 /* RootVCAssembly.swift */; };
+		5C7895F3244B599B00410A37 /* RootVCPresentor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C7895F2244B599B00410A37 /* RootVCPresentor.swift */; };
+		5C7895F5244B791B00410A37 /* RootVCInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C7895F4244B791B00410A37 /* RootVCInteractor.swift */; };
+		5C7895F7244B792900410A37 /* RootVCRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C7895F6244B792900410A37 /* RootVCRouter.swift */; };
 		5CA0920024422EF800D38C98 /* RegHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CA091FF24422EF800D38C98 /* RegHeaderView.swift */; };
 		5CA092042442460800D38C98 /* SportsRegVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CA092032442460800D38C98 /* SportsRegVC.swift */; };
 		5CA092072442462900D38C98 /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CA092062442462900D38C98 /* RootViewController.swift */; };
@@ -62,6 +67,11 @@
 		5C70DF24243FD7CA00C4A998 /* TrickRegInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrickRegInteractor.swift; sourceTree = "<group>"; };
 		5C70DF26243FD7F200C4A998 /* TrickRegRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrickRegRouter.swift; sourceTree = "<group>"; };
 		5C7895EC244A274800410A37 /* userInfoRegistrationAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = userInfoRegistrationAssembly.swift; sourceTree = "<group>"; };
+		5C7895EE244B554B00410A37 /* RootVCProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootVCProtocol.swift; sourceTree = "<group>"; };
+		5C7895F0244B580A00410A37 /* RootVCAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootVCAssembly.swift; sourceTree = "<group>"; };
+		5C7895F2244B599B00410A37 /* RootVCPresentor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootVCPresentor.swift; sourceTree = "<group>"; };
+		5C7895F4244B791B00410A37 /* RootVCInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootVCInteractor.swift; sourceTree = "<group>"; };
+		5C7895F6244B792900410A37 /* RootVCRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootVCRouter.swift; sourceTree = "<group>"; };
 		5CA091FF24422EF800D38C98 /* RegHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegHeaderView.swift; sourceTree = "<group>"; };
 		5CA092032442460800D38C98 /* SportsRegVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SportsRegVC.swift; sourceTree = "<group>"; };
 		5CA092062442462900D38C98 /* RootViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootViewController.swift; sourceTree = "<group>"; };
@@ -115,8 +125,8 @@
 				45107DF5241FEC5F007A978D /* AppDelegate.swift */,
 				45107DF9241FEC5F007A978D /* ViewController.swift */,
 				5C04838B243E7EAB00B0B8C4 /* SceneDelegate.swift */,
-				5CA092082442462F00D38C98 /* RootVC */,
 				5CD39E34244222EC0053896E /* Model */,
+				5CA092082442462F00D38C98 /* RootVC */,
 				45107E0B241FF700007A978D /* UserRegistration */,
 				45107DFE241FEC64007A978D /* Assets.xcassets */,
 				45107E00241FEC64007A978D /* LaunchScreen.storyboard */,
@@ -179,6 +189,11 @@
 			isa = PBXGroup;
 			children = (
 				5CA092062442462900D38C98 /* RootViewController.swift */,
+				5C7895F2244B599B00410A37 /* RootVCPresentor.swift */,
+				5C7895F4244B791B00410A37 /* RootVCInteractor.swift */,
+				5C7895F6244B792900410A37 /* RootVCRouter.swift */,
+				5C7895EE244B554B00410A37 /* RootVCProtocol.swift */,
+				5C7895F0244B580A00410A37 /* RootVCAssembly.swift */,
 			);
 			path = RootVC;
 			sourceTree = "<group>";
@@ -330,16 +345,20 @@
 				45107DFA241FEC5F007A978D /* ViewController.swift in Sources */,
 				5CA092072442462900D38C98 /* RootViewController.swift in Sources */,
 				5C1C1D7F243D1D1C008BDC58 /* UserInfoRegInteractor.swift in Sources */,
+				5C7895F1244B580A00410A37 /* RootVCAssembly.swift in Sources */,
 				45107DF6241FEC5F007A978D /* AppDelegate.swift in Sources */,
+				5C7895F5244B791B00410A37 /* RootVCInteractor.swift in Sources */,
 				5C70DF21243FD76200C4A998 /* TrickRegAssembly.swift in Sources */,
 				5CA092102442484100D38C98 /* SportRegInteractor.swift in Sources */,
 				5C1C1D83243D24B6008BDC58 /* UserInfoRegRouter.swift in Sources */,
 				5CEA0DF92447BA760068A975 /* UserModel.swift in Sources */,
+				5C7895F7244B792900410A37 /* RootVCRouter.swift in Sources */,
 				5C1C1D7D243D1BD7008BDC58 /* UserInfoRegPresentor.swift in Sources */,
 				5CA0920E2442483000D38C98 /* SportRegPresentor.swift in Sources */,
 				5C7895ED244A274800410A37 /* userInfoRegistrationAssembly.swift in Sources */,
 				5CD39E33244222E40053896E /* TricksModel.swift in Sources */,
 				5CA0920A2442480E00D38C98 /* SportRegProtocol.swift in Sources */,
+				5C7895F3244B599B00410A37 /* RootVCPresentor.swift in Sources */,
 				5C70DF1F243FD5A200C4A998 /* TrickRegProtocol.swift in Sources */,
 				5C6C0944243E7868007C2022 /* TricksRegVC.swift in Sources */,
 				5CA092122442484D00D38C98 /* SportRegRouter.swift in Sources */,
@@ -348,6 +367,7 @@
 				5C70DF27243FD7F200C4A998 /* TrickRegRouter.swift in Sources */,
 				5CC8A62A2448EDD300ED0720 /* USRDefKeys.swift in Sources */,
 				5C70DF23243FD79800C4A998 /* TrickRegPresentor.swift in Sources */,
+				5C7895EF244B554B00410A37 /* RootVCProtocol.swift in Sources */,
 				5C1C1D81243D1DFD008BDC58 /* UserInfoRegProtocol.swift in Sources */,
 				5CA0920024422EF800D38C98 /* RegHeaderView.swift in Sources */,
 				45107E0D241FF721007A978D /* UserInfoRegistration.swift in Sources */,

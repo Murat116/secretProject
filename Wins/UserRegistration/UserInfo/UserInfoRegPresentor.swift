@@ -11,10 +11,6 @@ class UserInfoRegPresentor {
     weak var view: UserInfoRegViewProtocolInput!
     var router: UserInfoRegRouterProtocolInput!
     var interactor: UserInfoRegInteractorProtocolInput!
-    
-    func configure(){
-        self.view.setUp()
-    }
 }
 
 extension UserInfoRegPresentor: UserInfoRegViewProtocolOutput{

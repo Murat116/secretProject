@@ -13,13 +13,19 @@ class SportsRegVC: UIViewController{
     var output: SportRegViewProtocolOutput!
     
     var complition: (() -> ())? = nil
-    var isRegistration: Bool = false
     
     var sportType: SportType = .skate
     
-    static func show(parent: UIViewController, with complition: (() -> ())? = nil){
+    var header: RegHeaderView!
+    
+    var isUser: Bool = false{
+        didSet{
+            self.header.isHidden = self.isUser
+        }
+    }
+    
+    static func show(parent: UIViewController, and complition: (() -> ())? = nil){
         let vc = SportRegAssembly.configureModule()
-        vc.isRegistration = !(parent is UserInfoRegistrationVC)
         vc.complition = complition
         vc.navigationController?.popViewController(animated: true)
         parent.present(vc, animated: true, completion: nil)
@@ -32,12 +38,13 @@ class SportsRegVC: UIViewController{
 }
 
 extension SportsRegVC: SportRegViewProtocolInput{
-    func configure(with type: SportType) {
+    func configure(with type: SportType, and isUser: Bool) {
         self.sportType = type
+        self.isUser = isUser
     }
     
     func setUP() {
-        let header = RegHeaderView(step: .sport, parentView: self.view)
+        self.header = RegHeaderView(step: .sport, parentView: self.view)
         
         self.navigationController?.navigationBar.isHidden = true
         self.view.backgroundColor = UIColor(red: 0.11, green: 0.11, blue: 0.11, alpha: 1)

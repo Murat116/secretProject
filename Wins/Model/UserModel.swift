@@ -11,11 +11,11 @@ import RealmSwift
 
 @objcMembers
 class User: Object{
-    dynamic var login: String = ""
+    dynamic var login: String? = nil
     dynamic var password: String = ""
     
-    dynamic var name: String = ""
-    dynamic var city: String = ""
+    dynamic var name: String = "Guest"
+    dynamic var city: String? = nil
     dynamic var age: Int = 0
     
     dynamic var facebook: String = ""
@@ -26,7 +26,7 @@ class User: Object{
     dynamic var scootTrick = List<Trick>()
     dynamic var bmxTrick = List<Trick>()
     
-    dynamic var avatarImageData: Data = Data()
+    dynamic var avatarImageData: Data? = nil
     
     dynamic var standIsRegular: Bool = true
     
