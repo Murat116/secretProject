@@ -8,16 +8,14 @@
 import Foundation
 
 class SportRegInteractor{
-    
-    var dataMngr = DataManager()
-    
+        
     weak var output: SportRegInteractorProtocolOutput!
     
 }
 
 extension SportRegInteractor: SportRegInteractorProtocolInput{
     func saveData() {
-        self.dataMngr.createUser(login: "Murat", password: "12345", sportType: .skate)
+        DataManager._shared.createUser(login: "Murat", password: "12345", sportType: .skate)
     }
     
     func getUserSport() -> SportType {

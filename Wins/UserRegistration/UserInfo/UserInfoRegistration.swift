@@ -11,18 +11,19 @@ import UIKit
 class UserInfoRegistrationVC: ViewController{
 
     static func show(parent: UIViewController){
-        let instanse = UserInfoRegistrationVC()
+        let instanse = UserInfoRegistrationAssembly.configureModule()
         instanse.isRegistration = parent is SportsRegVC
         parent.present(instanse, animated: true, completion: nil)
     }
     
     //----------------------------------------------------------------------
     
-    var configurator: UserInfoRegConfiguratorProtocol = UserInfoRegConfigirator()
-    var presenter: UserInfoRegPresenterProtocol!
+    var output: UserInfoRegViewProtocolOutput!
     
     
     var isRegistration: Bool = true
+    
+    var user: User? = nil
     
     //----------------------------------------------------------------------
 
@@ -34,6 +35,12 @@ class UserInfoRegistrationVC: ViewController{
 
     //----------------------------------------------------------------------
 
+    var image: UIImage? = UIImage(named: "Registration/avatar")?.withRenderingMode(.alwaysTemplate) {
+        didSet{
+            self.avatarBtn.setImage(self.image, for: .normal)
+        }
+    }
+    
     var avatarBtn = UIButton()
     var addAvatarBtn = UIButton()
     
@@ -53,13 +60,30 @@ class UserInfoRegistrationVC: ViewController{
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        self.configurator.configure(with: self)
-        self.presenter.configureView()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(true)
+        guard let user = self.user else { return }
+        self.output.saveUserData(with: user)
     }
 }
 
-extension UserInfoRegistrationVC: UserInfoRegViewProtocol{
+extension UserInfoRegistrationVC: UserInfoRegViewProtocolInput{
+    func configureView(with user: User) {
+        self.user = user
+        
+        self.nameField.text = user.login
+        self.ageField.text = String(user.age)
+        self.cityFiled.text = user.city
+        
+        self.stand.selectedSegmentIndex = user.standIsRegular ? 0 : 1
+        
+        let imageData = user.avatarImageData
+        self.image = UIImage(data: imageData)
+        
+    }
+    
     func setUp() {
         self.setUpUI()
     }
@@ -138,6 +162,7 @@ extension UserInfoRegistrationVC{
         self.stand.tintColor = .red
         
         self.stand.backgroundColor = UIColor(red: 0.314, green: 0.314, blue: 0.314, alpha: 1)
+        self.stand.selectedSegmentIndex = 0
         
         self.stand.translatesAutoresizingMaskIntoConstraints = false
         
@@ -167,8 +192,7 @@ extension UserInfoRegistrationVC{
         self.avatarBtn.layer.borderWidth = 1
         self.avatarBtn.layer.borderColor = UIColor(red: 0.314, green: 0.314, blue: 0.314, alpha: 1).cgColor
 
-        let imageImage = UIImage(named: "Registration/avatar")?.withRenderingMode(.alwaysTemplate)
-        self.avatarBtn.setImage(imageImage, for: .normal)
+        self.avatarBtn.setImage(self.image, for: .normal)
         self.avatarBtn.imageView?.tintColor = UIColor(red: 0.314, green: 0.314, blue: 0.314, alpha: 1.0)
         
         self.avatarBtn.contentEdgeInsets = UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 8 )
@@ -272,10 +296,10 @@ extension UserInfoRegistrationVC{
     @objc func nextVC(){
         //какая-то првоерка
         if self.isRegistration{
-            self.presenter.router.openNextStep()
-            self.presenter.interactor.saveUserData()
+            
+            self.output.openNextStep()
         }else{
-            self.presenter.openSportVC()
+            self.output.openSportVC()
         }
     }
 
@@ -343,3 +367,8 @@ extension UserInfoRegistrationVC{
     }
 }
 
+enum SocialNetWork: Int{
+    case instagram = 0
+    case facebook
+    case twiter
+}

@@ -7,28 +7,41 @@
 //
 
 
-class UserInfoRegPresentor: UserInfoRegPresenterProtocol{
-    weak var view: UserInfoRegViewProtocol!
-    var router: UserInfoRegRouterProtocol!
-    var interactor: UserInfoRegInteractorProtocol!
+class UserInfoRegPresentor {
+    weak var view: UserInfoRegViewProtocolInput!
+    var router: UserInfoRegRouterProtocolInput!
+    var interactor: UserInfoRegInteractorProtocolInput!
     
+    func configure(){
+        self.view.setUp()
+    }
+}
+
+extension UserInfoRegPresentor: UserInfoRegViewProtocolOutput{
     func openSportVC() {
         self.router.openSportVC()
     }
     
-    func nextBtnAction() {
-        //открывать третий шаг
+    
+    func openNextStep() {
+        self.router.openNextStep()
     }
     
     func openPhotoPicker() {
         //открывать фото пикер
     }
     
-    func configureView() {
-        self.view.setUp()
+    func saveUserData(with user: User) {
+        self.interactor.saveUserData(with: user)
+    }
+}
+
+extension UserInfoRegPresentor: UserInfoRegInteractorProtocolOutput{
+    func configureView(with user: User) {
+        self.view.configureView(with: user)
     }
     
-    required init(view: UserInfoRegViewProtocol) {
-        self.view = view
+    func getUserData(){
+        
     }
 }

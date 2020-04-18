@@ -17,12 +17,18 @@ protocol DataManagerProtocol{
 
 
 class DataManager: DataManagerProtocol{
-    func getUser() -> User? {
-        let user = self.realm?.objects(User.self).first
-        
-        return user
-    }
     
+    static var _shared = DataManager()
+    
+    var user: User!
+    
+    private init(){
+        if let user = self.getUser(){
+            self.user = user
+        }else{
+            self.user = User()
+        }
+    }
     
     fileprivate var realm: Realm? {
         do{
@@ -33,6 +39,24 @@ class DataManager: DataManagerProtocol{
         }
     }
     
+    func getUser() -> User? {
+        let user = self.realm?.objects(User.self).first
+        
+        return user
+    }
+    
+    func saveTrik(trick: Trick,stab: Int, dif: Float){
+        do{
+            guard let realm = self.realm else { return }
+            try realm.write{
+                trick.stabuluty = stab
+                trick.difficults = dif
+            }
+        }catch{
+            print(error.localizedDescription, "error in create User's tricks")
+        }
+    }
+    
 }
 
 extension DataManager{
@@ -40,6 +64,14 @@ extension DataManager{
         let tricks = List<Trick>()
         for trick in sportType.tricks{
             tricks.append(trick)
+            do{
+                guard let realm = self.realm else { return }
+                try realm.write{
+                    realm.add(trick)
+                }
+            }catch{
+                print(error.localizedDescription, "error in create User's tricks")
+            }
         }
         
         let user = User()
@@ -55,4 +87,87 @@ extension DataManager{
             print(error.localizedDescription, "error in createUser")
         }
     }
+}
+
+extension DataManager{
+    
+    func saveName(_ name: String){
+        do{
+            guard let realm = self.realm else { return }
+            
+            try realm.write{
+                self.user.name = name
+            }
+        }catch{
+            print(error.localizedDescription, "error in saving User name")
+        }
+    }
+    
+    func saveAge(_ age: Int){
+        do{
+            guard let realm = self.realm else { return }
+            
+            try realm.write{
+                self.user.age = age
+            }
+        }catch{
+            print(error.localizedDescription, "error in saving User age")
+        }
+    }
+    
+    func saveCity(_ city: String){
+        do{
+            guard let realm = self.realm else { return }
+            
+            try realm.write{
+                self.user.city = city
+            }
+        }catch{
+            print(error.localizedDescription, "error in saving User city")
+        }
+    }
+    
+    func saveStand(_ name: String){
+        do{
+            guard let realm = self.realm else { return }
+            
+            try realm.write{
+                self.user.name = name
+            }
+        }catch{
+            print(error.localizedDescription, "error in saving User name")
+        }
+    }
+    
+    func saveStand(_ stand: Int){
+        do{
+            guard let realm = self.realm else { return }
+            let isRegulat = stand == 0
+            try realm.write{
+                self.user.standIsRegular = isRegulat
+            }
+        }catch{
+            print(error.localizedDescription, "error in saving User stand")
+        }
+    }
+    
+    func saveSocialNet(_ link: String, type: SocialNetWork){
+        do{
+            guard let realm = self.realm else { return }
+            
+            try realm.write{
+                switch type{
+                case .facebook:
+                    self.user.facebook = link
+                case .instagram:
+                    self.user.instagram = link
+                case .twiter:
+                    self.user.vkonakte = link
+                }
+            }
+        }catch{
+            print(error.localizedDescription, "error in saving User soc network")
+        }
+    }
+    
 }

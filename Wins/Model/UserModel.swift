@@ -26,6 +26,8 @@ class User: Object{
     dynamic var scootTrick = List<Trick>()
     dynamic var bmxTrick = List<Trick>()
     
+    dynamic var avatarImageData: Data = Data()
+    
     dynamic var standIsRegular: Bool = true
     
     dynamic var totalStats: TotalStats? = TotalStats()

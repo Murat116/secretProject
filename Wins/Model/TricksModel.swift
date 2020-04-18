@@ -13,8 +13,16 @@ import RealmSwift
 @objcMembers
 class Trick: Object {
     dynamic var name: String = "Trick"
-    dynamic var difficults: Float = 0.0
-    dynamic var stabuluty: Int = 0
+    dynamic var difficults: Float = 0.0 {
+        didSet{
+            self.difficults = self.difficults < 0 ? 0 : self.difficults
+        }
+    }
+    dynamic var stabuluty: Int = 0 {
+        didSet{
+            self.stabuluty = self.stabuluty < 0 ? 0 : self.stabuluty
+        }
+    }
     dynamic var tries: Int = 0
     dynamic var id: Int = 0
 }
