@@ -8,24 +8,30 @@
 
 import UIKit
 
-class TricksRegVC: ViewController{
+class TricksRegVC: UIViewController{
     
-    var presenter: TrickRegPresentorProtocol!
-    var configurator: TrickRegConfiguratorProtocol = TrickRegConfigurator()
+    var output: TrickRegViewOutput!
     
     var stackView = UIStackView()
     var nextVcBtn = UIButton()
     
+    var tricks = [Trick]()
+    
+    static func show(parent:UIViewController){
+        let nextStepVC = TrickRegAssembly.configureModule()
+        parent.present(nextStepVC, animated: true, completion: nil)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.configurator.configure(with: self)
-        self.presenter.configureView()
     }
 }
 
-extension TricksRegVC: TrickRegViewProtocol{
-    func setUpUI() {
+extension TricksRegVC: TrickRegViewInput{
+    
+    func setUpUI(with tricks: [Trick]) {
         let header = RegHeaderView(step: .tricks, parentView: self.view)
+        self.tricks = tricks
         
         self.view.backgroundColor = UIColor(red: 0.11, green: 0.11, blue: 0.11, alpha: 1)
         
@@ -64,8 +70,8 @@ extension TricksRegVC: TrickRegViewProtocol{
     
     func addTrics(number: Int){
         for i in 0..<number{
-            guard let trick =  Tricks(rawValue: i) else { continue }
-            let view = TricksRegVC.CheckBoxView(trick: trick)
+            let trick =  self.tricks[i]
+            let view = TricksRegVC.CheckBoxView(trick: trick, output: self.output)
             self.stackView.addArrangedSubview(view)
             view.rightAnchor.constraint(equalTo: self.stackView.rightAnchor).isActive = true
             view.leftAnchor.constraint(equalTo: self.stackView.leftAnchor).isActive = true
@@ -73,21 +79,31 @@ extension TricksRegVC: TrickRegViewProtocol{
     }
     
     @objc func nextVC(){
-        
+        self.output.enRegistration()
     }
 }
 
 extension TricksRegVC{
     class CheckBoxView: UIView{
-        let box = UIView()
-        let label = UILabel()
-        let cross = UIView()
+        private let box = UIView()
+        private let label = UILabel()
+        private let cross = UIView()
         
+        private var trick: Trick? = nil
+        private var defaultDif: Float? = nil
+        
+        private var newDif: Float = 0.0
+        private var newStab = 0
+        
+        private var output: TrickRegViewOutput!
         
         var isSelect: Bool = false{
             didSet{
                 self.cross.isHidden = !self.isSelect
                 self.label.textColor = self.isSelect ? .white : UIColor(red: 0.314, green: 0.314, blue: 0.314, alpha: 1)
+                self.newDif  = self.isSelect ? self.trick!.difficults - 3 : self.defaultDif!
+                self.newStab = self.isSelect ? self.trick!.stabuluty + 5 : 0
+                self.output.saveChangedTrick(with: trick!, self.newDif, self.newStab)
             }
         }
         
@@ -154,9 +170,12 @@ extension TricksRegVC{
             self.isSelect = !self.isSelect
         }
         
-        init(trick: Tricks) {
+        init(trick: Trick, output: TrickRegViewOutput) {
             super.init(frame: CGRect.zero)
-            self.setUp(with: trick.trick.name)
+            self.output = output
+            self.trick = trick
+            self.defaultDif = trick.difficults
+            self.setUp(with: trick.name)
         }
         
         override init(frame: CGRect) {
@@ -168,3 +187,4 @@ extension TricksRegVC{
         }
     }
 }
+

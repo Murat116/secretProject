@@ -8,18 +8,27 @@
 
 import Foundation
 
-class TrickRegPresentor: TrickRegPresentorProtocol{
+class TrickRegPresentor{
     
-    var interactor: TrickRegInteractorProtocol!
-    var router: TrickRegRouterProtocol!
-    var view: TrickRegViewProtocol!
+    var interactor: TrickRegInteractorlInput!
+    var router: TrickRegRouterInput!
+    weak var view: TrickRegViewInput!
     
-    func configureView() {
-        self.view.setUpUI()
+}
+
+extension TrickRegPresentor: TrickRegViewOutput{
+    
+    func saveChangedTrick(with trick: Trick, _ newDif: Float, _ newStab: Int) {
+        self.interactor.saveUserData(with: trick, newDif, newStab)
     }
     
-    required init(view: TrickRegViewProtocol) {
-        self.view = view
+    func enRegistration() {
+        self.router.endRegistration()
     }
-    
+}
+
+extension TrickRegPresentor: TricckRegInteractorOutput{
+    func configure(with model: [Trick]) {
+        self.view.setUpUI(with: model)
+    }
 }

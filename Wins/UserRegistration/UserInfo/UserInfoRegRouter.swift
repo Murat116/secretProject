@@ -8,25 +8,31 @@
 
 import Foundation
 
-class UserInfoRegRouter: UserInfoRegRouterProtocol{
+class UserInfoRegRouter{
+    
+    weak var view: UserInfoRegistrationVC!
+    
+}
 
-    weak var viewController: UserInfoRegistrationVC!
-    
-    init(viewController: UserInfoRegistrationVC) {
-        self.viewController = viewController
-    }
-    
+extension UserInfoRegRouter: UserInfoRegRouterProtocolInput{
     func closeCurrentViewController() {
-        self.viewController.dismiss(animated: true, completion: nil)
+        //        self.viewController.sportRegRouter?.endRegistration()
     }
     
     func openNextStep() {
-        let nextStepVC = TricksRegVC()
-        self.viewController.present(nextStepVC, animated: true, completion: nil)
-      }
+        TricksRegVC.show(parent: self.view)
+    }
+    
+    func endRegistration(){
+        //        self.viewController.sportRegRouter?.endRegistration()
+    }
     
     func openPhotoPicker() {
         //
+    }
+    
+    func openSportVC() {
+        SportsRegVC.show(parent: self.view)
     }
     
     

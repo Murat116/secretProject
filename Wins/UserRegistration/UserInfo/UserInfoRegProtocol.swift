@@ -8,29 +8,34 @@
 
 import Foundation
 
-protocol UserInfoRegPresenterProtocol: class {
-    var router: UserInfoRegRouterProtocol! { set get }
-    var interactor: UserInfoRegInteractorProtocol! {set get}
-    func configureView()
-    
-    func nextBtnAction()
-    func openPhotoPicker()
+protocol UserInfoRegInteractorProtocolInput: class {
+    func saveUserData(with user: User)
 }
 
-protocol UserInfoRegConfiguratorProtocol {
-    func configure(with VC: UserInfoRegistrationVC)
+protocol UserInfoRegInteractorProtocolOutput: class {
+    func getUserData()
+    func configureView(with user: User)
 }
 
-protocol UserInfoRegInteractorProtocol: class {
-    func saveUserData()
-}
-
-protocol UserInfoRegViewProtocol: class {
+protocol UserInfoRegViewProtocolInput: class {
     func setUp()
+    func configureView(with user: User)
 }
 
-protocol UserInfoRegRouterProtocol: class {
+protocol UserInfoRegViewProtocolOutput: class {
+    func openNextStep()
+    func openPhotoPicker()
+    
+    func openSportVC()
+    
+    func saveUserData(with user: User)
+}
+
+protocol UserInfoRegRouterProtocolInput: class {
     func closeCurrentViewController()
     func openNextStep()
     func openPhotoPicker()
+    func openSportVC()
+    
+    func endRegistration()
 }

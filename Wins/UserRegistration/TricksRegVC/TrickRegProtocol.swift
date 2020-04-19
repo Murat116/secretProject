@@ -8,25 +8,23 @@
 
 import UIKit
 
-protocol TrickRegConfiguratorProtocol {
-    func configure(with vc: TricksRegVC)
+protocol TrickRegViewOutput: class {
+    func enRegistration()
+    func saveChangedTrick(with trick: Trick,_ newDif: Float,_ newStab: Int)
 }
 
-protocol TrickRegPresentorProtocol: class {
-    var interactor: TrickRegInteractorProtocol! {get set}
-    var router: TrickRegRouterProtocol! {get set}
-    
-    func configureView()
+protocol TrickRegInteractorlInput: class {
+    func saveUserData(with trick: Trick,_ newDif: Float,_ newStab: Int)
 }
 
-protocol TrickRegInteractorProtocol: class {
-    func saveUserData()
+protocol TricckRegInteractorOutput: class{
+    func configure(with model: [Trick])
 }
 
-protocol TrickRegViewProtocol: class {
-    func setUpUI()
+protocol TrickRegViewInput: class {
+    func setUpUI(with tricks: [Trick])
 }
 
-protocol TrickRegRouterProtocol: class {
+protocol TrickRegRouterInput: class {
     func endRegistration()
 }
