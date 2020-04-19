@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 class TrickRegRouter {
     weak var view: TricksRegVC!
@@ -14,6 +15,11 @@ class TrickRegRouter {
 
 extension TrickRegRouter: TrickRegRouterInput{
     func endRegistration() {
+        let viewController = RootVCRegAssembly.configureModule()
+        let navigationViewController = UINavigationController(rootViewController: viewController)
+        
+        UIApplication.shared.windows.first?.rootViewController = navigationViewController
+        UIApplication.shared.windows.first?.makeKeyAndVisible()
         
     }
 }

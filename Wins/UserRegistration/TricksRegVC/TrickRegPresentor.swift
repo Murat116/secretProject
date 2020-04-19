@@ -23,7 +23,7 @@ extension TrickRegPresentor: TrickRegViewOutput{
     }
     
     func enRegistration() {
-       1
+        self.router.endRegistration()
     }
 }
 

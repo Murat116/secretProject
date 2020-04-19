@@ -13,15 +13,21 @@ class RootVCPresentor{
 
 
 extension RootVCPresentor: RootViewOutput{
+    func goToReg() {
+        self.router.goToReg()
+    }
+    
     func goToSettings() {
         self.router.goToSettings()
     }
-    
-    
 }
 
 extension RootVCPresentor: RootInteractorOutput{
     func configure(with model: User?) {
-        self.view.configure(with: model)
+        if model != nil{
+            self.view.configure(with: model)
+        } else{
+            self.goToReg()
+        }
     }
 }

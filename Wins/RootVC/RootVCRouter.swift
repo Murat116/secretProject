@@ -13,6 +13,10 @@ class RootVCRouter{
 }
 
 extension RootVCRouter: RootRouterInput{
+    func goToReg() {
+        SportsRegVC.show(parent: RootViewController._shared)
+    }
+    
     func goToSettings() {
         UserInfoRegistrationVC.show(parent: self.view)
     }

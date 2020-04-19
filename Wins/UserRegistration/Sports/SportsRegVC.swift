@@ -27,13 +27,15 @@ class SportsRegVC: UIViewController{
     static func show(parent: UIViewController, and complition: (() -> ())? = nil){
         let vc = SportRegAssembly.configureModule()
         vc.complition = complition
-        vc.navigationController?.popViewController(animated: true)
         parent.present(vc, animated: true, completion: nil)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        self.navigationController?.navigationBar.isHidden = true
     }
 }
 
@@ -46,7 +48,6 @@ extension SportsRegVC: SportRegViewProtocolInput{
     func setUP() {
         self.header = RegHeaderView(step: .sport, parentView: self.view)
         
-        self.navigationController?.navigationBar.isHidden = true
         self.view.backgroundColor = UIColor(red: 0.11, green: 0.11, blue: 0.11, alpha: 1)
         
         let skate = SportBtn(type: .skate, presentor: self.output)

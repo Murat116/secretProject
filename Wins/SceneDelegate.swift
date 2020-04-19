@@ -17,7 +17,16 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         guard let windowScene = (scene as? UIWindowScene) else { return }
         window = UIWindow(frame: UIScreen.main.bounds)
-        let viewController = RootVCRegAssembly.configureModule()
+        
+        let user = DataManager._shared.getUser()
+        
+        let viewController: UIViewController
+        
+        if user != nil{
+            viewController = RootVCRegAssembly.configureModule()
+        }else{
+            viewController = SportRegAssembly.configureModule()
+        }
         let navigationViewController = UINavigationController(rootViewController: viewController)
         window?.rootViewController = navigationViewController
         window?.makeKeyAndVisible()

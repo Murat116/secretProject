@@ -20,12 +20,11 @@ extension SportRegRouter: SportRegRouterProtocolInput{
     
     func nextView() {
         UserInfoRegistrationVC.show(parent: view)
+        DataManager._shared.createUser(login: "Murat", password: "1", sportType: .skate)
     }
     
     func endRegistration() {
-        func endRegistration(){
-            self.view.complition!()
-        }
+ 
     }
     
 }

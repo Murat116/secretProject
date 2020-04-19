@@ -20,14 +20,11 @@ class DataManager: DataManagerProtocol{
     
     static var _shared = DataManager()
     
-    var user: User!
+    var user: User? = nil
+    var chalenges = [Chalenges]()
     
     private init(){
-        if let user = self.getUser(){
-            self.user = user
-        }else{
-            self.user = User()
-        }
+       
     }
     
     fileprivate var realm: Realm? {
@@ -41,6 +38,11 @@ class DataManager: DataManagerProtocol{
     
     func getUser() -> User? {
         let user = self.realm?.objects(User.self).first
+        self.user = user
+        
+        if let usr = user{
+            self.chalenges = Array(usr.chalenges)
+        }
         
         return user
     }
@@ -74,6 +76,12 @@ extension DataManager{
             }
         }
         
+        guard let realm = self.realm else { return }
+        let chalenge = Chalenges()
+        try! realm.write{
+            realm.add(chalenge)
+        }
+        
         let user = User()
         user.login = login
         user.password = password
@@ -82,6 +90,7 @@ extension DataManager{
             guard let realm = self.realm else { return }
             try realm.write{
                 realm.add(user)
+                user.chalenges.append(chalenge)
             }
         }catch{
             print(error.localizedDescription, "error in createUser")
@@ -93,10 +102,11 @@ extension DataManager{
     
     func saveName(_ name: String){
         do{
-            guard let realm = self.realm else { return }
+            guard let realm = self.realm,
+                let user = self.user else { return }
             
             try realm.write{
-                self.user.name = name
+                user.name = name
             }
         }catch{
             print(error.localizedDescription, "error in saving User name")
@@ -105,10 +115,11 @@ extension DataManager{
     
     func saveAge(_ age: Int){
         do{
-            guard let realm = self.realm else { return }
+            guard let realm = self.realm ,
+                let user = self.user else { return }
             
             try realm.write{
-                self.user.age = age
+                user.age = age
             }
         }catch{
             print(error.localizedDescription, "error in saving User age")
@@ -117,10 +128,11 @@ extension DataManager{
     
     func saveCity(_ city: String){
         do{
-            guard let realm = self.realm else { return }
+            guard let realm = self.realm ,
+                let user = self.user else { return }
             
             try realm.write{
-                self.user.city = city
+                user.city = city
             }
         }catch{
             print(error.localizedDescription, "error in saving User city")
@@ -129,10 +141,11 @@ extension DataManager{
     
     func saveStand(_ name: String){
         do{
-            guard let realm = self.realm else { return }
+            guard let realm = self.realm ,
+                let user = self.user else { return }
             
             try realm.write{
-                self.user.name = name
+                user.name = name
             }
         }catch{
             print(error.localizedDescription, "error in saving User name")
@@ -141,10 +154,11 @@ extension DataManager{
     
     func saveStand(_ stand: Int){
         do{
-            guard let realm = self.realm else { return }
+            guard let realm = self.realm ,
+                let user = self.user else { return }
             let isRegulat = stand == 0
             try realm.write{
-                self.user.standIsRegular = isRegulat
+                user.standIsRegular = isRegulat
             }
         }catch{
             print(error.localizedDescription, "error in saving User stand")
@@ -153,16 +167,17 @@ extension DataManager{
     
     func saveSocialNet(_ link: String, type: SocialNetWork){
         do{
-            guard let realm = self.realm else { return }
+            guard let realm = self.realm,
+                let user = self.user else { return }
             
             try realm.write{
                 switch type{
                 case .facebook:
-                    self.user.facebook = link
+                    user.facebook = link
                 case .instagram:
-                    self.user.instagram = link
+                    user.instagram = link
                 case .twiter:
-                    self.user.vkonakte = link
+                    user.vkonakte = link
                 }
             }
         }catch{

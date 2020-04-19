@@ -27,6 +27,8 @@ class User: Object{
     dynamic var scootTrick = List<Trick>()
     dynamic var bmxTrick = List<Trick>()
     
+    dynamic var chalenges = List<Chalenges>()
+    
     dynamic var avatarImageData: Data? = nil
     
     dynamic var standIsRegular: Bool = true
@@ -50,8 +52,17 @@ class TotalStats: Object {
 @objcMembers
 class Promocodes: Object{
     dynamic var promocode: String = ""
-    dynamic var trikName: Trick? = Trick()
+    dynamic var trickName: Trick? = Trick()
     dynamic var boardshop: String = ""
     dynamic var startDate: Date = Date()
     dynamic var endDate: Date = Date()
+}
+
+@objcMembers
+class Chalenges: Object{
+    dynamic var trick: Trick? = Trick()
+    dynamic var boardShop: String = "Without sponsor("
+    dynamic var date: Date = Date()
+    dynamic var sponsorImageData: Data? = nil
+    dynamic var isChalenge: Bool = true
 }

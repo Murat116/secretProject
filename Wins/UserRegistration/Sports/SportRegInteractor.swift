@@ -15,8 +15,8 @@ class SportRegInteractor{
 
 extension SportRegInteractor: SportRegInteractorProtocolInput{
     func isUser() -> Bool {
-        let user = DataManager._shared.getUser()
-        if user?.login == nil{
+        let user = DataManager._shared.user
+        if user == nil{
             return false
         }else{
             return true
