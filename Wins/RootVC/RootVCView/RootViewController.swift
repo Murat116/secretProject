@@ -14,22 +14,21 @@ class RootViewController: UIViewController{
     
     internal var output: RootViewOutput!
     
+    internal var tricks = [Trick]()
+    
     private var headerView = HeaderView()
     private var statBtn = UIButton()
     private var gameBtn = UIButton()
+    internal var tableView = UITableView(frame: .zero, style: .grouped)
     
+    internal var tableViewheight: NSLayoutConstraint? = nil
+    internal let scrollView = UIScrollView()
+    
+    internal var selectedIndex = [IndexPath]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setUp()
-        //        let isGuest = true
-        //        if isGuest{
-        //            SportsRegVC.show(parent: self) {
-        //                self.dismiss(animated: true, completion: nil)
-        //            }
-        ////            UserInfoRegistrationVC.show(parent: self)
-        //        }
-        
     }
     
     
@@ -48,7 +47,7 @@ extension RootViewController{
         self.navigationController?.navigationBar.isHidden = true
         self.view.backgroundColor =  UIColor(red: 0.11, green: 0.11, blue: 0.11, alpha: 1)
         
-        let scrollView = UIScrollView()
+        
         self.view.addSubview(scrollView)
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         scrollView.rightAnchor.constraint(equalTo: self.view.rightAnchor).isActive = true
@@ -59,11 +58,21 @@ extension RootViewController{
         scrollView.showsVerticalScrollIndicator = false
         scrollView.showsHorizontalScrollIndicator = false
         
-        scrollView.addSubview(self.headerView)
+        let contentView = UIView()
+       scrollView.addSubview( contentView )
+       contentView.autoresizingMask = .flexibleTopMargin
+       contentView.clipsToBounds = true
+
+       contentView.translatesAutoresizingMaskIntoConstraints = false
+       contentView.topAnchor.constraint(equalTo:  scrollView.topAnchor).isActive = true
+       contentView.leftAnchor.constraint(equalTo: scrollView.leftAnchor).isActive = true
+       contentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor ).isActive = true
+        
+        contentView.addSubview(self.headerView)
         self.headerView.translatesAutoresizingMaskIntoConstraints = false
-        self.headerView.rightAnchor.constraint(equalTo: self.view.rightAnchor, constant: -33).isActive = true
-        self.headerView.leftAnchor.constraint(equalTo: self.view.leftAnchor, constant: 33).isActive = true
-        self.headerView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: 0).isActive = true
+        self.headerView.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -33).isActive = true
+        self.headerView.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 33).isActive = true
+        self.headerView.topAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.topAnchor, constant: 0).isActive = true
         
         self.headerView.settingsBtn.addTarget(self, action: #selector(self.goToSettings), for: .touchUpInside)
     
@@ -71,10 +80,10 @@ extension RootViewController{
         flowLayout.scrollDirection = .horizontal
         
         let chalengeView = UICollectionView(frame: .zero, collectionViewLayout: flowLayout)
-        scrollView.addSubview(chalengeView)
+        contentView.addSubview(chalengeView)
         chalengeView.translatesAutoresizingMaskIntoConstraints = false
-        chalengeView.rightAnchor.constraint(equalTo: self.view.rightAnchor).isActive = true
-        chalengeView.leftAnchor.constraint(equalTo: self.view.leftAnchor).isActive = true
+        chalengeView.rightAnchor.constraint(equalTo: contentView.rightAnchor).isActive = true
+        chalengeView.leftAnchor.constraint(equalTo: contentView.leftAnchor).isActive = true
         chalengeView.topAnchor.constraint(equalTo: self.headerView.bottomAnchor).isActive = true
         chalengeView.heightAnchor.constraint(equalToConstant: 135).isActive = true
         
@@ -88,10 +97,10 @@ extension RootViewController{
         
         chalengeView.register(ChalendgeCell.self, forCellWithReuseIdentifier: "ChalendgeCell")
 
-        scrollView.addSubview(self.statBtn)
+        contentView.addSubview(self.statBtn)
         self.statBtn.translatesAutoresizingMaskIntoConstraints = false
-        self.statBtn.leftAnchor.constraint(equalTo: self.view.leftAnchor).isActive = true
-        self.statBtn.rightAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
+        self.statBtn.leftAnchor.constraint(equalTo: contentView.leftAnchor).isActive = true
+        self.statBtn.rightAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
         self.statBtn.topAnchor.constraint(equalTo: chalengeView.bottomAnchor, constant: 42).isActive = true
         self.statBtn.heightAnchor.constraint(equalToConstant: 112).isActive = true
         
@@ -102,12 +111,12 @@ extension RootViewController{
         
         self.statBtn.addTarget(self, action: #selector(self.goToStatiscits), for: .touchUpInside)
         
-        scrollView.addSubview(self.gameBtn)
+        contentView.addSubview(self.gameBtn)
         self.gameBtn.translatesAutoresizingMaskIntoConstraints = false
         self.gameBtn.topAnchor.constraint(equalTo: self.statBtn.topAnchor).isActive = true
         self.gameBtn.bottomAnchor.constraint(equalTo: self.statBtn.bottomAnchor).isActive = true
-        self.gameBtn.rightAnchor.constraint(equalTo: self.view.rightAnchor).isActive = true
-        self.gameBtn.leftAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
+        self.gameBtn.rightAnchor.constraint(equalTo: contentView.rightAnchor).isActive = true
+        self.gameBtn.leftAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
         
         self.gameBtn.setTitle("Game", for: .normal)
         self.gameBtn.setTitleColor(.white, for: .normal)
@@ -115,6 +124,36 @@ extension RootViewController{
         self.gameBtn.setImage(UIImage(named:"Registration/Sports/Skate"), for: .normal)
     
         self.gameBtn.addTarget(self, action: #selector(self.goToGame), for: .touchUpInside)
+        
+        contentView.addSubview(self.tableView)
+        
+        self.tableView.translatesAutoresizingMaskIntoConstraints = false
+        self.tableView.topAnchor.constraint(equalTo: self.gameBtn.bottomAnchor).isActive = true
+        self.tableView.rightAnchor.constraint(equalTo :contentView.rightAnchor).isActive = true
+        self.tableView.leftAnchor.constraint(equalTo: contentView.leftAnchor).isActive = true
+        
+        self.tableView.register(StatTableViewCell.self, forCellReuseIdentifier: "StatTableViewCell")
+        self.tableView.delegate = self
+        self.tableView.dataSource = self
+        self.tableView.rowHeight = UITableView.automaticDimension
+        
+        self.view.layoutIfNeeded()
+        
+        self.tableViewheight = self.tableView.heightAnchor.constraint(equalToConstant: self.tableView.contentSize.height)
+        self.tableView.separatorStyle = .none
+        self.tableViewheight!.isActive = true
+        self.tableView.bounces = false
+        self.tableView.backgroundColor = UIColor(red: 0.11, green: 0.11, blue: 0.11, alpha: 1)
+    
+        contentView.bottomAnchor.constraint(equalTo: self.tableView.bottomAnchor).isActive = true
+        
+        self.scrollView.contentSize.height = self.tableView.frame.origin.y + self.tableView.contentSize.height
+
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        self.tableViewheight?.constant  = self.tableView.contentSize.height
     }
     
     @objc func goToSettings(){
@@ -122,11 +161,12 @@ extension RootViewController{
     }
     
     @objc func goToStatiscits(){
-        
+        StatisticViewController.show(parent: self)
     }
     
     @objc func goToGame(){
-        
+        let gameView = GameView(tricks: self.tricks, frame: self.view.frame)//GameView(frame: self.view.frame)
+        self.view.addSubview(gameView)
     }
     
 }
@@ -138,6 +178,7 @@ extension RootViewController: RootViewInpit{
             return
         }
         self.headerView.configure(with: model)
+        self.tricks = Array(model.skateTrick)
     }
 }
 
