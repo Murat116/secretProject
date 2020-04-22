@@ -114,6 +114,12 @@ extension SportsRegVC{
         }
         
         @objc func sportIsSelected(){
+            guard self.type == .skate else{
+                let alert = UIAlertController(title: "In developing", message: "You can choose skateboarding", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+                self.presentor.showAlert(alert: alert)
+                return
+            }
             self.presentor.sportIsSelected(with: self.type)
         }
         

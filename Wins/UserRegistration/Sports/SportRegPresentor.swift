@@ -29,6 +29,10 @@ class SportRegPresentor {
 }
 
 extension SportRegPresentor: SportRegViewProtocolOutput{
+    func showAlert(alert: UIAlertController) {
+        self.router.showAlert(alert: alert)
+    }
+    
     func sportIsSelected(with type: SportType) {
         self.saveUserData(with: type)
         if self.view.isUser{

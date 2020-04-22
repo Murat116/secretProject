@@ -10,12 +10,12 @@ import UIKit
 
 extension RootViewController: UITableViewDelegate, UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return DataManager._shared.user?.skateTrick.count ?? 0
+        return self.lastTenTricks.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "StatTableViewCell", for: indexPath) as! StatTableViewCell
-        guard let trick = DataManager._shared.user?.skateTrick[indexPath.row] else { return UITableViewCell()}
+         let trick = self.lastTenTricks[indexPath.row]
         cell.configure(with: trick)
         return cell
     }
@@ -197,11 +197,11 @@ class StatTableViewCell: UITableViewCell{
         self.title.text = trick.name
         let mainColor = UIColor(red: 0.11, green: 0.11, blue: 0.11, alpha: 1)
         let difColor = UIColor(red: 0.128, green: 0.3, blue: 0.933, alpha: 1.0)
-        let stabColor = UIColor(red: 0.128, green: 0.3, blue: 0.933, alpha: 1.0)
-        self.difPie.segments = [Segment(color: difColor, value: 1),//CGFloat(trick.difficults)),
-            Segment(color: mainColor, value: CGFloat( 10.0 - 1))]//trick.difficults))]
-        self.stabPie.segments = [Segment(color: stabColor, value: 2),//CGFloat(trick.stabuluty)),
-            Segment(color: mainColor, value: CGFloat( 10 - 2))]//trick.stabuluty))]
+        let stabColor = UIColor(hex: "617DDC")
+        self.difPie.segments = [Segment(color: difColor, value:  CGFloat(trick.difficults)),
+            Segment(color: mainColor, value: CGFloat(10 - trick.difficults))]
+        self.stabPie.segments = [Segment(color: stabColor, value: CGFloat(trick.stabuluty)),
+            Segment(color: mainColor, value: CGFloat( 10 - trick.stabuluty))]
         self.difPie.draw(self.difPie.frame)
         self.stabPie.draw(self.stabPie.frame)
         

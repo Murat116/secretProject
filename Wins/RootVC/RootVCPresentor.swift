@@ -9,10 +9,15 @@
 class RootVCPresentor{
     weak var view: RootViewInpit!
     var router: RootRouterInput!
+    var interactor: RootInteractorInput!
 }
 
 
 extension RootVCPresentor: RootViewOutput{
+    func saveTrick(_ trick: Trick, with stab: Int, and dif: Float) {
+        self.interactor.saveTrick(trick, with: stab, and: dif)
+    }
+        
     func goToReg() {
         self.router.goToReg()
     }
@@ -20,12 +25,13 @@ extension RootVCPresentor: RootViewOutput{
     func goToSettings() {
         self.router.goToSettings()
     }
+    
 }
 
 extension RootVCPresentor: RootInteractorOutput{
-    func configure(with model: User?) {
+    func configure(with model: User?, and lastTenTrick: [Trick]) {
         if model != nil{
-            self.view.configure(with: model)
+            self.view.configure(with: model, and: lastTenTrick)
         } else{
             self.goToReg()
         }

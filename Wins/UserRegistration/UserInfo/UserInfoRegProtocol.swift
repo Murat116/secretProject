@@ -8,6 +8,8 @@
 
 import Foundation
 
+import UIKit
+
 protocol UserInfoRegInteractorProtocolInput: class {
     func saveUserData(with user: User)
 }
@@ -28,6 +30,8 @@ protocol UserInfoRegViewProtocolOutput: class {
     
     func openSportVC()
     
+    func openAlert(alert: UIAlertController)
+    
     func saveUserData(with user: User)
 }
 
@@ -38,4 +42,6 @@ protocol UserInfoRegRouterProtocolInput: class {
     func openSportVC()
     
     func endRegistration()
+    
+    func openAlert(alert: UIAlertController)
 }

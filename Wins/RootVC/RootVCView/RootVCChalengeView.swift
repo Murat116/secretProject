@@ -20,7 +20,11 @@ extension RootViewController:  UICollectionViewDelegate, UICollectionViewDataSou
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        guard !(DataManager._shared.user?.chalenges[indexPath.row].isChalenge ?? true) else { return }
+        //guard !(DataManager._shared.user?.chalenges[indexPath.row].isChalenge ?? true) else { return }
+        if indexPath.row == 1{
+            let view = TurnamentPreviewViewController()
+            self.present(view, animated: true, completion: nil)
+        }
         //открываем страицу с турнирами
     }
 }

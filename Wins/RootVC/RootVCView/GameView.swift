@@ -22,6 +22,8 @@ class GameView: UIView{
     
     private var tricks = [Trick]()
     
+    private var output: RootViewOutput!
+    
     func setUp(){
         let blur = UIVisualEffectView(effect: UIBlurEffect(style: .dark))
         self.addSubview(blur)
@@ -96,6 +98,7 @@ class GameView: UIView{
         guard self.trickCount <= 6 else {
             UIView.animate(withDuration: 0.3) {
                 self.removeFromSuperview()
+                
             }
             return
         }
@@ -106,11 +109,31 @@ class GameView: UIView{
         
         self.trickLabel.text = self.tricks[self.trickCount - 1].name
         
+        let trick = self.tricks[self.trickCount - 2]
+        var stab = trick.stabuluty
+        var dif = trick.difficults
+        if self.noBtn != btn {
+            stab += 1
+            dif -= 0.3
+        }else{
+            stab -= 1
+            dif += 0.3
+        }
+        self.output.saveTrick(trick, with: stab, and: dif)
     }
-    init(tricks: [Trick], frame: CGRect) {
+    
+    override func willMove(toSuperview newSuperview: UIView?) {
+        super.willMove(toSuperview: newSuperview)
+        if newSuperview == nil{
+            RootViewController._shared.tableView.reloadData()
+        }
+    }
+    
+    init(tricks: [Trick], frame: CGRect, output: RootViewOutput) {
         super.init(frame: frame)
-        self.tricks = tricks
+        self.tricks = GameView.rundomTrick(tricks: tricks)
         self.setUp()
+        self.output = output
     }
     
     override init(frame: CGRect) {
@@ -121,4 +144,18 @@ class GameView: UIView{
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    static func rundomTrick(tricks: [Trick]) -> [Trick]{
+        var tri = tricks
+        var tricksForGame = [Trick]()
+        for _ in 1...10{
+            let i = Int.random(in: 0..<tri.count)
+            let trick = tri[i]
+            tri.remove(at: i)
+            tricksForGame.append(trick)
+        }
+        return tricksForGame
+    }
 }
+
+

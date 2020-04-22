@@ -10,7 +10,7 @@ import Foundation
 import  RealmSwift
 
 protocol DataManagerProtocol{
-    func createUser(login: String, password: String, sportType: SportType)
+    func createUser(login: String?, password: String?, sportType: SportType)
     func getUser() -> User?
     
 }
@@ -50,7 +50,9 @@ class DataManager: DataManagerProtocol{
     func saveTrik(trick: Trick,stab: Int, dif: Float){
         do{
             guard let realm = self.realm else { return }
+            let total = trick.tries + 1
             try realm.write{
+                trick.tries = total
                 trick.stabuluty = stab
                 trick.difficults = dif
             }
@@ -62,7 +64,7 @@ class DataManager: DataManagerProtocol{
 }
 
 extension DataManager{
-    func createUser(login: String, password: String, sportType: SportType) {
+    func createUser(login: String?, password: String?, sportType: SportType) {
         let tricks = List<Trick>()
         for trick in sportType.tricks{
             tricks.append(trick)

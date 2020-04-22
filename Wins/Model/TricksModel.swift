@@ -28,26 +28,199 @@ class Trick: Object {
 
 enum SkateTricks: Int, CaseIterable{
     case Ollie = 0
-    case Switch_Ollie
+    case Fakieollie
+    case Nollie
+    case Switchollie
+    case Shoveit
+    case Fakieshoveit
+    case NollieFsshoveit
+    case Switchshoveit
+    case FsShoveit
+    case FakeFsShoveit
+    case NollieBsShoveit
+    case SwitchFsShoveit
+    case Bs180
+    case Fakiebs180
+    case Nolliefs180
+    case Switchbs180
+    case Fs180
+    case Fakiefs180
+    case NollieBs180
+    case Switchfs180
+    case Bsbigspin
+    case Fakiebsbigspin
+    case Nolliefsbigspin
+    case Switchbsbigspin
+    case Fsbigspin
+    case Fakiefsbigspin
+    case Nolliebsbigspin
+    case Switchfsbigspin
+    case Bs360
+    case FakieBs360
+    case NollieFs360
+    case SwitchBs360
+    case Fs360
+    case FakieFs360
+    case NollieBs360
+    case SwitchFs360
     case KickFlip
-    case Fakie_Ollie
-    case Fake_KickFlip
-    case Nolie
+    case FakieKickFlip
+    case NolieKickFlip
+    case VarialKickFlip
+    case FakieVarialKickFlip
+    case HeelFlip
+    case FakieHeelFlip
+    case NollieHeelFlip
+    case SwitchHeelFlip
+    case VarialHeelflip
+    case FakieVariaHeelflip
+    case BsKickflip
+    case Fakiebskickglip
+    case FsKickflip
+    case FakieFsKickflip
+    case BsHeelflip
+    case FakieBsHeelflip
+    case FsHeelflip
+    case FakeFsHeelflip
+    case CasperFlip
+    case FakieCasperFlip
+    case Hardflip
+    case FakeHardFlip
+    case InwardHeelFlip
+    case FakeInwardHellflip
+    case flip360
+    case fakie360flip
+
     
     var parametrs: Trick{
         switch self {
         case .Ollie:
-            return self.createTrick(name: "Ollie", difficults: 0, stabuluty: 0, tries: 0)
-        case .Switch_Ollie:
-            return createTrick(name: "Swith Olie", difficults: 0, stabuluty: 0, tries: 0)
-        case .Fakie_Ollie:
-            return createTrick(name: "Fakie Olie", difficults: 0, stabuluty: 0, tries: 0)
-        case .Nolie:
-            return createTrick(name: "Nolie", difficults: 0, stabuluty: 0, tries: 0)
+        return createTrick(name: "Ollie", difficults: 1.0, stabuluty: 0, tries: 0)
+        case .Fakieollie:
+        return createTrick(name: "Fakie ollie", difficults: 1.2, stabuluty: 0, tries: 0)
+        case .Nollie:
+        return createTrick(name: "Nollie", difficults: 1.5, stabuluty: 0, tries: 0)
+        case .Switchollie:
+        return createTrick(name: "Switch ollie", difficults: 1.7, stabuluty: 0, tries: 0)
+        case .Shoveit:
+        return createTrick(name: "Shove-it", difficults: 1.2, stabuluty: 0, tries: 0)
+        case .Fakieshoveit:
+        return createTrick(name: "Fakie shove-it", difficults: 1.5, stabuluty: 0, tries: 0)
+        case .NollieFsshoveit:
+        return createTrick(name: "Nollie Fs shove-it", difficults: 1.5, stabuluty: 0, tries: 0)
+        case .Switchshoveit:
+        return createTrick(name: "Switch shove-it", difficults: 1.7, stabuluty: 0, tries: 0)
+        case .FsShoveit:
+        return createTrick(name: "Fs Shove-it", difficults: 1.5, stabuluty: 0, tries: 0)
+        case .FakeFsShoveit:
+        return createTrick(name: "Fake Fs Shove-it", difficults: 1.3, stabuluty: 0, tries: 0)
+        case .NollieBsShoveit:
+        return createTrick(name: "Nollie Bs Shove-it", difficults: 1.5, stabuluty: 0, tries: 0)
+        case .SwitchFsShoveit:
+        return createTrick(name: "Switch Fs Shove-it", difficults: 1.7, stabuluty: 0, tries: 0)
+        case .Bs180:
+        return createTrick(name: "Bs 180", difficults: 2.0, stabuluty: 0, tries: 0)
+        case .Fakiebs180:
+        return createTrick(name: "Fakie bs 180", difficults: 1.7, stabuluty: 0, tries: 0)
+        case .Nolliefs180:
+        return createTrick(name: "Nollie fs 180", difficults: 2.3, stabuluty: 0, tries: 0)
+        case .Switchbs180:
+        return createTrick(name: "Switch bs 180", difficults: 2.5, stabuluty: 0, tries: 0)
+        case .Fs180:
+        return createTrick(name: "Fs 180", difficults: 2.0, stabuluty: 0, tries: 0)
+        case .Fakiefs180:
+        return createTrick(name: "Fakie fs 180", difficults: 1.7, stabuluty: 0, tries: 0)
+        case .NollieBs180:
+        return createTrick(name: " Nollie Bs 180", difficults: 2.3, stabuluty: 0, tries: 0)
+        case .Switchfs180:
+        return createTrick(name: "Switch fs 180", difficults: 2.5, stabuluty: 0, tries: 0)
+        case .Bsbigspin:
+        return createTrick(name: "Bs bigspin", difficults: 3.0, stabuluty: 0, tries: 0)
+        case .Fakiebsbigspin:
+        return createTrick(name: "Fakie bs bigspin", difficults: 2.0, stabuluty: 0, tries: 0)
+        case .Nolliefsbigspin:
+        return createTrick(name: "Nollie fs bigspin", difficults: 2.5, stabuluty: 0, tries: 0)
+        case .Switchbsbigspin:
+        return createTrick(name: "Switch bs bigspin", difficults: 3.5, stabuluty: 0, tries: 0)
+        case .Fsbigspin:
+        return createTrick(name: "Fs bigspin", difficults: 4.0, stabuluty: 0, tries: 0)
+        case .Fakiefsbigspin:
+        return createTrick(name: "Fakie fs bigspin", difficults: 2.5, stabuluty: 0, tries: 0)
+        case .Nolliebsbigspin:
+        return createTrick(name: "Nollie bs bigspin", difficults: 2.7, stabuluty: 0, tries: 0)
+        case .Switchfsbigspin:
+        return createTrick(name: "Switch fs bigspin", difficults: 4.5, stabuluty: 0, tries: 0)
+        case .Bs360:
+        return createTrick(name: "Bs 360", difficults: 4.0, stabuluty: 0, tries: 0)
+        case .FakieBs360:
+        return createTrick(name: "Fakie Bs 360", difficults: 3.0, stabuluty: 0, tries: 0)
+        case .NollieFs360:
+        return createTrick(name: "Nollie Fs 360", difficults: 3.5, stabuluty: 0, tries: 0)
+        case .SwitchBs360:
+        return createTrick(name: "Switch Bs 360", difficults: 4.5, stabuluty: 0, tries: 0)
+        case .Fs360:
+        return createTrick(name: "Fs 360", difficults: 4.0, stabuluty: 0, tries: 0)
+        case .FakieFs360:
+        return createTrick(name: "Fakie Fs 360", difficults: 3.0, stabuluty: 0, tries: 0)
+        case .NollieBs360:
+        return createTrick(name: "Nollie Bs 360", difficults: 3.5, stabuluty: 0, tries: 0)
+        case .SwitchFs360:
+        return createTrick(name: "Switch Fs 360", difficults: 4.5, stabuluty: 0, tries: 0)
         case .KickFlip:
-            return createTrick(name: "Kick Flip", difficults: 0, stabuluty: 0, tries: 0)
-        case .Fake_KickFlip:
-            return createTrick(name: "Fake Kickflip", difficults: 0, stabuluty: 0, tries: 0)
+        return createTrick(name: "KickFlip", difficults: 3.0, stabuluty: 0, tries: 0)
+        case .FakieKickFlip:
+        return createTrick(name: "Fakie KickFlip", difficults: 3.3, stabuluty: 0, tries: 0)
+        case .NolieKickFlip:
+        return createTrick(name: "Nolie KickFlip", difficults: 5.0, stabuluty: 0, tries: 0)
+        case .VarialKickFlip:
+        return createTrick(name: "Varial KickFlip", difficults: 3.0, stabuluty: 0, tries: 0)
+        case .FakieVarialKickFlip:
+        return createTrick(name: "Fakie Varial KickFlip", difficults: 3.0, stabuluty: 0, tries: 0)
+        case .HeelFlip:
+        return createTrick(name: "HeelFlip", difficults: 3.0, stabuluty: 0, tries: 0)
+        case .FakieHeelFlip:
+        return createTrick(name: "Fakie HeelFlip", difficults: 3.3, stabuluty: 0, tries: 0)
+        case .NollieHeelFlip:
+        return createTrick(name: "Nollie HeelFlip", difficults: 4.0, stabuluty: 0, tries: 0)
+        case .SwitchHeelFlip:
+        return createTrick(name: "Switch HeelFlip", difficults: 5.0, stabuluty: 0, tries: 0)
+        case .VarialHeelflip:
+        return createTrick(name: "Varial Heelflip", difficults: 3.0, stabuluty: 0, tries: 0)
+        case .FakieVariaHeelflip:
+        return createTrick(name: "Fakie Varia Heelflip", difficults: 3.0, stabuluty: 0, tries: 0)
+        case .BsKickflip:
+        return createTrick(name: "Bs Kickflip", difficults: 4.0, stabuluty: 0, tries: 0)
+        case .Fakiebskickglip:
+        return createTrick(name: "Fakie bs kickglip", difficults: 3.7, stabuluty: 0, tries: 0)
+        case .FsKickflip:
+        return createTrick(name: "Fs Kickflip", difficults: 4.5, stabuluty: 0, tries: 0)
+        case .FakieFsKickflip:
+        return createTrick(name: "Fakie Fs Kickflip", difficults: 4.0, stabuluty: 0, tries: 0)
+        case .BsHeelflip:
+        return createTrick(name: "Bs Heelflip", difficults: 4.0, stabuluty: 0, tries: 0)
+        case .FakieBsHeelflip:
+        return createTrick(name: "Fakie Bs Heelflip", difficults: 3.7, stabuluty: 0, tries: 0)
+        case .FsHeelflip:
+        return createTrick(name: "Fs Heelflip", difficults: 4.5, stabuluty: 0, tries: 0)
+        case .FakeFsHeelflip:
+        return createTrick(name: "Fake Fs Heelflip", difficults: 4.0, stabuluty: 0, tries: 0)
+        case .CasperFlip:
+        return createTrick(name: "Casper Flip", difficults: 10.0, stabuluty: 0, tries: 0)
+        case .FakieCasperFlip:
+        return createTrick(name: "Fakie Casper Flip", difficults: 10.0, stabuluty: 0, tries: 0)
+        case .Hardflip:
+        return createTrick(name: "Hardflip", difficults: 5.0, stabuluty: 0, tries: 0)
+        case .FakeHardFlip:
+        return createTrick(name: "Fake HardFlip", difficults: 5.0, stabuluty: 0, tries: 0)
+        case .InwardHeelFlip:
+        return createTrick(name: "Inward HeelFlip", difficults: 5.0, stabuluty: 0, tries: 0)
+        case .FakeInwardHellflip:
+        return createTrick(name: "Fake InwardHellflip", difficults: 5.0, stabuluty: 0, tries: 0)
+        case .flip360:
+        return createTrick(name: "360 flip", difficults: 5.0, stabuluty: 0, tries: 0)
+        case .fakie360flip:
+        return createTrick(name: "fakie 360 flip", difficults: 5.0, stabuluty: 0, tries: 0)
+
         }
     }
     

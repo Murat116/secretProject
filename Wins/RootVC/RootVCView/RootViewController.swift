@@ -14,7 +14,9 @@ class RootViewController: UIViewController{
     
     internal var output: RootViewOutput!
     
+    private var user: User!
     internal var tricks = [Trick]()
+    internal var lastTenTricks = [Trick]()
     
     private var headerView = HeaderView()
     private var statBtn = UIButton()
@@ -25,6 +27,8 @@ class RootViewController: UIViewController{
     internal let scrollView = UIScrollView()
     
     internal var selectedIndex = [IndexPath]()
+    
+    private var gameView = GameView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -165,20 +169,29 @@ extension RootViewController{
     }
     
     @objc func goToGame(){
-        let gameView = GameView(tricks: self.tricks, frame: self.view.frame)//GameView(frame: self.view.frame)
+        self.gameView = GameView(tricks: self.tricks, frame: self.view.frame, output: self.output)//GameView(frame: self.view.frame)
         self.view.addSubview(gameView)
     }
     
+//    override func willRemoveSubview(_ subview: UIView) {
+//        if subview is GameView{
+//            self.configure(with: us)
+//        }
+//    }
+
 }
 
 extension RootViewController: RootViewInpit{
-    func configure(with model: User?) {
+    func configure(with model: User?, and lastTenTrick: [Trick]) {
         guard let model = model else {
             self.output.goToReg()
             return
         }
+        self.user = model
         self.headerView.configure(with: model)
         self.tricks = Array(model.skateTrick)
+        self.lastTenTricks = lastTenTrick
+        self.tableView.reloadData()
     }
 }
 

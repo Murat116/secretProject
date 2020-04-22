@@ -7,7 +7,7 @@
 //
 
 
-
+import UIKit
 protocol SportRegInteractorProtocolOutput:class {
     func saveUserData(with type: SportType)
 }
@@ -26,10 +26,13 @@ protocol SportRegViewProtocolInput: class{
 
 protocol SportRegViewProtocolOutput: class{
     func sportIsSelected(with type: SportType)
+    func showAlert(alert: UIAlertController)
 }
+
 
 protocol SportRegRouterProtocolInput: class{
     func nextView()
     func endRegistration()
     func dismiss()
+    func showAlert(alert: UIAlertController)
 }

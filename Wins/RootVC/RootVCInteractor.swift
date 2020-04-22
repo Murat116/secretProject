@@ -13,7 +13,20 @@ class RootVCInteractor{
     
     func getUserData(){
         let user = DataManager._shared.getUser()
-        self.output.configure(with: user)
+        var lastTenTrick = UserDefaults.standard.value(forKey: USRDefKeys.lastTenTrick) as? [Trick]
+        if lastTenTrick == nil{
+            guard let tricks = user?.skateTrick else { return }
+            lastTenTrick = GameView.rundomTrick(tricks: Array(tricks))
+            UserDefaults.standard.set(lastTenTrick!, forKey: USRDefKeys.lastTenTrick)
+        }
+        self.output.configure(with: user, and: lastTenTrick!)
+        
+    }
+    
+}
+extension RootVCInteractor: RootInteractorInput{
+    func saveTrick(_ trick: Trick, with stab: Int, and dif: Float) {
+        DataManager._shared.saveTrik(trick: trick, stab: stab, dif: dif)
     }
 }
 

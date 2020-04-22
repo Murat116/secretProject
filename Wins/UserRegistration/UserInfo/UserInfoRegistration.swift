@@ -246,6 +246,7 @@ extension UserInfoRegistrationVC{
         let twitImage = UIImage(named: "Registration/twit")?.withRenderingMode(.alwaysTemplate)
         self.twitBtn.setImage(twitImage, for: .normal)
         self.twitBtn.tintColor = .white
+        self.twitBtn.addTarget(self, action: #selector(self.openInst), for: .touchUpInside)
         
         self.view.addSubview(self.instBtn)
         self.instBtn.translatesAutoresizingMaskIntoConstraints = false
@@ -258,6 +259,7 @@ extension UserInfoRegistrationVC{
         let instImage = UIImage(named: "Registration/inst")?.withRenderingMode(.alwaysTemplate)
         self.instBtn.setImage(instImage, for: .normal)
         self.instBtn.tintColor = .white
+        self.instBtn.addTarget(self, action: #selector(self.openInst), for: .touchUpInside)
         
         self.view.addSubview(self.faceBtn)
         self.faceBtn.translatesAutoresizingMaskIntoConstraints = false
@@ -266,10 +268,27 @@ extension UserInfoRegistrationVC{
         self.faceBtn.centerYAnchor.constraint(equalTo: self.socNetLbl.centerYAnchor).isActive = true
         self.faceBtn.heightAnchor.constraint(equalToConstant: 35).isActive = true
         self.faceBtn.widthAnchor.constraint(equalTo: self.faceBtn.heightAnchor).isActive = true
+        self.faceBtn.addTarget(self, action: #selector(self.openInst), for: .touchUpInside)
         
         let faceImage = UIImage(named: "Registration/facebook")?.withRenderingMode(.alwaysTemplate)
         self.faceBtn.setImage(faceImage, for: .normal)
         self.faceBtn.tintColor = .white
+    }
+    
+    @objc func openInst(){
+        let alert = UIAlertController(title: "While you can’t add your social network, but you can subscribe to us", message: nil, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Let's go", style: .default, handler: { (_) in
+            let instagramHooks = "instagram.com/wins_app?igshid=uc289nm1r62l"
+            let instagramUrl = URL(string: instagramHooks)
+            if let url = instagramUrl,UIApplication.shared.canOpenURL(url) {
+                UIApplication.shared.open(url)
+            } else {
+              //redirect to safari because the user doesn't have Instagram
+                UIApplication.shared.open(URL(string: "http://instagram.com/")!)
+            }
+        }))
+        alert.addAction(UIAlertAction(title: "Maybe later", style: .cancel, handler: nil))
+        self.output.openAlert(alert: alert)
     }
     
     func addBtn(){

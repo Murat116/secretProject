@@ -36,6 +36,7 @@
 		5C79C46E244D1CC5003589AE /* StatisticPresentor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C79C46D244D1CC5003589AE /* StatisticPresentor.swift */; };
 		5C79C470244D1F9A003589AE /* StatisticsInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C79C46F244D1F9A003589AE /* StatisticsInteractor.swift */; };
 		5C79C472244D2649003589AE /* GameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C79C471244D2649003589AE /* GameView.swift */; };
+		5C86F1BF244F9CAF00E80A0B /* TurnamentPreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C86F1BE244F9CAF00E80A0B /* TurnamentPreviewViewController.swift */; };
 		5CA0920024422EF800D38C98 /* RegHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CA091FF24422EF800D38C98 /* RegHeaderView.swift */; };
 		5CA092042442460800D38C98 /* SportsRegVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CA092032442460800D38C98 /* SportsRegVC.swift */; };
 		5CA092072442462900D38C98 /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CA092062442462900D38C98 /* RootViewController.swift */; };
@@ -86,6 +87,7 @@
 		5C79C46D244D1CC5003589AE /* StatisticPresentor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticPresentor.swift; sourceTree = "<group>"; };
 		5C79C46F244D1F9A003589AE /* StatisticsInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsInteractor.swift; sourceTree = "<group>"; };
 		5C79C471244D2649003589AE /* GameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameView.swift; sourceTree = "<group>"; };
+		5C86F1BE244F9CAF00E80A0B /* TurnamentPreviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TurnamentPreviewViewController.swift; sourceTree = "<group>"; };
 		5CA091FF24422EF800D38C98 /* RegHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegHeaderView.swift; sourceTree = "<group>"; };
 		5CA092032442460800D38C98 /* SportsRegVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SportsRegVC.swift; sourceTree = "<group>"; };
 		5CA092062442462900D38C98 /* RootViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootViewController.swift; sourceTree = "<group>"; };
@@ -143,6 +145,7 @@
 				45107E0B241FF700007A978D /* UserRegistration */,
 				5C79C468244D1BDC003589AE /* StatisticVC */,
 				5C00217E244CBDF800E34793 /* Extensions */,
+				5C86F1BE244F9CAF00E80A0B /* TurnamentPreviewViewController.swift */,
 				45107DFE241FEC64007A978D /* Assets.xcassets */,
 				45107E00241FEC64007A978D /* LaunchScreen.storyboard */,
 				45107E03241FEC64007A978D /* Info.plist */,
@@ -424,6 +427,7 @@
 				5CC8A62C244901F200ED0720 /* DataManager.swift in Sources */,
 				5C00217B244C7B6D00E34793 /* RootVCTableView.swift in Sources */,
 				5C79C472244D2649003589AE /* GameView.swift in Sources */,
+				5C86F1BF244F9CAF00E80A0B /* TurnamentPreviewViewController.swift in Sources */,
 				5CA0920C2442481F00D38C98 /* SportRegAssembly.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

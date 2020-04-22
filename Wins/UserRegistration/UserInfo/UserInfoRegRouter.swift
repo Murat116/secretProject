@@ -14,7 +14,12 @@ class UserInfoRegRouter{
     
 }
 
+import UIKit
 extension UserInfoRegRouter: UserInfoRegRouterProtocolInput{
+    func openAlert(alert: UIAlertController) {
+        self.view.present(alert, animated: true, completion: nil)
+    }
+    
     func closeCurrentViewController() {
         //        self.viewController.sportRegRouter?.endRegistration()
     }

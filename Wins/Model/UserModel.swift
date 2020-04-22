@@ -12,7 +12,7 @@ import RealmSwift
 @objcMembers
 class User: Object{
     dynamic var login: String? = nil
-    dynamic var password: String = ""
+    dynamic var password: String? = nil
     dynamic var id: String = ""
     
     dynamic var name: String = "Guest"
@@ -35,6 +35,8 @@ class User: Object{
     
     dynamic var totalStats: TotalStats? = TotalStats()
     dynamic var promotionalСodes = List<Promocodes>()
+    
+    dynamic var lastTenTrick = List<Trick>()
     
     override var description: String{
         return "\(self.login),\(self.password),\(self.skateTrick.last?.name)"
