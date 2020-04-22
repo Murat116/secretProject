@@ -18,7 +18,7 @@ class GameView: UIView{
     private var trickCountLabel = UILabel()
     private var progressBar = UIProgressView()
     
-    private var trickCount: Int = 1
+    private var trickCount: Int = 0
     
     private var tricks = [Trick]()
     
@@ -35,6 +35,15 @@ class GameView: UIView{
         
         blur.alpha = 0.9
         
+        let backView = UIView()
+        self.addSubview(backView)
+        backView.frame = self.frame
+        let tap = UITapGestureRecognizer(target: self, action: #selector(self.back))
+        backView.addGestureRecognizer(tap)
+        
+        let playView = UIView()
+        self.addSubview(playView)
+        
         self.addSubview(self.trickLabel)
         self.trickLabel.translatesAutoresizingMaskIntoConstraints = false
         self.trickLabel.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 33).isActive = true
@@ -43,7 +52,7 @@ class GameView: UIView{
         
         self.trickLabel.font = UIFont.systemFont(ofSize: 36)
         self.trickLabel.textColor = .white
-        self.trickLabel.text = "Fs 360 kickflip"
+        self.trickLabel.text = self.tricks[0].name
         
         self.addSubview(self.yesBtn)
         self.yesBtn.translatesAutoresizingMaskIntoConstraints = false
@@ -91,11 +100,27 @@ class GameView: UIView{
         self.progressBar.progressTintColor = UIColor(hex: "214FEF")
         self.progressBar.progress = 0.1
         self.progressBar.backgroundColor = UIColor(hex: "C4C4C4")
+    
+        self.layoutIfNeeded()
+        
+        let y = self.trickCountLabel.frame.origin.y
+        let height = self.yesBtn.frame.maxY - y
+        
+        playView.frame = CGRect(x: 0, y: y - 20, width: self.frame.width, height: height + 20)
+    }
+    
+    @objc func back(){
+        let alert = UIAlertController(title: "U want to stop game?", message: nil, preferredStyle: .actionSheet)
+        alert.addAction(UIAlertAction(title: "Stay to play", style: .default, handler: nil))
+        alert.addAction(UIAlertAction(title: "Stop game!", style: .destructive, handler: { (_) in
+            self.removeFromSuperview()
+        }))
+        RootViewController._shared.present(alert, animated: true, completion: nil)
     }
     
     @objc func nextTrick(btn: UIButton){
         self.trickCount += 1
-        guard self.trickCount <= 6 else {
+        guard self.trickCount < 10 else {
             UIView.animate(withDuration: 0.3) {
                 self.removeFromSuperview()
                 
@@ -103,13 +128,13 @@ class GameView: UIView{
             return
         }
         
-        self.progressBar.progress = Float(self.trickCount) / 10
+        self.progressBar.progress = Float(self.trickCount + 1) / 10
         
-        self.trickCountLabel.text = "\(self.trickCount)/10"
+        self.trickCountLabel.text = "\(self.trickCount + 1)/10"
         
-        self.trickLabel.text = self.tricks[self.trickCount - 1].name
+        self.trickLabel.text = self.tricks[self.trickCount].name
         
-        let trick = self.tricks[self.trickCount - 2]
+        let trick = self.tricks[self.trickCount - 1]
         var stab = trick.stabuluty
         var dif = trick.difficults
         if self.noBtn != btn {
@@ -125,7 +150,7 @@ class GameView: UIView{
     override func willMove(toSuperview newSuperview: UIView?) {
         super.willMove(toSuperview: newSuperview)
         if newSuperview == nil{
-            RootViewController._shared.tableView.reloadData()
+            self.output.reloadData()
         }
     }
     
@@ -138,17 +163,17 @@ class GameView: UIView{
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        self.setUp()
+//        self.setUp()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    static func rundomTrick(tricks: [Trick]) -> [Trick]{
+    static func rundomTrick(tricks: [Trick], maxNumber:Int = 10) -> [Trick]{
         var tri = tricks
         var tricksForGame = [Trick]()
-        for _ in 1...10{
+        for _ in 1...maxNumber{
             let i = Int.random(in: 0..<tri.count)
             let trick = tri[i]
             tri.remove(at: i)

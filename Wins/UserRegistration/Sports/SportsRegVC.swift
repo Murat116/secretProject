@@ -142,7 +142,7 @@ enum SportType: String{
     case bmx = "BMX"
     
     var image: UIImage?{
-        return UIImage(named: "Registration/Sports/\(self.rawValue)")
+        return UIImage(named: "skate")
     }
     
     var text: String{

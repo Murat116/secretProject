@@ -13,19 +13,32 @@ class RootVCInteractor{
     
     func getUserData(){
         let user = DataManager._shared.getUser()
-        var lastTenTrick = UserDefaults.standard.value(forKey: USRDefKeys.lastTenTrick) as? [Trick]
-        if lastTenTrick == nil{
-            guard let tricks = user?.skateTrick else { return }
-            lastTenTrick = GameView.rundomTrick(tricks: Array(tricks))
-            UserDefaults.standard.set(lastTenTrick!, forKey: USRDefKeys.lastTenTrick)
-        }
-        self.output.configure(with: user, and: lastTenTrick!)
-        
+        let lastTricks = self.getTricks()
+        self.output.configure(with: user, and: lastTricks)
     }
     
 }
 extension RootVCInteractor: RootInteractorInput{
+    func getTricks() -> [Trick] {
+        let user = DataManager._shared.getUser()
+        var lastTenTrick = DataManager._shared.lastTenTrick
+        if lastTenTrick.isEmpty{
+            guard let tricks = user?.skateTrick else { return []}
+            lastTenTrick = GameView.rundomTrick(tricks: Array(tricks))
+            var lastTenTrickID = [String]()
+            lastTenTrick.forEach { (trick) in
+                lastTenTrickID.append(trick.name)
+            }
+            UserDefaults.standard.set(lastTenTrickID, forKey: USRDefKeys.lastTenTrick)
+        }
+        return lastTenTrick
+    }
+    
     func saveTrick(_ trick: Trick, with stab: Int, and dif: Float) {
+        var arrTricks = DataManager._shared.lastTenTrick
+        arrTricks.removeFirst()
+        arrTricks.append(trick)
+        DataManager._shared.lastTenTrick = arrTricks
         DataManager._shared.saveTrik(trick: trick, stab: stab, dif: dif)
     }
 }

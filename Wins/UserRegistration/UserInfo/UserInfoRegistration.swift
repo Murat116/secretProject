@@ -373,9 +373,9 @@ extension UserInfoRegistrationVC{
     }
 
     enum TextFiledType: String{
-        case name = "Твое имя"
-        case city = "Твой город"
-        case age = "Твой возраст"
+        case name = "Your name"
+        case city = "Your city"
+        case age = "Your age"
 
         var keyboardType: UIKeyboardType{
             switch self {

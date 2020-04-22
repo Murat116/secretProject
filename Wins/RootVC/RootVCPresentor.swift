@@ -29,6 +29,11 @@ extension RootVCPresentor: RootViewOutput{
 }
 
 extension RootVCPresentor: RootInteractorOutput{
+    func reloadData() {
+        let lastTenTrick = self.interactor.getTricks()
+        self.view.reloadData(with: lastTenTrick)
+    }
+    
     func configure(with model: User?, and lastTenTrick: [Trick]) {
         if model != nil{
             self.view.configure(with: model, and: lastTenTrick)

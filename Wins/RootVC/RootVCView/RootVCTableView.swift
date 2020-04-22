@@ -9,14 +9,19 @@
 import UIKit
 
 extension RootViewController: UITableViewDelegate, UITableViewDataSource{
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 2
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        guard section != 0 else { return 0}
         return self.lastTenTricks.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "StatTableViewCell", for: indexPath) as! StatTableViewCell
          let trick = self.lastTenTricks[indexPath.row]
-        cell.configure(with: trick)
+        cell.configure(with: trick, isSelect: self.selectedIndex.contains(indexPath))
         return cell
     }
     
@@ -35,18 +40,63 @@ extension RootViewController: UITableViewDelegate, UITableViewDataSource{
         tableView.beginUpdates()
         tableView.endUpdates()
         
-        let trickCount = DataManager._shared.user?.skateTrick.count
-        let size = 100 + (50 * trickCount!) + (100 * self.selectedIndex.count)
-        
-        self.tableView.contentSize.height = CGFloat(size)
-//        self.tableView.contentSize.height =
-        self.tableViewheight?.constant = CGFloat(size)
-        self.scrollView.contentSize.height =  self.tableView.frame.origin.y + self.tableView.contentSize.height
-        
-
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        if section == 0{
+            let contentView = UIView()
+            
+            let flowLayout = UICollectionViewFlowLayout()
+            flowLayout.scrollDirection = .horizontal
+            
+            let chalengeView = UICollectionView(frame: .zero, collectionViewLayout: flowLayout)
+            contentView.addSubview(chalengeView)
+            chalengeView.translatesAutoresizingMaskIntoConstraints = false
+            chalengeView.rightAnchor.constraint(equalTo: contentView.rightAnchor).isActive = true
+            chalengeView.leftAnchor.constraint(equalTo: contentView.leftAnchor).isActive = true
+            chalengeView.topAnchor.constraint(equalTo: contentView.topAnchor).isActive = true
+            chalengeView.heightAnchor.constraint(equalToConstant: 135).isActive = true
+            
+            chalengeView.backgroundColor = UIColor(red: 0.11, green: 0.11, blue: 0.11, alpha: 1)
+            chalengeView.showsHorizontalScrollIndicator = false
+            chalengeView.showsVerticalScrollIndicator = false
+            chalengeView.contentInset = UIEdgeInsets(top: 0, left: 33, bottom: 0, right: 33)
+            
+            chalengeView.delegate = self
+            chalengeView.dataSource = self
+            
+            chalengeView.register(ChalendgeCell.self, forCellWithReuseIdentifier: "ChalendgeCell")
+            
+            contentView.addSubview(self.statBtn)
+            self.statBtn.translatesAutoresizingMaskIntoConstraints = false
+            self.statBtn.leftAnchor.constraint(equalTo: contentView.leftAnchor).isActive = true
+            self.statBtn.rightAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
+            self.statBtn.topAnchor.constraint(equalTo: chalengeView.bottomAnchor, constant: 42).isActive = true
+            self.statBtn.heightAnchor.constraint(equalToConstant: 112).isActive = true
+            
+            self.statBtn.setTitle("Statistics", for: .normal)
+            self.statBtn.setTitleColor(.white, for: .normal)
+            self.statBtn.titleLabel?.font = UIFont.systemFont(ofSize: 20)
+            self.statBtn.setImage(UIImage(named:"Menu/stat"), for: .normal)
+            
+            self.statBtn.addTarget(self, action: #selector(self.goToStatiscits), for: .touchUpInside)
+            
+            contentView.addSubview(self.gameBtn)
+            self.gameBtn.translatesAutoresizingMaskIntoConstraints = false
+            self.gameBtn.topAnchor.constraint(equalTo: self.statBtn.topAnchor).isActive = true
+            self.gameBtn.bottomAnchor.constraint(equalTo: self.statBtn.bottomAnchor).isActive = true
+            self.gameBtn.rightAnchor.constraint(equalTo: contentView.rightAnchor).isActive = true
+            self.gameBtn.leftAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
+            
+            self.gameBtn.setTitle("Game", for: .normal)
+            self.gameBtn.setTitleColor(.white, for: .normal)
+            self.gameBtn.titleLabel?.font = UIFont.systemFont(ofSize: 20)
+            self.gameBtn.setImage(UIImage(named:"Menu/game"), for: .normal)
+            
+            self.gameBtn.addTarget(self, action: #selector(self.goToGame), for: .touchUpInside)
+            
+            return contentView
+        }
         let view = UIView()
         let text = UILabel()
         
@@ -59,13 +109,17 @@ extension RootViewController: UITableViewDelegate, UITableViewDataSource{
         
         text.textColor = .white
         text.font = UIFont.systemFont(ofSize: 20)
-        text.text = "Stat for last ten tricks"
-        
+        text.text = "Statistics of the last ten tricks"
+
         return view
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 100
+        if section == 0{
+            return 250
+        }else{
+            return 100
+        }
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -93,12 +147,13 @@ class StatTableViewCell: UITableViewCell{
     private var selfHeight : NSLayoutConstraint? = nil
     
     private let line1 = UIView()
+    private let line = UIView()
     
     public var isSelect:Bool = false{
         didSet{
             UIView.animate(withDuration: 0.3) { [unowned self] in
                 self.arrowImage.transform = self.isSelect ? CGAffineTransform(rotationAngle: CGFloat.pi) : CGAffineTransform(rotationAngle: 0)
-                self.stactkView.isHidden = !self.isSelect
+//                self.stactkView.isHidden = !self.isSelect
                 self.difView.isHidden = !self.isSelect
                 self.stabView.isHidden = !self.isSelect
                 self.line1.isHidden = !self.isSelect
@@ -109,16 +164,17 @@ class StatTableViewCell: UITableViewCell{
         
     }
     
-    func setUp(){
-        self.selectionStyle = .none
-        
-        self.backgroundColor =  UIColor(red: 0.11, green: 0.11, blue: 0.11, alpha: 1)
-        self.selfHeight = self.heightAnchor.constraint(equalToConstant: 50)
-        self.selfHeight?.isActive = true
+    private func setUp(){
+//        self.selfHeight = self.heightAnchor.constraint(equalToConstant: 50)
+//        self.selfHeight?.isActive = true
         
         self.addSubview(self.title)
         self.title.translatesAutoresizingMaskIntoConstraints = false
-        self.title.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
+//        if !self.isSelect{
+//            self.title.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
+//        }else{
+        self.title.topAnchor.constraint(equalTo: self.topAnchor, constant: 10).isActive = true
+//        }
         self.title.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 53).isActive = true
         
         self.title.textColor = .white
@@ -126,7 +182,7 @@ class StatTableViewCell: UITableViewCell{
         
         self.addSubview(self.arrowImage)
         self.arrowImage.translatesAutoresizingMaskIntoConstraints = false
-        self.arrowImage.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
+        self.arrowImage.centerYAnchor.constraint(equalTo: self.title.centerYAnchor).isActive = true
         self.arrowImage.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -39).isActive = true
         self.arrowImage.heightAnchor.constraint(equalToConstant: 24).isActive = true
         self.arrowImage.widthAnchor.constraint(equalTo: self.arrowImage.heightAnchor).isActive = true
@@ -136,7 +192,7 @@ class StatTableViewCell: UITableViewCell{
         self.addSubview(self.stabPie)
         self.stabPie.translatesAutoresizingMaskIntoConstraints = false
         self.stabPie.rightAnchor.constraint(equalTo: self.arrowImage.leftAnchor, constant: -16).isActive = true
-        self.stabPie.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
+        self.stabPie.centerYAnchor.constraint(equalTo: self.title.centerYAnchor).isActive = true
         self.stabPie.heightAnchor.constraint(equalToConstant: 24).isActive = true
         self.stabPie.widthAnchor.constraint(equalTo: self.stabPie.heightAnchor).isActive = true
         
@@ -146,22 +202,21 @@ class StatTableViewCell: UITableViewCell{
         self.addSubview(self.difPie)
         self.difPie.translatesAutoresizingMaskIntoConstraints = false
         self.difPie.rightAnchor.constraint(equalTo: self.stabPie.leftAnchor, constant: -16).isActive = true
-        self.difPie.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
+        self.difPie.centerYAnchor.constraint(equalTo: self.title.centerYAnchor).isActive = true
         self.difPie.heightAnchor.constraint(equalToConstant: 24).isActive = true
         self.difPie.widthAnchor.constraint(equalTo: self.difPie.heightAnchor).isActive = true
         
         self.difPie.segments = [Segment(color: UIColor(red: 0.128, green: 0.3, blue: 0.933, alpha: 1.0), value: 1),
                                 Segment(color: UIColor(red: 0.11, green: 0.11, blue: 0.11, alpha: 1), value: 1) ]
         
-        let line = UIView()
-        self.addSubview(line)
-        line.translatesAutoresizingMaskIntoConstraints = false
-        line.rightAnchor.constraint(equalTo: self.rightAnchor).isActive = true
-        line.leftAnchor.constraint(equalTo: self.leftAnchor).isActive = true
-        line.topAnchor.constraint(equalTo: self.arrowImage.bottomAnchor, constant: 10).isActive = true
-        line.heightAnchor.constraint(equalToConstant: 1).isActive = true
+        self.addSubview(self.line)
+        self.line.translatesAutoresizingMaskIntoConstraints = false
+        self.line.rightAnchor.constraint(equalTo: self.rightAnchor).isActive = true
+        self.line.leftAnchor.constraint(equalTo: self.leftAnchor).isActive = true
+        self.line.topAnchor.constraint(equalTo: self.arrowImage.bottomAnchor, constant: 10).isActive = true
+        self.line.heightAnchor.constraint(equalToConstant: 1).isActive = true
         
-        line.backgroundColor = UIColor(hex: "505050")
+        self.line.backgroundColor = UIColor(hex: "505050")
         
         self.addSubview(self.stactkView)
         self.stactkView.translatesAutoresizingMaskIntoConstraints = false
@@ -172,8 +227,6 @@ class StatTableViewCell: UITableViewCell{
         self.stactkView.axis = .vertical
         self.stactkView.distribution = .fillEqually
         self.stactkView.spacing = 10
-
-        self.stactkView.isHidden = true
 
         self.stactkView.addArrangedSubview(self.difView)
         self.stactkView.addArrangedSubview(self.stabView)
@@ -193,7 +246,10 @@ class StatTableViewCell: UITableViewCell{
         self.line1.isHidden = true
     }
     
-    func configure(with trick: Trick){
+    internal func configure(with trick: Trick, isSelect: Bool){
+        self.setUp()
+        self.isSelect = isSelect
+        
         self.title.text = trick.name
         let mainColor = UIColor(red: 0.11, green: 0.11, blue: 0.11, alpha: 1)
         let difColor = UIColor(red: 0.128, green: 0.3, blue: 0.933, alpha: 1.0)
@@ -212,7 +268,9 @@ class StatTableViewCell: UITableViewCell{
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        self.setUp()
+        
+        self.selectionStyle = .none
+        self.backgroundColor =  UIColor(red: 0.11, green: 0.11, blue: 0.11, alpha: 1)
     }
     
     required init?(coder: NSCoder) {
@@ -276,11 +334,11 @@ extension StatTableViewCell{
             case .difficulty:
                 self.valueLabel.text = String(trick.difficults)
             case .stability:
-                self.valueLabel.text = String(trick.stabuluty)
+                self.valueLabel.text = "\(trick.stabuluty)/10"
             }
             
-            self.pieChart.segments = [Segment(color: self.type.color, value: 1),//CGFloat(trick.difficults)),
-                Segment(color: mainColor, value: CGFloat( 10.0 - 1))]//trick.difficults))]
+            self.pieChart.segments = [Segment(color: self.type.color, value: CGFloat(trick.difficults)),
+                Segment(color: mainColor, value: CGFloat( 10.0 - Double(trick.stabuluty)))]
             
             self.pieChart.draw(self.pieChart.frame)
             

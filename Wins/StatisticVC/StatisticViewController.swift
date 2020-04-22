@@ -32,6 +32,8 @@ class StatisticViewController: UITableViewController{
         
         self.tableView.register(StatTableViewCell.self, forCellReuseIdentifier: "StatTableViewCell")
         self.tableView.separatorStyle = .none
+        self.view.backgroundColor = UIColor(red: 0.11, green: 0.11, blue: 0.11, alpha: 1)
+        self.tableView.backgroundColor = UIColor(red: 0.11, green: 0.11, blue: 0.11, alpha: 1)
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -41,7 +43,7 @@ class StatisticViewController: UITableViewController{
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
             let cell = tableView.dequeueReusableCell(withIdentifier: "StatTableViewCell", for: indexPath) as! StatTableViewCell
             guard let trick = DataManager._shared.user?.skateTrick[indexPath.row] else { return UITableViewCell()}
-            cell.configure(with: trick)
+            cell.configure(with: trick, isSelect: self.selectedIndex.contains(indexPath))
             return cell
         }
         
