@@ -333,12 +333,13 @@ extension StatTableViewCell{
             switch self.type {
             case .difficulty:
                 self.valueLabel.text = String(trick.difficults)
+                self.pieChart.segments = [Segment(color: self.type.color, value: CGFloat(trick.difficults)),
+                Segment(color: mainColor, value: CGFloat( 10.0 - Double(trick.difficults)))]
             case .stability:
                 self.valueLabel.text = "\(trick.stabuluty)/10"
-            }
-            
-            self.pieChart.segments = [Segment(color: self.type.color, value: CGFloat(trick.difficults)),
+                self.pieChart.segments = [Segment(color: self.type.color, value: CGFloat(trick.stabuluty)),
                 Segment(color: mainColor, value: CGFloat( 10.0 - Double(trick.stabuluty)))]
+            }
             
             self.pieChart.draw(self.pieChart.frame)
             
