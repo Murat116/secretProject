@@ -10,7 +10,7 @@ import Foundation
 import  RealmSwift
 
 protocol DataManagerProtocol{
-    func createUser(login: String, password: String, sportType: SportType)
+    func createUser(login: String?, password: String?, sportType: SportType)
     func getUser() -> User?
     
 }
@@ -22,9 +22,34 @@ class DataManager: DataManagerProtocol{
     
     var user: User? = nil
     var chalenges = [Chalenges]()
+    var lastTenTrick: [Trick]{
+        get{
+            //            if self.lastTenTrick == nil{
+            guard let tricksName = UserDefaults.standard.value(forKey: USRDefKeys.lastTenTrick) as? [String],
+                let tricks = self.user?.skateTrick else{
+                    return []
+            }
+            var tricksArr = [Trick]()
+            for name in tricksName{
+                let trick = tricks.first{$0.name == name}
+                guard trick != nil else { continue }
+                tricksArr.append(trick!)
+            }
+            self.lastTenTrick = tricksArr
+            return tricksArr
+        }
+        set{
+            var array = [String]()
+            newValue.forEach { (trick) in
+                array.append(trick.name)
+            }
+            UserDefaults.standard.set(array, forKey: USRDefKeys.lastTenTrick)
+        }
+    }
+    
     
     private init(){
-       
+        
     }
     
     fileprivate var realm: Realm? {
@@ -50,9 +75,40 @@ class DataManager: DataManagerProtocol{
     func saveTrik(trick: Trick,stab: Int, dif: Float){
         do{
             guard let realm = self.realm else { return }
+            let total = trick.tries + 1
             try realm.write{
+                trick.tries = total
                 trick.stabuluty = stab
                 trick.difficults = dif
+            }
+        }catch{
+            print(error.localizedDescription, "error in create User's tricks")
+        }
+    }
+    
+    func createSkateTricks(){
+        guard let realm = self.realm else { return }
+        let tricks = List<Trick>()
+        let user = self.getUser()
+        for trick in SportType.skate.tricks{
+            tricks.append(trick)
+            do{
+                try realm.write{
+                    realm.add(trick)
+                    user?.skateTrick.append(trick)
+                }
+            }catch{
+                print(error.localizedDescription, "error in create User's tricks")
+            }
+        }
+        let chalenge = Chalenges()
+        do{
+            try realm.write{
+                realm.add(chalenge)
+                chalenge.date = Date()
+                chalenge.trick = tricks.first{$0.name == "360 flip"}
+                chalenge.isChalenge = true
+                user?.chalenges.insert(chalenge, at: 0)
             }
         }catch{
             print(error.localizedDescription, "error in create User's tricks")
@@ -62,7 +118,7 @@ class DataManager: DataManagerProtocol{
 }
 
 extension DataManager{
-    func createUser(login: String, password: String, sportType: SportType) {
+    func createUser(login: String?, password: String?, sportType: SportType) {
         let tricks = List<Trick>()
         for trick in sportType.tricks{
             tricks.append(trick)
@@ -77,20 +133,46 @@ extension DataManager{
         }
         
         guard let realm = self.realm else { return }
-        let chalenge = Chalenges()
-        try! realm.write{
-            realm.add(chalenge)
+        
+        
+        if let trick = tricks.first(where: {$0.name == "360 flip"}){
+            let chalenge = Chalenges()
+            do{
+                try realm.write{
+                    realm.add(chalenge)
+                    chalenge.date = Date()
+                    chalenge.trick =  trick
+                    chalenge.isChalenge = true
+                }
+            }catch{
+                print(error.localizedDescription, "error in create User's tricks")
+            }
+            chalenges.append(chalenge)
         }
+        
+        let turnamet = Chalenges()
+        do{
+            try realm.write{
+                realm.add(turnamet)
+                turnamet.date = Date()
+                turnamet.isChalenge = false
+            }
+        }catch{
+            print(error.localizedDescription, "error in create User's tricks")
+        }
+
+        let chalenges = List<Chalenges>()
+        chalenges.append(turnamet)
         
         let user = User()
         user.login = login
         user.password = password
         user.skateTrick = tricks
+        user.chalenges = chalenges
         do{
             guard let realm = self.realm else { return }
             try realm.write{
                 realm.add(user)
-                user.chalenges.append(chalenge)
             }
         }catch{
             print(error.localizedDescription, "error in createUser")

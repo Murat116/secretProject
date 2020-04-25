@@ -25,14 +25,14 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         if user != nil{
             viewController = RootVCRegAssembly.configureModule()
         }else{
-            viewController = SportRegAssembly.configureModule()
+            viewController = SignInAssembly.configureModule()
         }
         let navigationViewController = UINavigationController(rootViewController: viewController)
         window?.rootViewController = navigationViewController
         window?.makeKeyAndVisible()
         window?.windowScene = windowScene
         
-        
+        window?.overrideUserInterfaceStyle = .dark
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {

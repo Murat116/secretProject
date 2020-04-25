@@ -45,7 +45,7 @@ extension TricksRegVC: TrickRegViewInput{
         self.stackView.leftAnchor.constraint(equalTo: self.view.leftAnchor,constant:  33).isActive = true
         self.stackView.rightAnchor.constraint(equalTo: self.view.rightAnchor, constant: -33).isActive = true
         self.stackView.topAnchor.constraint(equalTo: header.bottomAnchor, constant: 40).isActive = true
-        self.stackView.bottomAnchor.constraint(greaterThanOrEqualTo: self.nextVcBtn.topAnchor, constant:  -20).isActive = true
+        self.stackView.bottomAnchor.constraint(greaterThanOrEqualTo: self.nextVcBtn.topAnchor, constant:  -40).isActive = true
         
         self.stackView.axis = .vertical
         self.stackView.alignment = .center
@@ -65,12 +65,17 @@ extension TricksRegVC: TrickRegViewInput{
         
         self.nextVcBtn.addTarget(self, action: #selector(self.nextVC), for: .touchUpInside)
         
-        self.addTrics(number: 5)
+        self.view.layoutIfNeeded()
+        
+        let tircksNumber = Int((self.stackView.frame.height) / 80)
+        
+        self.addTrics(number: tircksNumber)
     }
     
     func addTrics(number: Int){
-        for i in 0..<number{
-            let trick =  self.tricks[i]
+        let tricks = GameView.rundomTrick(tricks: self.tricks, maxNumber: number-1)
+        for i in 0..<number - 1{
+            let trick =  tricks[i]
             let view = TricksRegVC.CheckBoxView(trick: trick, output: self.output)
             self.stackView.addArrangedSubview(view)
             view.rightAnchor.constraint(equalTo: self.stackView.rightAnchor).isActive = true

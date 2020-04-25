@@ -14,13 +14,16 @@ class SportRegRouter{
 }
 
 extension SportRegRouter: SportRegRouterProtocolInput{
+    func showAlert(alert: UIAlertController) {
+        self.view.present(alert, animated: true, completion: nil)
+    }
+    
     func dismiss() {
         self.view.dismiss(animated: true, completion: nil)
     }
     
     func nextView() {
         UserInfoRegistrationVC.show(parent: view)
-        DataManager._shared.createUser(login: "Murat", password: "1", sportType: .skate)
     }
     
     func endRegistration() {

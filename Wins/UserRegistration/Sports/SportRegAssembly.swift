@@ -25,7 +25,7 @@ class SportRegAssembly {
         
         router.view = view
         
-        presenter.configure()
+        interactor.getData()
         
         return view
     }

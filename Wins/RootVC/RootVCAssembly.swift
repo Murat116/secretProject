@@ -14,13 +14,13 @@ class RootVCRegAssembly {
         let interactor = RootVCInteractor()
         let router = RootVCRouter()
         
-        view.output = presenter
-        
         presenter.view = view
         presenter.router = router
+        presenter.interactor = interactor
         
         router.view = view
         interactor.output = presenter
+        view.output = presenter
         
         interactor.getUserData()
         

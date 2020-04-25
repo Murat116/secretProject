@@ -11,12 +11,14 @@
 		45107DFF241FEC64007A978D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 45107DFE241FEC64007A978D /* Assets.xcassets */; };
 		45107E02241FEC64007A978D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 45107E00241FEC64007A978D /* LaunchScreen.storyboard */; };
 		45107E0D241FF721007A978D /* UserInfoRegistration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45107E0C241FF721007A978D /* UserInfoRegistration.swift */; };
-		5C002179244C74C200E34793 /* StatisticTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C002178244C74C200E34793 /* StatisticTableView.swift */; };
+		5C00217B244C7B6D00E34793 /* RootVCTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C00217A244C7B6D00E34793 /* RootVCTableView.swift */; };
+		5C00217D244CBDED00E34793 /* UIColor.extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C00217C244CBDED00E34793 /* UIColor.extension.swift */; };
 		5C04838C243E7EAB00B0B8C4 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C04838B243E7EAB00B0B8C4 /* SceneDelegate.swift */; };
 		5C1C1D7D243D1BD7008BDC58 /* UserInfoRegPresentor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C1C1D7C243D1BD7008BDC58 /* UserInfoRegPresentor.swift */; };
 		5C1C1D7F243D1D1C008BDC58 /* UserInfoRegInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C1C1D7E243D1D1C008BDC58 /* UserInfoRegInteractor.swift */; };
 		5C1C1D81243D1DFD008BDC58 /* UserInfoRegProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C1C1D80243D1DFD008BDC58 /* UserInfoRegProtocol.swift */; };
 		5C1C1D83243D24B6008BDC58 /* UserInfoRegRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C1C1D82243D24B6008BDC58 /* UserInfoRegRouter.swift */; };
+		5C54A714245259BC00223327 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C54A713245259BC00223327 /* SignInViewController.swift */; };
 		5C6C0944243E7868007C2022 /* TricksRegVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C6C0943243E7868007C2022 /* TricksRegVC.swift */; };
 		5C70DF1F243FD5A200C4A998 /* TrickRegProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C70DF1E243FD5A200C4A998 /* TrickRegProtocol.swift */; };
 		5C70DF21243FD76200C4A998 /* TrickRegAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C70DF20243FD76200C4A998 /* TrickRegAssembly.swift */; };
@@ -30,6 +32,17 @@
 		5C7895F5244B791B00410A37 /* RootVCInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C7895F4244B791B00410A37 /* RootVCInteractor.swift */; };
 		5C7895F7244B792900410A37 /* RootVCRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C7895F6244B792900410A37 /* RootVCRouter.swift */; };
 		5C7895F9244BAEF600410A37 /* RootVCChalengeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C7895F8244BAEF600410A37 /* RootVCChalengeView.swift */; };
+		5C79C46A244D1BFF003589AE /* StatisticViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C79C469244D1BFF003589AE /* StatisticViewController.swift */; };
+		5C79C46C244D1C30003589AE /* StatisticProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C79C46B244D1C30003589AE /* StatisticProtocol.swift */; };
+		5C79C46E244D1CC5003589AE /* StatisticPresentor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C79C46D244D1CC5003589AE /* StatisticPresentor.swift */; };
+		5C79C470244D1F9A003589AE /* StatisticsInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C79C46F244D1F9A003589AE /* StatisticsInteractor.swift */; };
+		5C79C472244D2649003589AE /* GameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C79C471244D2649003589AE /* GameView.swift */; };
+		5C86F1BF244F9CAF00E80A0B /* TurnamentPreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C86F1BE244F9CAF00E80A0B /* TurnamentPreviewViewController.swift */; };
+		5C876488245446D000040B28 /* SignInAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C876487245446D000040B28 /* SignInAssembly.swift */; };
+		5C87648A245446DB00040B28 /* SignInProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C876489245446DB00040B28 /* SignInProtocols.swift */; };
+		5C87648C2454564400040B28 /* SignInPresentor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C87648B2454564400040B28 /* SignInPresentor.swift */; };
+		5C87648E2454564E00040B28 /* SignInINteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C87648D2454564E00040B28 /* SignInINteractor.swift */; };
+		5C8764902454565A00040B28 /* SignInRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C87648F2454565A00040B28 /* SignInRouter.swift */; };
 		5CA0920024422EF800D38C98 /* RegHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CA091FF24422EF800D38C98 /* RegHeaderView.swift */; };
 		5CA092042442460800D38C98 /* SportsRegVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CA092032442460800D38C98 /* SportsRegVC.swift */; };
 		5CA092072442462900D38C98 /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CA092062442462900D38C98 /* RootViewController.swift */; };
@@ -55,12 +68,14 @@
 		45107E03241FEC64007A978D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		45107E0C241FF721007A978D /* UserInfoRegistration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoRegistration.swift; sourceTree = "<group>"; };
 		580D8E3408BCDA387F5E4976 /* Pods-Wins.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Wins.debug.xcconfig"; path = "Target Support Files/Pods-Wins/Pods-Wins.debug.xcconfig"; sourceTree = "<group>"; };
-		5C002178244C74C200E34793 /* StatisticTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticTableView.swift; sourceTree = "<group>"; };
+		5C00217A244C7B6D00E34793 /* RootVCTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootVCTableView.swift; sourceTree = "<group>"; };
+		5C00217C244CBDED00E34793 /* UIColor.extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColor.extension.swift; sourceTree = "<group>"; };
 		5C04838B243E7EAB00B0B8C4 /* SceneDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		5C1C1D7C243D1BD7008BDC58 /* UserInfoRegPresentor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoRegPresentor.swift; sourceTree = "<group>"; };
 		5C1C1D7E243D1D1C008BDC58 /* UserInfoRegInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoRegInteractor.swift; sourceTree = "<group>"; };
 		5C1C1D80243D1DFD008BDC58 /* UserInfoRegProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoRegProtocol.swift; sourceTree = "<group>"; };
 		5C1C1D82243D24B6008BDC58 /* UserInfoRegRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoRegRouter.swift; sourceTree = "<group>"; };
+		5C54A713245259BC00223327 /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
 		5C6C0943243E7868007C2022 /* TricksRegVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TricksRegVC.swift; sourceTree = "<group>"; };
 		5C70DF1E243FD5A200C4A998 /* TrickRegProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrickRegProtocol.swift; sourceTree = "<group>"; };
 		5C70DF20243FD76200C4A998 /* TrickRegAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrickRegAssembly.swift; sourceTree = "<group>"; };
@@ -74,6 +89,17 @@
 		5C7895F4244B791B00410A37 /* RootVCInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootVCInteractor.swift; sourceTree = "<group>"; };
 		5C7895F6244B792900410A37 /* RootVCRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootVCRouter.swift; sourceTree = "<group>"; };
 		5C7895F8244BAEF600410A37 /* RootVCChalengeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootVCChalengeView.swift; sourceTree = "<group>"; };
+		5C79C469244D1BFF003589AE /* StatisticViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticViewController.swift; sourceTree = "<group>"; };
+		5C79C46B244D1C30003589AE /* StatisticProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticProtocol.swift; sourceTree = "<group>"; };
+		5C79C46D244D1CC5003589AE /* StatisticPresentor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticPresentor.swift; sourceTree = "<group>"; };
+		5C79C46F244D1F9A003589AE /* StatisticsInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsInteractor.swift; sourceTree = "<group>"; };
+		5C79C471244D2649003589AE /* GameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameView.swift; sourceTree = "<group>"; };
+		5C86F1BE244F9CAF00E80A0B /* TurnamentPreviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TurnamentPreviewViewController.swift; sourceTree = "<group>"; };
+		5C876487245446D000040B28 /* SignInAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInAssembly.swift; sourceTree = "<group>"; };
+		5C876489245446DB00040B28 /* SignInProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInProtocols.swift; sourceTree = "<group>"; };
+		5C87648B2454564400040B28 /* SignInPresentor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInPresentor.swift; sourceTree = "<group>"; };
+		5C87648D2454564E00040B28 /* SignInINteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInINteractor.swift; sourceTree = "<group>"; };
+		5C87648F2454565A00040B28 /* SignInRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInRouter.swift; sourceTree = "<group>"; };
 		5CA091FF24422EF800D38C98 /* RegHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegHeaderView.swift; sourceTree = "<group>"; };
 		5CA092032442460800D38C98 /* SportsRegVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SportsRegVC.swift; sourceTree = "<group>"; };
 		5CA092062442462900D38C98 /* RootViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootViewController.swift; sourceTree = "<group>"; };
@@ -129,6 +155,9 @@
 				5CD39E34244222EC0053896E /* Model */,
 				5CA092082442462F00D38C98 /* RootVC */,
 				45107E0B241FF700007A978D /* UserRegistration */,
+				5C79C468244D1BDC003589AE /* StatisticVC */,
+				5C00217E244CBDF800E34793 /* Extensions */,
+				5C86F1BE244F9CAF00E80A0B /* TurnamentPreviewViewController.swift */,
 				45107DFE241FEC64007A978D /* Assets.xcassets */,
 				45107E00241FEC64007A978D /* LaunchScreen.storyboard */,
 				45107E03241FEC64007A978D /* Info.plist */,
@@ -140,11 +169,20 @@
 			isa = PBXGroup;
 			children = (
 				5CA091FF24422EF800D38C98 /* RegHeaderView.swift */,
+				5C54A715245259C900223327 /* SigIn */,
 				5CA092052442460D00D38C98 /* Sports */,
 				5C1C1D79243D195C008BDC58 /* UserInfo */,
 				5C6C0945243E7882007C2022 /* TricksRegVC */,
 			);
 			path = UserRegistration;
+			sourceTree = "<group>";
+		};
+		5C00217E244CBDF800E34793 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				5C00217C244CBDED00E34793 /* UIColor.extension.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 		5C1C1D79243D195C008BDC58 /* UserInfo */ = {
@@ -158,6 +196,19 @@
 				5C7895EC244A274800410A37 /* userInfoRegistrationAssembly.swift */,
 			);
 			path = UserInfo;
+			sourceTree = "<group>";
+		};
+		5C54A715245259C900223327 /* SigIn */ = {
+			isa = PBXGroup;
+			children = (
+				5C54A713245259BC00223327 /* SignInViewController.swift */,
+				5C87648B2454564400040B28 /* SignInPresentor.swift */,
+				5C87648D2454564E00040B28 /* SignInINteractor.swift */,
+				5C87648F2454565A00040B28 /* SignInRouter.swift */,
+				5C876489245446DB00040B28 /* SignInProtocols.swift */,
+				5C876487245446D000040B28 /* SignInAssembly.swift */,
+			);
+			path = SigIn;
 			sourceTree = "<group>";
 		};
 		5C6C0945243E7882007C2022 /* TricksRegVC */ = {
@@ -178,18 +229,31 @@
 			children = (
 				5CA092062442462900D38C98 /* RootViewController.swift */,
 				5C7895F8244BAEF600410A37 /* RootVCChalengeView.swift */,
+				5C00217A244C7B6D00E34793 /* RootVCTableView.swift */,
+				5C79C471244D2649003589AE /* GameView.swift */,
 			);
 			path = RootVCView;
+			sourceTree = "<group>";
+		};
+		5C79C468244D1BDC003589AE /* StatisticVC */ = {
+			isa = PBXGroup;
+			children = (
+				5C79C469244D1BFF003589AE /* StatisticViewController.swift */,
+				5C79C46D244D1CC5003589AE /* StatisticPresentor.swift */,
+				5C79C46F244D1F9A003589AE /* StatisticsInteractor.swift */,
+				5C79C46B244D1C30003589AE /* StatisticProtocol.swift */,
+			);
+			path = StatisticVC;
 			sourceTree = "<group>";
 		};
 		5CA092052442460D00D38C98 /* Sports */ = {
 			isa = PBXGroup;
 			children = (
 				5CA092032442460800D38C98 /* SportsRegVC.swift */,
-				5CA092092442480E00D38C98 /* SportRegProtocol.swift */,
 				5CA0920D2442483000D38C98 /* SportRegPresentor.swift */,
 				5CA0920F2442484100D38C98 /* SportRegInteractor.swift */,
 				5CA092112442484D00D38C98 /* SportRegRouter.swift */,
+				5CA092092442480E00D38C98 /* SportRegProtocol.swift */,
 				5CA0920B2442481F00D38C98 /* SportRegAssembly.swift */,
 			);
 			path = Sports;
@@ -204,7 +268,6 @@
 				5C7895F6244B792900410A37 /* RootVCRouter.swift */,
 				5C7895EE244B554B00410A37 /* RootVCProtocol.swift */,
 				5C7895F0244B580A00410A37 /* RootVCAssembly.swift */,
-				5C002178244C74C200E34793 /* StatisticTableView.swift */,
 			);
 			path = RootVC;
 			sourceTree = "<group>";
@@ -355,13 +418,15 @@
 				5CA092042442460800D38C98 /* SportsRegVC.swift in Sources */,
 				5CA092072442462900D38C98 /* RootViewController.swift in Sources */,
 				5C7895F9244BAEF600410A37 /* RootVCChalengeView.swift in Sources */,
-				5C002179244C74C200E34793 /* StatisticTableView.swift in Sources */,
 				5C1C1D7F243D1D1C008BDC58 /* UserInfoRegInteractor.swift in Sources */,
+				5C00217D244CBDED00E34793 /* UIColor.extension.swift in Sources */,
 				5C7895F1244B580A00410A37 /* RootVCAssembly.swift in Sources */,
 				45107DF6241FEC5F007A978D /* AppDelegate.swift in Sources */,
 				5C70DF21243FD76200C4A998 /* TrickRegAssembly.swift in Sources */,
 				5C7895F5244B791B00410A37 /* RootVCInteractor.swift in Sources */,
+				5C79C46A244D1BFF003589AE /* StatisticViewController.swift in Sources */,
 				5C70DF21243FD76200C4A998 /* TrickRegAssembly.swift in Sources */,
+				5C87648C2454564400040B28 /* SignInPresentor.swift in Sources */,
 				5CA092102442484100D38C98 /* SportRegInteractor.swift in Sources */,
 				5C1C1D83243D24B6008BDC58 /* UserInfoRegRouter.swift in Sources */,
 				5CEA0DF92447BA760068A975 /* UserModel.swift in Sources */,
@@ -371,22 +436,32 @@
 				5C7895ED244A274800410A37 /* userInfoRegistrationAssembly.swift in Sources */,
 				5CD39E33244222E40053896E /* TricksModel.swift in Sources */,
 				5CA0920A2442480E00D38C98 /* SportRegProtocol.swift in Sources */,
+				5C87648A245446DB00040B28 /* SignInProtocols.swift in Sources */,
 				5C7895F3244B599B00410A37 /* RootVCPresentor.swift in Sources */,
 				5C70DF1F243FD5A200C4A998 /* TrickRegProtocol.swift in Sources */,
 				5C6C0944243E7868007C2022 /* TricksRegVC.swift in Sources */,
 				5CA092122442484D00D38C98 /* SportRegRouter.swift in Sources */,
 				5C70DF25243FD7CA00C4A998 /* TrickRegInteractor.swift in Sources */,
 				5C04838C243E7EAB00B0B8C4 /* SceneDelegate.swift in Sources */,
+				5C79C470244D1F9A003589AE /* StatisticsInteractor.swift in Sources */,
 				5C70DF27243FD7F200C4A998 /* TrickRegRouter.swift in Sources */,
 				5CC8A62A2448EDD300ED0720 /* USRDefKeys.swift in Sources */,
 				5C70DF23243FD79800C4A998 /* TrickRegPresentor.swift in Sources */,
 				5C7895EF244B554B00410A37 /* RootVCProtocol.swift in Sources */,
 				5C1C1D81243D1DFD008BDC58 /* UserInfoRegProtocol.swift in Sources */,
 				5CA0920024422EF800D38C98 /* RegHeaderView.swift in Sources */,
+				5C79C46E244D1CC5003589AE /* StatisticPresentor.swift in Sources */,
 				45107E0D241FF721007A978D /* UserInfoRegistration.swift in Sources */,
-				5CA0920C2442481F00D38C98 /* SportRegAssembly.swift in Sources */,
+				5C8764902454565A00040B28 /* SignInRouter.swift in Sources */,
+				5C79C46C244D1C30003589AE /* StatisticProtocol.swift in Sources */,
+				5C876488245446D000040B28 /* SignInAssembly.swift in Sources */,
 				5CC8A62C244901F200ED0720 /* DataManager.swift in Sources */,
+				5C54A714245259BC00223327 /* SignInViewController.swift in Sources */,
+				5C00217B244C7B6D00E34793 /* RootVCTableView.swift in Sources */,
+				5C79C472244D2649003589AE /* GameView.swift in Sources */,
+				5C86F1BF244F9CAF00E80A0B /* TurnamentPreviewViewController.swift in Sources */,
 				5CA0920C2442481F00D38C98 /* SportRegAssembly.swift in Sources */,
+				5C87648E2454564E00040B28 /* SignInINteractor.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -466,6 +541,7 @@
 		};
 		45107E05241FEC64007A978D /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 42BDF2F513D222C6CE80DAD3 /* Pods-Wins.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -523,6 +599,7 @@
 			baseConfigurationReference = 580D8E3408BCDA387F5E4976 /* Pods-Wins.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = P5ZY6F8UKU;
 				INFOPLIST_FILE = Wins/Info.plist;
@@ -531,10 +608,11 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.simplanum.wins.Wins;
+				PRODUCT_BUNDLE_IDENTIFIER = com.hopeTo.Wins;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -543,7 +621,8 @@
 			baseConfigurationReference = 42BDF2F513D222C6CE80DAD3 /* Pods-Wins.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = P5ZY6F8UKU;
 				INFOPLIST_FILE = Wins/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
@@ -551,10 +630,11 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.simplanum.wins.Wins;
+				PRODUCT_BUNDLE_IDENTIFIER = com.hopeTo.Wins;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = com.hopeTo.Wins;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

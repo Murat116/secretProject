@@ -19,18 +19,15 @@ class SportRegPresentor {
     
     weak var view: SportRegViewProtocolInput!
         
-    func configure() {
-        self.view.setUP()
-        let sportType = self.interactor.getUserSport()
-        let isUser = self.interactor.isUser()
-        self.view.configure(with: sportType, and: isUser)
-    }
-    
 }
 
 extension SportRegPresentor: SportRegViewProtocolOutput{
+    func showAlert(alert: UIAlertController) {
+        self.router.showAlert(alert: alert)
+    }
+    
     func sportIsSelected(with type: SportType) {
-        self.saveUserData(with: type)
+        self.interactor.saveUserData(with: type)
         if self.view.isUser{
             self.router.dismiss()
         }else{
@@ -40,9 +37,9 @@ extension SportRegPresentor: SportRegViewProtocolOutput{
 }
 
 extension SportRegPresentor: SportRegInteractorProtocolOutput{
-    
-    func saveUserData(with type: SportType) {
-        UserDefaults.standard.set(type.rawValue, forKey: USRDefKeys.sportType)
-        
+    func configure(with sportType: SportType, isUser: Bool) {
+        self.view.setUP()
+        let isUser = sportType != .none ? isUser : false
+        self.view.configure(with: sportType, and: isUser)
     }
 }

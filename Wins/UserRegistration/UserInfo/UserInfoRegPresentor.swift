@@ -13,7 +13,12 @@ class UserInfoRegPresentor {
     var interactor: UserInfoRegInteractorProtocolInput!
 }
 
+import UIKit
 extension UserInfoRegPresentor: UserInfoRegViewProtocolOutput{
+    func openAlert(alert: UIAlertController) {
+        self.router.openAlert(alert: alert)
+    }
+    
     func openSportVC() {
         self.router.openSportVC()
     }
