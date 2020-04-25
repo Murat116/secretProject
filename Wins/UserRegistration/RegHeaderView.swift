@@ -30,11 +30,17 @@ class RegHeaderView: UIView{
         self.configure(step: step)
     }
     
+    internal var title: String = ""{
+        didSet{
+            self.titleVC.text = self.title
+        }
+    }
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func setUp(){
+    private func setUp(){
         self.parentView.addSubview(self)
         self.translatesAutoresizingMaskIntoConstraints = false
         
@@ -106,6 +112,7 @@ class RegHeaderView: UIView{
 
 
 enum Steps: Float, CaseIterable{
+    case sighIn = 0
     case sport = 0.33
     case userInfo = 0.66
     case tricks = 1.0
@@ -116,12 +123,14 @@ enum Steps: Float, CaseIterable{
 
     var title: String{
         switch self {
+        case .sighIn:
+            return "Registration"//"Регистрация"
         case .sport:
-            return "Вид спорта"
+            return "Kind of sport"//"Вид спорта"
         case .userInfo:
-            return "Введите данные"
+            return "Enter your data"//"Введите данные"
         case .tricks:
-            return "Какие трюки умеешь?"
+            return "What tricks do you know?"//"Какие трюки умеешь?"
         }
     }
 }

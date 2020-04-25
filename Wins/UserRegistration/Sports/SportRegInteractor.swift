@@ -29,7 +29,7 @@ extension SportRegInteractor: SportRegInteractorProtocolInput{
     
     func getUserSport() -> SportType {
         guard let sportTypeValue = UserDefaults.standard.value(forKey: USRDefKeys.sportType) as? String,
-            let type = SportType(rawValue: sportTypeValue) else { return .skate}
+            let type = SportType(rawValue: sportTypeValue) else { return .none}
         return type
     }
 }

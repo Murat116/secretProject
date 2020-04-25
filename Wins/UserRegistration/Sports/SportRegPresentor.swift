@@ -22,7 +22,7 @@ class SportRegPresentor {
     func configure() {
         self.view.setUP()
         let sportType = self.interactor.getUserSport()
-        let isUser = self.interactor.isUser()
+        let isUser = sportType != .none ? self.interactor.isUser() : false
         self.view.configure(with: sportType, and: isUser)
     }
     

@@ -10,13 +10,19 @@ import UIKit
 
 class SportsRegVC: UIViewController{
     
+    //----------------------------------------------------------------------
+    
     var output: SportRegViewProtocolOutput!
     
     var complition: (() -> ())? = nil
     
     var sportType: SportType = .skate
     
+    //----------------------------------------------------------------------
+    
     var header: RegHeaderView!
+    
+    //----------------------------------------------------------------------
     
     var isUser: Bool = false{
         didSet{
@@ -24,19 +30,28 @@ class SportsRegVC: UIViewController{
         }
     }
     
+    //----------------------------------------------------------------------
+    
     static func show(parent: UIViewController, and complition: (() -> ())? = nil){
         let vc = SportRegAssembly.configureModule()
         vc.complition = complition
         parent.present(vc, animated: true, completion: nil)
     }
     
+    //----------------------------------------------------------------------
+    
     override func viewDidLoad() {
         super.viewDidLoad()
     }
     
+    //----------------------------------------------------------------------
+    
     override func viewWillAppear(_ animated: Bool) {
         self.navigationController?.navigationBar.isHidden = true
     }
+    
+    //----------------------------------------------------------------------
+    
 }
 
 extension SportsRegVC: SportRegViewProtocolInput{
@@ -137,12 +152,13 @@ extension SportsRegVC{
 
 import RealmSwift
 enum SportType: String{
+    case none = ""
     case skate = "Skate"
     case scoot = "Scoot"
     case bmx = "BMX"
     
     var image: UIImage?{
-        return UIImage(named: "skate")
+         return UIImage(named: "Registration/Sports/\(self.rawValue)")
     }
     
     var text: String{

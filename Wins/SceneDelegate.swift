@@ -25,7 +25,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         if user != nil{
             viewController = RootVCRegAssembly.configureModule()
         }else{
-            viewController = SportRegAssembly.configureModule()
+            viewController = SignInAssembly.configureModule()
         }
         let navigationViewController = UINavigationController(rootViewController: viewController)
         window?.rootViewController = navigationViewController

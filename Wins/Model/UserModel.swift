@@ -39,7 +39,8 @@ class User: Object{
     dynamic var lastTenTrick = List<Trick>()
     
     override var description: String{
-        return "\(self.login),\(self.password),\(self.skateTrick.last?.name)"
+        return "\(self)"
+//        return "\(self.login),\(self.password),\(self.skateTrick.last?.name)"
     }
     
 }

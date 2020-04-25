@@ -134,7 +134,7 @@ extension RootViewController{
             if let imageData = chalenge.sponsorImageData, let image = UIImage(data: imageData){
                 self.backgoundImage.image = image
             }else{
-                self.backgoundImage.image = UIImage(named: "skate")
+                self.backgoundImage.image = UIImage(named: "Registration/Sports/\(SportType.skate)")
             }
         }
     }
