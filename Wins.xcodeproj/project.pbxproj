@@ -540,6 +540,7 @@
 		};
 		45107E05241FEC64007A978D /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 42BDF2F513D222C6CE80DAD3 /* Pods-Wins.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
