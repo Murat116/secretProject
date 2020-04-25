@@ -250,10 +250,10 @@
 			isa = PBXGroup;
 			children = (
 				5CA092032442460800D38C98 /* SportsRegVC.swift */,
-				5CA092092442480E00D38C98 /* SportRegProtocol.swift */,
 				5CA0920D2442483000D38C98 /* SportRegPresentor.swift */,
 				5CA0920F2442484100D38C98 /* SportRegInteractor.swift */,
 				5CA092112442484D00D38C98 /* SportRegRouter.swift */,
+				5CA092092442480E00D38C98 /* SportRegProtocol.swift */,
 				5CA0920B2442481F00D38C98 /* SportRegAssembly.swift */,
 			);
 			path = Sports;

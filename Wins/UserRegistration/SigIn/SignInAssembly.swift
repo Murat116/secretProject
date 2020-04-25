@@ -26,6 +26,6 @@ class SignInAssembly{
         
         presentor.setUpView()
         
-        return SignInVIewController()
+        return view
     }
 }

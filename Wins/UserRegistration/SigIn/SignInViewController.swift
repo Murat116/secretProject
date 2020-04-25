@@ -47,9 +47,12 @@ class SignInVIewController: UIViewController{
     //----------------------------------------------------------------------
     
     override func viewDidLoad() {
+        super.viewDidLoad()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         self.navigationController?.navigationBar.isHidden = true
-        self.view.backgroundColor = UIColor(red: 0.11, green: 0.11, blue: 0.11, alpha: 1)
-        self.setUp()
     }
     
     //----------------------------------------------------------------------
@@ -102,6 +105,8 @@ class SignInVIewController: UIViewController{
 
 extension SignInVIewController: SignInViewInput{
     func setUp(){
+        self.view.backgroundColor = UIColor(red: 0.11, green: 0.11, blue: 0.11, alpha: 1)
+        
         self.header = RegHeaderView(step: .sighIn, parentView: self.view)
         
         self.view.addSubview(self.loginField)

@@ -24,7 +24,7 @@ extension SportRegInteractor: SportRegInteractorProtocolInput{
     }
     
     func saveData() {
-//        DataManager._shared.createUser(login: "Murat", password: "12345", sportType: .skate)
+        DataManager._shared.createUser(login: nil, password: nil, sportType: .skate)
     }
     
     func getUserSport() -> SportType {
