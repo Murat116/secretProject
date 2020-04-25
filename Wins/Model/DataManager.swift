@@ -86,6 +86,35 @@ class DataManager: DataManagerProtocol{
         }
     }
     
+    func createSkateTricks(){
+        guard let realm = self.realm else { return }
+        let tricks = List<Trick>()
+        let user = self.getUser()
+        for trick in SportType.skate.tricks{
+            tricks.append(trick)
+            do{
+                try realm.write{
+                    realm.add(trick)
+                    user?.skateTrick.append(trick)
+                }
+            }catch{
+                print(error.localizedDescription, "error in create User's tricks")
+            }
+        }
+        let chalenge = Chalenges()
+        do{
+            try realm.write{
+                realm.add(chalenge)
+                chalenge.date = Date()
+                chalenge.trick = tricks.first{$0.name == "360 flip"}
+                chalenge.isChalenge = true
+                user?.chalenges.insert(chalenge, at: 0)
+            }
+        }catch{
+            print(error.localizedDescription, "error in create User's tricks")
+        }
+    }
+    
 }
 
 extension DataManager{
@@ -104,16 +133,21 @@ extension DataManager{
         }
         
         guard let realm = self.realm else { return }
-        let chalenge = Chalenges()
-        do{
-            try realm.write{
-                realm.add(chalenge)
-                chalenge.date = Date()
-                chalenge.trick = tricks.first{$0.name == "360 flip"}
-                chalenge.isChalenge = true
+        
+        
+        if let trick = tricks.first(where: {$0.name == "360 flip"}){
+            let chalenge = Chalenges()
+            do{
+                try realm.write{
+                    realm.add(chalenge)
+                    chalenge.date = Date()
+                    chalenge.trick =  trick
+                    chalenge.isChalenge = true
+                }
+            }catch{
+                print(error.localizedDescription, "error in create User's tricks")
             }
-        }catch{
-            print(error.localizedDescription, "error in create User's tricks")
+            chalenges.append(chalenge)
         }
         
         let turnamet = Chalenges()
@@ -128,7 +162,6 @@ extension DataManager{
         }
 
         let chalenges = List<Chalenges>()
-        chalenges.append(chalenge)
         chalenges.append(turnamet)
         
         let user = User()

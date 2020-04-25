@@ -87,22 +87,6 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "48B332EC-5120-4642-A706-DE469B5C2187"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Wins/Model/DataManager.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "138"
-            endingLineNumber = "138"
-            landmarkName = "createUser(login:password:sportType:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
             uuid = "970C4012-8001-4092-948B-78D53EC03083"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
@@ -119,31 +103,31 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "D4E7E472-C73A-44CD-8174-0FCCF0264061"
+            uuid = "B6C5516B-9A65-42EE-AEBB-13236C8C2973"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Wins/UserRegistration/UserInfo/userInfoRegistrationAssembly.swift"
+            filePath = "Wins/UserRegistration/Sports/SportRegInteractor.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "13"
-            endingLineNumber = "13"
-            landmarkName = "configureModule()"
+            startingLineNumber = "43"
+            endingLineNumber = "43"
+            landmarkName = "saveUserData(with:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "901AF583-4A9C-4828-869D-45F6CC891A15"
+            uuid = "9A7C1A91-E062-44D3-8C7B-F91EA1C992C3"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Wins/UserRegistration/UserInfo/UserInfoRegInteractor.swift"
+            filePath = "Wins/RootVC/RootVCInteractor.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "20"
-            endingLineNumber = "20"
+            startingLineNumber = "16"
+            endingLineNumber = "16"
             landmarkName = "getUserData()"
             landmarkType = "7">
          </BreakpointContent>
@@ -151,16 +135,32 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "AF5F0E22-1449-4330-ADE1-7AEE6F1B8749"
+            uuid = "CBCD9B28-9747-43FF-B1C6-4ED2F896F3FB"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Wins/Model/DataManager.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "68"
+            endingLineNumber = "68"
+            landmarkName = "getUser()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "D2A0F510-4A1A-4D41-8CC2-CBE7412426EA"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Wins/UserRegistration/SigIn/SignInViewController.swift"
+            filePath = "Wins/Model/DataManager.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "221"
-            endingLineNumber = "221"
-            landmarkName = "textFieldDidChangeSelection(_:)"
+            startingLineNumber = "139"
+            endingLineNumber = "139"
+            landmarkName = "createUser(login:password:sportType:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

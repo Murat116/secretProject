@@ -36,7 +36,12 @@ class SportRegInteractor{
 
 extension SportRegInteractor: SportRegInteractorProtocolInput{
     func saveUserData(with type: SportType) {
-        UserDefaults.standard.set(type.rawValue, forKey: USRDefKeys.sportType)
+        if DataManager._shared.getUser() != nil{
+            UserDefaults.standard.set(type.rawValue, forKey: USRDefKeys.sportType)
+            DataManager._shared.createSkateTricks()
+        }else{
+            self.saveData()
+        }
     }
 
     func saveData() {

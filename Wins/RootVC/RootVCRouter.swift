@@ -15,7 +15,6 @@ class RootVCRouter{
 extension RootVCRouter: RootRouterInput{
     func goToReg() {
         SportsRegVC.show(parent: RootViewController._shared)
-        DataManager._shared.createUser(login: nil, password: nil, sportType: .skate)
     }
     
     func goToSettings() {
