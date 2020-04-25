@@ -11,9 +11,12 @@ class SportRegInteractor{
         
     weak var output: SportRegInteractorProtocolOutput!
     
-}
-
-extension SportRegInteractor: SportRegInteractorProtocolInput{
+    func getData(){
+        let isUser = self.isUser()
+        let sportType = self.getUserSport()
+        self.output.configure(with: sportType, isUser: isUser)
+    }
+    
     func isUser() -> Bool {
         let user = DataManager._shared.user
         if user == nil{
@@ -23,13 +26,21 @@ extension SportRegInteractor: SportRegInteractorProtocolInput{
         }
     }
     
-    func saveData() {
-        DataManager._shared.createUser(login: nil, password: nil, sportType: .skate)
-    }
-    
     func getUserSport() -> SportType {
         guard let sportTypeValue = UserDefaults.standard.value(forKey: USRDefKeys.sportType) as? String,
             let type = SportType(rawValue: sportTypeValue) else { return .none}
         return type
     }
+    
+}
+
+extension SportRegInteractor: SportRegInteractorProtocolInput{
+    func saveUserData(with type: SportType) {
+        UserDefaults.standard.set(type.rawValue, forKey: USRDefKeys.sportType)
+    }
+
+    func saveData() {
+        DataManager._shared.createUser(login: nil, password: nil, sportType: .skate)
+    }
+    
 }

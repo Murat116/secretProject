@@ -9,13 +9,11 @@
 
 import UIKit
  internal protocol SportRegInteractorProtocolOutput:class {
-    func saveUserData(with type: SportType)
+    func configure(with sportType: SportType, isUser: Bool)
 }
 
 internal protocol SportRegInteractorProtocolInput: class{
-    func getUserSport() -> SportType
-    func isUser() -> Bool
-    
+    func saveUserData(with type: SportType)
 }
 
 internal protocol SportRegViewProtocolInput: class{
