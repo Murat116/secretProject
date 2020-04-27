@@ -1,0 +1,6 @@
+platform :ios, '13.0'
+use_frameworks!
+
+target 'Wins' do
+  pod 'RealmSwift', '>= 4.4.0'
+end

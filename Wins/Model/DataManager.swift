@@ -1,0 +1,270 @@
+//
+//  DataManager.swift
+//  Wins
+//
+//  Created by Мурат Камалов on 17.04.2020.
+//  Copyright © 2020 Hope To. All rights reserved.
+//
+
+import Foundation
+import  RealmSwift
+
+protocol DataManagerProtocol{
+    func createUser(login: String?, password: String?, sportType: SportType)
+    func getUser() -> User?
+    
+}
+
+
+class DataManager: DataManagerProtocol{
+    
+    static var _shared = DataManager()
+    
+    var user: User? = nil
+    var chalenges = [Chalenges]()
+    var lastTenTrick: [Trick]{
+        get{
+            //            if self.lastTenTrick == nil{
+            guard let tricksName = UserDefaults.standard.value(forKey: USRDefKeys.lastTenTrick) as? [String],
+                let tricks = self.user?.skateTrick else{
+                    return []
+            }
+            var tricksArr = [Trick]()
+            for name in tricksName{
+                let trick = tricks.first{$0.name == name}
+                guard trick != nil else { continue }
+                tricksArr.append(trick!)
+            }
+            self.lastTenTrick = tricksArr
+            return tricksArr
+        }
+        set{
+            var array = [String]()
+            newValue.forEach { (trick) in
+                array.append(trick.name)
+            }
+            UserDefaults.standard.set(array, forKey: USRDefKeys.lastTenTrick)
+        }
+    }
+    
+    
+    private init(){
+        
+    }
+    
+    fileprivate var realm: Realm? {
+        do{
+            return try Realm(configuration: .defaultConfiguration)
+        }catch{
+            print(error.localizedDescription, "error in realm")
+            return nil
+        }
+    }
+    
+    func getUser() -> User? {
+        let user = self.realm?.objects(User.self).first
+        self.user = user
+        
+        if let usr = user{
+            self.chalenges = Array(usr.chalenges)
+        }
+        
+        return user
+    }
+    
+    func saveTrik(trick: Trick,stab: Int, dif: Float){
+        do{
+            guard let realm = self.realm else { return }
+            let total = trick.tries + 1
+            try realm.write{
+                trick.tries = total
+                trick.stabuluty = stab
+                trick.difficults = dif
+            }
+        }catch{
+            print(error.localizedDescription, "error in create User's tricks")
+        }
+    }
+    
+    func createSkateTricks(){
+        guard let realm = self.realm else { return }
+        let tricks = List<Trick>()
+        let user = self.getUser()
+        for trick in SportType.skate.tricks{
+            tricks.append(trick)
+            do{
+                try realm.write{
+                    realm.add(trick)
+                    user?.skateTrick.append(trick)
+                }
+            }catch{
+                print(error.localizedDescription, "error in create User's tricks")
+            }
+        }
+        let chalenge = Chalenges()
+        do{
+            try realm.write{
+                realm.add(chalenge)
+                chalenge.date = Date()
+                chalenge.trick = tricks.first{$0.name == "360 flip"}
+                chalenge.isChalenge = true
+                user?.chalenges.insert(chalenge, at: 0)
+            }
+        }catch{
+            print(error.localizedDescription, "error in create User's tricks")
+        }
+    }
+    
+}
+
+extension DataManager{
+    func createUser(login: String?, password: String?, sportType: SportType) {
+        let tricks = List<Trick>()
+        for trick in sportType.tricks{
+            tricks.append(trick)
+            do{
+                guard let realm = self.realm else { return }
+                try realm.write{
+                    realm.add(trick)
+                }
+            }catch{
+                print(error.localizedDescription, "error in create User's tricks")
+            }
+        }
+        
+        guard let realm = self.realm else { return }
+        
+        
+        if let trick = tricks.first(where: {$0.name == "360 flip"}){
+            let chalenge = Chalenges()
+            do{
+                try realm.write{
+                    realm.add(chalenge)
+                    chalenge.date = Date()
+                    chalenge.trick =  trick
+                    chalenge.isChalenge = true
+                }
+            }catch{
+                print(error.localizedDescription, "error in create User's tricks")
+            }
+            chalenges.append(chalenge)
+        }
+        
+        let turnamet = Chalenges()
+        do{
+            try realm.write{
+                realm.add(turnamet)
+                turnamet.date = Date()
+                turnamet.isChalenge = false
+            }
+        }catch{
+            print(error.localizedDescription, "error in create User's tricks")
+        }
+
+        let chalenges = List<Chalenges>()
+        chalenges.append(turnamet)
+        
+        let user = User()
+        user.login = login
+        user.password = password
+        user.skateTrick = tricks
+        user.chalenges = chalenges
+        do{
+            guard let realm = self.realm else { return }
+            try realm.write{
+                realm.add(user)
+            }
+        }catch{
+            print(error.localizedDescription, "error in createUser")
+        }
+    }
+}
+
+extension DataManager{
+    
+    func saveName(_ name: String){
+        do{
+            guard let realm = self.realm,
+                let user = self.user else { return }
+            
+            try realm.write{
+                user.name = name
+            }
+        }catch{
+            print(error.localizedDescription, "error in saving User name")
+        }
+    }
+    
+    func saveAge(_ age: Int){
+        do{
+            guard let realm = self.realm ,
+                let user = self.user else { return }
+            
+            try realm.write{
+                user.age = age
+            }
+        }catch{
+            print(error.localizedDescription, "error in saving User age")
+        }
+    }
+    
+    func saveCity(_ city: String){
+        do{
+            guard let realm = self.realm ,
+                let user = self.user else { return }
+            
+            try realm.write{
+                user.city = city
+            }
+        }catch{
+            print(error.localizedDescription, "error in saving User city")
+        }
+    }
+    
+    func saveStand(_ name: String){
+        do{
+            guard let realm = self.realm ,
+                let user = self.user else { return }
+            
+            try realm.write{
+                user.name = name
+            }
+        }catch{
+            print(error.localizedDescription, "error in saving User name")
+        }
+    }
+    
+    func saveStand(_ stand: Int){
+        do{
+            guard let realm = self.realm ,
+                let user = self.user else { return }
+            let isRegulat = stand == 0
+            try realm.write{
+                user.standIsRegular = isRegulat
+            }
+        }catch{
+            print(error.localizedDescription, "error in saving User stand")
+        }
+    }
+    
+    func saveSocialNet(_ link: String, type: SocialNetWork){
+        do{
+            guard let realm = self.realm,
+                let user = self.user else { return }
+            
+            try realm.write{
+                switch type{
+                case .facebook:
+                    user.facebook = link
+                case .instagram:
+                    user.instagram = link
+                case .twiter:
+                    user.vkonakte = link
+                }
+            }
+        }catch{
+            print(error.localizedDescription, "error in saving User soc network")
+        }
+    }
+    
+}

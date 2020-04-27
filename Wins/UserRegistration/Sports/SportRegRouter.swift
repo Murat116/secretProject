@@ -5,25 +5,29 @@
 //  Created by Мурат Камалов on 11.04.2020.
 //  Copyright © 2020 Hope To. All rights reserved.
 //
+import UIKit
 
-class SportRegRouter: SportRegRouterProtocol{
+class SportRegRouter{
+    
     weak var view: SportsRegVC!
+        
+}
+
+extension SportRegRouter: SportRegRouterProtocolInput{
+    func showAlert(alert: UIAlertController) {
+        self.view.present(alert, animated: true, completion: nil)
+    }
+    
+    func dismiss() {
+        self.view.dismiss(animated: true, completion: nil)
+    }
     
     func nextView() {
-        if self.view.isRegistration{
-            UserInfoRegistrationVC.show(parent: view, firstView: self)
-        }else{
-            self.view.dismiss(animated: true, completion: view.complition)
-        }
+        UserInfoRegistrationVC.show(parent: view)
     }
     
-    func endRegistration(){
-        self.view.complition!()
+    func endRegistration() {
+ 
     }
-    
-    required init(vc: SportsRegVC) {
-        self.view = vc
-    }
-    
     
 }

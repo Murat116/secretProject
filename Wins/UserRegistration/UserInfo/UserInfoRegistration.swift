@@ -8,23 +8,22 @@
 
 import UIKit
 
-class UserInfoRegistrationVC: ViewController{
+class UserInfoRegistrationVC: UIViewController{
 
-    static func show(parent: UIViewController, firstView: SportRegRouterProtocol? = nil){
-        let instanse = UserInfoRegistrationVC()
-        instanse.sportRegRouter = firstView
+    static func show(parent: UIViewController){
+        let instanse = UserInfoRegistrationAssembly.configureModule()
         instanse.isRegistration = parent is SportsRegVC
         parent.present(instanse, animated: true, completion: nil)
     }
     
     //----------------------------------------------------------------------
     
-    var configurator: UserInfoRegConfiguratorProtocol = UserInfoRegConfigirator()
-    var presenter: UserInfoRegPresenterProtocol!
+    var output: UserInfoRegViewProtocolOutput!
     
-    var sportRegRouter: SportRegRouterProtocol? = nil
     
     var isRegistration: Bool = true
+    
+    var user: User? = nil
     
     //----------------------------------------------------------------------
 
@@ -36,6 +35,12 @@ class UserInfoRegistrationVC: ViewController{
 
     //----------------------------------------------------------------------
 
+    var image: UIImage? = UIImage(named: "Registration/avatar")?.withRenderingMode(.alwaysTemplate) {
+        didSet{
+            self.avatarBtn.setImage(self.image, for: .normal)
+        }
+    }
+    
     var avatarBtn = UIButton()
     var addAvatarBtn = UIButton()
     
@@ -55,13 +60,34 @@ class UserInfoRegistrationVC: ViewController{
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        self.configurator.configure(with: self)
-        self.presenter.configureView()
+        self.setUp()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(true)
+        guard let user = self.user else { return }
+        self.output.saveUserData(with: user)
     }
 }
 
-extension UserInfoRegistrationVC: UserInfoRegViewProtocol{
+extension UserInfoRegistrationVC: UserInfoRegViewProtocolInput{
+    func configureView(with user: User) {
+        self.user = user
+        
+        self.nameField.text = user.login
+        self.ageField.text = String(user.age)
+        self.cityFiled.text = user.city
+        
+        self.stand.selectedSegmentIndex = user.standIsRegular ? 0 : 1
+        
+        if let imageData = user.avatarImageData{
+            self.image = UIImage(data: imageData)?.withRenderingMode(.alwaysTemplate)
+        }else{
+            self.image = UIImage(named: "Registration/avatar")?.withRenderingMode(.alwaysTemplate)
+        }
+        
+    }
+    
     func setUp() {
         self.setUpUI()
     }
@@ -140,6 +166,7 @@ extension UserInfoRegistrationVC{
         self.stand.tintColor = .red
         
         self.stand.backgroundColor = UIColor(red: 0.314, green: 0.314, blue: 0.314, alpha: 1)
+        self.stand.selectedSegmentIndex = 0
         
         self.stand.translatesAutoresizingMaskIntoConstraints = false
         
@@ -169,8 +196,7 @@ extension UserInfoRegistrationVC{
         self.avatarBtn.layer.borderWidth = 1
         self.avatarBtn.layer.borderColor = UIColor(red: 0.314, green: 0.314, blue: 0.314, alpha: 1).cgColor
 
-        let imageImage = UIImage(named: "Registration/avatar")?.withRenderingMode(.alwaysTemplate)
-        self.avatarBtn.setImage(imageImage, for: .normal)
+        self.avatarBtn.setImage(self.image, for: .normal)
         self.avatarBtn.imageView?.tintColor = UIColor(red: 0.314, green: 0.314, blue: 0.314, alpha: 1.0)
         
         self.avatarBtn.contentEdgeInsets = UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 8 )
@@ -220,6 +246,7 @@ extension UserInfoRegistrationVC{
         let twitImage = UIImage(named: "Registration/twit")?.withRenderingMode(.alwaysTemplate)
         self.twitBtn.setImage(twitImage, for: .normal)
         self.twitBtn.tintColor = .white
+        self.twitBtn.addTarget(self, action: #selector(self.openInst), for: .touchUpInside)
         
         self.view.addSubview(self.instBtn)
         self.instBtn.translatesAutoresizingMaskIntoConstraints = false
@@ -232,6 +259,7 @@ extension UserInfoRegistrationVC{
         let instImage = UIImage(named: "Registration/inst")?.withRenderingMode(.alwaysTemplate)
         self.instBtn.setImage(instImage, for: .normal)
         self.instBtn.tintColor = .white
+        self.instBtn.addTarget(self, action: #selector(self.openInst), for: .touchUpInside)
         
         self.view.addSubview(self.faceBtn)
         self.faceBtn.translatesAutoresizingMaskIntoConstraints = false
@@ -240,10 +268,27 @@ extension UserInfoRegistrationVC{
         self.faceBtn.centerYAnchor.constraint(equalTo: self.socNetLbl.centerYAnchor).isActive = true
         self.faceBtn.heightAnchor.constraint(equalToConstant: 35).isActive = true
         self.faceBtn.widthAnchor.constraint(equalTo: self.faceBtn.heightAnchor).isActive = true
+        self.faceBtn.addTarget(self, action: #selector(self.openInst), for: .touchUpInside)
         
         let faceImage = UIImage(named: "Registration/facebook")?.withRenderingMode(.alwaysTemplate)
         self.faceBtn.setImage(faceImage, for: .normal)
         self.faceBtn.tintColor = .white
+    }
+    
+    @objc func openInst(){
+        let alert = UIAlertController(title: "While you can’t add your social network, but you can subscribe to us", message: nil, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Let's go", style: .default, handler: { (_) in
+            let instagramHooks = "instagram.com/wins_app?igshid=uc289nm1r62l"
+            let instagramUrl = URL(string: instagramHooks)
+            if let url = instagramUrl,UIApplication.shared.canOpenURL(url) {
+                UIApplication.shared.open(url)
+            } else {
+              //redirect to safari because the user doesn't have Instagram
+                UIApplication.shared.open(URL(string: "http://instagram.com/")!)
+            }
+        }))
+        alert.addAction(UIAlertAction(title: "Maybe later", style: .cancel, handler: nil))
+        self.output.openAlert(alert: alert)
     }
     
     func addBtn(){
@@ -274,10 +319,10 @@ extension UserInfoRegistrationVC{
     @objc func nextVC(){
         //какая-то првоерка
         if self.isRegistration{
-            self.presenter.router.openNextStep()
-            self.presenter.interactor.saveUserData()
+            
+            self.output.openNextStep()
         }else{
-            self.presenter.openSportVC()
+            self.output.openSportVC()
         }
     }
 
@@ -328,9 +373,9 @@ extension UserInfoRegistrationVC{
     }
 
     enum TextFiledType: String{
-        case name = "Твое имя"
-        case city = "Твой город"
-        case age = "Твой возраст"
+        case name = "Your name"
+        case city = "Your city"
+        case age = "Your age"
 
         var keyboardType: UIKeyboardType{
             switch self {
@@ -345,3 +390,8 @@ extension UserInfoRegistrationVC{
     }
 }
 
+enum SocialNetWork: Int{
+    case instagram = 0
+    case facebook
+    case twiter
+}

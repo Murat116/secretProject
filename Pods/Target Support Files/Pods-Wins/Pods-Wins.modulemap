@@ -1,0 +1,6 @@
+framework module Pods_Wins {
+  umbrella header "Pods-Wins-umbrella.h"
+
+  export *
+  module * { export * }
+}

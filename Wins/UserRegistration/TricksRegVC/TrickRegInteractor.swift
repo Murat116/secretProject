@@ -8,16 +8,20 @@
 
 import Foundation
 
-class TrickRegInteractor: TrickRegInteractorProtocol{
+class TrickRegInteractor{
+    weak var output: TricckRegInteractorOutput!
     
-    weak var presentor: TrickRegPresentorProtocol!
-    
-    func saveUserData() {
-        
+    func getUserData(){
+        guard let trick = DataManager._shared.user?.skateTrick else { return }
+        self.output.configure(with: Array(trick))
     }
     
-    required init(_ presentor: TrickRegPresentorProtocol){
-        self.presentor = presentor
-    }
+}
+
+extension TrickRegInteractor: TrickRegInteractorlInput{
     
+    func saveUserData(with trick: Trick, _ newDif: Float, _ newStab: Int) {
+        DataManager._shared.saveTrik(trick: trick, stab: newStab, dif: newDif)
+    }
+
 }

@@ -1,17 +1,15 @@
 {
   "images" : [
     {
-      "filename" : "Group.png",
+      "filename" : "IMAGE 2020-04-22 23:25:16.jpg",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "Group@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "Group@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

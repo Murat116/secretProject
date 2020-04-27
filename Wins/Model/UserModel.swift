@@ -7,41 +7,65 @@
 //
 
 import Foundation
+import RealmSwift
 
 @objcMembers
-class User: NSObject{
-    dynamic var login: String = ""
-    dynamic var password: String = ""
+class User: Object{
+    dynamic var login: String? = nil
+    dynamic var password: String? = nil
+    dynamic var id: String = ""
     
-    dynamic var name: String = ""
-    dynamic var city: String = ""
+    dynamic var name: String = "Guest"
+    dynamic var city: String? = nil
     dynamic var age: Int = 0
     
     dynamic var facebook: String = ""
     dynamic var instagram: String = ""
     dynamic var vkonakte: String = ""
     
-    dynamic var sport: Sports = Sports()
+    dynamic var skateTrick = List<Trick>()
+    dynamic var scootTrick = List<Trick>()
+    dynamic var bmxTrick = List<Trick>()
+    
+    dynamic var chalenges = List<Chalenges>()
+    
+    dynamic var avatarImageData: Data? = nil
+    
     dynamic var standIsRegular: Bool = true
     
-    dynamic var totalStats: TotalStats = TotalStats()
-    dynamic var promotionalСodes: [String] = []
+    dynamic var totalStats: TotalStats? = TotalStats()
+    dynamic var promotionalСodes = List<Promocodes>()
     
-}
-
-struct Sports{
-    var type: SportType = .skateboarding
-    var tricks = [Trick]()
+    dynamic var lastTenTrick = List<Trick>()
     
-    enum SportType: Int{
-        case skateboarding = 0
-        case bmx = 1
-        case scoot = 2
+    override var description: String{
+        return "\(self)"
+//        return "\(self.login),\(self.password),\(self.skateTrick.last?.name)"
     }
+    
 }
 
-struct TotalStats {
-    var technicality: Float = 0
-    var stability: Float = 0
-    var percentageеTricksLearned: Float = 0
+@objcMembers
+class TotalStats: Object {
+    dynamic var technicality: Float = 0
+    dynamic var stability: Float = 0
+    dynamic var percentageеTricksLearned: Float = 0
+}
+
+@objcMembers
+class Promocodes: Object{
+    dynamic var promocode: String = ""
+    dynamic var trickName: Trick? = Trick()
+    dynamic var boardshop: String = ""
+    dynamic var startDate: Date = Date()
+    dynamic var endDate: Date = Date()
+}
+
+@objcMembers
+class Chalenges: Object{
+    dynamic var trick: Trick? = Trick()
+    dynamic var boardShop: String = "Without sponsor("
+    dynamic var date: Date = Date()
+    dynamic var sponsorImageData: Data? = nil
+    dynamic var isChalenge: Bool = true
 }

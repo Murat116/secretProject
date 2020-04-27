@@ -1,12 +1,11 @@
 {
   "images" : [
     {
-      "filename" : "Rectangle.jpg",
+      "filename" : "IMAGE 2020-04-24 20:30:28.jpg",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "Rectangle@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },

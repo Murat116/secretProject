@@ -17,13 +17,22 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         guard let windowScene = (scene as? UIWindowScene) else { return }
         window = UIWindow(frame: UIScreen.main.bounds)
-        let viewController = RootViewController()
+        
+        let user = DataManager._shared.getUser()
+        
+        let viewController: UIViewController
+        
+        if user != nil{
+            viewController = RootVCRegAssembly.configureModule()
+        }else{
+            viewController = SignInAssembly.configureModule()
+        }
         let navigationViewController = UINavigationController(rootViewController: viewController)
         window?.rootViewController = navigationViewController
         window?.makeKeyAndVisible()
         window?.windowScene = windowScene
         
-        
+        window?.overrideUserInterfaceStyle = .dark
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {

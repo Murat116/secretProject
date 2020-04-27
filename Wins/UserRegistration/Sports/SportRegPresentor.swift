@@ -7,23 +7,39 @@
 //
 import UIKit
 
-class SportRegPresentor: SportRegPresentorProtocol{
-    func sportIsSelected(with type: SportsRegVC.SportType) {
-        self.interactor.saveUserData()
-        self.router.nextView()
-    }
+class SportRegPresentor {
+//    func sportIsSelected(with type: SportsRegVC.SportType) {
+//        self.interactor.saveUserData()
+//        self.router.nextView()
+//    }
     
-    var interactor: SportRegInteractorProtocol!
+    var interactor: SportRegInteractorProtocolInput!
     
-    var router: SportRegRouterProtocol!
+    var router: SportRegRouterProtocolInput!
     
-    var view: SportRegViewProtocol!
+    weak var view: SportRegViewProtocolInput!
         
-    func configure() {
-        self.view.setUP()
+}
+
+extension SportRegPresentor: SportRegViewProtocolOutput{
+    func showAlert(alert: UIAlertController) {
+        self.router.showAlert(alert: alert)
     }
     
-    required init(view: SportRegViewProtocol) {
-        self.view = view
+    func sportIsSelected(with type: SportType) {
+        self.interactor.saveUserData(with: type)
+        if self.view.isUser{
+            self.router.dismiss()
+        }else{
+            self.router.nextView()
+        }
+    }
+}
+
+extension SportRegPresentor: SportRegInteractorProtocolOutput{
+    func configure(with sportType: SportType, isUser: Bool) {
+        self.view.setUP()
+        let isUser = sportType != .none ? isUser : false
+        self.view.configure(with: sportType, and: isUser)
     }
 }

@@ -8,24 +8,28 @@
 
 import Foundation
 
-class UserInfoRegRouter: UserInfoRegRouterProtocol{
+class UserInfoRegRouter{
     
-    weak var viewController: UserInfoRegistrationVC!
+    weak var view: UserInfoRegistrationVC!
     
-    init(viewController: UserInfoRegistrationVC) {
-        self.viewController = viewController
+}
+
+import UIKit
+extension UserInfoRegRouter: UserInfoRegRouterProtocolInput{
+    func openAlert(alert: UIAlertController) {
+        self.view.present(alert, animated: true, completion: nil)
     }
     
     func closeCurrentViewController() {
-        self.viewController.sportRegRouter?.endRegistration()
+        //        self.viewController.sportRegRouter?.endRegistration()
     }
     
     func openNextStep() {
-        TricksRegVC.show(parent: self.viewController, userRegRouter: self)
+        TricksRegVC.show(parent: self.view)
     }
     
     func endRegistration(){
-        self.viewController.sportRegRouter?.endRegistration()
+        //        self.viewController.sportRegRouter?.endRegistration()
     }
     
     func openPhotoPicker() {
@@ -33,8 +37,7 @@ class UserInfoRegRouter: UserInfoRegRouterProtocol{
     }
     
     func openSportVC() {
-        let sportVC =  SportsRegVC()
-        viewController.present(sportVC, animated: true, completion: nil)
+        SportsRegVC.show(parent: self.view)
     }
     
     
