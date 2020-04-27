@@ -19,14 +19,13 @@ protocol DataManagerProtocol{
 class DataManager: DataManagerProtocol{
     
     static var _shared = DataManager()
-    
-    var user: User? = nil
+
     var chalenges = [Chalenges]()
     var lastTenTrick: [Trick]{
         get{
-            //            if self.lastTenTrick == nil{
+            let user = self.getUser()
             guard let tricksName = UserDefaults.standard.value(forKey: USRDefKeys.lastTenTrick) as? [String],
-                let tricks = self.user?.skateTrick else{
+                let tricks = user?.skateTrick else{
                     return []
             }
             var tricksArr = [Trick]()
@@ -63,7 +62,6 @@ class DataManager: DataManagerProtocol{
     
     func getUser() -> User? {
         let user = self.realm?.objects(User.self).first
-        self.user = user
         
         if let usr = user{
             self.chalenges = Array(usr.chalenges)
@@ -102,12 +100,15 @@ class DataManager: DataManagerProtocol{
             }
         }
         let chalenge = Chalenges()
+        let image = UIImage(named: "Registration/Sports/Skate")
+        let data = image?.pngData()
         do{
             try realm.write{
                 realm.add(chalenge)
                 chalenge.date = Date()
                 chalenge.trick = tricks.first{$0.name == "360 flip"}
                 chalenge.isChalenge = true
+                chalenge.sponsorImageData = data
                 user?.chalenges.insert(chalenge, at: 0)
             }
         }catch{
@@ -181,11 +182,23 @@ extension DataManager{
 }
 
 extension DataManager{
+    func saveTechnikalSkill(_ skill: Float){
+        guard let realm = self.realm,
+        let user = self.getUser() else { return }
+        
+        do{
+            try realm.write{
+                user.totalStats?.technicality = skill
+            }
+        }catch{
+            print(error.localizedDescription, "error in saving User technicality")
+        }
+    }
     
     func saveName(_ name: String){
         do{
             guard let realm = self.realm,
-                let user = self.user else { return }
+                let user = self.getUser() else { return }
             
             try realm.write{
                 user.name = name
@@ -198,7 +211,7 @@ extension DataManager{
     func saveAge(_ age: Int){
         do{
             guard let realm = self.realm ,
-                let user = self.user else { return }
+                let user = self.getUser() else { return }
             
             try realm.write{
                 user.age = age
@@ -211,7 +224,7 @@ extension DataManager{
     func saveCity(_ city: String){
         do{
             guard let realm = self.realm ,
-                let user = self.user else { return }
+                let user = self.getUser() else { return }
             
             try realm.write{
                 user.city = city
@@ -224,7 +237,7 @@ extension DataManager{
     func saveStand(_ name: String){
         do{
             guard let realm = self.realm ,
-                let user = self.user else { return }
+                let user = self.getUser() else { return }
             
             try realm.write{
                 user.name = name
@@ -234,13 +247,12 @@ extension DataManager{
         }
     }
     
-    func saveStand(_ stand: Int){
+    func saveStand(_ stand: Bool){
         do{
             guard let realm = self.realm ,
-                let user = self.user else { return }
-            let isRegulat = stand == 0
+                let user = self.getUser() else { return }
             try realm.write{
-                user.standIsRegular = isRegulat
+                user.standIsRegular = stand
             }
         }catch{
             print(error.localizedDescription, "error in saving User stand")
@@ -250,7 +262,7 @@ extension DataManager{
     func saveSocialNet(_ link: String, type: SocialNetWork){
         do{
             guard let realm = self.realm,
-                let user = self.user else { return }
+                let user = self.getUser() else { return }
             
             try realm.write{
                 switch type{

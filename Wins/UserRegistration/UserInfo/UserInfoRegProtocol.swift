@@ -11,7 +11,7 @@ import Foundation
 import UIKit
 
 protocol UserInfoRegInteractorProtocolInput: class {
-    func saveUserData(with user: User)
+    func saveUserData(with name: String, city: String, age: String, isReg: Bool)
 }
 
 protocol UserInfoRegInteractorProtocolOutput: class {
@@ -32,7 +32,7 @@ protocol UserInfoRegViewProtocolOutput: class {
     
     func openAlert(alert: UIAlertController)
     
-    func saveUserData(with user: User)
+    func saveUserData(with name: String, city: String, age: String, isReg: Bool)
 }
 
 protocol UserInfoRegRouterProtocolInput: class {

@@ -18,7 +18,7 @@ class SportRegInteractor{
     }
     
     func isUser() -> Bool {
-        let user = DataManager._shared.user
+        let user = DataManager._shared.getUser()
         if user == nil{
             return false
         }else{

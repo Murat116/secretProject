@@ -16,6 +16,7 @@ protocol RootViewOutput: class{
     func goToReg()
     func saveTrick(_ trick: Trick, with stab: Int, and dif: Float)
     func reloadData()
+    func recountTechnocalSkill()
 }
 
 protocol RootInteractorOutput: class{
@@ -30,6 +31,8 @@ protocol RootRouterInput: class{
 protocol RootInteractorInput {
     func saveTrick(_ trick: Trick, with stab: Int, and dif: Float)
     func getTricks() -> [Trick]
+    func getUser() -> User
+    func recountTechnocalSkill()
 }
 
 

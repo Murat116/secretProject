@@ -149,10 +149,13 @@ class GameView: UIView{
     
     override func willMove(toSuperview newSuperview: UIView?) {
         super.willMove(toSuperview: newSuperview)
+        self.output.recountTechnocalSkill()
         if newSuperview == nil{
             self.output.reloadData()
         }
     }
+    
+    
     
     init(tricks: [Trick], frame: CGRect, output: RootViewOutput) {
         super.init(frame: frame)
