@@ -59,8 +59,10 @@ class Chalenges: Object{
     dynamic var date: Date = Date()
     dynamic var sponsorImageData: Data? = nil
     dynamic var descript: String? = ""
-    dynamic var isChalenge: Bool = true
+
     dynamic var promocode: String? = nil
     
-    dynamic var id: String ?
+    dynamic var isChalenge: Bool = true
+    dynamic var id: String?
+    
 }
