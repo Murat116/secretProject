@@ -21,6 +21,7 @@ class DataManager: DataManagerProtocol {
     static var _shared = DataManager()
 
     var chalenges = [Challenge]()
+    
     var lastTenTrick: [Trick] {
         get {
             let user = self.getUser()
