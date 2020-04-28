@@ -43,6 +43,7 @@
 		5C87648C2454564400040B28 /* SignInPresentor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C87648B2454564400040B28 /* SignInPresentor.swift */; };
 		5C87648E2454564E00040B28 /* SignInINteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C87648D2454564E00040B28 /* SignInINteractor.swift */; };
 		5C8764902454565A00040B28 /* SignInRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C87648F2454565A00040B28 /* SignInRouter.swift */; };
+		5C8C5FEF2458E67700842A8A /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C8C5FEE2458E67700842A8A /* LocationManager.swift */; };
 		5CA0920024422EF800D38C98 /* RegHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CA091FF24422EF800D38C98 /* RegHeaderView.swift */; };
 		5CA092042442460800D38C98 /* SportsRegVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CA092032442460800D38C98 /* SportsRegVC.swift */; };
 		5CA092072442462900D38C98 /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CA092062442462900D38C98 /* RootViewController.swift */; };
@@ -100,6 +101,7 @@
 		5C87648B2454564400040B28 /* SignInPresentor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInPresentor.swift; sourceTree = "<group>"; };
 		5C87648D2454564E00040B28 /* SignInINteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInINteractor.swift; sourceTree = "<group>"; };
 		5C87648F2454565A00040B28 /* SignInRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInRouter.swift; sourceTree = "<group>"; };
+		5C8C5FEE2458E67700842A8A /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		5CA091FF24422EF800D38C98 /* RegHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegHeaderView.swift; sourceTree = "<group>"; };
 		5CA092032442460800D38C98 /* SportsRegVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SportsRegVC.swift; sourceTree = "<group>"; };
 		5CA092062442462900D38C98 /* RootViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootViewController.swift; sourceTree = "<group>"; };
@@ -279,6 +281,7 @@
 				5CEA0DF82447BA760068A975 /* UserModel.swift */,
 				5CD39E32244222E40053896E /* TricksModel.swift */,
 				5CC8A6292448EDD300ED0720 /* USRDefKeys.swift */,
+				5C8C5FEE2458E67700842A8A /* LocationManager.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -415,6 +418,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5C8C5FEF2458E67700842A8A /* LocationManager.swift in Sources */,
 				5CA092042442460800D38C98 /* SportsRegVC.swift in Sources */,
 				5CA092072442462900D38C98 /* RootViewController.swift in Sources */,
 				5C7895F9244BAEF600410A37 /* RootVCChalengeView.swift in Sources */,
