@@ -268,10 +268,10 @@ class StatTableViewCell: UITableViewCell{
         let mainColor = UIColor(red: 0.11, green: 0.11, blue: 0.11, alpha: 1)
         let difColor = UIColor(red: 0.128, green: 0.3, blue: 0.933, alpha: 1.0)
         let stabColor = UIColor(hex: "617DDC")
-        self.difPie.segments = [Segment(color: difColor, value:  CGFloat(trick.difficults)),
-            Segment(color: mainColor, value: CGFloat(10 - trick.difficults))]
-        self.stabPie.segments = [Segment(color: stabColor, value: CGFloat(trick.stabuluty)),
-            Segment(color: mainColor, value: CGFloat( 10 - trick.stabuluty))]
+        self.difPie.segments = [Segment(color: difColor, value:  CGFloat(trick.complexity)),
+            Segment(color: mainColor, value: CGFloat(10 - trick.complexity))]
+        self.stabPie.segments = [Segment(color: stabColor, value: CGFloat(trick.stability)),
+            Segment(color: mainColor, value: CGFloat( 10 - trick.stability))]
         self.difPie.draw(self.difPie.frame)
         self.stabPie.draw(self.stabPie.frame)
         
@@ -346,13 +346,13 @@ extension StatTableViewCell{
             let mainColor = UIColor(red: 0.11, green: 0.11, blue: 0.11, alpha: 1)
             switch self.type {
             case .difficulty:
-                self.valueLabel.text = String(trick.difficults)
-                self.pieChart.segments = [Segment(color: self.type.color, value: CGFloat(trick.difficults)),
-                Segment(color: mainColor, value: CGFloat( 10.0 - Double(trick.difficults)))]
+                self.valueLabel.text = String(trick.complexity)
+                self.pieChart.segments = [Segment(color: self.type.color, value: CGFloat(trick.complexity)),
+                Segment(color: mainColor, value: CGFloat( 10.0 - Double(trick.complexity)))]
             case .stability:
-                self.valueLabel.text = "\(trick.stabuluty)/10"
-                self.pieChart.segments = [Segment(color: self.type.color, value: CGFloat(trick.stabuluty)),
-                Segment(color: mainColor, value: CGFloat( 10.0 - Double(trick.stabuluty)))]
+                self.valueLabel.text = "\(trick.stability)/10"
+                self.pieChart.segments = [Segment(color: self.type.color, value: CGFloat(trick.stability)),
+                Segment(color: mainColor, value: CGFloat( 10.0 - Double(trick.stability)))]
             }
             
             self.pieChart.draw(self.pieChart.frame)
