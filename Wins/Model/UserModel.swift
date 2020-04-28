@@ -10,7 +10,8 @@ import Foundation
 import RealmSwift
 
 @objcMembers
-class User: Object{
+class User: Object {
+    
     dynamic var login: String? = nil
     dynamic var password: String? = nil
     dynamic var id: String = ""
@@ -21,39 +22,40 @@ class User: Object{
     
     dynamic var facebook: String = ""
     dynamic var instagram: String = ""
-    dynamic var vkonakte: String = ""
+    dynamic var vkontakte: String = ""
     
     dynamic var skateTrick = List<Trick>()
     dynamic var scootTrick = List<Trick>()
     dynamic var bmxTrick = List<Trick>()
     
-    dynamic var chalenges = List<Chalenges>()
+    dynamic var challenges = List<Challenge>()
     
     dynamic var avatarImageData: Data? = nil
     
     dynamic var standIsRegular: Bool = true
     
     dynamic var totalStats: TotalStats? = TotalStats()
-    dynamic var doneChalenges = List<Chalenges>()
+    dynamic var doneChallenges = List<Challenge>()
     
     dynamic var lastTenTrick = List<Trick>()
     
-    override var description: String{
+    override var description: String {
         return "\(self)"
 //        return "\(self.login),\(self.password),\(self.skateTrick.last?.name)"
     }
-    
 }
 
 @objcMembers
 class TotalStats: Object {
+    
     dynamic var technicality: Float = 0
     dynamic var stability: Float = 0
-    dynamic var percentageеTricksLearned: Float = 0
+    dynamic var percentageTricksLearned: Float = 0
 }
 
 @objcMembers
-class Chalenges: Object{
+class Challenge: Object {
+    
     dynamic var trick: Trick? = Trick()
     dynamic var boardShop: String = "Without sponsor("
     dynamic var date: Date = Date()
@@ -62,7 +64,6 @@ class Chalenges: Object{
 
     dynamic var promocode: String? = nil
     
-    dynamic var isChalenge: Bool = true
+    dynamic var isChallenge: Bool = true
     dynamic var id: String?
-    
 }
