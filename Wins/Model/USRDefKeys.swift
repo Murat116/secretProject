@@ -7,6 +7,7 @@
 //
 
 class USRDefKeys{
+    
     static let sportType = "SportType"
     
     static let lastTenTrick = "LastTenTrick"

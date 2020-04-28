@@ -22,11 +22,12 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         let viewController: UIViewController
         
-        if user != nil{
+        if user != nil {
             viewController = RootVCRegAssembly.configureModule()
-        }else{
+        } else {
             viewController = SignInAssembly.configureModule()
         }
+        
         let navigationViewController = UINavigationController(rootViewController: viewController)
         window?.rootViewController = navigationViewController
         window?.makeKeyAndVisible()

@@ -29,10 +29,10 @@ extension RootVCInteractor: RootInteractorInput{
         let allTricks = self.getUser().skateTrick
         let doneTrick = allTricks.filter{$0.tries >= 1}
         var donesDif: Float = 0
-        doneTrick.forEach{donesDif += $0.difficults}
+        doneTrick.forEach{donesDif += $0.complexity}
         
         var allDif: Float = 0
-        allTricks.forEach{allDif += $0.difficults}
+        allTricks.forEach{allDif += $0.complexity}
         
         let techSkill = donesDif / allDif
         

@@ -135,8 +135,8 @@ class GameView: UIView{
         self.trickLabel.text = self.tricks[self.trickCount].name
         
         let trick = self.tricks[self.trickCount - 1]
-        var stab = trick.stabuluty
-        var dif = trick.difficults
+        var stab = trick.stability
+        var dif = trick.complexity
         if self.noBtn != btn {
             stab += 1
             dif -= 0.3

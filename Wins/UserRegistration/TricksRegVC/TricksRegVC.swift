@@ -106,8 +106,8 @@ extension TricksRegVC{
             didSet{
                 self.cross.isHidden = !self.isSelect
                 self.label.textColor = self.isSelect ? .white : UIColor(red: 0.314, green: 0.314, blue: 0.314, alpha: 1)
-                self.newDif  = self.isSelect ? self.trick!.difficults - 3 : self.defaultDif!
-                self.newStab = self.isSelect ? self.trick!.stabuluty + 5 : 0
+                self.newDif  = self.isSelect ? self.trick!.complexity - 3 : self.defaultDif!
+                self.newStab = self.isSelect ? self.trick!.stability + 5 : 0
                 self.output.saveChangedTrick(with: trick!, self.newDif, self.newStab)
             }
         }
@@ -179,7 +179,7 @@ extension TricksRegVC{
             super.init(frame: CGRect.zero)
             self.output = output
             self.trick = trick
-            self.defaultDif = trick.difficults
+            self.defaultDif = trick.complexity
             self.setUp(with: trick.name)
         }
         
