@@ -126,9 +126,9 @@
             filePath = "Wins/RootVC/RootVCInteractor.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "16"
-            endingLineNumber = "16"
-            landmarkName = "getUserData()"
+            startingLineNumber = "22"
+            endingLineNumber = "22"
+            landmarkName = "recountTechnocalSkill()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
