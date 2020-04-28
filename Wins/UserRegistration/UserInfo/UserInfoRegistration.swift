@@ -65,8 +65,14 @@ class UserInfoRegistrationVC: UIViewController{
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(true)
-        guard let user = self.user else { return }
-        self.output.saveUserData(with: user)
+        
+        let name = self.nameField.text ?? ""
+        let age = self.ageField.text ?? "0"
+        let city = self.cityFiled.text ?? ""
+        
+        let isReg = self.stand.selectedSegmentIndex == 0
+        
+        self.output.saveUserData(with: name, city: city, age: age, isReg: isReg)
     }
 }
 
@@ -317,9 +323,7 @@ extension UserInfoRegistrationVC{
     }
     
     @objc func nextVC(){
-        //какая-то првоерка
         if self.isRegistration{
-            
             self.output.openNextStep()
         }else{
             self.output.openSportVC()

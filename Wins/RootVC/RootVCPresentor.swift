@@ -17,6 +17,10 @@ extension RootVCPresentor: RootViewOutput{
     func saveTrick(_ trick: Trick, with stab: Int, and dif: Float) {
         self.interactor.saveTrick(trick, with: stab, and: dif)
     }
+    
+    func recountTechnocalSkill(){
+        self.interactor.recountTechnocalSkill()
+    }
         
     func goToReg() {
         self.router.goToReg()
@@ -31,7 +35,9 @@ extension RootVCPresentor: RootViewOutput{
 extension RootVCPresentor: RootInteractorOutput{
     func reloadData() {
         let lastTenTrick = self.interactor.getTricks()
-        self.view.reloadData(with: lastTenTrick)
+        let user = self.interactor.getUser()
+        self.configure(with: user, and: lastTenTrick)
+        
     }
     
     func configure(with model: User?, and lastTenTrick: [Trick]) {

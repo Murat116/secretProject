@@ -19,11 +19,29 @@ class RootVCInteractor{
     
 }
 extension RootVCInteractor: RootInteractorInput{
+    func recountTechnocalSkill() {
+        let allTricks = self.getUser().skateTrick
+        let doneTrick = allTricks.filter{$0.tries >= 1}
+        var donesDif: Float = 0
+        doneTrick.forEach{donesDif += $0.difficults}
+        
+        var allDif: Float = 0
+        allTricks.forEach{allDif += $0.difficults}
+        
+        let techSkill = donesDif / allDif
+        
+        DataManager._shared.saveTechnikalSkill(techSkill)
+    }
+    
+    func getUser() -> User {
+        return DataManager._shared.getUser()!
+    }
+    
     func getTricks() -> [Trick] {
-        let user = DataManager._shared.getUser()
+        let user = self.getUser()
         var lastTenTrick = DataManager._shared.lastTenTrick
         if lastTenTrick.isEmpty{
-            guard let tricks = user?.skateTrick else { return []}
+            let tricks = user.skateTrick 
             lastTenTrick = GameView.rundomTrick(tricks: Array(tricks))
             var lastTenTrickID = [String]()
             lastTenTrick.forEach { (trick) in

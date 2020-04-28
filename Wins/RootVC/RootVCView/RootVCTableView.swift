@@ -73,13 +73,20 @@ extension RootViewController: UITableViewDelegate, UITableViewDataSource{
             self.statBtn.rightAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
             self.statBtn.topAnchor.constraint(equalTo: chalengeView.bottomAnchor, constant: 42).isActive = true
             self.statBtn.heightAnchor.constraint(equalToConstant: 112).isActive = true
-            
-            self.statBtn.setTitle("Statistics", for: .normal)
-            self.statBtn.setTitleColor(.white, for: .normal)
-            self.statBtn.titleLabel?.font = UIFont.systemFont(ofSize: 20)
-            self.statBtn.setImage(UIImage(named:"Menu/stat"), for: .normal)
+
+            self.statBtn.setImage(UIImage(named:"Menu/stat"), for: [])
             
             self.statBtn.addTarget(self, action: #selector(self.goToStatiscits), for: .touchUpInside)
+            
+            let statLabel = UILabel()
+            contentView.addSubview(statLabel)
+            statLabel.translatesAutoresizingMaskIntoConstraints = false
+            statLabel.centerXAnchor.constraint(equalTo: self.statBtn.centerXAnchor).isActive = true
+            statLabel.centerYAnchor.constraint(equalTo: self.statBtn.centerYAnchor).isActive = true
+            
+            statLabel.text = "Statistics"
+            statLabel.textColor = .white
+            statLabel.font  = UIFont.systemFont(ofSize: 20)
             
             contentView.addSubview(self.gameBtn)
             self.gameBtn.translatesAutoresizingMaskIntoConstraints = false
@@ -87,13 +94,20 @@ extension RootViewController: UITableViewDelegate, UITableViewDataSource{
             self.gameBtn.bottomAnchor.constraint(equalTo: self.statBtn.bottomAnchor).isActive = true
             self.gameBtn.rightAnchor.constraint(equalTo: contentView.rightAnchor).isActive = true
             self.gameBtn.leftAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
-            
-            self.gameBtn.setTitle("Game", for: .normal)
-            self.gameBtn.setTitleColor(.white, for: .normal)
-            self.gameBtn.titleLabel?.font = UIFont.systemFont(ofSize: 20)
+
             self.gameBtn.setImage(UIImage(named:"Menu/game"), for: .normal)
             
             self.gameBtn.addTarget(self, action: #selector(self.goToGame), for: .touchUpInside)
+            
+            let gameTitle = UILabel()
+            contentView.addSubview(gameTitle)
+            gameTitle.translatesAutoresizingMaskIntoConstraints = false
+            gameTitle.centerYAnchor.constraint(equalTo: self.gameBtn.centerYAnchor).isActive = true
+            gameTitle.centerXAnchor.constraint(equalTo: self.gameBtn.centerXAnchor).isActive = true
+            
+            gameTitle.text = "Game"
+            gameTitle.textColor = .white
+            gameTitle.font = UIFont.systemFont(ofSize: 20)
             
             return contentView
         }

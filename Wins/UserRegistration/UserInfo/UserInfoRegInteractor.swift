@@ -8,6 +8,7 @@
 
 import Foundation
 
+
 class UserInfoRegInteractor{
     
     var user: User? = nil
@@ -22,16 +23,12 @@ class UserInfoRegInteractor{
 }
 
 extension UserInfoRegInteractor: UserInfoRegInteractorProtocolInput{
-    func saveUserData(with user: User) {
+    func saveUserData(with name: String, city: String, age: String, isReg: Bool) {
         let dataMng = DataManager._shared
-        dataMng.saveName(user.name)
-        dataMng.saveCity(user.city ?? "")
-        dataMng.saveAge(user.age)
-        dataMng.saveStand(user.standIsRegular ? 0 : 1)
-        dataMng.saveSocialNet(user.facebook, type: .facebook)
-        dataMng.saveSocialNet(user.instagram, type: .instagram)
-        dataMng.saveSocialNet(user.vkonakte, type: .twiter)
+        dataMng.saveName(name)
+        dataMng.saveCity(city )
+        dataMng.saveAge(Int(age) ?? 0)
+        dataMng.saveStand(isReg)
     }
-
 }
 
