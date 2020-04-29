@@ -122,7 +122,7 @@ extension UserInfoRegistrationVC{
             
             self.addBtn()
             
-            if (UIScreen.main.bounds.height > 667){
+            if (screenIsBig()){
                 self.addSocialetworks()
             }
             

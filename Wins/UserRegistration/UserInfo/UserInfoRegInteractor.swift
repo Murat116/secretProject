@@ -32,10 +32,10 @@ extension UserInfoRegInteractor: UserInfoRegInteractorProtocolInput{
     }
     
     func setUserImage(image: UIImage) {
-        let user = DataManager._shared.getUser()
-        let image = image
-        let data = image.pngData()
-        user?.avatarImageData = data
+        //let user = DataManager._shared.getUser()
+        //let image = image
+        //let data = image.pngData()
+        //user?.avatarImageData = data
         //let data = image.jpegData(compressionQuality: 0.9)
         //let uiImage: UIImage = UIImage(data: imageData)
     }
