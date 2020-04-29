@@ -110,7 +110,7 @@ class DataManager: DataManagerProtocol {
         do {
             try realm.write {
                 realm.add(chalenge)
-                chalenge.date = Date()
+                chalenge.startDate = Date()
                 chalenge.trick = tricks.first{$0.name == "360 flip"}
                 chalenge.isChallenge = true
                 chalenge.sponsorImageData = data
@@ -147,7 +147,7 @@ extension DataManager {
             do {
                 try realm.write{
                     realm.add(chalenge)
-                    chalenge.date = Date()
+                    chalenge.startDate = Date()
                     chalenge.trick =  trick
                     chalenge.isChallenge = true
                 }
@@ -161,7 +161,7 @@ extension DataManager {
         do {
             try realm.write {
                 realm.add(turnamet)
-                turnamet.date = Date()
+                turnamet.startDate = Date()
                 turnamet.isChallenge = false
             }
         } catch {

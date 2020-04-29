@@ -22,6 +22,8 @@ class RootVCRegAssembly {
         interactor.output = presenter
         view.output = presenter
         
+        interactor.locationManager = LocationManager(delegate: interactor)
+        
         interactor.getUserData()
         
         return view

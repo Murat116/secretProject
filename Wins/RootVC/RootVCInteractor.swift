@@ -11,7 +11,12 @@ import Foundation
 class RootVCInteractor{
     weak var output: RootInteractorOutput!
     
+    var locationManager:LocationManager!
+    
+    var locationKey = ""
+    
     func getUserData(){
+        self.locationManager.setUp()
         let user = DataManager._shared.getUser()
         let lastTricks = self.getTricks()
         self.output.configure(with: user, and: lastTricks)
@@ -58,6 +63,20 @@ extension RootVCInteractor: RootInteractorInput{
         arrTricks.append(trick)
         DataManager._shared.lastTenTrick = arrTricks
         DataManager._shared.saveTrik(trick: trick, stab: stab, dif: dif)
+    }
+}
+
+extension RootVCInteractor: LocationDelegate{
+    func someError(error: Error?) {
+        print(error)
+    }
+    
+    func updateLocation(with region: String?) {
+        if locationKey != region{
+            self.locationKey = region ?? "Moscow"
+            
+            //читаем данные с сервера
+        }
     }
 }
 
