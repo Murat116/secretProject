@@ -7,6 +7,7 @@
 //
 
 import CoreLocation
+import UserNotifications
 import UIKit
 
 protocol LocationDelegate: class{
@@ -22,26 +23,20 @@ class LocationManager: NSObject{
     init(delegate: LocationDelegate) {
         self.locationDelegate = delegate
     }
+    
+    func setUp(){
+        self.locationManager.desiredAccuracy = kCLLocationAccuracyThreeKilometers
         
-    func setUp() -> LocationGetStatus{
-//        self.locationManager.desiredAccuracy = kCLLocationAccuracyThreeKilometers
-//
-//        self.locationManager.delegate = self
-//        self.locationManager.requestWhenInUseAuthorization()
-//
-////        self.locationManager.requestLocation()
-//
-//        guard CLLocationManager.locationServicesEnabled() else { return .error }
-//
-//        self.locationManager.startUpdatingLocation()
+        self.locationManager.requestWhenInUseAuthorization()
+        //
+        //        self.locationManager.requestLocation()
+        
         self.locationManager.delegate = self
-        self.locationManager.requestAlwaysAuthorization()
-        self.locationManager.allowsBackgroundLocationUpdates = false
-        self.locationManager.pausesLocationUpdatesAutomatically = true
+        //
+        guard CLLocationManager.locationServicesEnabled() else { return  }
+        //
         self.locationManager.startUpdatingLocation()
-        self.locationManager.startMonitoringSignificantLocationChanges()
         
-        return .locationIsGetting
     }
 }
 
@@ -49,20 +44,25 @@ extension LocationManager: CLLocationManagerDelegate{
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         print(error)
     }
-    internal func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        guard let location = locations.first else {
-            self.locationDelegate.someError(error: nil)
-            return
-        }
-        CLGeocoder().reverseGeocodeLocation(location) { (placemarks, error) in
-            guard error == nil, let placemarks = placemarks else{
-                self.locationDelegate.someError(error: error)
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        DispatchQueue.global(qos: .userInteractive).async{
+            guard let location = locations.first else {
+                self.locationDelegate.someError(error: nil)
                 return
             }
-            let adminArea = placemarks.first?.administrativeArea
-            self.locationDelegate.updateLocation(with: adminArea)
+            
+            CLGeocoder().reverseGeocodeLocation(location, preferredLocale: Locale(identifier: "en")) { (placemarks, error) in
+                guard error == nil, let placemarks = placemarks else{ return self.locationDelegate.someError(error: error) }
+                let placemark =  placemarks.first
+                guard let adminArea = placemark?.administrativeArea,
+                    let country = placemark?.country else { return self.locationDelegate.someError(error: error)  }
+                
+                self.locationDelegate.updateLocation(with: country + "/" + adminArea)
+                self.locationManager.stopUpdatingLocation()
+                print("update location")
+            }
         }
-        
     }
 }
 
