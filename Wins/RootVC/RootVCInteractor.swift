@@ -12,12 +12,13 @@ class RootVCInteractor{
     weak var output: RootInteractorOutput!
     
     var locationManager:LocationManager{
-        return LocationManager(delegate: self)
+        let manager = LocationManager(delegate: self)
+        manager.setUp()
+        return manager
     }
     
     func getUserData(){
-        let error = locationManager.setUp()
-        guard error != .error else { return }
+        locationManager
         let user = DataManager._shared.getUser()
         let lastTricks = self.getTricks()
         self.output.configure(with: user, and: lastTricks)

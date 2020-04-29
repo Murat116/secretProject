@@ -117,7 +117,7 @@ extension RootViewController{
             
             let formatter = DateFormatter()
             formatter.dateFormat = "dd:MM:yyyy"
-            let myStringafd = formatter.string(from: chalenge.date)
+            let myStringafd = formatter.string(from: chalenge.startDate)
             
             if chalenge.isChallenge{
                 self.mainLabel.text =  "Today's lucky trick - \n\(chalenge.trick!.name)"

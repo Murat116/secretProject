@@ -24,24 +24,31 @@ class LocationManager: NSObject{
     }
         
     func setUp() -> LocationGetStatus{
-        self.locationManager.requestAlwaysAuthorization()
-        
-        self.locationManager.requestLocation()
-        
-        guard CLLocationManager.locationServicesEnabled() else { return .error }
-        
+//        self.locationManager.desiredAccuracy = kCLLocationAccuracyThreeKilometers
+//
+//        self.locationManager.delegate = self
+//        self.locationManager.requestWhenInUseAuthorization()
+//
+////        self.locationManager.requestLocation()
+//
+//        guard CLLocationManager.locationServicesEnabled() else { return .error }
+//
+//        self.locationManager.startUpdatingLocation()
         self.locationManager.delegate = self
-        self.locationManager.desiredAccuracy = kCLLocationAccuracyThreeKilometers
+        self.locationManager.requestAlwaysAuthorization()
+        self.locationManager.allowsBackgroundLocationUpdates = false
+        self.locationManager.pausesLocationUpdatesAutomatically = true
+        self.locationManager.startUpdatingLocation()
+        self.locationManager.startMonitoringSignificantLocationChanges()
         
         return .locationIsGetting
     }
 }
 
 extension LocationManager: CLLocationManagerDelegate{
-    internal func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-        self.locationDelegate.someError(error: error)
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        print(error)
     }
-    
     internal func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         guard let location = locations.first else {
             self.locationDelegate.someError(error: nil)
@@ -56,17 +63,6 @@ extension LocationManager: CLLocationManagerDelegate{
             self.locationDelegate.updateLocation(with: adminArea)
         }
         
-    }
-    
-    internal func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
-        switch status {
-        case .notDetermined:
-            manager.requestWhenInUseAuthorization()
-        case .authorizedWhenInUse:
-            manager.requestAlwaysAuthorization()
-        default:
-            break
-        }
     }
 }
 
