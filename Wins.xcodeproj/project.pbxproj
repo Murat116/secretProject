@@ -58,6 +58,7 @@
 		5CEA0DF92447BA760068A975 /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CEA0DF82447BA760068A975 /* UserModel.swift */; };
 		5CFBDB3C2448C58300588978 /* PodFile in Resources */ = {isa = PBXBuildFile; fileRef = 5CFBDB3B2448C58300588978 /* PodFile */; };
 		76837F62DA2DC1F2098E549E /* Pods_Wins.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 63D750BBCBA4F1568B123A58 /* Pods_Wins.framework */; };
+		7DC4004E245ABFEE007301EC /* ScreenTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DC4004D245ABFEE007301EC /* ScreenTheme.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -116,6 +117,7 @@
 		5CEA0DF82447BA760068A975 /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
 		5CFBDB3B2448C58300588978 /* PodFile */ = {isa = PBXFileReference; lastKnownFileType = text; path = PodFile; sourceTree = "<group>"; };
 		63D750BBCBA4F1568B123A58 /* Pods_Wins.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Wins.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		7DC4004D245ABFEE007301EC /* ScreenTheme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScreenTheme.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -152,6 +154,7 @@
 		45107DF4241FEC5F007A978D /* Wins */ = {
 			isa = PBXGroup;
 			children = (
+				7DC4004D245ABFEE007301EC /* ScreenTheme.swift */,
 				45107DF5241FEC5F007A978D /* AppDelegate.swift */,
 				5C04838B243E7EAB00B0B8C4 /* SceneDelegate.swift */,
 				5CD39E34244222EC0053896E /* Model */,
@@ -445,6 +448,7 @@
 				5C70DF1F243FD5A200C4A998 /* TrickRegProtocol.swift in Sources */,
 				5C6C0944243E7868007C2022 /* TricksRegVC.swift in Sources */,
 				5CA092122442484D00D38C98 /* SportRegRouter.swift in Sources */,
+				7DC4004E245ABFEE007301EC /* ScreenTheme.swift in Sources */,
 				5C70DF25243FD7CA00C4A998 /* TrickRegInteractor.swift in Sources */,
 				5C04838C243E7EAB00B0B8C4 /* SceneDelegate.swift in Sources */,
 				5C79C470244D1F9A003589AE /* StatisticsInteractor.swift in Sources */,
@@ -616,7 +620,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.hopeTo.Wins;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "Profile for roman";
+				PROVISIONING_PROFILE_SPECIFIER = "Profile for Alexander";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -640,7 +644,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.hopeTo.Wins;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "Profile for roman";
+				PROVISIONING_PROFILE_SPECIFIER = "Profile for Alexander";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
