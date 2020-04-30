@@ -72,6 +72,12 @@ class DataManager: DataManagerProtocol {
         return user
     }
     
+    func getChalanges() -> [Challenge]{
+        guard let chalanges = self.realm?.objects(Challenge.self) else { return []}
+        let arrayOfChalenges = chalanges.sorted{$0.startDate > $1.startDate}
+        return arrayOfChalenges
+    }
+    
     func saveTrik(trick: Trick,stab: Int, dif: Float){
         do {
             guard let realm = self.realm else { return }

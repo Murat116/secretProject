@@ -25,7 +25,7 @@
 		5C70DF23243FD79800C4A998 /* TrickRegPresentor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C70DF22243FD79800C4A998 /* TrickRegPresentor.swift */; };
 		5C70DF25243FD7CA00C4A998 /* TrickRegInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C70DF24243FD7CA00C4A998 /* TrickRegInteractor.swift */; };
 		5C70DF27243FD7F200C4A998 /* TrickRegRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C70DF26243FD7F200C4A998 /* TrickRegRouter.swift */; };
-		5C7895ED244A274800410A37 /* userInfoRegistrationAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C7895EC244A274800410A37 /* userInfoRegistrationAssembly.swift */; };
+		5C7895ED244A274800410A37 /* UserInfoRegistrationAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C7895EC244A274800410A37 /* UserInfoRegistrationAssembly.swift */; };
 		5C7895EF244B554B00410A37 /* RootVCProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C7895EE244B554B00410A37 /* RootVCProtocol.swift */; };
 		5C7895F1244B580A00410A37 /* RootVCAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C7895F0244B580A00410A37 /* RootVCAssembly.swift */; };
 		5C7895F3244B599B00410A37 /* RootVCPresentor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C7895F2244B599B00410A37 /* RootVCPresentor.swift */; };
@@ -83,7 +83,7 @@
 		5C70DF22243FD79800C4A998 /* TrickRegPresentor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrickRegPresentor.swift; sourceTree = "<group>"; };
 		5C70DF24243FD7CA00C4A998 /* TrickRegInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrickRegInteractor.swift; sourceTree = "<group>"; };
 		5C70DF26243FD7F200C4A998 /* TrickRegRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrickRegRouter.swift; sourceTree = "<group>"; };
-		5C7895EC244A274800410A37 /* userInfoRegistrationAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = userInfoRegistrationAssembly.swift; sourceTree = "<group>"; };
+		5C7895EC244A274800410A37 /* UserInfoRegistrationAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoRegistrationAssembly.swift; sourceTree = "<group>"; };
 		5C7895EE244B554B00410A37 /* RootVCProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootVCProtocol.swift; sourceTree = "<group>"; };
 		5C7895F0244B580A00410A37 /* RootVCAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootVCAssembly.swift; sourceTree = "<group>"; };
 		5C7895F2244B599B00410A37 /* RootVCPresentor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootVCPresentor.swift; sourceTree = "<group>"; };
@@ -195,7 +195,7 @@
 				5C1C1D7E243D1D1C008BDC58 /* UserInfoRegInteractor.swift */,
 				5C1C1D82243D24B6008BDC58 /* UserInfoRegRouter.swift */,
 				5C1C1D80243D1DFD008BDC58 /* UserInfoRegProtocol.swift */,
-				5C7895EC244A274800410A37 /* userInfoRegistrationAssembly.swift */,
+				5C7895EC244A274800410A37 /* UserInfoRegistrationAssembly.swift */,
 			);
 			path = UserInfo;
 			sourceTree = "<group>";
@@ -437,7 +437,7 @@
 				5C7895F7244B792900410A37 /* RootVCRouter.swift in Sources */,
 				5C1C1D7D243D1BD7008BDC58 /* UserInfoRegPresentor.swift in Sources */,
 				5CA0920E2442483000D38C98 /* SportRegPresentor.swift in Sources */,
-				5C7895ED244A274800410A37 /* userInfoRegistrationAssembly.swift in Sources */,
+				5C7895ED244A274800410A37 /* UserInfoRegistrationAssembly.swift in Sources */,
 				5CD39E33244222E40053896E /* TricksModel.swift in Sources */,
 				5CA0920A2442480E00D38C98 /* SportRegProtocol.swift in Sources */,
 				5C87648A245446DB00040B28 /* SignInProtocols.swift in Sources */,
@@ -627,7 +627,7 @@
 			baseConfigurationReference = 42BDF2F513D222C6CE80DAD3 /* Pods-Wins.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = P5ZY6F8UKU;
@@ -640,7 +640,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.hopeTo.Wins;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "Profile for roman";
+				PROVISIONING_PROFILE_SPECIFIER = com.hopeTo.Wins;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};

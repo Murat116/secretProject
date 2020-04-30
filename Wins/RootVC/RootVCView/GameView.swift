@@ -156,7 +156,7 @@ class GameView: UIView{
         super.willMove(toSuperview: newSuperview)
         self.output.recountTechnocalSkill()
         if newSuperview == nil{
-            self.output.reloadData()
+            self.output.reloadTricks()
         }
     }
     

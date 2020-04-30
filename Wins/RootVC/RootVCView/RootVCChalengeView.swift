@@ -10,12 +10,12 @@ import UIKit
 
 extension RootViewController:  UICollectionViewDelegate, UICollectionViewDataSource{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return DataManager._shared.getUser()?.challenges.count ?? 0
+        return self.challenges.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ChalendgeCell", for: indexPath) as? ChalendgeCell
-        cell!.configure(with: (DataManager._shared.getUser()?.challenges[indexPath.row])!)
+        cell!.configure(with: self.challenges[indexPath.row])
         return cell!
     }
     

@@ -17,11 +17,14 @@ class RootViewController: UIViewController{
     private var user: User!
     internal var tricks = [Trick]()
     internal var lastTenTricks = [Trick]()
-    
+
+    internal var challenges = [Challenge]()
+
     internal var headerView = HeaderView()
     internal var statBtn = UIButton()
     internal var gameBtn = UIButton()
     internal var tableView = UITableView(frame: .zero, style: .grouped)
+    internal var chalengeView = UICollectionView()
     
     internal var selectedIndex = [IndexPath]()
     
@@ -102,9 +105,19 @@ extension RootViewController{
 }
 
 extension RootViewController: RootViewInpit{
-    func reloadData(with lastTenTrick: [Trick]) {
+    func reload(with chalanges: [Challenge]) {
+        self.challenges = chalanges
+        self.chalengeView.reloadData()
+    }
+    
+    func reload(with lastTenTrick: [Trick]) {
         self.lastTenTricks = lastTenTrick
         self.tableView.reloadData()
+    }
+    
+    func reload(with user: User) {
+        self.user = user
+        self.headerView.configure(with: user)
     }
     
     func configure(with model: User?, and lastTenTrick: [Trick]) {

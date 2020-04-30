@@ -14,6 +14,21 @@ class RootVCPresentor{
 
 
 extension RootVCPresentor: RootViewOutput{
+    func reloaChalanhes() {
+        let challenges = self.interactor.getChallenges()
+        self.view.reload(with: challenges)
+    }
+    
+    func reloadTricks() {
+        let lastTenTrick = self.interactor.getTricks()
+        self.view.reload(with: lastTenTrick)
+    }
+    
+    func reloadUser() {
+        let user = self.interactor.getUser()
+        self.view.reload(with: user)
+    }
+    
     func saveTrick(_ trick: Trick, with stab: Int, and dif: Float) {
         self.interactor.saveTrick(trick, with: stab, and: dif)
     }
@@ -33,14 +48,7 @@ extension RootVCPresentor: RootViewOutput{
 }
 
 extension RootVCPresentor: RootInteractorOutput{
-    func reloadData() {
-        let lastTenTrick = self.interactor.getTricks()
-        let user = self.interactor.getUser()
-        self.configure(with: user, and: lastTenTrick)
-        
-    }
-    
-    func configure(with model: User?, and lastTenTrick: [Trick]) {
+    func configure(with model: User?, _ chalenges: [Challenge], and lastTenTrick: [Trick]) {
         if model != nil{
             self.view.configure(with: model, and: lastTenTrick)
         } else{

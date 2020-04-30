@@ -17,9 +17,10 @@ class RootVCInteractor{
     
     func getUserData(){
         self.locationManager.setUp()
-        let user = DataManager._shared.getUser()
+        let user = self.getUser()
+        let challenges = self.getChallenges()
         let lastTricks = self.getTricks()
-        self.output.configure(with: user, and: lastTricks)
+        self.output.configure(with: user, challenges, and: lastTricks)
     }
     
 }
@@ -40,6 +41,11 @@ extension RootVCInteractor: RootInteractorInput{
     
     func getUser() -> User {
         return DataManager._shared.getUser()!
+    }
+    
+    func getChallenges() -> [Challenge]{
+        let chalanges = DataManager._shared.getChalanges()
+        return chalanges
     }
     
     func getTricks() -> [Trick] {
