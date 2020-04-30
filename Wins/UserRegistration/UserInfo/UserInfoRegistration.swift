@@ -111,7 +111,10 @@ extension UserInfoRegistrationVC{
             
             self.addAvatarView(headerBottom: nil)
             
-            self.addSocialetworks()
+            if (screenIsBig()){
+                print("Big")
+                self.addSocialetworks()
+            }
             
             self.addBtn()
         }else{
@@ -123,6 +126,7 @@ extension UserInfoRegistrationVC{
             self.addBtn()
             
             if (screenIsBig()){
+                print("Big")
                 self.addSocialetworks()
             }
             
