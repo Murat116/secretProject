@@ -21,7 +21,6 @@ class GameView: UIView{
     private var trickCount: Int = 0
     
     private var tricks = [Trick]()
-    private var chalenges = [Challenge]()
     
     private var output: RootViewOutput!
     
@@ -133,15 +132,11 @@ class GameView: UIView{
         
         self.trickCountLabel.text = "\(self.trickCount + 1)/10"
         
-        let trick = self.tricks[self.trickCount]
+        self.trickLabel.text = self.tricks[self.trickCount].name
         
-        self.trickLabel.text = trick.name
-        
-        
-        
-        let oldTrick = self.tricks[self.trickCount - 1]
-        var stab = oldTrick.stability
-        var dif = oldTrick.complexity
+        let trick = self.tricks[self.trickCount - 1]
+        var stab = trick.stability
+        var dif = trick.complexity
         if self.noBtn != btn {
             stab += 1
             dif -= 0.3
@@ -149,7 +144,7 @@ class GameView: UIView{
             stab -= 1
             dif += 0.3
         }
-        self.output.saveTrick(oldTrick, with: stab, and: dif)
+        self.output.saveTrick(trick, with: stab, and: dif)
     }
     
     override func willMove(toSuperview newSuperview: UIView?) {
@@ -162,10 +157,9 @@ class GameView: UIView{
     
     
     
-    init(tricks: [Trick],chalenges: [Challenge], frame: CGRect, output: RootViewOutput) {
+    init(tricks: [Trick], frame: CGRect, output: RootViewOutput) {
         super.init(frame: frame)
         self.tricks = GameView.rundomTrick(tricks: tricks)
-        self.chalenges = chalenges
         self.setUp()
         self.output = output
     }

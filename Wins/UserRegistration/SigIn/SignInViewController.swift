@@ -60,6 +60,15 @@ class SignInVIewController: UIViewController{
 
     @objc func sigIn(){
         self.isRegistration = !self.isRegistration
+        UIView.animate(withDuration: 0.3) { [unowned self] in
+            self.loginField.text = ""
+            self.passwordField.text = ""
+            self.confirmationField.text = ""
+            self.confirmationField.isHidden = true
+            self.nextBtnTopToPass?.isActive = true
+            self.nextBtnTopToConfirm?.isActive = false
+            self.view.layoutIfNeeded()
+        }
     }
     
     //----------------------------------------------------------------------
