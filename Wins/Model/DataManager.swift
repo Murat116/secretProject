@@ -19,7 +19,7 @@ protocol DataManagerProtocol{
 class DataManager: DataManagerProtocol {
     
     static var _shared = DataManager()
-
+    
     var chalenges = [Challenge]()
     
     var lastTenTrick: [Trick] {
@@ -173,7 +173,7 @@ extension DataManager {
         } catch {
             print(error.localizedDescription, "error in create User's tricks")
         }
-
+        
         let challenges = List<Challenge>()
         challenges.append(turnamet)
         
@@ -199,7 +199,7 @@ extension DataManager {
     func saveTechnikalSkill(_ skill: Float) {
         
         guard let realm = self.realm,
-        let user = self.getUser() else { return }
+            let user = self.getUser() else { return }
         
         do {
             try realm.write {
@@ -291,6 +291,19 @@ extension DataManager {
             }
         } catch {
             print(error.localizedDescription, "error in saving User soc network")
+        }
+    }
+    
+    func saveImage(_ image: UIImage){
+        guard let realm = self.realm,
+            let user = self.getUser(),
+            let data = image.pngData() else { return }
+        do{
+            try realm.write{
+                user.avatarImageData = data
+            }
+        }catch{
+            print(error.localizedDescription, "error in saving User image")
         }
     }
 }
