@@ -393,7 +393,7 @@ extension UserInfoRegistrationVC{
         }
     }
 }
-
+ 
 enum SocialNetWork: Int{
     case instagram = 0
     case facebook
