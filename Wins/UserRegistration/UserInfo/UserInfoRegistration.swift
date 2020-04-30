@@ -111,10 +111,7 @@ extension UserInfoRegistrationVC{
             
             self.addAvatarView(headerBottom: nil)
             
-            if (screenIsBig()){
-                print("Big")
-                self.addSocialetworks()
-            }
+            self.addSocialetworks()
             
             self.addBtn()
         }else{
@@ -125,11 +122,7 @@ extension UserInfoRegistrationVC{
             
             self.addBtn()
             
-            if (screenIsBig()){
-                print("Big")
-                self.addSocialetworks()
-            }
-            
+            self.addSocialetworks()
             
         }
         
@@ -189,17 +182,8 @@ extension UserInfoRegistrationVC{
         self.stand.heightAnchor.constraint(equalTo: self.ageField.heightAnchor).isActive = true
     }
     
-    @objc func addAvatarBtnIsSelected(){
-        self.output.openPhotoPicker()
-    }
-    
-    @objc func avatarBtnIsSelected() {
-        self.output.openCameraPicker()
-    }
-    
     func addAvatarView(headerBottom: NSLayoutYAxisAnchor?){
         self.view.addSubview(self.avatarBtn)
-        self.avatarBtn.addTarget(self, action: #selector(avatarBtnIsSelected), for: .touchUpInside)
         self.avatarBtn.translatesAutoresizingMaskIntoConstraints = false
         self.avatarBtn.leftAnchor.constraint(equalTo: self.view.leftAnchor, constant: 33).isActive = true
         if self.isRegistration{
@@ -224,7 +208,6 @@ extension UserInfoRegistrationVC{
         self.avatarBtn.contentEdgeInsets = UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 8 )
         
         self.view.addSubview(self.addAvatarBtn)
-        self.addAvatarBtn.addTarget(self, action: #selector(self.addAvatarBtnIsSelected), for: .touchUpInside)
         self.addAvatarBtn.translatesAutoresizingMaskIntoConstraints = false
         
         self.addAvatarBtn.leftAnchor.constraint(equalTo: self.avatarBtn.rightAnchor, constant: 22).isActive = true
@@ -416,45 +399,3 @@ enum SocialNetWork: Int{
     case facebook
     case twiter
 }
-
-extension UserInfoRegistrationVC: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-    
-    func showCameraPicker() {
-        if(UIImagePickerController .isSourceTypeAvailable(UIImagePickerController.SourceType.camera)) {
-            let imagePickerController = UIImagePickerController()
-            imagePickerController.delegate = self
-            imagePickerController.sourceType = UIImagePickerController.SourceType.camera
-            imagePickerController.allowsEditing = true
-            self.present(imagePickerController, animated: true, completion: nil)
-        }
-        else {
-            let alert = UIAlertController(title: "Error", message: "Sorry, you don't have camera", preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "Cancel", style: .default, handler: nil))
-            self.present(alert, animated: true, completion: nil)
-        }
-    }
-    
-    func showImagePicker() {
-        let imagePickerController = UIImagePickerController()
-        imagePickerController.delegate = self
-        imagePickerController.sourceType = UIImagePickerController.SourceType.photoLibrary
-        imagePickerController.allowsEditing = true
-        self.present(imagePickerController, animated: true, completion: nil)
-    }
-    
-    func imagePickerController(_ picker: UIImagePickerController,
-        didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
-        if let image = info[.editedImage] as? UIImage {
-            self.avatarBtn.setImage(image, for: .normal)
-            self.avatarBtn.imageView!.bounds = self.avatarBtn.imageView!.frame
-            self.avatarBtn.imageView!.layer.cornerRadius = self.avatarBtn.imageView!.frame.size.width / 2
-            //self.output.setUserImage(image: image)
-        }
-        picker.dismiss(animated: true, completion: nil)
-    }
-    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
-        picker.dismiss(animated:  true, completion: nil)
-    }
-    
-}
-

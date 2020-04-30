@@ -2,10 +2,6 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>NSPhotoLibraryUsageDescription</key>
-	<string>Allow this to use Photo Album</string>
-	<key>NSCameraUsageDescription</key>
-	<string>Allow this to use camera</string>
 	<key>NSLocationAlwaysUsageDescription</key>
 	<string>We need your location to get chalenge from your boardshoop</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
