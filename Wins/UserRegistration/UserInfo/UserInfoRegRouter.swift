@@ -33,12 +33,17 @@ extension UserInfoRegRouter: UserInfoRegRouterProtocolInput{
     }
     
     func openPhotoPicker() {
-        //
+        //UserInfoImagePickerVC.show(parent: self.view)
+        self.view.showImagePicker()
+    }
+    
+    func openCameraPicker() {
+        self.view.showCameraPicker()
     }
     
     func openSportVC() {
         SportsRegVC.show(parent: self.view)
     }
     
-    
 }
+
