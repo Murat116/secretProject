@@ -57,7 +57,7 @@
 		5CEA0DF92447BA760068A975 /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CEA0DF82447BA760068A975 /* UserModel.swift */; };
 		5CFBDB3C2448C58300588978 /* PodFile in Resources */ = {isa = PBXBuildFile; fileRef = 5CFBDB3B2448C58300588978 /* PodFile */; };
 		76837F62DA2DC1F2098E549E /* Pods_Wins.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 63D750BBCBA4F1568B123A58 /* Pods_Wins.framework */; };
-		7D4C6BD2245AA7D400B01ED4 /* ScreenTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D4C6BD1245AA7D400B01ED4 /* ScreenTheme.swift */; };
+		7D4C6BD4245AAA5700B01ED4 /* ScreenTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D4C6BD3245AAA5700B01ED4 /* ScreenTheme.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -115,7 +115,7 @@
 		5CEA0DF82447BA760068A975 /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
 		5CFBDB3B2448C58300588978 /* PodFile */ = {isa = PBXFileReference; lastKnownFileType = text; path = PodFile; sourceTree = "<group>"; };
 		63D750BBCBA4F1568B123A58 /* Pods_Wins.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Wins.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		7D4C6BD1245AA7D400B01ED4 /* ScreenTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenTheme.swift; sourceTree = "<group>"; };
+		7D4C6BD3245AAA5700B01ED4 /* ScreenTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenTheme.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -163,7 +163,7 @@
 				45107DFE241FEC64007A978D /* Assets.xcassets */,
 				45107E00241FEC64007A978D /* LaunchScreen.storyboard */,
 				45107E03241FEC64007A978D /* Info.plist */,
-				7D4C6BD1245AA7D400B01ED4 /* ScreenTheme.swift */,
+				7D4C6BD3245AAA5700B01ED4 /* ScreenTheme.swift */,
 			);
 			path = Wins;
 			sourceTree = "<group>";
@@ -449,7 +449,7 @@
 				5C79C470244D1F9A003589AE /* StatisticsInteractor.swift in Sources */,
 				5C70DF27243FD7F200C4A998 /* TrickRegRouter.swift in Sources */,
 				5CC8A62A2448EDD300ED0720 /* USRDefKeys.swift in Sources */,
-				7D4C6BD2245AA7D400B01ED4 /* ScreenTheme.swift in Sources */,
+				7D4C6BD4245AAA5700B01ED4 /* ScreenTheme.swift in Sources */,
 				5C70DF23243FD79800C4A998 /* TrickRegPresentor.swift in Sources */,
 				5C7895EF244B554B00410A37 /* RootVCProtocol.swift in Sources */,
 				5C1C1D81243D1DFD008BDC58 /* UserInfoRegProtocol.swift in Sources */,
