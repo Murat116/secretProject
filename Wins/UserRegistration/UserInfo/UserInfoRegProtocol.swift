@@ -7,11 +7,11 @@
 //
 
 import Foundation
+
 import UIKit
 
 protocol UserInfoRegInteractorProtocolInput: class {
     func saveUserData(with name: String, city: String, age: String, isReg: Bool)
-    func setUserImage(image: UIImage)
 }
 
 protocol UserInfoRegInteractorProtocolOutput: class {
@@ -30,10 +30,6 @@ protocol UserInfoRegViewProtocolOutput: class {
     
     func openSportVC()
     
-    func openCameraPicker()
-    
-    func setUserImage(image: UIImage)
-    
     func openAlert(alert: UIAlertController)
     
     func saveUserData(with name: String, city: String, age: String, isReg: Bool)
@@ -45,12 +41,7 @@ protocol UserInfoRegRouterProtocolInput: class {
     func openPhotoPicker()
     func openSportVC()
     
-    func openCameraPicker()
-    
     func endRegistration()
     
     func openAlert(alert: UIAlertController)
 }
-
-
-
