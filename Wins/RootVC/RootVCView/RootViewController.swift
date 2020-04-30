@@ -94,8 +94,7 @@ extension RootViewController{
     }
     
     @objc func goToGame(){
-        let chalenges = Array(self.user!.challenges)
-        self.gameView = GameView(tricks: self.tricks, chalenges: chalenges, frame: self.view.frame, output: self.output)//GameView(frame: self.view.frame)
+        self.gameView = GameView(tricks: self.tricks, frame: self.view.frame, output: self.output)//GameView(frame: self.view.frame)
         self.view.addSubview(gameView)
     }
     
