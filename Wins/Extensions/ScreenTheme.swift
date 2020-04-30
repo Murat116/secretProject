@@ -9,6 +9,10 @@
 import Foundation
 import UIKit
 
-func screenIsBig() -> Bool {
-    return UIScreen.main.bounds.height > 667
+struct ScreenTheme {
+    
+    static var isXFormat: Bool {
+        return UIScreen.main.bounds.height / UIScreen.main.bounds.width >= 896.0 / 414.0
+    }
+    
 }

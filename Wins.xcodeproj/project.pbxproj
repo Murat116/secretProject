@@ -154,7 +154,6 @@
 		45107DF4241FEC5F007A978D /* Wins */ = {
 			isa = PBXGroup;
 			children = (
-				7DC4004D245ABFEE007301EC /* ScreenTheme.swift */,
 				45107DF5241FEC5F007A978D /* AppDelegate.swift */,
 				5C04838B243E7EAB00B0B8C4 /* SceneDelegate.swift */,
 				5CD39E34244222EC0053896E /* Model */,
@@ -185,6 +184,7 @@
 		5C00217E244CBDF800E34793 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				7DC4004D245ABFEE007301EC /* ScreenTheme.swift */,
 				5C00217C244CBDED00E34793 /* UIColor.extension.swift */,
 			);
 			path = Extensions;
