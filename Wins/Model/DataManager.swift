@@ -306,4 +306,15 @@ extension DataManager {
             print(error.localizedDescription, "error in saving User image")
         }
     }
+    
+    func saveChallenge(_ challenge: Challenge){
+        guard let realm = self.realm else { return }
+        do{
+            try realm.write{
+                challenge.isDone = true
+            }
+        }catch{
+            print(error.localizedDescription, "error in saving User image")
+        }
+    }
 }

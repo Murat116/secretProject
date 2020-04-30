@@ -10,7 +10,7 @@ import UIKit
 
 extension RootViewController:  UICollectionViewDelegate, UICollectionViewDataSource{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return self.challenges.count ?? 0
+        return self.challenges.filter{!$0.isDone}.count 
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {

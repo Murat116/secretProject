@@ -20,6 +20,7 @@ protocol RootViewOutput: class{
     
     //save metods
     func saveTrick(_ trick: Trick, with stab: Int, and dif: Float)
+    func challengeDone(challenge: Challenge)
     
     //reloadMetods
     func reloaChalanhes()
@@ -39,6 +40,7 @@ protocol RootRouterInput: class{
 
 protocol RootInteractorInput {
     func saveTrick(_ trick: Trick, with stab: Int, and dif: Float)
+    func challengeDone(challenge: Challenge)
     func getTricks() -> [Trick]
     func getUser() -> User
     func getChallenges() -> [Challenge]

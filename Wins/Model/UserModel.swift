@@ -64,6 +64,7 @@ class Challenge: Object {
     dynamic var descript: String? = ""
 
     dynamic var promocode: String? = nil
+    dynamic var isDone: Bool = false
     
     dynamic var isChallenge: Bool = true
     dynamic var id: String?

@@ -25,6 +25,10 @@ class RootVCInteractor{
     
 }
 extension RootVCInteractor: RootInteractorInput{
+    func challengeDone(challenge: Challenge) {
+        DataManager._shared.saveChallenge(challenge)
+    }
+    
     func recountTechnocalSkill() {
         let allTricks = self.getUser().skateTrick
         let doneTrick = allTricks.filter{$0.tries >= 1}
@@ -74,7 +78,7 @@ extension RootVCInteractor: RootInteractorInput{
 
 extension RootVCInteractor: LocationDelegate{
     func someError(error: Error?) {
-        print(error)
+        print(error!)
     }
     
     func updateLocation(with region: String?) {

@@ -14,6 +14,10 @@ class RootVCPresentor{
 
 
 extension RootVCPresentor: RootViewOutput{
+    func challengeDone(challenge: Challenge) {
+        self.interactor.challengeDone(challenge: challenge)
+    }
+    
     func reloaChalanhes() {
         let challenges = self.interactor.getChallenges()
         self.view.reload(with: challenges)
