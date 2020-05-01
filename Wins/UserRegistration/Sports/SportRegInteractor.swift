@@ -42,6 +42,7 @@ extension SportRegInteractor: SportRegInteractorProtocolInput{
         }else{
             self.saveData()
         }
+        DataManager._shared.addDefaultChalenge()
     }
 
     func saveData() {

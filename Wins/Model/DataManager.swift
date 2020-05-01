@@ -106,7 +106,6 @@ class DataManager: DataManagerProtocol {
             tricks.append(trick)
             do {
                 try realm.write {
-                    realm.add(trick)
                     user?.skateTrick.append(trick)
                 }
             } catch {
@@ -148,6 +147,37 @@ extension DataManager {
         } catch {
             print(error.localizedDescription, "error in createUser")
         }
+        
+    }
+    
+    func addDefaultChalenge(){
+        let kickflipChalenge = Challenge()
+        let trick = self.skateTricks.first{ $0.name == "KickFlip"}
+        kickflipChalenge.trick = trick
+        kickflipChalenge.boardShop = ""
+        kickflipChalenge.startDate = Date()
+        
+        kickflipChalenge.descript = "It's welcome chalenge:)"
+        kickflipChalenge.isChallenge = true
+        
+        let turnamentPreview = Challenge()
+        turnamentPreview.startDate = Date()
+        turnamentPreview.endDate = Date().addingDays(4)
+        turnamentPreview.isChallenge = false
+        
+        guard let realm = self.realm else { return }
+        do{
+            try realm.write{
+                realm.add(kickflipChalenge)
+                realm.add(turnamentPreview)
+                self.user?.challenges.append(kickflipChalenge)
+                self.user?.challenges.append(turnamentPreview)
+            }
+        }catch{
+            print(error.localizedDescription, "error in create default chalenge")
+        }
+        
+        print("saving")
     }
 }
 

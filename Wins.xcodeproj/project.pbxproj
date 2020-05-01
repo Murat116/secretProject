@@ -43,6 +43,7 @@
 		5C87648C2454564400040B28 /* SignInPresentor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C87648B2454564400040B28 /* SignInPresentor.swift */; };
 		5C87648E2454564E00040B28 /* SignInINteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C87648D2454564E00040B28 /* SignInINteractor.swift */; };
 		5C8764902454565A00040B28 /* SignInRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C87648F2454565A00040B28 /* SignInRouter.swift */; };
+		5C8B66E0245CDC66000AFAEE /* Date.extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C8B66DF245CDC66000AFAEE /* Date.extension.swift */; };
 		5C8C5FEF2458E67700842A8A /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C8C5FEE2458E67700842A8A /* LocationManager.swift */; };
 		5CA0920024422EF800D38C98 /* RegHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CA091FF24422EF800D38C98 /* RegHeaderView.swift */; };
 		5CA092042442460800D38C98 /* SportsRegVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CA092032442460800D38C98 /* SportsRegVC.swift */; };
@@ -103,6 +104,7 @@
 		5C87648B2454564400040B28 /* SignInPresentor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInPresentor.swift; sourceTree = "<group>"; };
 		5C87648D2454564E00040B28 /* SignInINteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInINteractor.swift; sourceTree = "<group>"; };
 		5C87648F2454565A00040B28 /* SignInRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInRouter.swift; sourceTree = "<group>"; };
+		5C8B66DF245CDC66000AFAEE /* Date.extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Date.extension.swift; sourceTree = "<group>"; };
 		5C8C5FEE2458E67700842A8A /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		5CA091FF24422EF800D38C98 /* RegHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegHeaderView.swift; sourceTree = "<group>"; };
 		5CA092032442460800D38C98 /* SportsRegVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SportsRegVC.swift; sourceTree = "<group>"; };
@@ -189,6 +191,7 @@
 			children = (
 				7DC4004D245ABFEE007301EC /* ScreenTheme.swift */,
 				5C00217C244CBDED00E34793 /* UIColor.extension.swift */,
+				5C8B66DF245CDC66000AFAEE /* Date.extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -466,6 +469,7 @@
 				5C79C470244D1F9A003589AE /* StatisticsInteractor.swift in Sources */,
 				5C70DF27243FD7F200C4A998 /* TrickRegRouter.swift in Sources */,
 				5CC8A62A2448EDD300ED0720 /* USRDefKeys.swift in Sources */,
+				5C8B66E0245CDC66000AFAEE /* Date.extension.swift in Sources */,
 				5C70DF23243FD79800C4A998 /* TrickRegPresentor.swift in Sources */,
 				5C7895EF244B554B00410A37 /* RootVCProtocol.swift in Sources */,
 				5C1C1D81243D1DFD008BDC58 /* UserInfoRegProtocol.swift in Sources */,
