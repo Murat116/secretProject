@@ -48,8 +48,12 @@ extension RootViewController: UITableViewDelegate, UITableViewDataSource{
             
             let flowLayout = UICollectionViewFlowLayout()
             flowLayout.scrollDirection = .horizontal
+            self.chalengeView.collectionViewLayout = flowLayout
+            self.chalengeView.backgroundColor = UIColor(red: 0.11, green: 0.11, blue: 0.11, alpha: 1)
+            self.chalengeView.showsHorizontalScrollIndicator = false
+            self.chalengeView.showsVerticalScrollIndicator = false
+            self.chalengeView.contentInset = UIEdgeInsets(top: 0, left: 33, bottom: 0, right: 33)
             
-            self.chalengeView = UICollectionView(frame: .zero, collectionViewLayout: flowLayout)
             contentView.addSubview(self.chalengeView)
             self.chalengeView.translatesAutoresizingMaskIntoConstraints = false
             self.chalengeView.rightAnchor.constraint(equalTo: contentView.rightAnchor).isActive = true
@@ -57,6 +61,7 @@ extension RootViewController: UITableViewDelegate, UITableViewDataSource{
             self.chalengeView.topAnchor.constraint(equalTo: contentView.topAnchor).isActive = true
             self.chalengeView.heightAnchor.constraint(equalToConstant: 135).isActive = true
             
+            self.chalengeView.collectionViewLayout = flowLayout
             self.chalengeView.backgroundColor = UIColor(red: 0.11, green: 0.11, blue: 0.11, alpha: 1)
             self.chalengeView.showsHorizontalScrollIndicator = false
             self.chalengeView.showsVerticalScrollIndicator = false

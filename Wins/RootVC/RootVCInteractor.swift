@@ -44,11 +44,11 @@ extension RootVCInteractor: RootInteractorInput{
     }
     
     func getUser() -> User {
-        return DataManager._shared.getUser()!
+        return DataManager._shared.user!
     }
     
     func getChallenges() -> [Challenge]{
-        let chalanges = DataManager._shared.getChalanges()
+        let chalanges = DataManager._shared.actualChallenges
         return chalanges
     }
     

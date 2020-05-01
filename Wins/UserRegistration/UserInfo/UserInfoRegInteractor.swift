@@ -16,7 +16,7 @@ class UserInfoRegInteractor{
     weak var output: UserInfoRegInteractorProtocolOutput!
     
     func getUserData(){
-        self.user = DataManager._shared.getUser()
+        self.user = DataManager._shared.user
         guard let user = self.user else { return }
         self.output.configureView(with: user)
     }

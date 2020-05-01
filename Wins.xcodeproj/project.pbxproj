@@ -55,6 +55,7 @@
 		5CC8A62A2448EDD300ED0720 /* USRDefKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CC8A6292448EDD300ED0720 /* USRDefKeys.swift */; };
 		5CC8A62C244901F200ED0720 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CC8A62B244901F200ED0720 /* DataManager.swift */; };
 		5CD39E33244222E40053896E /* TricksModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CD39E32244222E40053896E /* TricksModel.swift */; };
+		5CE3B307245B69CB004FA565 /* DoneChalengeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CE3B306245B69CB004FA565 /* DoneChalengeVC.swift */; };
 		5CEA0DF92447BA760068A975 /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CEA0DF82447BA760068A975 /* UserModel.swift */; };
 		5CFBDB3C2448C58300588978 /* PodFile in Resources */ = {isa = PBXBuildFile; fileRef = 5CFBDB3B2448C58300588978 /* PodFile */; };
 		76837F62DA2DC1F2098E549E /* Pods_Wins.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 63D750BBCBA4F1568B123A58 /* Pods_Wins.framework */; };
@@ -114,6 +115,7 @@
 		5CC8A6292448EDD300ED0720 /* USRDefKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = USRDefKeys.swift; sourceTree = "<group>"; };
 		5CC8A62B244901F200ED0720 /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 		5CD39E32244222E40053896E /* TricksModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TricksModel.swift; sourceTree = "<group>"; };
+		5CE3B306245B69CB004FA565 /* DoneChalengeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoneChalengeVC.swift; sourceTree = "<group>"; };
 		5CEA0DF82447BA760068A975 /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
 		5CFBDB3B2448C58300588978 /* PodFile */ = {isa = PBXFileReference; lastKnownFileType = text; path = PodFile; sourceTree = "<group>"; };
 		63D750BBCBA4F1568B123A58 /* Pods_Wins.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Wins.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -160,6 +162,7 @@
 				5CA092082442462F00D38C98 /* RootVC */,
 				45107E0B241FF700007A978D /* UserRegistration */,
 				5C79C468244D1BDC003589AE /* StatisticVC */,
+				5CE3B309245B69F7004FA565 /* DoneChalengeVC */,
 				5C00217E244CBDF800E34793 /* Extensions */,
 				5C86F1BE244F9CAF00E80A0B /* TurnamentPreviewViewController.swift */,
 				45107DFE241FEC64007A978D /* Assets.xcassets */,
@@ -287,6 +290,14 @@
 				5C8C5FEE2458E67700842A8A /* LocationManager.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		5CE3B309245B69F7004FA565 /* DoneChalengeVC */ = {
+			isa = PBXGroup;
+			children = (
+				5CE3B306245B69CB004FA565 /* DoneChalengeVC.swift */,
+			);
+			path = DoneChalengeVC;
 			sourceTree = "<group>";
 		};
 		936D674DDE816FF754BD5295 /* Pods */ = {
@@ -444,6 +455,7 @@
 				5CD39E33244222E40053896E /* TricksModel.swift in Sources */,
 				5CA0920A2442480E00D38C98 /* SportRegProtocol.swift in Sources */,
 				5C87648A245446DB00040B28 /* SignInProtocols.swift in Sources */,
+				5CE3B307245B69CB004FA565 /* DoneChalengeVC.swift in Sources */,
 				5C7895F3244B599B00410A37 /* RootVCPresentor.swift in Sources */,
 				5C70DF1F243FD5A200C4A998 /* TrickRegProtocol.swift in Sources */,
 				5C6C0944243E7868007C2022 /* TricksRegVC.swift in Sources */,
@@ -607,7 +619,7 @@
 			baseConfigurationReference = 580D8E3408BCDA387F5E4976 /* Pods-Wins.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = P5ZY6F8UKU;
@@ -620,7 +632,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.hopeTo.Wins;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = com.hopeTo.Wins;
+				PROVISIONING_PROFILE_SPECIFIER = "Profile for roman";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -631,7 +643,7 @@
 			baseConfigurationReference = 42BDF2F513D222C6CE80DAD3 /* Pods-Wins.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = P5ZY6F8UKU;
@@ -644,7 +656,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.hopeTo.Wins;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = com.hopeTo.Wins;
+				PROVISIONING_PROFILE_SPECIFIER = "Profile for roman";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};

@@ -24,7 +24,7 @@ class RootViewController: UIViewController{
     internal var statBtn = UIButton()
     internal var gameBtn = UIButton()
     internal var tableView = UITableView(frame: .zero, style: .grouped)
-    internal var chalengeView = UICollectionView()
+    internal var chalengeView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewLayout())
     
     internal var selectedIndex = [IndexPath]()
     
@@ -119,16 +119,18 @@ extension RootViewController: RootViewInpit{
         self.headerView.configure(with: user)
     }
     
-    func configure(with model: User?, and lastTenTrick: [Trick]) {
+    func configure(with model: User?, _ chalenges: [Challenge], and lastTenTrick: [Trick]) {
         guard let model = model else {
             self.output.goToReg()
             return
         }
         self.user = model
+        self.challenges = chalenges
         self.headerView.configure(with: model)
         self.tricks = Array(model.skateTrick)
         self.lastTenTricks = lastTenTrick
         self.tableView.reloadData()
+        self.chalengeView.reloadData()
     }
 }
 
@@ -161,6 +163,8 @@ extension RootViewController{
             self.avatar.layer.borderWidth  = 1
             self.avatar.contentEdgeInsets =  UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 8 )
             self.avatar.layer.borderColor = UIColor(red: 0.314, green: 0.314, blue: 0.314, alpha: 1).cgColor
+            
+            self.avatar.addTarget(self, action: #selector(self.openDoneChall), for: .touchUpInside)
             
             self.avatar.layer.cornerRadius = 46/2
             
@@ -203,6 +207,12 @@ extension RootViewController{
             
             self.avatar.setImage(image, for: [])
             
+        }
+        
+        @objc private func openDoneChall(){
+            let vc = DoneChalengeVC()
+            RootViewController._shared.navigationController?.pushViewController(vc, animated: true)
+//            RootViewController._shared.present(vc, animated: true, completion: nil)
         }
         
         private override init(frame: CGRect) {

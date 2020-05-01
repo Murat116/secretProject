@@ -7,7 +7,7 @@
 //
 
 protocol RootViewInpit: class {
-    func configure(with model: User?, and lastTenTrick: [Trick])
+    func configure(with model: User?, _ chalenges: [Challenge], and lastTenTrick: [Trick])
     func reload(with chalanges: [Challenge])
     func reload(with lastTenTrick: [Trick])
     func reload(with user: User)

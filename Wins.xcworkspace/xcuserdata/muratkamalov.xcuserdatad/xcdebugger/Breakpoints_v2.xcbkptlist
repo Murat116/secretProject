@@ -55,33 +55,65 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "CBCD9B28-9747-43FF-B1C6-4ED2F896F3FB"
-            shouldBeEnabled = "No"
+            uuid = "EB9A6CB8-2477-4C1F-8B97-51547F943B1D"
+            shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Wins/Model/DataManager.swift"
+            filePath = "Wins/DoneChalengeVC/DoneChalengeVC.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "66"
-            endingLineNumber = "66"
-            landmarkName = "getUser()"
+            startingLineNumber = "88"
+            endingLineNumber = "88"
+            landmarkName = "collectionView(_:cellForItemAt:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "AF9C18B3-A90B-497B-991C-F8FC006B5478"
+            uuid = "8341F847-9572-4D67-9716-619FAC361955"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Wins/Model/LocationManager.swift"
+            filePath = "Wins/DoneChalengeVC/DoneChalengeVC.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "45"
-            endingLineNumber = "45"
-            landmarkName = "locationManager(_:didFailWithError:)"
-            landmarkType = "7">
+            startingLineNumber = "14"
+            endingLineNumber = "14"
+            landmarkName = "doneChalange"
+            landmarkType = "24">
+            <Locations>
+               <Location
+                  uuid = "8341F847-9572-4D67-9716-619FAC361955 - cb60c06ee6d6e88a"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Wins.DoneChalengeVC.(doneChalange in _419AD710EAAFB0B8F47084612D303A9E).getter : Swift.Array&lt;Wins.Challenge&gt;"
+                  moduleName = "Wins"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/muratkamalov/Desktop/Wins/Wins/DoneChalengeVC/DoneChalengeVC.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "14"
+                  endingLineNumber = "14"
+                  offsetFromSymbolStart = "40">
+               </Location>
+               <Location
+                  uuid = "8341F847-9572-4D67-9716-619FAC361955 - f3b9a946649c7423"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Wins.Challenge) -&gt; Swift.Bool in Wins.DoneChalengeVC.(doneChalange in _419AD710EAAFB0B8F47084612D303A9E).getter : Swift.Array&lt;Wins.Challenge&gt;"
+                  moduleName = "Wins"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/muratkamalov/Desktop/Wins/Wins/DoneChalengeVC/DoneChalengeVC.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "14"
+                  endingLineNumber = "14"
+                  offsetFromSymbolStart = "24">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

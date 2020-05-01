@@ -12,7 +12,7 @@ class TrickRegInteractor{
     weak var output: TricckRegInteractorOutput!
     
     func getUserData(){
-        guard let trick = DataManager._shared.getUser()?.skateTrick else { return }
+        let trick = DataManager._shared.skateTricks
         self.output.configure(with: Array(trick))
     }
     

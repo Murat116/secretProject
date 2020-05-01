@@ -54,7 +54,7 @@ extension RootVCPresentor: RootViewOutput{
 extension RootVCPresentor: RootInteractorOutput{
     func configure(with model: User?, _ chalenges: [Challenge], and lastTenTrick: [Trick]) {
         if model != nil{
-            self.view.configure(with: model, and: lastTenTrick)
+            self.view.configure(with: model, chalenges, and: lastTenTrick)
         } else{
             self.goToReg()
         }
