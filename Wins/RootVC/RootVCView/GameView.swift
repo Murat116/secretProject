@@ -39,7 +39,6 @@ class GameView: UIView{
         guard self.trickCount < 10 else {
             UIView.animate(withDuration: 0.3) {
                 self.removeFromSuperview()
-                
             }
             return
         }
@@ -58,8 +57,10 @@ class GameView: UIView{
         if self.noBtn != btn {
             stab += 1
             dif -= 0.3
-            if let challenge = self.chalenges.first(where: { $0.trick == trick }) {
+            
+            if let challenge = self.chalenges.first(where: {$0.trick?.name == oldTrick.name}){
                 self.output.challengeDone(challenge: challenge)
+                self.output.reloaChalanhes()
             }
         }else{
             stab -= 1

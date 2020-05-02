@@ -60,7 +60,7 @@ class DoneChalengeVC: UIViewController{
         self.collectionView.delegate = self
         self.collectionView.dataSource = self
         
-        self.collectionView.register(RootViewController.ChalendgeCell.self, forCellWithReuseIdentifier: "ChalendgeCell")
+        self.collectionView.register(DoneChallengeCell.self, forCellWithReuseIdentifier: "DoneChallengeCell")
         self.collectionView.register(EmptyChallengeCell.self, forCellWithReuseIdentifier: "EmptyChallengeCell")
             
     }
@@ -85,8 +85,8 @@ extension DoneChalengeVC: UICollectionViewDataSource, UICollectionViewDelegate{
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if !self.doneChalange.isEmpty, self.doneChalange.count - 1 >= indexPath.row{
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ChalendgeCell", for: indexPath) as? RootViewController.ChalendgeCell
-            cell!.configure(with: self.doneChalange[indexPath.row])
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "DoneChallengeCell", for: indexPath) as? DoneChallengeCell
+//            cell!.configure(with: self.doneChalange[indexPath.row])
             return cell!
         }else{
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "EmptyChallengeCell", for: indexPath) as? EmptyChallengeCell
@@ -171,6 +171,77 @@ extension DoneChalengeVC{
             self.label.font = UIFont.systemFont(ofSize: 12)
             
             self.label.text = "Chalange"
+            
         }
+    }
+}
+
+extension DoneChalengeVC{
+    class DoneChallengeCell: UICollectionViewCell{
+        
+        private var trickLabel = UILabel()
+        private var boardShop = UILabel()
+        private var dateLabel = UILabel()
+        private var backgroundImge = UIImageView()
+        
+        private var borderView = UIView()
+        
+        func setUp(){
+            self.addSubview(self.backgroundImge)
+            self.backgroundImge.translatesAutoresizingMaskIntoConstraints = false
+            self.backgroundImge.leftAnchor.constraint(equalTo: self.leftAnchor).isActive = true
+            self.backgroundImge.rightAnchor.constraint(equalTo: self.rightAnchor).isActive = true
+            self.backgroundImge.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
+            self.backgroundImge.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
+            
+            self.backgroundImge.layer.cornerRadius = 6
+            self.backgroundImge.image = UIImage(named: "Registration/Sports/Skate")
+            
+            self.addSubview(self.boardShop)
+            self.boardShop.translatesAutoresizingMaskIntoConstraints = false
+            self.boardShop.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 11).isActive = true
+            self.boardShop.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
+            
+            self.boardShop.text = "Nike sb"
+            self.boardShop.font = UIFont.systemFont(ofSize: 12)
+            
+            self.addSubview(self.trickLabel)
+            self.trickLabel.translatesAutoresizingMaskIntoConstraints = false
+            self.trickLabel.leftAnchor.constraint(equalTo: self.boardShop.leftAnchor).isActive = true
+            self.trickLabel.bottomAnchor.constraint(equalTo: self.boardShop.topAnchor, constant: -4).isActive = true
+            
+            self.trickLabel.textColor = .white
+            self.trickLabel.font = UIFont.systemFont(ofSize: 14)
+            self.trickLabel.text = "Kickflip"
+            
+            self.addSubview(self.dateLabel)
+            self.dateLabel.translatesAutoresizingMaskIntoConstraints = false
+            self.dateLabel.topAnchor.constraint(equalTo: self.boardShop.bottomAnchor, constant: 4).isActive = true
+            self.dateLabel.leftAnchor.constraint(equalTo: self.trickLabel.leftAnchor).isActive = true
+            
+            self.dateLabel.text = "Date"
+            self.dateLabel.font = UIFont.systemFont(ofSize: 12)
+            
+            self.addSubview(self.borderView)
+            self.borderView.translatesAutoresizingMaskIntoConstraints = false
+            self.borderView.topAnchor.constraint(equalTo: self.topAnchor, constant: 3).isActive = true
+            self.borderView.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 3).isActive = true
+            self.borderView.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -3).isActive = true
+            self.borderView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -3).isActive = true
+            
+            self.borderView.layer.cornerRadius = 6
+            self.borderView.layer.borderColor = UIColor.white.cgColor
+            self.borderView.layer.borderWidth = 1
+        }
+        
+        override init(frame: CGRect) {
+            super.init(frame: .zero)
+            self.setUp()
+        }
+        
+        required init?(coder: NSCoder) {
+            fatalError("init(coder:) has not been implemented")
+        }
+    
     }
 }
