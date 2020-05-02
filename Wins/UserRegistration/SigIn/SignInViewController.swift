@@ -58,16 +58,11 @@ class SignInVIewController: UIViewController{
     //----------------------------------------------------------------------
     
 
+    
     @objc func sigIn(){
         self.isRegistration = !self.isRegistration
         UIView.animate(withDuration: 0.3) { [unowned self] in
-            self.loginField.text = ""
-            self.passwordField.text = ""
-            self.confirmationField.text = ""
-            self.confirmationField.isHidden = true
-            self.nextBtnTopToPass?.isActive = true
-            self.nextBtnTopToConfirm?.isActive = false
-            self.view.layoutIfNeeded()
+            self.prepareFieldsForSignIn()
         }
     }
     
@@ -83,7 +78,7 @@ class SignInVIewController: UIViewController{
     
     @objc func nextVC(btn: UIButton){
         guard self.loginField.isValid else {
-            //showAlert
+            showSignAlert()
             return
         }
         
@@ -91,7 +86,7 @@ class SignInVIewController: UIViewController{
             guard self.passwordField.isValid, self.confirmationField.isValid,
                 let login = self.loginField.text,
                 let password = self.passwordField.text else {
-                //showAlert
+                showSignAlert()
                 return
             }
             
@@ -209,6 +204,29 @@ extension SignInVIewController: UITextFieldDelegate{
         return true
     }
         
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        guard let textField = textField as? SignInTextField else { return false }
+        
+        switch textField.type {
+        case .login:
+            let nextField = passwordField
+            nextField.becomeFirstResponder()
+        case .password:
+            if (self.isRegistration && !confirmationField.isHidden) {
+                let nextField = confirmationField
+                nextField.becomeFirstResponder()
+            } else {
+                self.hideKeyboard()
+            }
+        case .confirmation:
+            self.hideKeyboard()
+        case .none:
+            break
+        }
+        
+        return true
+    }
+    
     func textFieldDidChangeSelection(_ textField: UITextField) {
         guard let signInField = textField as? SignInTextField else { return }
         
@@ -332,9 +350,14 @@ extension SignInVIewController{
         func checkField() -> Bool{
             switch self.type {
             case .login:
-                return true
+                let regex = "\\w{7,18}"
+                let еest = NSPredicate(format:"SELF MATCHES %@", regex)
+                return еest.evaluate(with: self.text)
             case .password, .confirmation:
-                return self.text?.count ?? 0 >= 8
+                let regex = "^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z!@#$%^&*()\\-_=+{}|?>.<,:;~`’]{8,}$"
+                let test = NSPredicate(format: "SELF MATCHES %@", regex)
+                return test.evaluate(with: self.text)
+                //return self.text?.count ?? 0 >= 8
             default:
                 return false
             }
@@ -354,5 +377,26 @@ extension SignInVIewController{
         var isSecure: Bool{
             return self != .login
         }
+    }
+}
+
+extension SignInVIewController {
+    func prepareFieldsForSignIn() {
+        self.loginField.text = ""
+        self.passwordField.text = ""
+        self.confirmationField.text = ""
+        self.loginField.placeholderIsHidden = true
+        self.confirmationField.placeholderIsHidden = true
+        self.passwordField.placeholderIsHidden = true
+        self.confirmationField.isHidden = true
+        self.nextBtnTopToPass?.isActive = true
+        self.nextBtnTopToConfirm?.isActive = false
+        self.view.layoutIfNeeded()
+    }
+    
+    func showSignAlert() {
+        let alert = UIAlertController (title: "Error!", message: "Fill right all fields", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Try again", style: .default, handler: nil))
+        present(alert, animated: true, completion: nil)
     }
 }
