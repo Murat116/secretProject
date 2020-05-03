@@ -35,6 +35,11 @@ class RootViewController: UIViewController{
         self.setUp()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationController?.navigationBar.isHidden = true
+    }
+    
     
     private override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
@@ -44,11 +49,24 @@ class RootViewController: UIViewController{
         fatalError("init(coder:) has not been implemented")
     }
     
+        
+    @objc func goToSettings(){
+        self.output.goToSettings()
+    }
+    
+    @objc func goToStatiscits(){
+        StatisticViewController.show(parent: self)
+    }
+    
+    @objc func goToGame(){
+        self.gameView = GameView(tricks: self.tricks, chalenges: self.challenges, frame: self.view.frame, output: self.output)
+        self.view.addSubview(gameView)
+    }
+    
 }
 
 extension RootViewController{
     func setUp(){
-        self.navigationController?.navigationBar.isHidden = true
         self.view.backgroundColor =  UIColor(red: 0.11, green: 0.11, blue: 0.11, alpha: 1)
         
         self.view.addSubview(self.headerView)
@@ -82,25 +100,6 @@ extension RootViewController{
         self.tableView.showsVerticalScrollIndicator = false
         
     }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        
-    }
-    
-    @objc func goToSettings(){
-        self.output.goToSettings()
-    }
-    
-    @objc func goToStatiscits(){
-        StatisticViewController.show(parent: self)
-    }
-    
-    @objc func goToGame(){
-        self.gameView = GameView(tricks: self.tricks, chalenges: self.challenges, frame: self.view.frame, output: self.output)
-        self.view.addSubview(gameView)
-    }
-    
 }
 
 extension RootViewController: RootViewInpit{
@@ -137,6 +136,8 @@ extension RootViewController: RootViewInpit{
 
 extension RootViewController{
     internal class HeaderView: UIView{
+        
+        var output: RootViewOutput!
         
         private let avatar = UIButton()
         private let nameLabel = UILabel()
@@ -210,9 +211,7 @@ extension RootViewController{
         }
         
         @objc private func openDoneChall(){
-            let vc = DoneChalengeVC()
-            RootViewController._shared.navigationController?.pushViewController(vc, animated: true)
-//            RootViewController._shared.present(vc, animated: true, completion: nil)
+            self.output.goToDoneChallenge()
         }
         
         private override init(frame: CGRect) {

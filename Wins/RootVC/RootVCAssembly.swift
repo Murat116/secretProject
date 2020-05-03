@@ -21,7 +21,7 @@ class RootVCRegAssembly {
         router.view = view
         interactor.output = presenter
         view.output = presenter
-        
+        view.headerView.output = presenter
         interactor.locationManager = LocationManager(delegate: interactor)
         
         interactor.getUserData()

@@ -17,6 +17,7 @@ protocol RootViewOutput: class{
     //router
     func goToSettings()
     func goToReg()
+    func goToDoneChallenge()
     
     //save metods
     func saveTrick(_ trick: Trick, with stab: Int, and dif: Float)
@@ -36,6 +37,7 @@ protocol RootInteractorOutput: class{
 protocol RootRouterInput: class{
     func goToSettings()
     func goToReg()
+    func goToDoneChallenge()
 }
 
 protocol RootInteractorInput {

@@ -137,5 +137,12 @@ extension Date {
         return Calendar.current.component(.month, from: self)
     }
     
+    var string: String{
+        let formatter = DateFormatter()
+        formatter.dateFormat = "dd:MM:yyyy"
+        let string = formatter.string(from: self)
+        return string
+    }
+    
 }
 

@@ -8,11 +8,16 @@
 
 import UIKit
 
-class DoneChalengeVC: UIViewController{
+class DoneChallengeVC: UIViewController{
     
-    private var doneChalange: [Challenge]{
-        return DataManager._shared.doneChallenges.filter{$0.isChallenge}
+    static func show(parent: UIViewController){
+        let vc = DoneChallengeAssembly.configureModule()
+        parent.navigationController?.pushViewController(vc, animated: true)
     }
+    
+    var output: DoneChallemgeViewOutput!
+    
+    private var doneChallange = [Challenge]()
     private var collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewLayout())
     
     override func viewDidLoad() {
@@ -34,7 +39,8 @@ class DoneChalengeVC: UIViewController{
         
         let backLabel = UIButton()
         backLabel.setImage(UIImage(named: "BackIcon"), for: [])
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem(customView: backLabel)//UIBarButtonItem(image: UIImage(named: "BackIcon"), style: .done, target: self, action: #selector(self.goBack))
+        backLabel.addTarget(self, action: #selector(self.goBack), for: .touchUpInside)
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(customView: backLabel)
         
         
         self.collectionView.backgroundColor = .red
@@ -66,27 +72,32 @@ class DoneChalengeVC: UIViewController{
     }
     
     @objc func goBack(){
-        //FIXME: VIPER
-//        self.output.goBack()
-        self.dismiss(animated: true, completion: nil)
+        self.output.goBack()
     }
     
 }
 
-extension DoneChalengeVC: UICollectionViewDataSource, UICollectionViewDelegate{
+extension DoneChallengeVC: DoneChallengeViewInput{
+    func configureView(with challenges: [Challenge]) {
+        self.doneChallange = challenges
+        self.collectionView.reloadData()
+    }
+}
+
+extension DoneChallengeVC: UICollectionViewDataSource, UICollectionViewDelegate{
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         let defaultNumber = Int(self.view.frame.height / 67) * 2
-        return self.doneChalange.count < defaultNumber ? defaultNumber - self.doneChalange.count: self.doneChalange.count
+        return self.doneChallange.count < defaultNumber ? defaultNumber - self.doneChallange.count: self.doneChallange.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        if !self.doneChalange.isEmpty, self.doneChalange.count - 1 >= indexPath.row{
+        if !self.doneChallange.isEmpty, self.doneChallange.count - 1 >= indexPath.row{
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "DoneChallengeCell", for: indexPath) as? DoneChallengeCell
-//            cell!.configure(with: self.doneChalange[indexPath.row])
+            cell!.configure(with: self.doneChallange[indexPath.row])
             return cell!
         }else{
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "EmptyChallengeCell", for: indexPath) as? EmptyChallengeCell
@@ -105,14 +116,14 @@ extension DoneChalengeVC: UICollectionViewDataSource, UICollectionViewDelegate{
     }
 }
 
-extension DoneChalengeVC: UICollectionViewDelegateFlowLayout{
+extension DoneChallengeVC: UICollectionViewDelegateFlowLayout{
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let width = (self.view.frame.size.width - 20 - 33 - 5) / 2
         return CGSize(width: width, height: 67.5)
     }
 }
 
-extension DoneChalengeVC{
+extension DoneChallengeVC{
     class EmptyChallengeCell: UICollectionViewCell{
         
         private var backGroundImageView = UIImageView()
@@ -176,7 +187,7 @@ extension DoneChalengeVC{
     }
 }
 
-extension DoneChalengeVC{
+extension DoneChallengeVC{
     class DoneChallengeCell: UICollectionViewCell{
         
         private var trickLabel = UILabel()
@@ -232,6 +243,11 @@ extension DoneChalengeVC{
             self.borderView.layer.cornerRadius = 6
             self.borderView.layer.borderColor = UIColor.white.cgColor
             self.borderView.layer.borderWidth = 1
+        }
+        
+        fileprivate func configure(with doneChallenge: Challenge){
+            self.trickLabel.text = doneChallenge.trick?.name
+            self.dateLabel.text = doneChallenge.startDate.string
         }
         
         override init(frame: CGRect) {
