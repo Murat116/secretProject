@@ -15,7 +15,9 @@ class RootVCRouter{
 extension RootVCRouter: RootRouterInput{
     func showGameView() {
         let gameView = GameViewAssembly.configureModule(with: self.view.view.frame)
+        gameView.controller = self.view
         self.view.view.addSubview(gameView)
+        
     }
     
     func goToDoneChallenge() {
