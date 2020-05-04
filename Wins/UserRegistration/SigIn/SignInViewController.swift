@@ -61,7 +61,7 @@ class SignInVIewController: UIViewController{
     
     @objc func sigIn(){
         self.isRegistration = !self.isRegistration
-        UIView.animate(withDuration: 0.3) { [unowned self] in
+        UIView.animate(withDuration: 0.3) { [self] in
             self.prepareFieldsForSignIn()
         }
     }
@@ -78,7 +78,7 @@ class SignInVIewController: UIViewController{
     
     @objc func nextVC(btn: UIButton){
         guard self.loginField.isValid else {
-            showSignAlert()
+            showSignAlert(text: "Username doesn't conform rules")
             return
         }
         
@@ -86,11 +86,14 @@ class SignInVIewController: UIViewController{
             guard self.passwordField.isValid, self.confirmationField.isValid,
                 let login = self.loginField.text,
                 let password = self.passwordField.text else {
-                showSignAlert()
+                    showSignAlert(text: "Password doesn't conform rules")
                 return
             }
-            
-            self.output.createUser(login: login, password: password)
+            if self.passwordField.text == self.confirmationField.text {
+                self.output.createUser(login: login, password: password)
+            } else {
+                showSignAlert(text: "Password and confirmation not equal")
+            }
         }else{
             self.output.signIn()
             return
@@ -350,7 +353,7 @@ extension SignInVIewController{
         func checkField() -> Bool{
             switch self.type {
             case .login:
-                let regex = "\\w{7,18}"
+                let regex = "\\w{5,18}"
                 let еest = NSPredicate(format:"SELF MATCHES %@", regex)
                 return еest.evaluate(with: self.text)
             case .password, .confirmation:
@@ -394,9 +397,7 @@ extension SignInVIewController {
         self.view.layoutIfNeeded()
     }
     
-    func showSignAlert() {
-        let alert = UIAlertController (title: "Error!", message: "Fill right all fields", preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "Try again", style: .default, handler: nil))
-        present(alert, animated: true, completion: nil)
+    func showSignAlert(text: String) {
+        self.output.showSignAlert(text: text)
     }
 }

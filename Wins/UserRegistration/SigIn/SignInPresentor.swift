@@ -16,9 +16,14 @@ class SignInPresentor{
     func setUpView(){
         self.view.setUp()
     }
+    
 }
 
 extension SignInPresentor: SignInViewOutput{
+    func showSignAlert(text: String) {
+        self.router.showSignAlert(text: text)
+    }
+    
     func signIn() {
         self.router.signIn()
     }
