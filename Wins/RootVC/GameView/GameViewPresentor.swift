@@ -9,8 +9,6 @@
 import Foundation
 import AVFoundation
 
-let synth = AVSpeechSynthesizer()
-
 class GameViewPresentor{
     weak var view: GameViewViewInput!
     var interactor: GameViewInteractorInput!
@@ -29,11 +27,11 @@ extension GameViewPresentor: GameViewViewOutput{
         guard let trick = trick else { return }
         if speechState {
             let utterance = AVSpeechUtterance(string: trick)
-            utterance.voice = AVSpeechSynthesisVoice(language: "en-GB")
-            utterance.rate = 1
-
-            //let synthesizer = AVSpeechSynthesizer()
-            synth.speak(utterance)
+            //utterance.voice = AVSpeechSynthesisVoice(language: "")
+            utterance.rate = 0.5
+            
+            let synthesizer = AVSpeechSynthesizer()
+            synthesizer.speak(utterance)
         }
     }
     
