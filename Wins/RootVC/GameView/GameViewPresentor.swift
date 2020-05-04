@@ -23,16 +23,8 @@ extension GameViewPresentor: GameViewInteractorOutput{
 }
 
 extension GameViewPresentor: GameViewViewOutput{
-    func speekTrick(trick: String!, speechState: Bool) {
-        guard let trick = trick else { return }
-        if speechState {
-            let utterance = AVSpeechUtterance(string: trick)
-            //utterance.voice = AVSpeechSynthesisVoice(language: "")
-            utterance.rate = 0.5
-            
-            let synthesizer = AVSpeechSynthesizer()
-            synthesizer.speak(utterance)
-        }
+    func speekTrick() {
+        self.view.speekTrick()
     }
     
     func infoTapped() {

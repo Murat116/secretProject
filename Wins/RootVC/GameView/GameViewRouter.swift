@@ -14,7 +14,7 @@ class GameRouter {
 }
 
 extension GameRouter: GameViewRouterInput {
-    func showSpeechInfo() {
+    func showSpeechInfo() {/*
         let infoPopVC = SpeechInfoViewController()
         infoPopVC.modalPresentationStyle = .popover
         
@@ -23,6 +23,6 @@ extension GameRouter: GameViewRouterInput {
         popoverVC?.sourceView = self.view.infoBtn
         popoverVC?.sourceRect = CGRect(x: self.view.infoBtn.bounds.midX, y: self.view.infoBtn.bounds.maxY, width: 0, height: 0)
         infoPopVC.preferredContentSize = CGSize(width: 250, height: 250)
-        RootViewController._shared.present(infoPopVC, animated: true, completion: nil)
+        RootViewController._shared.present(infoPopVC, animated: true, completion: nil)*/
     }
 }
