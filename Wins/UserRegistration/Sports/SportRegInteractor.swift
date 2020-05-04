@@ -18,7 +18,7 @@ class SportRegInteractor{
     }
     
     func isUser() -> Bool {
-        let user = DataManager._shared.getUser()
+        let user = DataManager._shared.user
         if user == nil{
             return false
         }else{
@@ -36,12 +36,13 @@ class SportRegInteractor{
 
 extension SportRegInteractor: SportRegInteractorProtocolInput{
     func saveUserData(with type: SportType) {
-        if DataManager._shared.getUser() != nil{
+        if DataManager._shared.user != nil{
             UserDefaults.standard.set(type.rawValue, forKey: USRDefKeys.sportType)
-            DataManager._shared.createSkateTricks()
+            _ = DataManager._shared.createSkateTricks()
         }else{
             self.saveData()
         }
+        DataManager._shared.addDefaultChalenge()
     }
 
     func saveData() {

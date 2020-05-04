@@ -18,7 +18,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         window = UIWindow(frame: UIScreen.main.bounds)
         
-        let user = DataManager._shared.getUser()
+        let user = DataManager._shared.user
         
         let viewController: UIViewController
         

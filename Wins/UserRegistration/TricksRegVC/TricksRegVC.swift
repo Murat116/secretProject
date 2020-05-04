@@ -73,7 +73,7 @@ extension TricksRegVC: TrickRegViewInput{
     }
     
     func addTrics(number: Int){
-        let tricks = GameView.rundomTrick(tricks: self.tricks, maxNumber: number-1)
+        let tricks = GameViewInteractor.rundomTrick(tricks: self.tricks, maxNumber: number-1)
         for i in 0..<number - 1{
             let trick =  tricks[i]
             let view = TricksRegVC.CheckBoxView(trick: trick, output: self.output)

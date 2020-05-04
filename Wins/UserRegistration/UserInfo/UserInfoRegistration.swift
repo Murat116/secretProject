@@ -111,9 +111,7 @@ extension UserInfoRegistrationVC{
             
             self.addAvatarView(headerBottom: nil)
             
-            if (screenIsBig()){
-                self.addSocialetworks()
-            }
+            self.addSocialetworks()
             
             self.addBtn()
         }else{
@@ -124,10 +122,7 @@ extension UserInfoRegistrationVC{
             
             self.addBtn()
             
-            if (screenIsBig()){
-                self.addSocialetworks()
-            }
-            
+            self.addSocialetworks()
             
         }
         
@@ -239,6 +234,8 @@ extension UserInfoRegistrationVC{
     }
     
     func addSocialetworks(){
+        guard ScreenTheme.isXFormat else { return } //FIXME: Саша посмотри
+        
         self.view.addSubview(socNetLbl)
         self.socNetLbl.translatesAutoresizingMaskIntoConstraints = false
         
@@ -446,7 +443,7 @@ extension UserInfoRegistrationVC: UIImagePickerControllerDelegate, UINavigationC
             self.avatarBtn.setImage(image, for: .normal)
             self.avatarBtn.imageView!.bounds = self.avatarBtn.imageView!.frame
             self.avatarBtn.imageView!.layer.cornerRadius = self.avatarBtn.imageView!.frame.size.width / 2
-            //self.output.setUserImage(image: image)
+            self.output.setUserImage(image: image)
         }
         picker.dismiss(animated: true, completion: nil)
     }
