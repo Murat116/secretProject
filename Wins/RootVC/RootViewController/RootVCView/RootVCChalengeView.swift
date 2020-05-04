@@ -10,12 +10,12 @@ import UIKit
 
 extension RootViewController:  UICollectionViewDelegate, UICollectionViewDataSource{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return DataManager._shared.getUser()?.challenges.count ?? 0
+        return self.challenges.filter{!$0.isDone}.count 
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ChalendgeCell", for: indexPath) as? ChalendgeCell
-        cell!.configure(with: (DataManager._shared.getUser()?.challenges[indexPath.row])!)
+        cell!.configure(with: self.challenges[indexPath.row])
         return cell!
     }
     
@@ -117,7 +117,7 @@ extension RootViewController{
             
             let formatter = DateFormatter()
             formatter.dateFormat = "dd:MM:yyyy"
-            let myStringafd = formatter.string(from: chalenge.date)
+            let myStringafd = formatter.string(from: chalenge.startDate)
             
             if chalenge.isChallenge{
                 self.mainLabel.text =  "Today's lucky trick - \n\(chalenge.trick!.name)"

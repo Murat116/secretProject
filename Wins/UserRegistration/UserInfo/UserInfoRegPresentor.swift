@@ -15,6 +15,7 @@ class UserInfoRegPresentor {
 
 import UIKit
 extension UserInfoRegPresentor: UserInfoRegViewProtocolOutput{
+    
     func saveUserData(with name: String, city: String, age: String, isReg: Bool) {
         self.interactor.saveUserData(with: name, city: city, age: age, isReg: isReg)
     }
@@ -33,9 +34,17 @@ extension UserInfoRegPresentor: UserInfoRegViewProtocolOutput{
     }
     
     func openPhotoPicker() {
-        //открывать фото пикер
+        self.router.openPhotoPicker()
     }
 
+    func openCameraPicker() {
+        self.router.openCameraPicker()
+    }
+    
+    func setUserImage(image: UIImage) {
+        self.interactor.setUserImage(image: image)
+    }
+    
 }
 
 extension UserInfoRegPresentor: UserInfoRegInteractorProtocolOutput{

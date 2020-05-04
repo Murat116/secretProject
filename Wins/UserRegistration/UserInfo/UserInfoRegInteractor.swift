@@ -7,7 +7,7 @@
 //
 
 import Foundation
-
+import UIKit
 
 class UserInfoRegInteractor{
     
@@ -16,7 +16,7 @@ class UserInfoRegInteractor{
     weak var output: UserInfoRegInteractorProtocolOutput!
     
     func getUserData(){
-        self.user = DataManager._shared.getUser()
+        self.user = DataManager._shared.user
         guard let user = self.user else { return }
         self.output.configureView(with: user)
     }
@@ -29,6 +29,10 @@ extension UserInfoRegInteractor: UserInfoRegInteractorProtocolInput{
         dataMng.saveCity(city )
         dataMng.saveAge(Int(age) ?? 0)
         dataMng.saveStand(isReg)
+    }
+    
+    func setUserImage(image: UIImage) {
+        DataManager._shared.saveImage(image)
     }
 }
 

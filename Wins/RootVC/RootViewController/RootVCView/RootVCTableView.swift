@@ -48,30 +48,35 @@ extension RootViewController: UITableViewDelegate, UITableViewDataSource{
             
             let flowLayout = UICollectionViewFlowLayout()
             flowLayout.scrollDirection = .horizontal
+            self.chalengeView.collectionViewLayout = flowLayout
+            self.chalengeView.backgroundColor = UIColor(red: 0.11, green: 0.11, blue: 0.11, alpha: 1)
+            self.chalengeView.showsHorizontalScrollIndicator = false
+            self.chalengeView.showsVerticalScrollIndicator = false
+            self.chalengeView.contentInset = UIEdgeInsets(top: 0, left: 33, bottom: 0, right: 33)
             
-            let chalengeView = UICollectionView(frame: .zero, collectionViewLayout: flowLayout)
-            contentView.addSubview(chalengeView)
-            chalengeView.translatesAutoresizingMaskIntoConstraints = false
-            chalengeView.rightAnchor.constraint(equalTo: contentView.rightAnchor).isActive = true
-            chalengeView.leftAnchor.constraint(equalTo: contentView.leftAnchor).isActive = true
-            chalengeView.topAnchor.constraint(equalTo: contentView.topAnchor).isActive = true
-            chalengeView.heightAnchor.constraint(equalToConstant: 135).isActive = true
+            contentView.addSubview(self.chalengeView)
+            self.chalengeView.translatesAutoresizingMaskIntoConstraints = false
+            self.chalengeView.rightAnchor.constraint(equalTo: contentView.rightAnchor).isActive = true
+            self.chalengeView.leftAnchor.constraint(equalTo: contentView.leftAnchor).isActive = true
+            self.chalengeView.topAnchor.constraint(equalTo: contentView.topAnchor).isActive = true
+            self.chalengeView.heightAnchor.constraint(equalToConstant: 135).isActive = true
             
-            chalengeView.backgroundColor = UIColor(red: 0.11, green: 0.11, blue: 0.11, alpha: 1)
-            chalengeView.showsHorizontalScrollIndicator = false
-            chalengeView.showsVerticalScrollIndicator = false
-            chalengeView.contentInset = UIEdgeInsets(top: 0, left: 33, bottom: 0, right: 33)
+            self.chalengeView.collectionViewLayout = flowLayout
+            self.chalengeView.backgroundColor = UIColor(red: 0.11, green: 0.11, blue: 0.11, alpha: 1)
+            self.chalengeView.showsHorizontalScrollIndicator = false
+            self.chalengeView.showsVerticalScrollIndicator = false
+            self.chalengeView.contentInset = UIEdgeInsets(top: 0, left: 33, bottom: 0, right: 33)
             
-            chalengeView.delegate = self
-            chalengeView.dataSource = self
+            self.chalengeView.delegate = self
+            self.chalengeView.dataSource = self
             
-            chalengeView.register(ChalendgeCell.self, forCellWithReuseIdentifier: "ChalendgeCell")
+            self.chalengeView.register(ChalendgeCell.self, forCellWithReuseIdentifier: "ChalendgeCell")
             
             contentView.addSubview(self.statBtn)
             self.statBtn.translatesAutoresizingMaskIntoConstraints = false
             self.statBtn.leftAnchor.constraint(equalTo: contentView.leftAnchor).isActive = true
             self.statBtn.rightAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
-            self.statBtn.topAnchor.constraint(equalTo: chalengeView.bottomAnchor, constant: 42).isActive = true
+            self.statBtn.topAnchor.constraint(equalTo: self.chalengeView.bottomAnchor, constant: 42).isActive = true
             self.statBtn.heightAnchor.constraint(equalToConstant: 112).isActive = true
 
             self.statBtn.setImage(UIImage(named:"Menu/stat"), for: [])
