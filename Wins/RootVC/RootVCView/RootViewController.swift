@@ -15,7 +15,6 @@ class RootViewController: UIViewController{
     internal var output: RootViewOutput!
     
     private var user: User!
-    internal var tricks = [Trick]()
     internal var lastTenTricks = [Trick]()
 
     internal var challenges = [Challenge]()
@@ -27,8 +26,6 @@ class RootViewController: UIViewController{
     internal var chalengeView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewLayout())
     
     internal var selectedIndex = [IndexPath]()
-    
-    private var gameView = GameView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -59,8 +56,7 @@ class RootViewController: UIViewController{
     }
     
     @objc func goToGame(){
-        self.gameView = GameView(tricks: self.tricks, chalenges: self.challenges, frame: self.view.frame, output: self.output)
-        self.view.addSubview(gameView)
+        self.output.showGameView()
     }
     
 }
@@ -126,7 +122,6 @@ extension RootViewController: RootViewInpit{
         self.user = model
         self.challenges = chalenges
         self.headerView.configure(with: model)
-        self.tricks = Array(model.skateTrick)
         self.lastTenTricks = lastTenTrick
         self.tableView.reloadData()
         self.chalengeView.reloadData()

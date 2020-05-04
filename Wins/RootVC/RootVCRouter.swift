@@ -13,6 +13,11 @@ class RootVCRouter{
 }
 
 extension RootVCRouter: RootRouterInput{
+    func showGameView() {
+        let gameView = GameViewAssembly.configureModule(with: self.view.view.frame)
+        self.view.view.addSubview(gameView)
+    }
+    
     func goToDoneChallenge() {
         DoneChallengeVC.show(parent: view)
     }

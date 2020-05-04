@@ -24,7 +24,7 @@ class RootVCRegAssembly {
         view.headerView.output = presenter
         interactor.locationManager = LocationManager(delegate: interactor)
         
-        interactor.getUserData()
+        interactor.startConfigure()
         
         return view
     }

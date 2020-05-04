@@ -23,7 +23,7 @@ class GameView: UIView{
     private var tricks = [Trick]()
     private var chalenges = [Challenge]()
     
-    private var output: RootViewOutput!
+    internal var output: GameViewViewOutput!
     
     @objc func back(){
         let alert = UIAlertController(title: "U want to stop game?", message: nil, preferredStyle: .actionSheet)
@@ -35,8 +35,26 @@ class GameView: UIView{
     }
     
     @objc func nextTrick(btn: UIButton){
+        
+        let oldTrick = self.tricks[self.trickCount]
+                var stab = oldTrick.stability
+                var dif = oldTrick.complexity
+                if self.noBtn != btn {
+                    stab += 1
+                    dif -= 0.3
+                    
+                    if let challenge = self.chalenges.first(where: {$0.trick?.name == oldTrick.name}){
+                        self.output.isChallengeDone(challenge, done: true)
+                    }
+                }else{
+                    stab -= 1
+                    dif += 0.3
+                }
+                self.output.saveChanges(of: oldTrick, with: dif, and: stab)
+        
         self.trickCount += 1
         guard self.trickCount < 10 else {
+            self.output.recountTechnocalSkill()
             UIView.animate(withDuration: 0.3) {
                 self.removeFromSuperview()
             }
@@ -50,65 +68,23 @@ class GameView: UIView{
         let trick = self.tricks[self.trickCount]
         
         self.trickLabel.text = trick.name
-        
-        let oldTrick = self.tricks[self.trickCount - 1]
-        var stab = oldTrick.stability
-        var dif = oldTrick.complexity
-        if self.noBtn != btn {
-            stab += 1
-            dif -= 0.3
-            
-            if let challenge = self.chalenges.first(where: {$0.trick?.name == oldTrick.name}){
-                self.output.challengeDone(challenge: challenge)
-                self.output.reloaChalanhes()
-            }
-        }else{
-            stab -= 1
-            dif += 0.3
-        }
-        self.output.saveTrick(oldTrick, with: stab, and: dif)
     }
     
     override func willMove(toSuperview newSuperview: UIView?) {
         super.willMove(toSuperview: newSuperview)
-        self.output.recountTechnocalSkill()
-        if newSuperview == nil{
-            self.output.reloadTricks()
-        }
-    }
-    
-    init(tricks: [Trick],chalenges: [Challenge], frame: CGRect, output: RootViewOutput) {
-        super.init(frame: frame)
-        self.tricks = GameView.rundomTrick(tricks: tricks)
-        self.chalenges = chalenges
-        self.setUp()
-        self.output = output
+        guard newSuperview == nil else { return }
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "gameViewWillRemove"), object: nil, userInfo: nil)
     }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-//        self.setUp()
+        self.setUp()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    static func rundomTrick(tricks: [Trick], maxNumber:Int = 10) -> [Trick]{
-        var tri = tricks
-        var tricksForGame = [Trick]()
-        for _ in 1...maxNumber{
-            let i = Int.random(in: 0..<tri.count)
-            let trick = tri[i]
-            tri.remove(at: i)
-            tricksForGame.append(trick)
-        }
-        return tricksForGame
-    }
-}
-
-
-extension GameView{
     func setUp(){
         let blur = UIVisualEffectView(effect: UIBlurEffect(style: .dark))
         self.addSubview(blur)
@@ -137,7 +113,6 @@ extension GameView{
         
         self.trickLabel.font = UIFont.systemFont(ofSize: 36)
         self.trickLabel.textColor = .white
-        self.trickLabel.text = self.tricks[0].name
         
         self.addSubview(self.yesBtn)
         self.yesBtn.translatesAutoresizingMaskIntoConstraints = false
@@ -192,5 +167,13 @@ extension GameView{
         let height = self.yesBtn.frame.maxY - y
         
         playView.frame = CGRect(x: 0, y: y - 20, width: self.frame.width, height: height + 20)
+    }
+}
+
+extension GameView: GameViewViewInput{
+    func configure(with tenTricks: [Trick], _ actualChallenges: [Challenge]) {
+        self.tricks = tenTricks
+        self.trickLabel.text = tenTricks[0].name
+        self.chalenges = actualChallenges
     }
 }
