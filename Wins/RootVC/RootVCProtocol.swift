@@ -7,32 +7,43 @@
 //
 
 protocol RootViewInpit: class {
-    func configure(with model: User?, and lastTenTrick: [Trick])
-    func reloadData(with lastTenTrick: [Trick])
+    func configure(with model: User?, _ chalenges: [Challenge], and lastTenTrick: [Trick])
+    func reload(with chalanges: [Challenge])
+    func reload(with lastTenTrick: [Trick])
+    func reload(with user: User)
 }
 
 protocol RootViewOutput: class{
+    //router
     func goToSettings()
     func goToReg()
-    func saveTrick(_ trick: Trick, with stab: Int, and dif: Float)
-    func reloadData()
-    func recountTechnocalSkill()
+    func goToDoneChallenge()
+    
+    func showGameView()
+    
+    //reloadMetods
 }
 
 protocol RootInteractorOutput: class{
-    func configure(with model: User?, and lastTenTrick: [Trick])
+    func configure(with model: User?,_ chalenges: [Challenge], and lastTenTrick: [Trick])
+    
+    func reload(with chalanges: [Challenge])
+    func reload(with lastTenTrick: [Trick])
+    func reload(with user: User)
 }
 
 protocol RootRouterInput: class{
     func goToSettings()
     func goToReg()
+    func goToDoneChallenge()
+    
+    func showGameView()
 }
 
 protocol RootInteractorInput {
-    func saveTrick(_ trick: Trick, with stab: Int, and dif: Float)
-    func getTricks() -> [Trick]
+    func getLastTenTricks() -> [Trick]
     func getUser() -> User
-    func recountTechnocalSkill()
+    func getChallenges() -> [Challenge]
 }
 
 

@@ -443,7 +443,7 @@ extension UserInfoRegistrationVC: UIImagePickerControllerDelegate, UINavigationC
             self.avatarBtn.setImage(image, for: .normal)
             self.avatarBtn.imageView!.bounds = self.avatarBtn.imageView!.frame
             self.avatarBtn.imageView!.layer.cornerRadius = self.avatarBtn.imageView!.frame.size.width / 2
-            //self.output.setUserImage(image: image)
+            self.output.setUserImage(image: image)
         }
         picker.dismiss(animated: true, completion: nil)
     }

@@ -12,7 +12,7 @@ class StatisticInteractor{
     weak var output: StatInteractorOutput!
     
     func getTricks(){
-        guard let tricks = DataManager._shared.getUser()?.skateTrick else { return }
+        let tricks = DataManager._shared.skateTricks
         let arrOfTricks = Array(tricks)
         
         self.output.configure(with: arrOfTricks)

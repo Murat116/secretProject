@@ -14,14 +14,8 @@ class RootVCPresentor{
 
 
 extension RootVCPresentor: RootViewOutput{
-    func saveTrick(_ trick: Trick, with stab: Int, and dif: Float) {
-        self.interactor.saveTrick(trick, with: stab, and: dif)
-    }
+    //MARK: Router metods
     
-    func recountTechnocalSkill(){
-        self.interactor.recountTechnocalSkill()
-    }
-        
     func goToReg() {
         self.router.goToReg()
     }
@@ -30,19 +24,33 @@ extension RootVCPresentor: RootViewOutput{
         self.router.goToSettings()
     }
     
-}
-
-extension RootVCPresentor: RootInteractorOutput{
-    func reloadData() {
-        let lastTenTrick = self.interactor.getTricks()
-        let user = self.interactor.getUser()
-        self.configure(with: user, and: lastTenTrick)
-        
+    func goToDoneChallenge() {
+        self.router.goToDoneChallenge()
     }
     
-    func configure(with model: User?, and lastTenTrick: [Trick]) {
+    func showGameView() {
+        self.router.showGameView()
+    }
+    
+}
+
+//MARK: Configure
+extension RootVCPresentor: RootInteractorOutput{
+    func reload(with chalanges: [Challenge]) {
+        self.view.reload(with: chalanges)
+    }
+    
+    func reload(with lastTenTrick: [Trick]) {
+        self.view.reload(with: lastTenTrick)
+    }
+    
+    func reload(with user: User) {
+        self.view.reload(with: user)
+    }
+    
+    func configure(with model: User?, _ chalenges: [Challenge], and lastTenTrick: [Trick]) {
         if model != nil{
-            self.view.configure(with: model, and: lastTenTrick)
+            self.view.configure(with: model, chalenges, and: lastTenTrick)
         } else{
             self.goToReg()
         }

@@ -59,11 +59,12 @@ class Challenge: Object {
     dynamic var trick: Trick? = Trick()
     dynamic var boardShop: String = "Without sponsor("
     dynamic var startDate: Date = Date()
-    dynamic var endDate: Date = Date()
+    dynamic var endDate: Date?
     dynamic var sponsorImageData: Data? = nil
     dynamic var descript: String? = ""
 
     dynamic var promocode: String? = nil
+    dynamic var isDone: Bool = false
     
     dynamic var isChallenge: Bool = true
     dynamic var id: String?

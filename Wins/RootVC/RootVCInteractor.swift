@@ -8,6 +8,7 @@
 
 import Foundation
 
+
 class RootVCInteractor{
     weak var output: RootInteractorOutput!
     
@@ -17,37 +18,48 @@ class RootVCInteractor{
     
     func getUserData(){
         self.locationManager.setUp()
-        let user = DataManager._shared.getUser()
-        let lastTricks = self.getTricks()
-        self.output.configure(with: user, and: lastTricks)
+        let user = self.getUser()
+        let challenges = self.getChallenges()
+        let lastTricks = self.getLastTenTricks()
+        self.output.configure(with: user, challenges, and: lastTricks)
+    }
+    
+    func startConfigure(){
+        self.getUserData()
+        self.addNotification()
+    }
+    
+    func addNotification(){
+        NotificationCenter.default.addObserver(self, selector: #selector(reloadData), name: NSNotification.Name(rawValue: "gameViewWillRemove"), object: nil)
+    }
+    
+    @objc func reloadData(){
+        self.output.reload(with: self.getChallenges())
+        self.output.reload(with: self.getLastTenTricks())
+        self.output.reload(with: self.getUser())
     }
     
 }
 extension RootVCInteractor: RootInteractorInput{
-    func recountTechnocalSkill() {
-        let allTricks = self.getUser().skateTrick
-        let doneTrick = allTricks.filter{$0.tries >= 1}
-        var donesDif: Float = 0
-        doneTrick.forEach{donesDif += $0.complexity}
-        
-        var allDif: Float = 0
-        allTricks.forEach{allDif += $0.complexity}
-        
-        let techSkill = donesDif / allDif
-        
-        DataManager._shared.saveTechnikalSkill(techSkill)
+    func challengeDone(challenge: Challenge) {
+        DataManager._shared.saveChallenge(challenge)
     }
     
     func getUser() -> User {
-        return DataManager._shared.getUser()!
+        return DataManager._shared.user!
     }
     
-    func getTricks() -> [Trick] {
+    func getChallenges() -> [Challenge]{
+        let chalanges = DataManager._shared.actualChallenges
+        return chalanges
+    }
+    
+    func getLastTenTricks() -> [Trick] {
         let user = self.getUser()
         var lastTenTrick = DataManager._shared.lastTenTrick
         if lastTenTrick.isEmpty{
             let tricks = user.skateTrick 
-            lastTenTrick = GameView.rundomTrick(tricks: Array(tricks))
+            lastTenTrick = GameViewInteractor.rundomTrick(tricks: Array(tricks))
             var lastTenTrickID = [String]()
             lastTenTrick.forEach { (trick) in
                 lastTenTrickID.append(trick.name)
@@ -68,7 +80,7 @@ extension RootVCInteractor: RootInteractorInput{
 
 extension RootVCInteractor: LocationDelegate{
     func someError(error: Error?) {
-        print(error)
+        print(error!)
     }
     
     func updateLocation(with region: String?) {
