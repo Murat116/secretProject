@@ -7,11 +7,14 @@
 //
 
 import Foundation
+import AVFoundation
+
+let synth = AVSpeechSynthesizer()
 
 class GameViewPresentor{
     weak var view: GameViewViewInput!
     var interactor: GameViewInteractorInput!
-    
+    var router: GameViewRouterInput!
     
 }
 
@@ -22,6 +25,22 @@ extension GameViewPresentor: GameViewInteractorOutput{
 }
 
 extension GameViewPresentor: GameViewViewOutput{
+    func speekTrick(trick: String!, speechState: Bool) {
+        guard let trick = trick else { return }
+        if speechState {
+            let utterance = AVSpeechUtterance(string: trick)
+            utterance.voice = AVSpeechSynthesisVoice(language: "en-GB")
+            utterance.rate = 1
+
+            //let synthesizer = AVSpeechSynthesizer()
+            synth.speak(utterance)
+        }
+    }
+    
+    func infoTapped() {
+        self.router.showSpeechInfo()
+    }
+    
     func recountTechnocalSkill() {
         self.interactor.recountTechnocalSkill()
     }
