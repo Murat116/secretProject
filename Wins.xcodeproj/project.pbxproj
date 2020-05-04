@@ -303,6 +303,14 @@
 			isa = PBXGroup;
 			children = (
 				5C8B66EB246018D8000AFAEE /* GameView */,
+				5CCD758E24603F0A00608906 /* RootViewController */,
+			);
+			path = RootVC;
+			sourceTree = "<group>";
+		};
+		5CCD758E24603F0A00608906 /* RootViewController */ = {
+			isa = PBXGroup;
+			children = (
 				5C7895FA244BB8D800410A37 /* RootVCView */,
 				5C7895F2244B599B00410A37 /* RootVCPresentor.swift */,
 				5C7895F4244B791B00410A37 /* RootVCInteractor.swift */,
@@ -310,7 +318,7 @@
 				5C7895EE244B554B00410A37 /* RootVCProtocol.swift */,
 				5C7895F0244B580A00410A37 /* RootVCAssembly.swift */,
 			);
-			path = RootVC;
+			path = RootViewController;
 			sourceTree = "<group>";
 		};
 		5CD39E34244222EC0053896E /* Model */ = {
