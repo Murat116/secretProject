@@ -172,39 +172,45 @@ class GameView: UIView{
         self.progressBar.backgroundColor = UIColor(hex: "C4C4C4")
     
         self.addSubview(self.speechSwitch)
-        self.speechSwitch.onTintColor = UIColor(hex: "214FEF")
         self.speechSwitch.translatesAutoresizingMaskIntoConstraints = false
         self.speechSwitch.topAnchor.constraint(equalTo: self.noBtn.bottomAnchor, constant: 28).isActive = true
         self.speechSwitch.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -33).isActive = true
+        
+        self.speechSwitch.onTintColor = UIColor(hex: "214FEF")
         self.speechSwitch.isOn = true
+        
         
         self.addSubview(self.infoBtn)
         self.infoBtn.translatesAutoresizingMaskIntoConstraints = false
-        self.infoBtn.addTarget(self, action: #selector(self.infoTapped), for: .touchUpInside)
         self.infoBtn.topAnchor.constraint(equalTo: self.noBtn.bottomAnchor, constant: 28).isActive = true
         self.infoBtn.rightAnchor.constraint(equalTo: self.speechSwitch.leftAnchor, constant: -13).isActive = true
+        self.infoBtn.heightAnchor.constraint(equalTo: self.speechSwitch.heightAnchor, constant: 0).isActive = true
+        self.infoBtn.widthAnchor.constraint(equalTo: self.speechSwitch.heightAnchor, constant: 0).isActive = true
+        
+        self.infoBtn.addTarget(self, action: #selector(self.infoTapped), for: .touchUpInside)
+        
+        self.infoBtn.tintColor = UIColor(hex: "FFFFFF")
         self.infoBtn.setTitle("?", for: .normal)
         self.infoBtn.setTitleColor(UIColor(hex: "909090"), for: .normal)
         self.infoBtn.setBackgroundImage(UIImage(systemName: "circle.fill"), for: .normal)
-        self.infoBtn.heightAnchor.constraint(equalTo: self.speechSwitch.heightAnchor, constant: 0).isActive = true
-        self.infoBtn.widthAnchor.constraint(equalTo: self.speechSwitch.heightAnchor, constant: 0).isActive = true
-        self.infoBtn.tintColor = UIColor(hex: "FFFFFF")
+        
         
         self.addSubview(self.speechLabel)
         self.speechLabel.translatesAutoresizingMaskIntoConstraints = false
         self.speechLabel.topAnchor.constraint(equalTo: self.speechSwitch.topAnchor, constant: 0).isActive = true
         self.speechLabel.rightAnchor.constraint(equalTo: self.infoBtn.leftAnchor, constant: -15).isActive = true
         self.speechLabel.centerYAnchor.constraint(equalTo: self.infoBtn.centerYAnchor, constant: 0).isActive = true
+        
         self.speechLabel.text = "Speech control"
         self.speechLabel.textColor = UIColor(hex: "909090")
         self.speechLabel.font = UIFont.systemFont(ofSize: 14)
         
         self.layoutIfNeeded()
 
-        let y = self.trickCountLabel.frame.origin.y
-        let height = self.yesBtn.frame.maxY - y
+        let y = self.progressBar.frame.origin.y
+        let height = self.speechLabel.frame.maxY
         
-        playView.frame = CGRect(x: 0, y: y - 20, width: self.frame.width, height: height + 20)
+        playView.frame = CGRect(x: 0, y: y - 20, width: self.frame.width, height: height + 40 - y)
     }
 }
 
@@ -218,7 +224,29 @@ extension GameView: GameViewViewInput{
     }
     
     @objc func infoTapped() {
-        self.output.infoTapped()
+        let popover = UIViewController()
+        let label = UILabel()
+        label.frame = CGRect(x: 10, y: 10, width: 300, height: 60)
+        label.text = "Говорите Done и Fail и управляйте\nигрой не нажимая кнопки"
+        label.lineBreakMode = .byWordWrapping
+        label.numberOfLines = 2
+        label.textColor = .white
+        popover.view.addSubview(label)
+        
+        popover.modalPresentationStyle = .popover
+        popover.preferredContentSize = CGSize(width: 300, height: 60)
+        let popoverVC = popover.popoverPresentationController
+        popoverVC?.delegate = self
+        
+        popoverVC?.sourceView = self.infoBtn
+        popoverVC?.permittedArrowDirections = .up
+        var frame = CGRect.zero
+        frame.origin.x = self.infoBtn.frame.width / 2
+        frame.origin.y = self.infoBtn.frame.height + 10
+        popoverVC?.sourceRect = frame
+        
+        RootViewController._shared.present(popover, animated: true)
+//        self.output.infoTapped()
     }
 }
 
@@ -235,4 +263,21 @@ extension GameView {
             synthesizer.speak(utterance)
         }
     }
+}
+
+extension GameView: UIPopoverPresentationControllerDelegate{
+    //UIPopoverPresentationControllerDelegate inherits from UIAdaptivePresentationControllerDelegate, we will use this method to define the presentation style for popover presentation controller
+    func adaptivePresentationStyle(for controller: UIPresentationController) -> UIModalPresentationStyle {
+        return .none
+    }
+    
+    //UIPopoverPresentationControllerDelegate
+    func popoverPresentationControllerDidDismissPopover(_ popoverPresentationController: UIPopoverPresentationController) {
+        
+    }
+    
+    func popoverPresentationControllerShouldDismissPopover(_ popoverPresentationController: UIPopoverPresentationController) -> Bool {
+        return true
+    }
+    
 }
