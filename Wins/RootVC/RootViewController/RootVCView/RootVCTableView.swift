@@ -78,8 +78,9 @@ extension RootViewController: UITableViewDelegate, UITableViewDataSource{
             self.statBtn.rightAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
             self.statBtn.topAnchor.constraint(equalTo: self.chalengeView.bottomAnchor, constant: 42).isActive = true
             self.statBtn.heightAnchor.constraint(equalToConstant: 112).isActive = true
-
-            self.statBtn.setImage(UIImage(named:"Menu/stat"), for: [])
+            
+            let statImage = UIImage(named:"Menu/stat")
+            self.statBtn.setImage(statImage, for: [])
             
             self.statBtn.addTarget(self, action: #selector(self.goToStatiscits), for: .touchUpInside)
             
@@ -100,7 +101,8 @@ extension RootViewController: UITableViewDelegate, UITableViewDataSource{
             self.gameBtn.rightAnchor.constraint(equalTo: contentView.rightAnchor).isActive = true
             self.gameBtn.leftAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
 
-            self.gameBtn.setImage(UIImage(named:"Menu/game"), for: .normal)
+            let imageGame = UIImage(named:"Menu/game")
+            self.gameBtn.setImage(imageGame, for: .normal)
             
             self.gameBtn.addTarget(self, action: #selector(self.goToGame), for: .touchUpInside)
             
@@ -135,7 +137,7 @@ extension RootViewController: UITableViewDelegate, UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         if section == 0{
-            return 250
+            return 260
         }else{
             return 100
         }
