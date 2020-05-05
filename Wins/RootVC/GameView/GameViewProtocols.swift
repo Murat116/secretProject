@@ -10,7 +10,6 @@ import Foundation
 
 protocol GameViewViewInput: class{
     func configure(with tenTricks: [Trick],_ actualChallenges: [Challenge])
-    func openInfo()
     func speekTrick()
 }
 
@@ -30,8 +29,4 @@ protocol GameViewInteractorInput: class{
     func saveChanges(of trick: Trick, with dif: Float, and stab: Int)
     func isChallengeDone(_ challenge: Challenge, done: Bool)
     func recountTechnocalSkill()
-}
-
-protocol GameViewRouterInput: class {
-    func showSpeechInfo()
 }

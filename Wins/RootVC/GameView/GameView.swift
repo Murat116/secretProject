@@ -14,8 +14,6 @@ class GameView: UIView{
     private var yesBtn = UIButton()
     private var noBtn = UIButton()
     
-   // weak var delegate: showPopoverDelegate?
-    
     weak var controller: RootViewController!
     
     private var infoBtn = UIButton()
@@ -211,9 +209,6 @@ class GameView: UIView{
 }
 
 extension GameView: GameViewViewInput{
-    func openInfo() {
-        print("tapped")
-    }
     
     func configure(with tenTricks: [Trick], _ actualChallenges: [Challenge]) {
         self.tricks = tenTricks
@@ -223,7 +218,6 @@ extension GameView: GameViewViewInput{
     }
     
     @objc func infoTapped() {
-        //delegate?.willPresentingViewController()
         self.output.infoTapped()
     }
 }
@@ -241,23 +235,4 @@ extension GameView {
             synthesizer.speak(utterance)
         }
     }
-    
-    func openPopover() {
-        let infoPopVC = SpeechInfoViewController()
-        
-        infoPopVC.modalPresentationStyle = .popover
-        
-        let popoverVC = infoPopVC.popoverPresentationController
-        popoverVC?.delegate = self.controller
-        popoverVC?.sourceView = self.infoBtn
-        popoverVC?.sourceRect = CGRect (x: self.infoBtn.bounds.midX, y: self.infoBtn.bounds.maxY, width: 0, height: 0)
-        infoPopVC.preferredContentSize = CGSize (width: 250, height: 250)
-        controller.present(infoPopVC, animated: true)
-    }
 }
-
-/*
-protocol showPopoverDelegate: class {
-    func willPresentingViewController()
-}
-*/
