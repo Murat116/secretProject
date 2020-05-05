@@ -10,12 +10,14 @@ import CoreLocation
 import UserNotifications
 import UIKit
 
-protocol LocationDelegate: class{
+protocol LocationDelegate: class {
+    
     func someError(error: Error?)
     func updateLocation(with region: String?)
 }
 
-class LocationManager: NSObject{
+class LocationManager: NSObject {
+    
     var locationManager = CLLocationManager()
     
     weak var locationDelegate: LocationDelegate!
@@ -28,24 +30,26 @@ class LocationManager: NSObject{
         self.locationManager.desiredAccuracy = kCLLocationAccuracyThreeKilometers
         
         self.locationManager.requestWhenInUseAuthorization()
-        //
+        
         //        self.locationManager.requestLocation()
         
         self.locationManager.delegate = self
-        //
+        
         guard CLLocationManager.locationServicesEnabled() else { return  }
-        //
+        
         self.locationManager.startUpdatingLocation()
         
     }
 }
 
 extension LocationManager: CLLocationManagerDelegate{
+    
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         print(error)
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        
         DispatchQueue.global(qos: .userInteractive).async{
             guard let location = locations.first else {
                 self.locationDelegate.someError(error: nil)
@@ -67,7 +71,8 @@ extension LocationManager: CLLocationManagerDelegate{
 }
 
 
-enum LocationGetStatus{
+enum LocationGetStatus {
+    
     case locationIsGetting
     case error
 }

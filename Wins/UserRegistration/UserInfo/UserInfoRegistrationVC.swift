@@ -8,9 +8,9 @@
 
 import UIKit
 
-class UserInfoRegistrationVC: UIViewController{
+class UserInfoRegistrationVC: UIViewController {
 
-    static func show(parent: UIViewController){
+    static func show(parent: UIViewController) {
         let instanse = UserInfoRegistrationAssembly.configureModule()
         instanse.isRegistration = parent is SportsRegVC
         parent.present(instanse, animated: true, completion: nil)
@@ -19,7 +19,6 @@ class UserInfoRegistrationVC: UIViewController{
     //----------------------------------------------------------------------
     
     var output: UserInfoRegViewProtocolOutput!
-    
     
     var isRegistration: Bool = true
     
@@ -36,7 +35,7 @@ class UserInfoRegistrationVC: UIViewController{
     //----------------------------------------------------------------------
 
     var image: UIImage? = UIImage(named: "Registration/avatar")?.withRenderingMode(.alwaysTemplate) {
-        didSet{
+        didSet {
             self.avatarBtn.setImage(self.image, for: .normal)
         }
     }
@@ -76,7 +75,8 @@ class UserInfoRegistrationVC: UIViewController{
     }
 }
 
-extension UserInfoRegistrationVC: UserInfoRegViewProtocolInput{
+extension UserInfoRegistrationVC: UserInfoRegViewProtocolInput {
+    
     func configureView(with user: User) {
         self.user = user
         
@@ -86,9 +86,9 @@ extension UserInfoRegistrationVC: UserInfoRegViewProtocolInput{
         
         self.stand.selectedSegmentIndex = user.standIsRegular ? 0 : 1
         
-        if let imageData = user.avatarImageData{
+        if let imageData = user.avatarImageData {
             self.image = UIImage(data: imageData)?.withRenderingMode(.alwaysTemplate)
-        }else{
+        } else {
             self.image = UIImage(named: "Registration/avatar")?.withRenderingMode(.alwaysTemplate)
         }
         
@@ -99,13 +99,14 @@ extension UserInfoRegistrationVC: UserInfoRegViewProtocolInput{
     }
 }
 
-extension UserInfoRegistrationVC{
+extension UserInfoRegistrationVC {
+    
     func setUpUI(){
         self.navigationController?.navigationBar.isHidden = true
         self.view.backgroundColor = UIColor(red: 0.11, green: 0.11, blue: 0.11, alpha: 1)
         
         //Сделанно с точки зрения читабельности View
-        if self.isRegistration{
+        if self.isRegistration {
             let bottom = self.addHeader()
             self.addUsersFiled(topAnchor: bottom)
             
@@ -114,7 +115,7 @@ extension UserInfoRegistrationVC{
             self.addSocialetworks()
             
             self.addBtn()
-        }else{
+        } else {
             let bottom = self.addHeader()
             self.addAvatarView(headerBottom: bottom)
             
@@ -139,7 +140,7 @@ extension UserInfoRegistrationVC{
         if self.isRegistration{
             let header = RegHeaderView(step: .userInfo, parentView: self.view)
             return header.bottomAnchor
-        }else{
+        } else {
             let label  = UILabel()
             self.view.addSubview(label)
             label.translatesAutoresizingMaskIntoConstraints = false
@@ -151,10 +152,10 @@ extension UserInfoRegistrationVC{
             
             return label.bottomAnchor
         }
-        
     }
     
-    func addUsersFiled(topAnchor: NSLayoutYAxisAnchor){
+    func addUsersFiled(topAnchor: NSLayoutYAxisAnchor) {
+        
         self.textFiledSetUp(field: self.nameField, with: topAnchor , constant: 30, and: .name)
         self.textFiledSetUp(field: self.cityFiled, with: self.nameField.bottomAnchor, and: .city)
         self.textFiledSetUp(field: self.ageField, with: self.cityFiled.bottomAnchor, and: .age)
@@ -182,7 +183,7 @@ extension UserInfoRegistrationVC{
         self.stand.heightAnchor.constraint(equalTo: self.ageField.heightAnchor).isActive = true
     }
     
-    @objc func addAvatarBtnIsSelected(){
+    @objc func addAvatarBtnIsSelected() {
         self.output.openPhotoPicker()
     }
     
@@ -190,22 +191,25 @@ extension UserInfoRegistrationVC{
         self.output.openCameraPicker()
     }
     
-    func addAvatarView(headerBottom: NSLayoutYAxisAnchor?){
+    func addAvatarView(headerBottom: NSLayoutYAxisAnchor?) {
+        
         self.view.addSubview(self.avatarBtn)
         self.avatarBtn.addTarget(self, action: #selector(avatarBtnIsSelected), for: .touchUpInside)
         self.avatarBtn.translatesAutoresizingMaskIntoConstraints = false
         self.avatarBtn.leftAnchor.constraint(equalTo: self.view.leftAnchor, constant: 33).isActive = true
-        if self.isRegistration{
+        
+        if self.isRegistration {
+            
             self.avatarBtn.topAnchor.constraint(equalTo: self.stand.bottomAnchor, constant: 26).isActive = true
             self.avatarBtn.heightAnchor.constraint(equalToConstant: 60).isActive = true
             self.avatarBtn.widthAnchor.constraint(equalTo: self.avatarBtn.heightAnchor).isActive = true
         } else {
+            
             self.avatarBtn.topAnchor.constraint(equalTo: headerBottom!, constant: 37).isActive = true
             let height = self.avatarBtn.heightAnchor.constraint(equalToConstant: 80)
             height.isActive = true
             let  width = self.avatarBtn.widthAnchor.constraint(equalTo: self.avatarBtn.heightAnchor)
             width.isActive = true
-            
         }
         
         self.avatarBtn.layer.borderWidth = 1
@@ -233,8 +237,9 @@ extension UserInfoRegistrationVC{
         self.addAvatarBtn.setAttributedTitle(buttonTitleStr, for: .normal)
     }
     
-    func addSocialetworks(){
-        guard ScreenTheme.isXFormat else { return } //FIXME: Саша посмотри Посмотрел, понято
+    func addSocialetworks() {
+        
+        guard ScreenTheme.isXFormat else { return }
         
         self.view.addSubview(socNetLbl)
         self.socNetLbl.translatesAutoresizingMaskIntoConstraints = false
@@ -242,7 +247,7 @@ extension UserInfoRegistrationVC{
         self.socNetLbl.leftAnchor.constraint(equalTo: self.avatarBtn.leftAnchor).isActive = true
         if self.isRegistration{
             self.socNetLbl.topAnchor.constraint(equalTo: self.avatarBtn.bottomAnchor, constant: 32).isActive = true
-        }else{
+        } else {
             self.socNetLbl.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor, constant: -20).isActive  = true
         }
         
@@ -293,8 +298,10 @@ extension UserInfoRegistrationVC{
         self.faceBtn.tintColor = .white
     }
     
-    @objc func openInst(){
+    @objc func openInst() {
+        
         let alert = UIAlertController(title: "While you can’t add your social network, but you can subscribe to us", message: nil, preferredStyle: .alert)
+        
         alert.addAction(UIAlertAction(title: "Let's go", style: .default, handler: { (_) in
             let instagramHooks = "instagram.com/wins_app?igshid=uc289nm1r62l"
             let instagramUrl = URL(string: instagramHooks)
@@ -305,19 +312,22 @@ extension UserInfoRegistrationVC{
                 UIApplication.shared.open(URL(string: "http://instagram.com/")!)
             }
         }))
+        
         alert.addAction(UIAlertAction(title: "Maybe later", style: .cancel, handler: nil))
         self.output.openAlert(alert: alert)
     }
     
-    func addBtn(){
+    func addBtn() {
+        
         self.view.addSubview(self.nextVcBtn)
         self.nextVcBtn.translatesAutoresizingMaskIntoConstraints = false
         
         self.nextVcBtn.rightAnchor.constraint(equalTo: self.view.rightAnchor, constant: -33).isActive = true
         self.nextVcBtn.leftAnchor.constraint(equalTo: self.view.leftAnchor, constant:  33).isActive = true
+        
         if self.isRegistration{
             self.nextVcBtn.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor).isActive = true
-        }else{
+        } else {
             self.nextVcBtn.topAnchor.constraint(equalTo: self.stand.bottomAnchor, constant: 18).isActive = true
         }
         self.nextVcBtn.heightAnchor.constraint(equalToConstant: 56).isActive = true
@@ -335,20 +345,22 @@ extension UserInfoRegistrationVC{
     }
     
     @objc func nextVC(){
-        if self.isRegistration{
+        
+        if self.isRegistration {
             self.output.openNextStep()
-        }else{
+        } else {
             self.output.openSportVC()
         }
     }
 
-    @objc func hideKeyboard(){
+    @objc func hideKeyboard() {
         self.nameField.resignFirstResponder()
         self.cityFiled.resignFirstResponder()
         self.ageField.resignFirstResponder()
     }
 
-    func textFiledSetUp(field: UserField, with top: NSLayoutYAxisAnchor,constant: CGFloat = 15, and type: TextFiledType){
+    func textFiledSetUp(field: UserField, with top: NSLayoutYAxisAnchor,constant: CGFloat = 15, and type: TextFiledType) {
+        
         self.view.addSubview(field)
         field.translatesAutoresizingMaskIntoConstraints = false
         
@@ -361,15 +373,17 @@ extension UserInfoRegistrationVC{
     }
 }
 
-extension UserInfoRegistrationVC{
-    class SocialNetWorkView: UIView{
-        //потом напиать нормально
+extension UserInfoRegistrationVC {
+    class SocialNetWorkView: UIView {
+        //потом напиcать нормально
     }
 }
 
-extension UserInfoRegistrationVC{
-    class UserField: UITextField{
-        func configure(type: TextFiledType){
+extension UserInfoRegistrationVC {
+    
+    class UserField: UITextField {
+        func configure(type: TextFiledType) {
+            
             let attributes: [NSAttributedString.Key : Any] = [.font : UIFont.systemFont(ofSize: 18), .foregroundColor : UIColor(red: 0.314, green: 0.314, blue: 0.314, alpha: 1)]
             let attributedString = NSAttributedString(string: type.rawValue, attributes: attributes)
             self.attributedPlaceholder = attributedString
@@ -388,12 +402,13 @@ extension UserInfoRegistrationVC{
         }
     }
 
-    enum TextFiledType: String{
+    enum TextFiledType: String {
+        
         case name = "Your name"
         case city = "Your city"
         case age = "Your age"
 
-        var keyboardType: UIKeyboardType{
+        var keyboardType: UIKeyboardType {
             switch self {
             case .name:
                 return .namePhonePad
@@ -406,7 +421,7 @@ extension UserInfoRegistrationVC{
     }
 }
 
-enum SocialNetWork: Int{
+enum SocialNetWork: Int {
     case instagram = 0
     case facebook
     case twiter
@@ -415,14 +430,14 @@ enum SocialNetWork: Int{
 extension UserInfoRegistrationVC: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     func showCameraPicker() {
+        
         if(UIImagePickerController .isSourceTypeAvailable(UIImagePickerController.SourceType.camera)) {
             let imagePickerController = UIImagePickerController()
             imagePickerController.delegate = self
             imagePickerController.sourceType = UIImagePickerController.SourceType.camera
             imagePickerController.allowsEditing = true
             self.present(imagePickerController, animated: true, completion: nil)
-        }
-        else {
+        } else {
             let alert = UIAlertController(title: "Error", message: "Sorry, you don't have camera", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "Cancel", style: .default, handler: nil))
             self.present(alert, animated: true, completion: nil)
@@ -430,21 +445,26 @@ extension UserInfoRegistrationVC: UIImagePickerControllerDelegate, UINavigationC
     }
     
     func showImagePicker() {
+        
         let imagePickerController = UIImagePickerController()
+        
         imagePickerController.delegate = self
         imagePickerController.sourceType = UIImagePickerController.SourceType.photoLibrary
         imagePickerController.allowsEditing = true
+        
         self.present(imagePickerController, animated: true, completion: nil)
     }
     
     func imagePickerController(_ picker: UIImagePickerController,
         didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
+        
         if let image = info[.editedImage] as? UIImage {
             self.avatarBtn.setImage(image, for: .normal)
             self.avatarBtn.imageView!.bounds = self.avatarBtn.imageView!.frame
             self.avatarBtn.imageView!.layer.cornerRadius = self.avatarBtn.imageView!.frame.size.width / 2
             self.output.setUserImage(image: image)
         }
+        
         picker.dismiss(animated: true, completion: nil)
     }
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {

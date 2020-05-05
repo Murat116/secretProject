@@ -7,13 +7,13 @@
 //
 import UIKit
 
-class SportRegRouter{
+class SportRegRouter {
     
     weak var view: SportsRegVC!
-        
 }
 
-extension SportRegRouter: SportRegRouterProtocolInput{
+extension SportRegRouter: SportRegRouterProtocolInput {
+    
     func showAlert(alert: UIAlertController) {
         self.view.present(alert, animated: true, completion: nil)
     }

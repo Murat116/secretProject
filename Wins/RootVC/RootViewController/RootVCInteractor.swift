@@ -46,7 +46,10 @@ extension RootVCInteractor: RootInteractorInput{
     }
     
     func getUser() -> User {
-        return DataManager._shared.user!
+        
+        let user = DataManager._shared.user!
+        
+        return user
     }
     
     func getChallenges() -> [Challenge]{
@@ -74,7 +77,7 @@ extension RootVCInteractor: RootInteractorInput{
         arrTricks.removeFirst()
         arrTricks.append(trick)
         DataManager._shared.lastTenTrick = arrTricks
-        DataManager._shared.saveTrik(trick: trick, stab: stab, dif: dif)
+        DataManager._shared.saveTrick(trick: trick, stab: stab, dif: dif)
     }
 }
 

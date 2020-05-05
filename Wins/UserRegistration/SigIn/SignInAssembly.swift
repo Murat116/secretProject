@@ -8,8 +8,9 @@
 
 import Foundation
 
-class SignInAssembly{
-    class func configureModule() -> SignInVIewController{
+class SignInAssembly {
+    class func configureModule() -> SignInVIewController {
+        
         let view = SignInVIewController()
         
         let presentor = SignInPresentor()

@@ -33,7 +33,7 @@ class GameViewInteractor{
 
 extension GameViewInteractor: GameViewInteractorInput{
     func saveChanges(of trick: Trick, with dif: Float, and stab: Int) {
-        DataManager._shared.saveTrik(trick: trick, stab: stab, dif: dif)
+        DataManager._shared.saveTrick(trick: trick, stab: stab, dif: dif)
     }
     
     func isChallengeDone(_ challenge: Challenge, done: Bool) {

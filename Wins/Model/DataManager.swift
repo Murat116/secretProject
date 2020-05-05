@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import  RealmSwift
+import RealmSwift
 
 protocol DataManagerProtocol{
     
@@ -28,29 +28,30 @@ class DataManager: DataManagerProtocol {
         }
     }
     
-    var user: User?{
+    var user: User? {
         let user = self.realm?.objects(User.self).first
         return user
     }
     
-    var skateTricks: [Trick]{
+    var skateTricks: [Trick] {
         guard let skateTricks = self.realm?.objects(Trick.self) else {
             return self.createSkateTricks()
         }
         return Array(skateTricks)
     }
     
-    var allChallanges: [Challenge]{
+    var allChallanges: [Challenge] {
+        
         guard let chalanges = self.realm?.objects(Challenge.self) else { return []}
         let arrayOfChalenges = chalanges.sorted{$0.startDate > $1.startDate}
         return arrayOfChalenges
     }
     
-    var actualChallenges: [Challenge]{
+    var actualChallenges: [Challenge] {
         return self.allChallanges.filter{!$0.isDone}
     }
     
-    var doneChallenges: [Challenge]{
+    var doneChallenges: [Challenge] {
         return self.allChallanges.filter{$0.isDone}
     }
     
@@ -82,7 +83,7 @@ class DataManager: DataManagerProtocol {
     
     private init() {}
     
-    func saveTrik(trick: Trick,stab: Int, dif: Float){
+    func saveTrick(trick: Trick,stab: Int, dif: Float) {
         do {
             guard let realm = self.realm else { return }
             let total = trick.tries + 1
@@ -150,7 +151,8 @@ extension DataManager {
         
     }
     
-    func addDefaultChalenge(){
+    func addDefaultChalenge() {
+        
         let kickflipChalenge = Challenge()
         let trick = self.skateTricks.first{ $0.name == "KickFlip"}
         kickflipChalenge.trick = trick
@@ -166,14 +168,14 @@ extension DataManager {
         turnamentPreview.isChallenge = false
         
         guard let realm = self.realm else { return }
-        do{
+        do {
             try realm.write{
                 realm.add(kickflipChalenge)
                 realm.add(turnamentPreview)
                 self.user?.challenges.append(kickflipChalenge)
                 self.user?.challenges.append(turnamentPreview)
             }
-        }catch{
+        } catch {
             print(error.localizedDescription, "error in create default chalenge")
         }
         
@@ -224,7 +226,7 @@ extension DataManager {
     }
     
     func saveCity(_ city: String) {
-        do{
+        do {
             guard let realm = self.realm,
                 let user = self.user else { return }
             
@@ -281,26 +283,26 @@ extension DataManager {
         }
     }
     
-    func saveImage(_ image: UIImage){
+    func saveImage(_ image: UIImage) {
         guard let realm = self.realm,
             let user = self.user,
             let data = image.pngData() else { return }
-        do{
-            try realm.write{
+        do {
+            try realm.write {
                 user.avatarImageData = data
             }
-        }catch{
+        } catch {
             print(error.localizedDescription, "error in saving User image")
         }
     }
     
-    func saveChallenge(_ challenge: Challenge){
+    func saveChallenge(_ challenge: Challenge) {
         guard let realm = self.realm else { return }
-        do{
+        do {
             try realm.write{
                 challenge.isDone = true
             }
-        }catch{
+        } catch {
             print(error.localizedDescription, "error in saving User image")
         }
     }

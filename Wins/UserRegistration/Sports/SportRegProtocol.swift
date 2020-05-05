@@ -12,23 +12,23 @@ import UIKit
     func configure(with sportType: SportType, isUser: Bool)
 }
 
-internal protocol SportRegInteractorProtocolInput: class{
+internal protocol SportRegInteractorProtocolInput: class {
     func saveUserData(with type: SportType)
 }
 
-internal protocol SportRegViewProtocolInput: class{
+internal protocol SportRegViewProtocolInput: class {
     func setUP()
     func configure(with type: SportType,and isUser: Bool)
     var isUser: Bool { get set }
 }
 
-internal protocol SportRegViewProtocolOutput: class{
+internal protocol SportRegViewProtocolOutput: class {
     func sportIsSelected(with type: SportType)
     func showAlert(alert: UIAlertController)
 }
 
 
-internal protocol SportRegRouterProtocolInput: class{
+internal protocol SportRegRouterProtocolInput: class {
     func nextView()
     func endRegistration()
     func dismiss()

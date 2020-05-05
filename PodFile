@@ -3,4 +3,5 @@ use_frameworks!
 
 target 'Wins' do
   pod 'RealmSwift', '>= 4.4.0'
+  pod 'Alamofire', '~> 5.1'
 end
