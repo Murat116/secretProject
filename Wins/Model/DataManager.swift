@@ -42,8 +42,10 @@ class DataManager: DataManagerProtocol {
     
     var allChallanges: [Challenge]{
         guard let chalanges = self.realm?.objects(Challenge.self) else { return []}
-        let arrayOfChalenges = chalanges.sorted{$0.startDate > $1.startDate}
-        return arrayOfChalenges
+        let arrayOfChalenges = chalanges.filter{$0.isChallenge}.sorted{$0.startDate >  $1.startDate}
+        let arrayOfTurnament = chalanges.filter{!$0.isChallenge}.sorted{$0.startDate > $1.startDate}
+        let array = arrayOfChalenges + arrayOfTurnament
+        return array
     }
     
     var actualChallenges: [Challenge]{
@@ -189,10 +191,10 @@ extension DataManager {
         
         guard let realm = self.realm,
             let user = self.user else { return }
-        
+        let skilToSave = round(skill / 0.01) * 0.01
         do {
             try realm.write {
-                user.totalStats?.technicality = skill
+                user.totalStats?.technicality = skilToSave
             }
         } catch {
             print(error.localizedDescription, "error in saving User technicality")
