@@ -13,6 +13,14 @@ class GameView: UIView{
     private var yesBtn = UIButton()
     private var noBtn = UIButton()
     
+   // weak var delegate: showPopoverDelegate?
+    
+    weak var controller: RootViewController!
+    
+    var infoBtn = UIButton()
+    var speechSwitch = UISwitch()
+    var speechLabel = UILabel()
+    
     private var trickLabel = UILabel()
     
     private var trickCountLabel = UILabel()
@@ -68,6 +76,8 @@ class GameView: UIView{
         let trick = self.tricks[self.trickCount]
         
         self.trickLabel.text = trick.name
+        
+        self.output.speekTrick(trick: trick.name, speechState: speechSwitch.isOn)
     }
     
     override func willMove(toSuperview newSuperview: UIView?) {
@@ -144,25 +154,54 @@ class GameView: UIView{
         
         self.addSubview(self.trickCountLabel)
         self.trickCountLabel.translatesAutoresizingMaskIntoConstraints = false
-        self.trickCountLabel.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 33).isActive = true
-        self.trickCountLabel.bottomAnchor.constraint(equalTo: self.trickLabel.topAnchor, constant: -40).isActive = true
+        self.trickCountLabel.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -38).isActive = true
+        self.trickCountLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor, constant: 0).isActive = true
         
         self.trickCountLabel.font = UIFont.systemFont(ofSize: 14)
-        self.trickCountLabel.textColor = UIColor(hex: "505050")
+        self.trickCountLabel.textColor = UIColor(hex: "909090")
         self.trickCountLabel.text = "1/10"
         
         self.addSubview(self.progressBar)
         self.progressBar.translatesAutoresizingMaskIntoConstraints = false
-        self.progressBar.rightAnchor.constraint(equalTo: self.rightAnchor, constant:  0).isActive = true
-        self.progressBar.leftAnchor.constraint(equalTo: self.trickCountLabel.rightAnchor, constant: 10).isActive = true
-        self.progressBar.centerYAnchor.constraint(equalTo: self.trickCountLabel.centerYAnchor).isActive = true
+        self.progressBar.bottomAnchor.constraint(equalTo: self.trickLabel.topAnchor, constant: -40).isActive = true
+        self.progressBar.rightAnchor.constraint(equalTo: self.rightAnchor, constant:  -33).isActive = true
+        self.progressBar.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 33).isActive = true
+        
         
         self.progressBar.progressTintColor = UIColor(hex: "214FEF")
         self.progressBar.progress = 0.1
         self.progressBar.backgroundColor = UIColor(hex: "C4C4C4")
     
-        self.layoutIfNeeded()
+        self.addSubview(self.speechSwitch)
+        self.speechSwitch.onTintColor = UIColor(hex: "214FEF")
+        self.speechSwitch.translatesAutoresizingMaskIntoConstraints = false
+        self.speechSwitch.topAnchor.constraint(equalTo: self.noBtn.bottomAnchor, constant: 28).isActive = true
+        self.speechSwitch.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -33).isActive = true
+        self.speechSwitch.isOn = true
         
+        self.addSubview(self.infoBtn)
+        self.infoBtn.translatesAutoresizingMaskIntoConstraints = false
+        self.infoBtn.addTarget(self, action: #selector(self.infoTapped), for: .touchUpInside)
+        self.infoBtn.topAnchor.constraint(equalTo: self.noBtn.bottomAnchor, constant: 28).isActive = true
+        self.infoBtn.rightAnchor.constraint(equalTo: self.speechSwitch.leftAnchor, constant: -13).isActive = true
+        self.infoBtn.setTitle("?", for: .normal)
+        self.infoBtn.setTitleColor(UIColor(hex: "909090"), for: .normal)
+        self.infoBtn.setBackgroundImage(UIImage(systemName: "circle.fill"), for: .normal)
+        self.infoBtn.heightAnchor.constraint(equalTo: self.speechSwitch.heightAnchor, constant: 0).isActive = true
+        self.infoBtn.widthAnchor.constraint(equalTo: self.speechSwitch.heightAnchor, constant: 0).isActive = true
+        self.infoBtn.tintColor = UIColor(hex: "FFFFFF")
+        
+        self.addSubview(self.speechLabel)
+        self.speechLabel.translatesAutoresizingMaskIntoConstraints = false
+        self.speechLabel.topAnchor.constraint(equalTo: self.speechSwitch.topAnchor, constant: 0).isActive = true
+        self.speechLabel.rightAnchor.constraint(equalTo: self.infoBtn.leftAnchor, constant: -15).isActive = true
+        self.speechLabel.centerYAnchor.constraint(equalTo: self.infoBtn.centerYAnchor, constant: 0).isActive = true
+        self.speechLabel.text = "Speech control"
+        self.speechLabel.textColor = UIColor(hex: "909090")
+        self.speechLabel.font = UIFont.systemFont(ofSize: 14)
+        
+        self.layoutIfNeeded()
+
         let y = self.trickCountLabel.frame.origin.y
         let height = self.yesBtn.frame.maxY - y
         
@@ -171,9 +210,40 @@ class GameView: UIView{
 }
 
 extension GameView: GameViewViewInput{
+    func openInfo() {
+        print("tapped")
+    }
+    
     func configure(with tenTricks: [Trick], _ actualChallenges: [Challenge]) {
         self.tricks = tenTricks
         self.trickLabel.text = tenTricks[0].name
+        self.output.speekTrick(trick: self.trickLabel.text, speechState: self.speechSwitch.isOn)
         self.chalenges = actualChallenges
     }
+    
+    @objc func infoTapped() {
+        //delegate?.willPresentingViewController()
+        self.output.infoTapped()
+    }
 }
+
+extension GameView {
+    func openPopover() {
+        let infoPopVC = SpeechInfoViewController()
+        
+        infoPopVC.modalPresentationStyle = .popover
+        
+        let popoverVC = infoPopVC.popoverPresentationController
+        popoverVC?.delegate = self.controller
+        popoverVC?.sourceView = self.infoBtn
+        popoverVC?.sourceRect = CGRect (x: self.infoBtn.bounds.midX, y: self.infoBtn.bounds.maxY, width: 0, height: 0)
+        infoPopVC.preferredContentSize = CGSize (width: 250, height: 250)
+        controller.present(infoPopVC, animated: true)
+    }
+}
+
+/*
+protocol showPopoverDelegate: class {
+    func willPresentingViewController()
+}
+*/
