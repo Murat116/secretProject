@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TricksRegVC: UIViewController{
+class TricksRegVC: UIViewController {
     
     var output: TrickRegViewOutput!
     
@@ -17,7 +17,7 @@ class TricksRegVC: UIViewController{
     
     var tricks = [Trick]()
     
-    static func show(parent:UIViewController){
+    static func show(parent:UIViewController) {
         let nextStepVC = TrickRegAssembly.configureModule()
         parent.present(nextStepVC, animated: true, completion: nil)
     }
@@ -27,9 +27,10 @@ class TricksRegVC: UIViewController{
     }
 }
 
-extension TricksRegVC: TrickRegViewInput{
+extension TricksRegVC: TrickRegViewInput {
     
     func setUpUI(with tricks: [Trick]) {
+        
         let header = RegHeaderView(step: .tricks, parentView: self.view)
         self.tricks = tricks
         
@@ -72,9 +73,11 @@ extension TricksRegVC: TrickRegViewInput{
         self.addTrics(number: tircksNumber)
     }
     
-    func addTrics(number: Int){
+    func addTrics(number: Int) {
+        
         let tricks = GameViewInteractor.rundomTrick(tricks: self.tricks, maxNumber: number-1)
-        for i in 0..<number - 1{
+        
+        for i in 0..<number - 1 {
             let trick =  tricks[i]
             let view = TricksRegVC.CheckBoxView(trick: trick, output: self.output)
             self.stackView.addArrangedSubview(view)
@@ -83,13 +86,15 @@ extension TricksRegVC: TrickRegViewInput{
         }
     }
     
-    @objc func nextVC(){
+    @objc func nextVC() {
         self.output.enRegistration()
     }
 }
 
 extension TricksRegVC{
-    class CheckBoxView: UIView{
+    
+    class CheckBoxView: UIView {
+        
         private let box = UIView()
         private let label = UILabel()
         private let cross = UIView()
@@ -102,8 +107,8 @@ extension TricksRegVC{
         
         private var output: TrickRegViewOutput!
         
-        var isSelect: Bool = false{
-            didSet{
+        var isSelect: Bool = false {
+            didSet {
                 self.cross.isHidden = !self.isSelect
                 self.label.textColor = self.isSelect ? .white : UIColor(red: 0.314, green: 0.314, blue: 0.314, alpha: 1)
                 self.newDif  = self.isSelect ? self.trick!.complexity - 3 : self.defaultDif!
@@ -112,7 +117,8 @@ extension TricksRegVC{
             }
         }
         
-        func setUp(with name: String){
+        func setUp(with name: String) {
+            
             self.layer.borderColor = UIColor(red: 0.314, green: 0.314, blue: 0.314, alpha: 1).cgColor
             self.layer.borderWidth = 1
             self.layer.cornerRadius = 6
@@ -149,7 +155,7 @@ extension TricksRegVC{
             self.cross.heightAnchor.constraint(equalTo: self.box.heightAnchor).isActive = true
             self.cross.widthAnchor.constraint(equalTo: self.box.widthAnchor).isActive = true
 
-            func addCrossPart(crossPart: UIView, rotate: CGFloat){
+            func addCrossPart(crossPart: UIView, rotate: CGFloat) {
                 self.cross.addSubview(crossPart)
                 crossPart.translatesAutoresizingMaskIntoConstraints = false
                 crossPart.centerXAnchor.constraint(equalTo: self.cross.centerXAnchor).isActive = true
@@ -171,7 +177,7 @@ extension TricksRegVC{
             self.cross.isHidden = true
         }
         
-        @objc func isTaped(){
+        @objc func isTaped() {
             self.isSelect = !self.isSelect
         }
         

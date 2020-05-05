@@ -8,7 +8,9 @@
 import UIKit
 
 class SportRegAssembly {
-    class func configureModule() -> SportsRegVC{
+    
+    class func configureModule() -> SportsRegVC {
+        
         let view = SportsRegVC()
         
         let presenter = SportRegPresentor()

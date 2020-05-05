@@ -8,10 +8,10 @@
 import Foundation
 import RealmSwift
 
-
-
 @objcMembers
-class Trick: Object {
+class Trick: Object, Codable {
+    
+    dynamic var id: String = ""
     
     dynamic var name: String = "Trick"
     dynamic var complexity: Float = 0.0 {
@@ -25,6 +25,18 @@ class Trick: Object {
         }
     }
     dynamic var tries: Int = 0
+}
+
+extension Trick: DTOProtocol {
+    
+    var dto: Any {
+        
+        return TrickDTO(id: self.id,
+                        name: self.name,
+                        complexity: self.complexity,
+                        stability: self.stability,
+                        tries: self.tries)
+    }
 }
 
 enum SkateTricks: Int, CaseIterable {
@@ -238,6 +250,7 @@ enum SkateTricks: Int, CaseIterable {
     func createTrick(name: String, complexity: Float, stability: Int, tries: Int) -> Trick {
         
         let trick = Trick()
+        trick.id = UUID().uuidString
         trick.name = name
         trick.complexity = complexity
         trick.stability = stability
@@ -247,3 +260,26 @@ enum SkateTricks: Int, CaseIterable {
     }
 }
 
+enum SportType: String {
+    case none = ""
+    case skate = "Skate"
+    case scoot = "Scoot"
+    case bmx = "BMX"
+    
+    var image: UIImage? {
+         return UIImage(named: "Registration/Sports/\(self.rawValue)")
+    }
+    
+    var text: String{
+        return self.rawValue
+    }
+    
+    var tricks: [Trick] {
+        switch self {
+        case .skate:
+            return SkateTricks.defaultSkateTrick
+        default:
+            return []
+        }
+    }
+}
