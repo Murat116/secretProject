@@ -86,10 +86,12 @@ class DataManager: DataManagerProtocol {
         do {
             guard let realm = self.realm else { return }
             let total = trick.tries + 1
+            let stabSave = stab < 0 ? trick.stability : stab
+            let difSave = dif < 0 ? trick.complexity : dif
             try realm.write {
                 trick.tries = total
-                trick.stability = stab
-                trick.complexity = dif
+                trick.stability = stabSave
+                trick.complexity = difSave
             }
         } catch {
             print(error.localizedDescription, "error in create User's tricks")
