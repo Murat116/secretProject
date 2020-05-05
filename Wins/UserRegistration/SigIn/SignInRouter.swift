@@ -8,10 +8,11 @@
 
 import UIKit
 
-class SignInRouter: SignInRouterInput{
+class SignInRouter: SignInRouterInput {
     
     
     func signIn() {
+        
         let viewController = RootVCRegAssembly.configureModule()
         let navigationViewController = UINavigationController(rootViewController: viewController)
         

@@ -14,7 +14,7 @@ class UserInfoRegPresentor {
 }
 
 import UIKit
-extension UserInfoRegPresentor: UserInfoRegViewProtocolOutput{
+extension UserInfoRegPresentor: UserInfoRegViewProtocolOutput {
     
     func saveUserData(with name: String, city: String, age: String, isReg: Bool) {
         self.interactor.saveUserData(with: name, city: city, age: age, isReg: isReg)
@@ -48,6 +48,7 @@ extension UserInfoRegPresentor: UserInfoRegViewProtocolOutput{
 }
 
 extension UserInfoRegPresentor: UserInfoRegInteractorProtocolOutput{
+    
     func configureView(with user: User) {
         self.view.configureView(with: user)
     }

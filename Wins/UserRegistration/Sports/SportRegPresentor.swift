@@ -21,22 +21,25 @@ class SportRegPresentor {
         
 }
 
-extension SportRegPresentor: SportRegViewProtocolOutput{
+extension SportRegPresentor: SportRegViewProtocolOutput {
+    
     func showAlert(alert: UIAlertController) {
         self.router.showAlert(alert: alert)
     }
     
     func sportIsSelected(with type: SportType) {
+        
         self.interactor.saveUserData(with: type)
-        if self.view.isUser{
+        
+        if self.view.isUser {
             self.router.dismiss()
-        }else{
+        } else {
             self.router.nextView()
         }
     }
 }
 
-extension SportRegPresentor: SportRegInteractorProtocolOutput{
+extension SportRegPresentor: SportRegInteractorProtocolOutput {
     func configure(with sportType: SportType, isUser: Bool) {
         self.view.setUP()
         let isUser = sportType != .none ? isUser : false

@@ -8,18 +8,18 @@
 
 import Foundation
 
-class SignInPresentor{
+class SignInPresentor {
     weak var view: SignInViewInput!
     var router: SignInRouterInput!
     var interactor: SignInInteractorInput!
     
-    func setUpView(){
+    func setUpView() {
         self.view.setUp()
     }
     
 }
 
-extension SignInPresentor: SignInViewOutput{
+extension SignInPresentor: SignInViewOutput {
     func showSignAlert(text: String) {
         self.router.showSignAlert(text: text)
     }
@@ -35,6 +35,4 @@ extension SignInPresentor: SignInViewOutput{
     func nextVC() {
         self.router.nextVc()
     }
-    
-  
 }
