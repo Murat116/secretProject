@@ -218,3 +218,9 @@ extension RootViewController{
         }
     }
 }
+
+extension RootViewController: UIPopoverPresentationControllerDelegate {
+    func adaptivePresentationStyle(for controller: UIPresentationController) -> UIModalPresentationStyle {
+        return .none
+    }
+}

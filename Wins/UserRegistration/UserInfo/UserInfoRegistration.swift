@@ -234,7 +234,7 @@ extension UserInfoRegistrationVC{
     }
     
     func addSocialetworks(){
-        guard ScreenTheme.isXFormat else { return } //FIXME: Саша посмотри
+        guard ScreenTheme.isXFormat else { return } //FIXME: Саша посмотри Посмотрел, понято
         
         self.view.addSubview(socNetLbl)
         self.socNetLbl.translatesAutoresizingMaskIntoConstraints = false
