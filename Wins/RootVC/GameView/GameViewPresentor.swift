@@ -7,11 +7,11 @@
 //
 
 import Foundation
+import AVFoundation
 
 class GameViewPresentor{
     weak var view: GameViewViewInput!
     var interactor: GameViewInteractorInput!
-    
     
 }
 
@@ -22,6 +22,14 @@ extension GameViewPresentor: GameViewInteractorOutput{
 }
 
 extension GameViewPresentor: GameViewViewOutput{
+    func speekTrick() {
+        self.view.speekTrick()
+    }
+    
+    func infoTapped() {
+
+    }
+    
     func recountTechnocalSkill() {
         self.interactor.recountTechnocalSkill()
     }

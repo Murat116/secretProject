@@ -15,8 +15,10 @@ class GameViewAssembly{
         let presentor = GameViewPresentor()
         let interactor = GameViewInteractor()
         
+        
         view.output = presentor
         interactor.output = presentor
+        
         
         presentor.view = view
         presentor.interactor = interactor

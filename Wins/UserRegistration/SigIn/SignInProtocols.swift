@@ -16,11 +16,13 @@ internal protocol SignInViewOutput:class{
     func createUser(login: String, password: String)
     func nextVC()
     func signIn()
+    func showSignAlert(text: String)
 }
 
 internal protocol SignInRouterInput:class{
     func nextVc()
     func signIn()
+    func showSignAlert(text: String)
 }
 
 internal protocol SignInInteractorInput:class{
