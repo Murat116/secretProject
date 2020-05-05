@@ -103,7 +103,7 @@ class GameView: UIView{
         blur.rightAnchor.constraint(equalTo: self.rightAnchor).isActive = true
         blur.leftAnchor.constraint(equalTo: self.leftAnchor).isActive = true
         
-        blur.alpha = 0.9
+        blur.alpha = 1.0
         
         let backView = UIView()
         self.addSubview(backView)
