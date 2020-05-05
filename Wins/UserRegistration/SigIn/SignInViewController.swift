@@ -61,9 +61,7 @@ class SignInVIewController: UIViewController{
     
     @objc func sigIn(){
         self.isRegistration = !self.isRegistration
-        UIView.animate(withDuration: 0.3) { [self] in
-            self.prepareFieldsForSignIn()
-        }
+        UIView.animate(withDuration: 0.3) { self.prepareFieldsForSignIn() }
     }
     
     //----------------------------------------------------------------------

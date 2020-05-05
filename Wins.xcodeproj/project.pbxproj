@@ -69,8 +69,6 @@
 		5CEA0DF92447BA760068A975 /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CEA0DF82447BA760068A975 /* UserModel.swift */; };
 		5CFBDB3C2448C58300588978 /* PodFile in Resources */ = {isa = PBXBuildFile; fileRef = 5CFBDB3B2448C58300588978 /* PodFile */; };
 		76837F62DA2DC1F2098E549E /* Pods_Wins.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 63D750BBCBA4F1568B123A58 /* Pods_Wins.framework */; };
-		7D7FECA624608C2A0035EA09 /* GameViewRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D7FECA524608C2A0035EA09 /* GameViewRouter.swift */; };
-		7D7FECAA24608FFC0035EA09 /* SpeechInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D7FECA924608FFC0035EA09 /* SpeechInfo.swift */; };
 		7DC4004E245ABFEE007301EC /* ScreenTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DC4004D245ABFEE007301EC /* ScreenTheme.swift */; };
 /* End PBXBuildFile section */
 
@@ -141,8 +139,6 @@
 		5CEA0DF82447BA760068A975 /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
 		5CFBDB3B2448C58300588978 /* PodFile */ = {isa = PBXFileReference; lastKnownFileType = text; path = PodFile; sourceTree = "<group>"; };
 		63D750BBCBA4F1568B123A58 /* Pods_Wins.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Wins.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		7D7FECA524608C2A0035EA09 /* GameViewRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewRouter.swift; sourceTree = "<group>"; };
-		7D7FECA924608FFC0035EA09 /* SpeechInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeechInfo.swift; sourceTree = "<group>"; };
 		7DC4004D245ABFEE007301EC /* ScreenTheme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScreenTheme.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -286,8 +282,6 @@
 				5C8B66F224601F67000AFAEE /* GameViewPresentor.swift */,
 				5C8B66EE24601C26000AFAEE /* GameViewProtocols.swift */,
 				5C8B66F024601E89000AFAEE /* GameViewAssemly.swift */,
-				7D7FECA524608C2A0035EA09 /* GameViewRouter.swift */,
-				7D7FECA924608FFC0035EA09 /* SpeechInfo.swift */,
 			);
 			path = GameView;
 			sourceTree = "<group>";
@@ -506,7 +500,6 @@
 				5C7895F7244B792900410A37 /* RootVCRouter.swift in Sources */,
 				5C1C1D7D243D1BD7008BDC58 /* UserInfoRegPresentor.swift in Sources */,
 				5CA0920E2442483000D38C98 /* SportRegPresentor.swift in Sources */,
-				7D7FECA624608C2A0035EA09 /* GameViewRouter.swift in Sources */,
 				5C7895ED244A274800410A37 /* UserInfoRegistrationAssembly.swift in Sources */,
 				5CD39E33244222E40053896E /* TricksModel.swift in Sources */,
 				5CA0920A2442480E00D38C98 /* SportRegProtocol.swift in Sources */,
@@ -531,7 +524,6 @@
 				5C8B66ED24601C15000AFAEE /* GameViewInteractor.swift in Sources */,
 				5C1C1D81243D1DFD008BDC58 /* UserInfoRegProtocol.swift in Sources */,
 				5CA0920024422EF800D38C98 /* RegHeaderView.swift in Sources */,
-				7D7FECAA24608FFC0035EA09 /* SpeechInfo.swift in Sources */,
 				5C79C46E244D1CC5003589AE /* StatisticPresentor.swift in Sources */,
 				45107E0D241FF721007A978D /* UserInfoRegistration.swift in Sources */,
 				5C8764902454565A00040B28 /* SignInRouter.swift in Sources */,

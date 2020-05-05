@@ -7,19 +7,18 @@
 //
 
 import UIKit
+import AVFoundation
 
 class GameView: UIView{
     
     private var yesBtn = UIButton()
     private var noBtn = UIButton()
     
-   // weak var delegate: showPopoverDelegate?
-    
     weak var controller: RootViewController!
     
-    var infoBtn = UIButton()
-    var speechSwitch = UISwitch()
-    var speechLabel = UILabel()
+    private var infoBtn = UIButton()
+    private var speechSwitch = UISwitch()
+    private var speechLabel = UILabel()
     
     private var trickLabel = UILabel()
     
@@ -77,7 +76,7 @@ class GameView: UIView{
         
         self.trickLabel.text = trick.name
         
-        self.output.speekTrick(trick: trick.name, speechState: speechSwitch.isOn)
+        self.output.speekTrick()
     }
     
     override func willMove(toSuperview newSuperview: UIView?) {
@@ -210,40 +209,30 @@ class GameView: UIView{
 }
 
 extension GameView: GameViewViewInput{
-    func openInfo() {
-        print("tapped")
-    }
     
     func configure(with tenTricks: [Trick], _ actualChallenges: [Challenge]) {
         self.tricks = tenTricks
         self.trickLabel.text = tenTricks[0].name
-        self.output.speekTrick(trick: self.trickLabel.text, speechState: self.speechSwitch.isOn)
+        self.output.speekTrick()
         self.chalenges = actualChallenges
     }
     
     @objc func infoTapped() {
-        //delegate?.willPresentingViewController()
         self.output.infoTapped()
     }
 }
 
 extension GameView {
-    func openPopover() {
-        let infoPopVC = SpeechInfoViewController()
-        
-        infoPopVC.modalPresentationStyle = .popover
-        
-        let popoverVC = infoPopVC.popoverPresentationController
-        popoverVC?.delegate = self.controller
-        popoverVC?.sourceView = self.infoBtn
-        popoverVC?.sourceRect = CGRect (x: self.infoBtn.bounds.midX, y: self.infoBtn.bounds.maxY, width: 0, height: 0)
-        infoPopVC.preferredContentSize = CGSize (width: 250, height: 250)
-        controller.present(infoPopVC, animated: true)
+    
+    func speekTrick () {
+        guard let trick = trickLabel.text else { return }
+        if speechSwitch.isOn {
+            let utterance = AVSpeechUtterance(string: trick)
+            //utterance.voice = AVSpeechSynthesisVoice(language: "")
+            utterance.rate = 0.5
+            
+            let synthesizer = AVSpeechSynthesizer()
+            synthesizer.speak(utterance)
+        }
     }
 }
-
-/*
-protocol showPopoverDelegate: class {
-    func willPresentingViewController()
-}
-*/
