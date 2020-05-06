@@ -13,10 +13,8 @@ class GameView: UIView{
     
     private var yesBtn = UIButton()
     private var noBtn = UIButton()
-    
-    weak var controller: RootViewController!
-    
-    private var infoBtn = UIButton()
+        
+    internal var infoBtn = UIButton()
     private var speechSwitch = UISwitch()
     private var speechLabel = UILabel()
     
@@ -176,6 +174,7 @@ class GameView: UIView{
         self.speechSwitch.topAnchor.constraint(equalTo: self.noBtn.bottomAnchor, constant: 28).isActive = true
         self.speechSwitch.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -33).isActive = true
         
+        self.speechSwitch.addTarget(self, action: #selector(self.speechOn), for: .editingDidEnd)
         self.speechSwitch.onTintColor = UIColor(hex: "214FEF")
         self.speechSwitch.isOn = true
         
@@ -224,29 +223,11 @@ extension GameView: GameViewViewInput{
     }
     
     @objc func infoTapped() {
-        let popover = UIViewController()
-        let label = UILabel()
-        label.frame = CGRect(x: 10, y: 10, width: 300, height: 60)
-        label.text = "Говорите Done и Fail и управляйте\nигрой не нажимая кнопки"
-        label.lineBreakMode = .byWordWrapping
-        label.numberOfLines = 2
-        label.textColor = .white
-        popover.view.addSubview(label)
+        self.output.infoTapped()
+    }
+    
+    @objc func speechOn(){
         
-        popover.modalPresentationStyle = .popover
-        popover.preferredContentSize = CGSize(width: 300, height: 60)
-        let popoverVC = popover.popoverPresentationController
-        popoverVC?.delegate = self
-        
-        popoverVC?.sourceView = self.infoBtn
-        popoverVC?.permittedArrowDirections = .up
-        var frame = CGRect.zero
-        frame.origin.x = self.infoBtn.frame.width / 2
-        frame.origin.y = self.infoBtn.frame.height + 10
-        popoverVC?.sourceRect = frame
-        
-        RootViewController._shared.present(popover, animated: true)
-//        self.output.infoTapped()
     }
 }
 

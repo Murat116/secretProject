@@ -12,6 +12,7 @@ import AVFoundation
 class GameViewPresentor{
     weak var view: GameViewViewInput!
     var interactor: GameViewInteractorInput!
+    var router: GameViewRouterInput!
     
 }
 
@@ -27,7 +28,7 @@ extension GameViewPresentor: GameViewViewOutput{
     }
     
     func infoTapped() {
-
+        self.router.showInfo()
     }
     
     func recountTechnocalSkill() {

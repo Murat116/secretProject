@@ -102,7 +102,6 @@ class DataManager: DataManagerProtocol {
     }
     
     func createSkateTricks() -> [Trick] {
-        
         guard let realm = self.realm else { return []}
         let tricks = List<Trick>()
         let user = self.user

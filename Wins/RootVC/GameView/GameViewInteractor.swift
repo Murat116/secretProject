@@ -22,6 +22,9 @@ class GameViewInteractor{
     
     static func rundomTrick(tricks: [Trick], maxNumber:Int = 10) -> [Trick]{
         var tri = tricks
+        if tri.isEmpty{
+            tri = DataManager._shared.createSkateTricks() //FIXME: узнать почему он пустой и поправить
+        }
         var tricksForGame = [Trick]()
         for _ in 1...maxNumber{
             let i = Int.random(in: 0..<tri.count)
