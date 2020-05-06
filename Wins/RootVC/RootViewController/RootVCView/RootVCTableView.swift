@@ -457,8 +457,6 @@ extension StatTableViewCell{
 
 class SubView: UIView {
     
-    var imageView: UIImageView!
-    
     override init (frame: CGRect) {
         super.init(frame: frame)
     }
@@ -471,15 +469,15 @@ class SubView: UIView {
         
         self.contentMode = .scaleAspectFill
         
-        imageView = UIImageView(image: UIImage(named: imageName))
+        let imageView = UIImageView(image: UIImage(named: imageName))
         self.addSubview(imageView)
-        self.imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.translatesAutoresizingMaskIntoConstraints = false
         
-        self.imageView.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 0).isActive = true
-        self.imageView.rightAnchor.constraint(equalTo: self.rightAnchor, constant: 0).isActive = true
-        self.imageView.topAnchor.constraint(equalTo: self.topAnchor, constant: 0).isActive = true
+        imageView.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 0).isActive = true
+        imageView.rightAnchor.constraint(equalTo: self.rightAnchor, constant: 0).isActive = true
+        imageView.topAnchor.constraint(equalTo: self.topAnchor, constant: 0).isActive = true
         
-        self.heightAnchor.constraint(equalToConstant: self.imageView.frame.height).isActive = true
+        self.heightAnchor.constraint(equalToConstant: imageView.frame.height).isActive = true
         
         let label = UILabel()
         self.addSubview(label)
