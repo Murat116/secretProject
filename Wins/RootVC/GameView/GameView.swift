@@ -8,8 +8,16 @@
 
 import UIKit
 import AVFoundation
+import Speech
 
 class GameView: UIView{
+    
+    var speechRecognitionIsAvialable = false
+    
+    let speechRecognizer = SFSpeechRecognizer(locale: Locale.init(identifier: "en-US"))
+    var recognitionRequest: SFSpeechAudioBufferRecognitionRequest?
+    var recognitionTask: SFSpeechRecognitionTask?
+    let audioEngine = AVAudioEngine()
     
     private var yesBtn = UIButton()
     private var noBtn = UIButton()
@@ -75,6 +83,12 @@ class GameView: UIView{
         let trick = self.tricks[self.trickCount]
         
         self.trickLabel.text = trick.name
+        
+        
+        
+        self.stopRecognition()
+        
+        recordAndRecognizeSpeech()
         
         self.output.speekTrick()
     }
@@ -177,6 +191,7 @@ class GameView: UIView{
         self.speechSwitch.topAnchor.constraint(equalTo: self.noBtn.bottomAnchor, constant: 28).isActive = true
         self.speechSwitch.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -33).isActive = true
         self.speechSwitch.isOn = true
+        self.speechSwitch.addTarget(self, action: #selector(self.changeSpeechState), for: .touchUpInside)
         
         self.addSubview(self.infoBtn)
         self.infoBtn.translatesAutoresizingMaskIntoConstraints = false
@@ -213,8 +228,10 @@ extension GameView: GameViewViewInput{
     func configure(with tenTricks: [Trick], _ actualChallenges: [Challenge]) {
         self.tricks = tenTricks
         self.trickLabel.text = tenTricks[0].name
-        self.output.speekTrick()
         self.chalenges = actualChallenges
+        self.output.speekTrick()
+        self.speechRecognizer?.delegate = self
+        self.recordAndRecognizeSpeech()
     }
     
     @objc func infoTapped() {
@@ -228,11 +245,83 @@ extension GameView {
         guard let trick = trickLabel.text else { return }
         if speechSwitch.isOn {
             let utterance = AVSpeechUtterance(string: trick)
-            //utterance.voice = AVSpeechSynthesisVoice(language: "")
             utterance.rate = 0.5
             
             let synthesizer = AVSpeechSynthesizer()
             synthesizer.speak(utterance)
         }
+    }
+    @objc func changeSpeechState() {
+        if self.speechSwitch.isOn {
+            self.speekTrick()
+            self.stopRecognition()
+            self.recordAndRecognizeSpeech()
+        } else {
+            stopRecognition()
+        }
+        
+        
+    }
+}
+extension GameView: SFSpeechRecognizerDelegate {
+    func speechRecognizer(_ speechRecognizer: SFSpeechRecognizer, availabilityDidChange available: Bool) {
+        if available {
+            self.speechRecognitionIsAvialable = true
+        } else {
+            self.speechRecognitionIsAvialable = false
+        }
+    }
+    func recordAndRecognizeSpeech() {
+        guard self.speechSwitch.isOn else {
+            stopRecognition()
+            return
+        }
+        if let recognitionTask = self.recognitionTask {
+            recognitionTask.cancel()
+            self.recognitionTask = nil
+          }
+          self.recognitionRequest = SFSpeechAudioBufferRecognitionRequest()
+          guard let recognitionRequest = self.recognitionRequest else { fatalError("Unable to created a SFSpeechAudioBufferRecognitionRequest object") }
+          let inputNode = audioEngine.inputNode
+          recognitionRequest.shouldReportPartialResults = true
+        
+        self.recognitionTask = speechRecognizer?.recognitionTask(with: recognitionRequest, resultHandler: { result, error in
+            if let result = result {
+                let str = result.bestTranscription.formattedString
+                var lastWord = ""
+                for segment in result.bestTranscription.segments {
+                    let index = str.index(str.startIndex, offsetBy: segment.substringRange.location)
+                    lastWord = String(str[index...])
+                }
+                switch lastWord.capitalized {
+                case "Done":
+                    self.nextTrick(btn: self.yesBtn)
+                case "Fail":
+                    self.nextTrick(btn: self.noBtn)
+                default: break
+                }
+            }
+          })
+        
+        let recordingFormat = inputNode.outputFormat(forBus: 0)
+        
+        inputNode.installTap(onBus: 0, bufferSize: 2048, format: recordingFormat, block: { (buffer: AVAudioPCMBuffer, when: AVAudioTime) in
+            recognitionRequest.append(buffer)
+          })
+        
+          self.audioEngine.prepare()
+        do {
+            try self.audioEngine.start()
+        } catch {
+            return
+        }
+               
+    }
+    func stopRecognition() {
+        self.recognitionTask?.finish()
+        self.recognitionTask = nil
+        self.recognitionRequest?.endAudio()
+        self.audioEngine.stop()
+        self.audioEngine.inputNode.removeTap(onBus: 0)
     }
 }
