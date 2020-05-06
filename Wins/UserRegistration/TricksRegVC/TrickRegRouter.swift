@@ -13,13 +13,13 @@ class TrickRegRouter {
     weak var view: TricksRegVC!
 }
 
-extension TrickRegRouter: TrickRegRouterInput{
+extension TrickRegRouter: TrickRegRouterInput {
+    
     func endRegistration() {
         let viewController = RootVCRegAssembly.configureModule()
         let navigationViewController = UINavigationController(rootViewController: viewController)
         
         UIApplication.shared.windows.first?.rootViewController = navigationViewController
         UIApplication.shared.windows.first?.makeKeyAndVisible()
-        
     }
 }

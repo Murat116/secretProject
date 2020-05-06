@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SignInVIewController: UIViewController{
+class SignInVIewController: UIViewController {
     
     //----------------------------------------------------------------------
     
@@ -36,8 +36,8 @@ class SignInVIewController: UIViewController{
     
     //----------------------------------------------------------------------
     
-    private var isRegistration: Bool = true{
-        didSet{
+    private var isRegistration: Bool = true {
+        didSet {
             self.header.title = self.isRegistration ? "Registration" : "Sign In"
             let title = self.isRegistration ? "Sign In" : "Create account"
             self.sigInBtn.setTitle(title, for: [])
@@ -59,14 +59,16 @@ class SignInVIewController: UIViewController{
     
 
     
-    @objc func sigIn(){
+    @objc func sigIn() {
+        
         self.isRegistration = !self.isRegistration
         UIView.animate(withDuration: 0.3) { self.prepareFieldsForSignIn() }
     }
     
     //----------------------------------------------------------------------
     
-    @objc func hideKeyboard(){
+    @objc func hideKeyboard() {
+        
         self.loginField.resignFirstResponder()
         self.passwordField.resignFirstResponder()
         self.confirmationField.resignFirstResponder()
@@ -74,13 +76,14 @@ class SignInVIewController: UIViewController{
     
     //----------------------------------------------------------------------
     
-    @objc func nextVC(btn: UIButton){
+    @objc func nextVC(btn: UIButton) {
+        
         guard self.loginField.isValid else {
             showSignAlert(text: "Username doesn't conform rules")
             return
         }
         
-        if self.isRegistration{
+        if self.isRegistration {
             guard self.passwordField.isValid, self.confirmationField.isValid,
                 let login = self.loginField.text,
                 let password = self.passwordField.text else {
@@ -92,24 +95,24 @@ class SignInVIewController: UIViewController{
             } else {
                 showSignAlert(text: "Password and confirmation not equal")
             }
-        }else{
+        } else {
             self.output.signIn()
             return
         }
         self.output.nextVC()
-            
-        
     }
     
-    @objc func withoutRegAction(){
+    @objc func withoutRegAction() {
         self.output.nextVC()
     }
     
 }
 
 
-extension SignInVIewController: SignInViewInput{
+extension SignInVIewController: SignInViewInput {
+    
     func setUp(){
+        
         self.view.backgroundColor = UIColor(red: 0.11, green: 0.11, blue: 0.11, alpha: 1)
         
         self.header = RegHeaderView(step: .sighIn, parentView: self.view)
@@ -196,7 +199,8 @@ extension SignInVIewController: SignInViewInput{
 
 //----------------------------------------------------------------------
 
-extension SignInVIewController: UITextFieldDelegate{
+extension SignInVIewController: UITextFieldDelegate {
+    
     func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
         guard let signInField = textField as? SignInTextField else { return false}
         if signInField.type == .login{
@@ -245,7 +249,7 @@ extension SignInVIewController: UITextFieldDelegate{
                 return
             }
             
-            if self.confirmationField.isHidden, signInField.isValid{
+            if self.confirmationField.isHidden, signInField.isValid {
                 self.confirmationField.isHidden = false
                 UIView.animate(withDuration: 0.3) { [unowned self] in
                     self.nextBtnTopToPass?.isActive = false
@@ -253,20 +257,20 @@ extension SignInVIewController: UITextFieldDelegate{
                     self.view.layoutIfNeeded()
                 }
                 return
-            }else if self.confirmationField.isHidden{
+            } else if self.confirmationField.isHidden {
                 return
-            }else if self.confirmationField.text == "" && signInField.type == .password{
+            } else if self.confirmationField.text == "" && signInField.type == .password {
                 return
             }
             
-            if self.confirmationField.text == self.passwordField.text{
+            if self.confirmationField.text == self.passwordField.text {
+                
                 self.confirmationField.isValid = true
                 self.passwordField.isValid = true
+            } else {
                 
-            }else{
                 self.confirmationField.isValid = false
                 self.passwordField.isValid = false
-                
             }
         case .none:
             break
@@ -277,30 +281,30 @@ extension SignInVIewController: UITextFieldDelegate{
 
 //----------------------------------------------------------------------
 
-extension SignInVIewController{
-    private class SignInTextField: UITextField{
+extension SignInVIewController {
+    private class SignInTextField: UITextField {
         
         fileprivate var type: SigInFieldType? = nil
         private let label = UILabel()
         
-        init(type: SigInFieldType){
+        init(type: SigInFieldType) {
             super.init(frame: .zero)
             self.type = type
             self.configure(type: type)
         }
         
-        fileprivate var isValid: Bool{
-            get{
+        fileprivate var isValid: Bool {
+            get {
                 self.isValid = self.checkField()
                 return self.checkField()
-            }set{
+            } set {
                 self.label.textColor = newValue ? UIColor(red: 0.314, green: 0.314, blue: 0.314, alpha: 1) : .red
                 self.textColor = newValue ? .white : .red
             }
         }
         
-        fileprivate var placeholderIsHidden: Bool = false{
-            didSet{
+        fileprivate var placeholderIsHidden: Bool = false {
+            didSet {
                 UIView.animate(withDuration: 0.2) { [unowned self] in
                     self.label.isHidden = self.placeholderIsHidden
                 }
@@ -315,7 +319,8 @@ extension SignInVIewController{
             fatalError("init(coder:) has not been implemented")
         }
         
-        func configure(type: SigInFieldType){
+        func configure(type: SigInFieldType) {
+            
             let attributes: [NSAttributedString.Key : Any] = [.font : UIFont.systemFont(ofSize: 18), .foregroundColor : UIColor(red: 0.314, green: 0.314, blue: 0.314, alpha: 1)]
             let attributedString = NSAttributedString(string: type.rawValue, attributes: attributes)
             self.attributedPlaceholder = attributedString
@@ -348,7 +353,7 @@ extension SignInVIewController{
             self.isHidden = self.type == .confirmation
         }
         
-        func checkField() -> Bool{
+        func checkField() -> Bool {
             switch self.type {
             case .login:
                 let regex = "\\w{5,18}"
@@ -363,14 +368,14 @@ extension SignInVIewController{
                 return false
             }
         }
-            
     }
 }
 
 //----------------------------------------------------------------------
 
-extension SignInVIewController{
-    private enum SigInFieldType: String{
+extension SignInVIewController {
+    private enum SigInFieldType: String {
+        
         case login = "Login"
         case password = "Password"
         case confirmation = "Password Confirmation"
@@ -382,6 +387,7 @@ extension SignInVIewController{
 }
 
 extension SignInVIewController {
+    
     func prepareFieldsForSignIn() {
         self.loginField.text = ""
         self.passwordField.text = ""

@@ -9,7 +9,7 @@
 import Foundation
 
 class UserInfoRegistrationAssembly {
-    class func configureModule() -> UserInfoRegistrationVC{
+    class func configureModule() -> UserInfoRegistrationVC {
         let view = UserInfoRegistrationVC()
         
         let presenter = UserInfoRegPresentor()
