@@ -12,10 +12,17 @@ class GameViewInteractor{
     weak var output: GameViewInteractorOutput!
     
     var skateTricks = [Trick]()
+    var lastTenTrick = [Trick]()
     
     func startConfigure(){
         let actulChallenge = DataManager._shared.actualChallenges
         self.skateTricks = DataManager._shared.skateTricks
+        self.lastTenTrick = self.getLastTenTricks()
+        for trick in self.skateTricks{
+            guard !self.lastTenTrick.filter({$0.name == trick.name}).isEmpty else { continue }
+            let i = self.skateTricks.firstIndex(of: trick)
+            self.skateTricks.remove(at: i!)
+        }
         let tenTrick = self.generateTenTricks()
         self.output.configure(with: tenTrick, actulChallenge)
     }
@@ -35,6 +42,21 @@ class GameViewInteractor{
         return tricksForGame
     }
     
+    func getLastTenTricks() -> [Trick] {
+        guard let user = DataManager._shared.user else { return [] }
+        var lastTenTrick = DataManager._shared.lastTenTrick
+        if lastTenTrick.isEmpty{
+            let tricks = user.skateTrick
+            lastTenTrick = GameViewInteractor.rundomTrick(tricks: Array(tricks))
+            var lastTenTrickID = [String]()
+            lastTenTrick.forEach { (trick) in
+                lastTenTrickID.append(trick.name)
+            }
+            UserDefaults.standard.set(lastTenTrickID, forKey: USRDefKeys.lastTenTrick)
+        }
+        return lastTenTrick
+    }
+    
     func generateTenTricks() -> [Trick]{
         var arr = [Trick]()
         arr.append(self.generateTricks(maxStab: 10, minStab: 7, maxDif: 0.3))   //1
@@ -43,11 +65,10 @@ class GameViewInteractor{
         arr.append(self.generateTricks(maxStab: 4, minStab: 3, maxDif: 0.7))    //4
         arr.append(self.generateTricks(maxStab: 3, minStab: 2, maxDif: 0.8))    //5
         arr.append(self.generateTricks(maxStab: 2, minStab: 1, maxDif: 0.9))    //6
-        arr.append(self.rundomTrick())    //7
-        arr.append(self.rundomTrick())    //8
+        arr.append(self.generateTricks(maxStab: 0, minStab: 0, maxDif: 0.5))    //7
+        arr.append(self.generateTricks(maxStab: 0, minStab: 0, maxDif: 0.8))    //8
         arr.append(self.rundomTrick())    //9
-        arr.append(self.rundomTrick())    //10
-        self.skateTricks = DataManager._shared.skateTricks
+        arr.append(self.generateTricks(maxStab: 0, minStab: 0, maxDif: 1.0))   //10
         return arr
     }
     
@@ -130,6 +151,8 @@ class GameViewInteractor{
 
 extension GameViewInteractor: GameViewInteractorInput{
     func saveChanges(of trick: Trick, with dif: Float, and stab: Int) {
+        DataManager._shared.lastTenTrick.removeFirst()
+        DataManager._shared.lastTenTrick.append(trick)
         DataManager._shared.saveTrick(trick: trick, stab: stab, dif: dif)
     }
     

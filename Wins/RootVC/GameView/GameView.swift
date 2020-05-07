@@ -11,9 +11,13 @@ import AVFoundation
 
 class GameView: UIView{
     
+    deinit {
+        print("GameView deinit")
+    }
+    
     private var yesBtn = UIButton()
     private var noBtn = UIButton()
-        
+    
     internal var infoBtn = UIButton()
     private var speechSwitch = UISwitch()
     private var speechLabel = UILabel()
@@ -42,20 +46,20 @@ class GameView: UIView{
     @objc func nextTrick(btn: UIButton){
         
         let oldTrick = self.tricks[self.trickCount]
-                var stab = oldTrick.stability
-                var dif = oldTrick.complexity
-                if self.noBtn != btn {
-                    stab += 1
-                    dif -= 0.3
-                    
-                    if let challenge = self.chalenges.first(where: {$0.trick?.name == oldTrick.name}){
-                        self.output.isChallengeDone(challenge, done: true)
-                    }
-                }else{
-                    stab -= 1
-                    dif += 0.3
-                }
-                self.output.saveChanges(of: oldTrick, with: dif, and: stab)
+        var stab = oldTrick.stability
+        var dif = oldTrick.complexity
+        if self.noBtn != btn {
+            stab += 1
+            dif -= 0.3
+            
+            if let challenge = self.chalenges.first(where: {$0.trick?.name == oldTrick.name}){
+                self.output.isChallengeDone(challenge, done: true)
+            }
+        }else{
+            stab -= 1
+            dif += 0.3
+        }
+        self.output.saveChanges(of: oldTrick, with: dif, and: stab)
         
         self.trickCount += 1
         guard self.trickCount < 10 else {
@@ -168,7 +172,7 @@ class GameView: UIView{
         self.progressBar.progressTintColor = UIColor(hex: "214FEF")
         self.progressBar.progress = 0.1
         self.progressBar.backgroundColor = UIColor(hex: "C4C4C4")
-    
+        
         self.addSubview(self.speechSwitch)
         self.speechSwitch.translatesAutoresizingMaskIntoConstraints = false
         self.speechSwitch.topAnchor.constraint(equalTo: self.noBtn.bottomAnchor, constant: 28).isActive = true
@@ -205,7 +209,7 @@ class GameView: UIView{
         self.speechLabel.font = UIFont.systemFont(ofSize: 14)
         
         self.layoutIfNeeded()
-
+        
         let y = self.progressBar.frame.origin.y
         let height = self.speechLabel.frame.maxY
         
