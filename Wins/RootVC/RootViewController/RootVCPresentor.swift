@@ -14,6 +14,11 @@ class RootVCPresentor{
 
 
 extension RootVCPresentor: RootViewOutput{
+    
+    func technicalSkillTaped() {
+        self.router.showTechnicalPopover()
+    }
+    
     //MARK: Router metods
     
     func goToReg() {
@@ -31,6 +36,7 @@ extension RootVCPresentor: RootViewOutput{
     func showGameView() {
         self.router.showGameView()
     }
+    
     
 }
 
