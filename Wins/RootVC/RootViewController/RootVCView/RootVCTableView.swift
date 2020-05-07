@@ -72,49 +72,34 @@ extension RootViewController: UITableViewDelegate, UITableViewDataSource{
             
             self.chalengeView.register(ChalendgeCell.self, forCellWithReuseIdentifier: "ChalendgeCell")
             
-            contentView.addSubview(self.statBtn)
-            self.statBtn.translatesAutoresizingMaskIntoConstraints = false
-            self.statBtn.leftAnchor.constraint(equalTo: contentView.leftAnchor).isActive = true
-            self.statBtn.rightAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
-            self.statBtn.topAnchor.constraint(equalTo: self.chalengeView.bottomAnchor, constant: 42).isActive = true
-            self.statBtn.heightAnchor.constraint(equalToConstant: 112).isActive = true
+            let statView = SubView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
+            statView.setup(imageName: "Menu/stat", labelText: "Statistics")
             
-            let statImage = UIImage(named:"Menu/stat")
-            self.statBtn.setImage(statImage, for: [])
+            let statTap = UITapGestureRecognizer(target: self, action: #selector(self.goToStatiscits))
+            statView.addGestureRecognizer(statTap)
+            statView.isUserInteractionEnabled = true
             
-            self.statBtn.addTarget(self, action: #selector(self.goToStatiscits), for: .touchUpInside)
+            contentView.addSubview(statView)
             
-            let statLabel = UILabel()
-            contentView.addSubview(statLabel)
-            statLabel.translatesAutoresizingMaskIntoConstraints = false
-            statLabel.centerXAnchor.constraint(equalTo: self.statBtn.centerXAnchor).isActive = true
-            statLabel.centerYAnchor.constraint(equalTo: self.statBtn.centerYAnchor).isActive = true
+            statView.translatesAutoresizingMaskIntoConstraints = false
+            statView.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 0).isActive = true
+            statView.topAnchor.constraint(equalTo: chalengeView.bottomAnchor, constant: 42).isActive = true
+            statView.rightAnchor.constraint(equalTo: contentView.centerXAnchor, constant: 0).isActive = true
             
-            statLabel.text = "Statistics"
-            statLabel.textColor = .white
-            statLabel.font  = UIFont.systemFont(ofSize: 20)
             
-            contentView.addSubview(self.gameBtn)
-            self.gameBtn.translatesAutoresizingMaskIntoConstraints = false
-            self.gameBtn.topAnchor.constraint(equalTo: self.statBtn.topAnchor).isActive = true
-            self.gameBtn.bottomAnchor.constraint(equalTo: self.statBtn.bottomAnchor).isActive = true
-            self.gameBtn.rightAnchor.constraint(equalTo: contentView.rightAnchor).isActive = true
-            self.gameBtn.leftAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
-
-            let imageGame = UIImage(named:"Menu/game")
-            self.gameBtn.setImage(imageGame, for: .normal)
+            let gameView = SubView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
+            gameView.setup(imageName: "Menu/game", labelText: "Game")
             
-            self.gameBtn.addTarget(self, action: #selector(self.goToGame), for: .touchUpInside)
+            let gameTap = UITapGestureRecognizer(target: self, action: #selector(self.goToGame))
+            gameView.addGestureRecognizer(gameTap)
+            gameView.isUserInteractionEnabled = true
             
-            let gameTitle = UILabel()
-            contentView.addSubview(gameTitle)
-            gameTitle.translatesAutoresizingMaskIntoConstraints = false
-            gameTitle.centerYAnchor.constraint(equalTo: self.gameBtn.centerYAnchor).isActive = true
-            gameTitle.centerXAnchor.constraint(equalTo: self.gameBtn.centerXAnchor).isActive = true
+            contentView.addSubview(gameView)
             
-            gameTitle.text = "Game"
-            gameTitle.textColor = .white
-            gameTitle.font = UIFont.systemFont(ofSize: 20)
+            gameView.translatesAutoresizingMaskIntoConstraints = false
+            gameView.leftAnchor.constraint(equalTo: contentView.centerXAnchor, constant: 0).isActive = true
+            gameView.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: 0).isActive = true
+            gameView.topAnchor.constraint(equalTo: statView.topAnchor, constant: 0).isActive = true
             
             return contentView
         }
@@ -467,5 +452,41 @@ extension StatTableViewCell{
                 startAngle = endAngle
             }
         }
+    }
+}
+
+class SubView: UIView {
+    
+    override init (frame: CGRect) {
+        super.init(frame: frame)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    func setup(imageName: String, labelText: String) {
+        
+        self.contentMode = .scaleAspectFill
+        
+        let imageView = UIImageView(image: UIImage(named: imageName))
+        self.addSubview(imageView)
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        
+        imageView.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 0).isActive = true
+        imageView.rightAnchor.constraint(equalTo: self.rightAnchor, constant: 0).isActive = true
+        imageView.topAnchor.constraint(equalTo: self.topAnchor, constant: 0).isActive = true
+        
+        self.heightAnchor.constraint(equalToConstant: imageView.frame.height).isActive = true
+        
+        let label = UILabel()
+        self.addSubview(label)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
+        label.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
+        
+        label.text = labelText
+        label.textColor = .white
+        label.font  = UIFont.systemFont(ofSize: 20)
     }
 }
