@@ -7,19 +7,28 @@
 //
 
 import UIKit
+import AVFoundation
+import Speech
 
 class GameView: UIView{
+    
+    var speechRecognitionIsAvialable = false
+    
+    let speechRecognizer = SFSpeechRecognizer(locale: Locale.init(identifier: "en-US"))
+    var recognitionRequest: SFSpeechAudioBufferRecognitionRequest?
+    var recognitionTask: SFSpeechRecognitionTask?
+    let audioEngine = AVAudioEngine()
+    
+    deinit {
+        print("GameView deinit")
+    }
     
     private var yesBtn = UIButton()
     private var noBtn = UIButton()
     
-   // weak var delegate: showPopoverDelegate?
-    
-    weak var controller: RootViewController!
-    
-    var infoBtn = UIButton()
-    var speechSwitch = UISwitch()
-    var speechLabel = UILabel()
+    internal var infoBtn = UIButton()
+    private var speechSwitch = UISwitch()
+    private var speechLabel = UILabel()
     
     private var trickLabel = UILabel()
     
@@ -45,20 +54,20 @@ class GameView: UIView{
     @objc func nextTrick(btn: UIButton){
         
         let oldTrick = self.tricks[self.trickCount]
-                var stab = oldTrick.stability
-                var dif = oldTrick.complexity
-                if self.noBtn != btn {
-                    stab += 1
-                    dif -= 0.3
-                    
-                    if let challenge = self.chalenges.first(where: {$0.trick?.name == oldTrick.name}){
-                        self.output.isChallengeDone(challenge, done: true)
-                    }
-                }else{
-                    stab -= 1
-                    dif += 0.3
-                }
-                self.output.saveChanges(of: oldTrick, with: dif, and: stab)
+        var stab = oldTrick.stability
+        var dif = oldTrick.complexity
+        if self.noBtn != btn {
+            stab += 1
+            dif -= 0.3
+            
+            if let challenge = self.chalenges.first(where: {$0.trick?.name == oldTrick.name}){
+                self.output.isChallengeDone(challenge, done: true)
+            }
+        }else{
+            stab -= 1
+            dif += 0.3
+        }
+        self.output.saveChanges(of: oldTrick, with: dif, and: stab)
         
         self.trickCount += 1
         guard self.trickCount < 10 else {
@@ -77,7 +86,13 @@ class GameView: UIView{
         
         self.trickLabel.text = trick.name
         
-        self.output.speekTrick(trick: trick.name, speechState: speechSwitch.isOn)
+        
+        
+        self.stopRecognition()
+        
+        recordAndRecognizeSpeech()
+        
+        self.output.speekTrick()
     }
     
     override func willMove(toSuperview newSuperview: UIView?) {
@@ -104,7 +119,7 @@ class GameView: UIView{
         blur.rightAnchor.constraint(equalTo: self.rightAnchor).isActive = true
         blur.leftAnchor.constraint(equalTo: self.leftAnchor).isActive = true
         
-        blur.alpha = 0.9
+        blur.alpha = 1.0
         
         let backView = UIView()
         self.addSubview(backView)
@@ -171,79 +186,172 @@ class GameView: UIView{
         self.progressBar.progressTintColor = UIColor(hex: "214FEF")
         self.progressBar.progress = 0.1
         self.progressBar.backgroundColor = UIColor(hex: "C4C4C4")
-    
+        
         self.addSubview(self.speechSwitch)
-        self.speechSwitch.onTintColor = UIColor(hex: "214FEF")
         self.speechSwitch.translatesAutoresizingMaskIntoConstraints = false
         self.speechSwitch.topAnchor.constraint(equalTo: self.noBtn.bottomAnchor, constant: 28).isActive = true
         self.speechSwitch.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -33).isActive = true
+        
+        self.speechSwitch.addTarget(self, action: #selector(self.speechOn), for: .editingDidEnd)
+        self.speechSwitch.onTintColor = UIColor(hex: "214FEF")
         self.speechSwitch.isOn = true
+        self.speechSwitch.addTarget(self, action: #selector(self.changeSpeechState), for: .touchUpInside)
+        
         
         self.addSubview(self.infoBtn)
         self.infoBtn.translatesAutoresizingMaskIntoConstraints = false
-        self.infoBtn.addTarget(self, action: #selector(self.infoTapped), for: .touchUpInside)
         self.infoBtn.topAnchor.constraint(equalTo: self.noBtn.bottomAnchor, constant: 28).isActive = true
         self.infoBtn.rightAnchor.constraint(equalTo: self.speechSwitch.leftAnchor, constant: -13).isActive = true
+        self.infoBtn.heightAnchor.constraint(equalTo: self.speechSwitch.heightAnchor, constant: 0).isActive = true
+        self.infoBtn.widthAnchor.constraint(equalTo: self.speechSwitch.heightAnchor, constant: 0).isActive = true
+        
+        self.infoBtn.addTarget(self, action: #selector(self.infoTapped), for: .touchUpInside)
+        
+        self.infoBtn.tintColor = UIColor(hex: "FFFFFF")
         self.infoBtn.setTitle("?", for: .normal)
         self.infoBtn.setTitleColor(UIColor(hex: "909090"), for: .normal)
         self.infoBtn.setBackgroundImage(UIImage(systemName: "circle.fill"), for: .normal)
-        self.infoBtn.heightAnchor.constraint(equalTo: self.speechSwitch.heightAnchor, constant: 0).isActive = true
-        self.infoBtn.widthAnchor.constraint(equalTo: self.speechSwitch.heightAnchor, constant: 0).isActive = true
-        self.infoBtn.tintColor = UIColor(hex: "FFFFFF")
+        
         
         self.addSubview(self.speechLabel)
         self.speechLabel.translatesAutoresizingMaskIntoConstraints = false
         self.speechLabel.topAnchor.constraint(equalTo: self.speechSwitch.topAnchor, constant: 0).isActive = true
         self.speechLabel.rightAnchor.constraint(equalTo: self.infoBtn.leftAnchor, constant: -15).isActive = true
         self.speechLabel.centerYAnchor.constraint(equalTo: self.infoBtn.centerYAnchor, constant: 0).isActive = true
+        
         self.speechLabel.text = "Speech control"
         self.speechLabel.textColor = UIColor(hex: "909090")
         self.speechLabel.font = UIFont.systemFont(ofSize: 14)
         
         self.layoutIfNeeded()
-
-        let y = self.trickCountLabel.frame.origin.y
-        let height = self.yesBtn.frame.maxY - y
         
-        playView.frame = CGRect(x: 0, y: y - 20, width: self.frame.width, height: height + 20)
+        let y = self.progressBar.frame.origin.y
+        let height = self.speechLabel.frame.maxY
+        
+        playView.frame = CGRect(x: 0, y: y - 20, width: self.frame.width, height: height + 40 - y)
     }
 }
 
 extension GameView: GameViewViewInput{
-    func openInfo() {
-        print("tapped")
-    }
     
     func configure(with tenTricks: [Trick], _ actualChallenges: [Challenge]) {
         self.tricks = tenTricks
         self.trickLabel.text = tenTricks[0].name
-        self.output.speekTrick(trick: self.trickLabel.text, speechState: self.speechSwitch.isOn)
         self.chalenges = actualChallenges
+        self.output.speekTrick()
+        self.speechRecognizer?.delegate = self
+        self.recordAndRecognizeSpeech()
     }
     
     @objc func infoTapped() {
-        //delegate?.willPresentingViewController()
         self.output.infoTapped()
+    }
+    
+    @objc func speechOn(){
+        
     }
 }
 
 extension GameView {
-    func openPopover() {
-        let infoPopVC = SpeechInfoViewController()
+    
+    func speekTrick () {
+        guard let trick = trickLabel.text else { return }
+        if speechSwitch.isOn {
+            let utterance = AVSpeechUtterance(string: trick)
+            utterance.rate = 0.5
+            
+            let synthesizer = AVSpeechSynthesizer()
+            synthesizer.speak(utterance)
+        }
+    }
+    @objc func changeSpeechState() {
+        if self.speechSwitch.isOn {
+            self.speekTrick()
+            self.stopRecognition()
+            self.recordAndRecognizeSpeech()
+        } else {
+            stopRecognition()
+        }
         
-        infoPopVC.modalPresentationStyle = .popover
         
-        let popoverVC = infoPopVC.popoverPresentationController
-        popoverVC?.delegate = self.controller
-        popoverVC?.sourceView = self.infoBtn
-        popoverVC?.sourceRect = CGRect (x: self.infoBtn.bounds.midX, y: self.infoBtn.bounds.maxY, width: 0, height: 0)
-        infoPopVC.preferredContentSize = CGSize (width: 250, height: 250)
-        controller.present(infoPopVC, animated: true)
+    }
+}
+extension GameView: SFSpeechRecognizerDelegate {
+    func speechRecognizer(_ speechRecognizer: SFSpeechRecognizer, availabilityDidChange available: Bool) {
+        if available {
+            self.speechRecognitionIsAvialable = true
+        } else {
+            self.speechRecognitionIsAvialable = false
+        }
+    }
+    func recordAndRecognizeSpeech() {
+        guard self.speechSwitch.isOn else {
+            stopRecognition()
+            return
+        }
+        if let recognitionTask = self.recognitionTask {
+            recognitionTask.cancel()
+            self.recognitionTask = nil
+          }
+          self.recognitionRequest = SFSpeechAudioBufferRecognitionRequest()
+          guard let recognitionRequest = self.recognitionRequest else { fatalError("Unable to created a SFSpeechAudioBufferRecognitionRequest object") }
+          let inputNode = audioEngine.inputNode
+          recognitionRequest.shouldReportPartialResults = true
+        
+        self.recognitionTask = speechRecognizer?.recognitionTask(with: recognitionRequest, resultHandler: { result, error in
+            if let result = result {
+                let str = result.bestTranscription.formattedString
+                var lastWord = ""
+                for segment in result.bestTranscription.segments {
+                    let index = str.index(str.startIndex, offsetBy: segment.substringRange.location)
+                    lastWord = String(str[index...])
+                }
+                switch lastWord.capitalized {
+                case "Done":
+                    self.nextTrick(btn: self.yesBtn)
+                case "Fail":
+                    self.nextTrick(btn: self.noBtn)
+                default: break
+                }
+            }
+          })
+        
+        let recordingFormat = inputNode.outputFormat(forBus: 0)
+        
+        inputNode.installTap(onBus: 0, bufferSize: 2048, format: recordingFormat, block: { (buffer: AVAudioPCMBuffer, when: AVAudioTime) in
+            recognitionRequest.append(buffer)
+          })
+        
+          self.audioEngine.prepare()
+        do {
+            try self.audioEngine.start()
+        } catch {
+            return
+        }
+               
+    }
+    func stopRecognition() {
+        self.recognitionTask?.finish()
+        self.recognitionTask = nil
+        self.recognitionRequest?.endAudio()
+        self.audioEngine.stop()
+        self.audioEngine.inputNode.removeTap(onBus: 0)
     }
 }
 
-/*
-protocol showPopoverDelegate: class {
-    func willPresentingViewController()
+extension GameView: UIPopoverPresentationControllerDelegate{
+    //UIPopoverPresentationControllerDelegate inherits from UIAdaptivePresentationControllerDelegate, we will use this method to define the presentation style for popover presentation controller
+    func adaptivePresentationStyle(for controller: UIPresentationController) -> UIModalPresentationStyle {
+        return .none
+    }
+    
+    //UIPopoverPresentationControllerDelegate
+    func popoverPresentationControllerDidDismissPopover(_ popoverPresentationController: UIPopoverPresentationController) {
+        
+    }
+    
+    func popoverPresentationControllerShouldDismissPopover(_ popoverPresentationController: UIPopoverPresentationController) -> Bool {
+        return true
+    }
+    
 }
-*/

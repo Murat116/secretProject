@@ -14,23 +14,18 @@ class GameViewAssembly{
         
         let presentor = GameViewPresentor()
         let interactor = GameViewInteractor()
-        let router = GameRouter()
+        let router = GameViewRouter()
         
         view.output = presentor
         interactor.output = presentor
-        presentor.router = router
-        
         router.view = view
         
         presentor.view = view
         presentor.interactor = interactor
+        presentor.router = router
         
         interactor.startConfigure()
         
         return view
-    }
-    
-    func showInfoPopover() {
-        
     }
 }

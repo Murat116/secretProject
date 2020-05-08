@@ -2,27 +2,38 @@
 //  GameViewRouter.swift
 //  Wins
 //
-//  Created by Александр Сетров on 04.05.2020.
+//  Created by Мурат Камалов on 06.05.2020.
 //  Copyright © 2020 Hope To. All rights reserved.
 //
 
-import Foundation
 import UIKit
 
-class GameRouter {
+class GameViewRouter: GameViewRouterInput{
     weak var view: GameView!
-}
-
-extension GameRouter: GameViewRouterInput {
-    func showSpeechInfo() {
-        let infoPopVC = SpeechInfoViewController()
-        infoPopVC.modalPresentationStyle = .popover
+    
+    func showInfo() {
+        let popover = UIViewController()
+        let label = UILabel()
+        label.frame = CGRect(x: 10, y: 10, width: 300, height: 60)
+        label.text = "Говорите Done и Fail и управляйте\nигрой не нажимая кнопки"
+        label.lineBreakMode = .byWordWrapping
+        label.numberOfLines = 2
+        label.textColor = .white
+        popover.view.addSubview(label)
         
-        let popoverVC = infoPopVC.popoverPresentationController
-        popoverVC?.delegate = self.view as? UIPopoverPresentationControllerDelegate
+        popover.modalPresentationStyle = .popover
+        popover.preferredContentSize = CGSize(width: 300, height: 60)
+        let popoverVC = popover.popoverPresentationController
+        popoverVC?.delegate = self.view
+        
         popoverVC?.sourceView = self.view.infoBtn
-        popoverVC?.sourceRect = CGRect(x: self.view.infoBtn.bounds.midX, y: self.view.infoBtn.bounds.maxY, width: 0, height: 0)
-        infoPopVC.preferredContentSize = CGSize(width: 250, height: 250)
-        RootViewController._shared.present(infoPopVC, animated: true, completion: nil)
+        popoverVC?.permittedArrowDirections = .up
+        var frame = CGRect.zero
+        frame.origin.x = self.view.infoBtn.frame.width / 2
+        frame.origin.y = self.view.infoBtn.frame.height + 10
+        popoverVC?.sourceRect = frame
+        
+        RootViewController._shared.present(popover, animated: true)
     }
 }
+

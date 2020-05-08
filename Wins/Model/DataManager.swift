@@ -18,7 +18,7 @@ protocol DataManagerProtocol{
 class DataManager: DataManagerProtocol {
     
     static var _shared = DataManager()
-    
+
     fileprivate var realm: Realm? {
         do {
             return try Realm(configuration: .defaultConfiguration)
@@ -43,8 +43,10 @@ class DataManager: DataManagerProtocol {
     var allChallanges: [Challenge] {
         
         guard let chalanges = self.realm?.objects(Challenge.self) else { return []}
-        let arrayOfChalenges = chalanges.sorted{$0.startDate > $1.startDate}
-        return arrayOfChalenges
+        let arrayOfChalenges = chalanges.filter{$0.isChallenge}.sorted{$0.startDate >  $1.startDate}
+        let arrayOfTurnament = chalanges.filter{!$0.isChallenge}.sorted{$0.startDate > $1.startDate}
+        let array = arrayOfChalenges + arrayOfTurnament
+        return array
     }
     
     var actualChallenges: [Challenge] {
@@ -87,10 +89,12 @@ class DataManager: DataManagerProtocol {
         do {
             guard let realm = self.realm else { return }
             let total = trick.tries + 1
+            let stabSave = stab < 0 ? trick.stability : stab
+            let difSave = dif < 0 ? trick.complexity : dif
             try realm.write {
                 trick.tries = total
-                trick.stability = stab
-                trick.complexity = dif
+                trick.stability = stabSave
+                trick.complexity = difSave
             }
         } catch {
             print(error.localizedDescription, "error in create User's tricks")
@@ -98,7 +102,6 @@ class DataManager: DataManagerProtocol {
     }
     
     func createSkateTricks() -> [Trick] {
-        
         guard let realm = self.realm else { return []}
         let tricks = List<Trick>()
         let user = self.user
@@ -189,10 +192,10 @@ extension DataManager {
         
         guard let realm = self.realm,
             let user = self.user else { return }
-        
+        let skilToSave = round(skill / 0.01) * 0.01
         do {
             try realm.write {
-                user.totalStats?.technicality = skill
+                user.totalStats?.technicality = skilToSave
             }
         } catch {
             print(error.localizedDescription, "error in saving User technicality")
