@@ -59,6 +59,7 @@ class RootViewController: UIViewController{
         self.output.showGameView()
     }
     
+    
 }
 
 extension RootViewController{
@@ -136,7 +137,7 @@ extension RootViewController{
         
         private let avatar = UIButton()
         private let nameLabel = UILabel()
-        private let technicalLabel = UILabel()
+        let technicalButton = UIButton()
         
         fileprivate let settingsBtn = UIButton()
         
@@ -172,13 +173,15 @@ extension RootViewController{
             self.nameLabel.textColor = .white
             self.nameLabel.font = UIFont.systemFont(ofSize: 18)
             
-            self.addSubview(self.technicalLabel)
-            self.technicalLabel.translatesAutoresizingMaskIntoConstraints = false
-            self.technicalLabel.leftAnchor.constraint(equalTo: self.nameLabel.leftAnchor).isActive = true
-            self.technicalLabel.bottomAnchor.constraint(equalTo: self.avatar.bottomAnchor, constant: 0).isActive = true
+            self.addSubview(self.technicalButton)
+            self.technicalButton.translatesAutoresizingMaskIntoConstraints = false
+            self.technicalButton.leftAnchor.constraint(equalTo: self.nameLabel.leftAnchor).isActive = true
+            self.technicalButton.bottomAnchor.constraint(equalTo: self.avatar.bottomAnchor, constant: 0).isActive = true
+            self.technicalButton.addTarget(self, action: #selector(self.technicalSkillTaped), for: .touchUpInside)
             
-            self.technicalLabel.textColor = .white
-            self.technicalLabel.font = UIFont.systemFont(ofSize: 12)
+            
+            self.technicalButton.titleLabel?.font = UIFont.systemFont(ofSize: 12)
+            self.technicalButton.titleLabel?.textColor = .white
             
             self.addSubview(self.settingsBtn)
             self.settingsBtn.translatesAutoresizingMaskIntoConstraints = false
@@ -196,8 +199,7 @@ extension RootViewController{
         
         fileprivate func configure(with user: User){
             self.nameLabel.text = user.login ?? "Guest"
-            self.technicalLabel.text = "Technical skill: \(user.totalStats?.technicality ?? 0)"
-            
+            self.technicalButton.setTitle("Technical skill: \(user.totalStats?.technicality ?? 0)", for: .normal)
             guard let imageData = user.avatarImageData,
                 let image = UIImage(data: imageData) else { return }
             
@@ -215,6 +217,10 @@ extension RootViewController{
         
         required init?(coder: NSCoder) {
             fatalError("init(coder:) has not been implemented")
+        }
+        
+        @objc func technicalSkillTaped() {
+            self.output.technicalSkillTaped()
         }
     }
 }

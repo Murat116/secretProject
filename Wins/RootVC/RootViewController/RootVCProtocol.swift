@@ -21,6 +21,8 @@ protocol RootViewOutput: class{
     
     func showGameView()
     
+    func technicalSkillTaped()
+    
     //reloadMetods
 }
 
@@ -38,6 +40,7 @@ protocol RootRouterInput: class{
     func goToDoneChallenge()
     
     func showGameView()
+    func showTechnicalPopover()
 }
 
 protocol RootInteractorInput {
