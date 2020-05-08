@@ -12,12 +12,12 @@ import Speech
 
 class GameView: UIView{
     
-    var speechRecognitionIsAvialable = false
+    private var speechRecognitionIsAvialable = true
     
-    let speechRecognizer = SFSpeechRecognizer(locale: Locale.init(identifier: "en-US"))
-    var recognitionRequest: SFSpeechAudioBufferRecognitionRequest?
-    var recognitionTask: SFSpeechRecognitionTask?
-    let audioEngine = AVAudioEngine()
+    private let speechRecognizer = SFSpeechRecognizer(locale: Locale.init(identifier: "en-US"))
+    private var recognitionRequest: SFSpeechAudioBufferRecognitionRequest?
+    private var recognitionTask: SFSpeechRecognitionTask?
+    private let audioEngine = AVAudioEngine()
     
     private var yesBtn = UIButton()
     private var noBtn = UIButton()
