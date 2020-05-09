@@ -15,21 +15,17 @@ protocol NetworkManagerProtocol {
     
     func saveUser(user: UserDTO)
     
+    func checkOriginLogin(_ login: String, completion: @escaping(BoolRequest?) -> Void)
+    
+    func checkCorrectLoginAndPassword(_ login: String, _ password: String, completion: @escaping (BoolRequest?) -> Void)
 }
 
 class NetworkManager: NetworkManagerProtocol {
     
+    
     let domen = "http://localhost"
     
     static var _shared = NetworkManager()
-    
-    private init() {
-//        NotificationCenter.default.addObserver(self, selector: #selector(update), name: UIApplication.willResignActiveNotification, object: nil)
-    }
-    
-    @objc func update() {
-//        NetworkManager._shared.saveUser(user: (DataManager._shared.user!.dto as! UserDTO))
-    }
     
     func getUser(id: String, completion: @escaping(User) -> Void) {
         
@@ -60,11 +56,40 @@ class NetworkManager: NetworkManagerProtocol {
         AF.request(urlString, method: .post, parameters: user, encoder: JSONParameterEncoder.default, headers: ["Content-Type" : "application/json"]).responseString { response in
             switch response.result {
             case .success(_):
-                print("good")
+                print("Success saving user")
             case .failure(_):
-                print("error")
+                print("error saving user")
             }
         }
     }
     
+    func checkOriginLogin(_ login: String, completion: @escaping (BoolRequest?) -> Void) {
+        
+        let urlString = domen + "/users/check/login"
+        
+        AF.request(urlString, parameters: ["login" : login]).responseDecodable(of: BoolRequest.self) { response in
+            
+            switch response.result {
+            case .success(_):
+                completion(response.value)
+            case .failure(_):
+                print("failure of checking originality of user")
+            }
+        }
+    }
+    
+    func checkCorrectLoginAndPassword(_ login: String, _ password: String, completion: @escaping (BoolRequest?) -> Void) {
+        
+        let urlString = domen + "/users/check/"
+        
+        AF.request(urlString, parameters: ["login" : login, "password" : password]).responseDecodable(of: BoolRequest.self) { response in
+            
+            switch response.result {
+            case .success(_):
+                completion(response.value)
+            case .failure(_):
+                print("failure of checking originality of user")
+            }
+        }
+    }
 }

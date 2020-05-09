@@ -10,7 +10,6 @@ import UIKit
 
 class SignInRouter: SignInRouterInput {
     
-    
     func signIn() {
         
         let viewController = RootVCRegAssembly.configureModule()
@@ -30,5 +29,19 @@ class SignInRouter: SignInRouterInput {
         let alert = UIAlertController(title: "Error", message: text, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Try again", style: .default, handler: nil))
         view.present(alert, animated: true, completion: nil)
+    }
+    
+    var loader = UIView()
+    
+    func showLoader() {
+        
+        self.loader.frame = self.view.view.frame
+        self.loader.backgroundColor = .white
+        
+        self.view.view.addSubview(loader)
+    }
+    
+    func closeLoader() {
+        self.loader.removeFromSuperview()
     }
 }

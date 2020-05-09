@@ -9,9 +9,12 @@
 import Foundation
 import RealmSwift
 
-protocol DataManagerProtocol{
-    
+protocol DataManagerProtocol {
     func createUser(login: String?, password: String?, sportType: SportType)
+}
+
+protocol DataManagerBindingWithNetworkManager {
+    func updateUserBackEnd()
 }
 
 
@@ -151,7 +154,6 @@ extension DataManager {
         } catch {
             print(error.localizedDescription, "error in createUser")
         }
-        
     }
     
     func addDefaultChalenge() {
@@ -308,5 +310,15 @@ extension DataManager {
         } catch {
             print(error.localizedDescription, "error in saving User image")
         }
+    }
+}
+
+extension DataManager: DataManagerBindingWithNetworkManager {
+    
+    func updateUserBackEnd() {
+        
+        guard let userDTO = self.user?.dto as? UserDTO else { return }
+        
+        NetworkManager._shared.saveUser(user: userDTO)
     }
 }

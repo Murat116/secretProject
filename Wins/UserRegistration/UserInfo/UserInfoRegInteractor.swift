@@ -24,6 +24,7 @@ class UserInfoRegInteractor {
 }
 
 extension UserInfoRegInteractor: UserInfoRegInteractorProtocolInput {
+    
     func saveUserData(with name: String, city: String, age: String, isReg: Bool) {
         
         let dataMng = DataManager._shared
