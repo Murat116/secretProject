@@ -156,19 +156,25 @@ extension DataManager {
     
     func addDefaultChalenge() {
         
+        let image = UIImage(named: "Registration/Sports/Skate")
+        let imageData = image?.pngData()
+        
         let kickflipChalenge = Challenge()
         let trick = self.skateTricks.first{ $0.name == "KickFlip"}
         kickflipChalenge.trick = trick
         kickflipChalenge.boardShop = ""
         kickflipChalenge.startDate = Date()
         
-        kickflipChalenge.descript = "It's welcome chalenge:)"
+        kickflipChalenge.descript = "Welcome chalenge:)"
         kickflipChalenge.isChallenge = true
+        kickflipChalenge.sponsorImageData = imageData
         
         let turnamentPreview = Challenge()
         turnamentPreview.startDate = Date()
         turnamentPreview.endDate = Date().addingDays(4)
         turnamentPreview.isChallenge = false
+        
+        turnamentPreview.sponsorImageData = imageData
         
         guard let realm = self.realm else { return }
         do {

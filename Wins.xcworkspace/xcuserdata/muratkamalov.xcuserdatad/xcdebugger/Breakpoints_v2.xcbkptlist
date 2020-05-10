@@ -62,8 +62,8 @@
             filePath = "Wins/DoneChalengeVC/DoneChalengeVC.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "75"
-            endingLineNumber = "75"
+            startingLineNumber = "73"
+            endingLineNumber = "73"
             landmarkName = "goBack()"
             landmarkType = "7">
          </BreakpointContent>
@@ -82,22 +82,6 @@
             startingLineNumber = "59"
             endingLineNumber = "59"
             landmarkName = "goToGame()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "EE08393F-EE99-4485-93AC-661FDCAF6D2F"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Wins/Model/DataManager.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "105"
-            endingLineNumber = "105"
-            landmarkName = "createSkateTricks()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -146,6 +130,70 @@
             startingLineNumber = "21"
             endingLineNumber = "21"
             landmarkName = "startConfigure()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "A0324ED6-073D-4DE9-8AD0-82321892F5AB"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Wins/RootVC/RootViewController/RootVCView/RootVCChalengeView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "179"
+            endingLineNumber = "179"
+            landmarkName = "showDescript()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "A0324ED6-073D-4DE9-8AD0-82321892F5AB - 9bc8c28bcf38ae28"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Wins.RootViewController.ChalendgeCell.(showDescript in _4B898D5CFB8E651158A01D580C290771)() -&gt; ()"
+                  moduleName = "Wins"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/muratkamalov/Desktop/Wins/Wins/RootVC/RootViewController/RootVCView/RootVCChalengeView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "178"
+                  endingLineNumber = "178"
+                  offsetFromSymbolStart = "58">
+               </Location>
+               <Location
+                  uuid = "A0324ED6-073D-4DE9-8AD0-82321892F5AB - 78f28f8b94e4e76"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 () -&gt; () in Wins.RootViewController.ChalendgeCell.(showDescript in _4B898D5CFB8E651158A01D580C290771)() -&gt; ()"
+                  moduleName = "Wins"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/muratkamalov/Desktop/Wins/Wins/RootVC/RootViewController/RootVCView/RootVCChalengeView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "179"
+                  endingLineNumber = "179"
+                  offsetFromSymbolStart = "22">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "CF696B34-2865-45C9-AB3D-44636D93B227"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Wins/RootVC/RootViewController/RootVCView/RootVCChalengeView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "156"
+            endingLineNumber = "156"
+            landmarkName = "configure(with:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
