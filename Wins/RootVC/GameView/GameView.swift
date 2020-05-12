@@ -14,6 +14,8 @@ class GameView: UIView{
     
     private var speechRecognitionIsAvialable = true
     
+    private let synthesizer = AVSpeechSynthesizer()
+    
     private let speechRecognizer = SFSpeechRecognizer(locale: Locale.init(identifier: "en-US"))
     private var recognitionRequest: SFSpeechAudioBufferRecognitionRequest?
     private var recognitionTask: SFSpeechRecognitionTask?
@@ -84,7 +86,7 @@ class GameView: UIView{
         
         self.trickLabel.text = trick.name
         
-        
+        synthesizer.stopSpeaking(at: .immediate)
         
         self.stopRecognition()
         
@@ -190,7 +192,7 @@ class GameView: UIView{
         self.speechSwitch.translatesAutoresizingMaskIntoConstraints = false
         self.speechSwitch.topAnchor.constraint(equalTo: self.noBtn.bottomAnchor, constant: 28).isActive = true
         self.speechSwitch.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -33).isActive = true
-        self.speechSwitch.isOn = true
+        self.speechSwitch.isOn = false
         self.speechSwitch.addTarget(self, action: #selector(self.changeSpeechState), for: .touchUpInside)
         
         self.addSubview(self.infoBtn)
@@ -246,8 +248,8 @@ extension GameView {
         if speechSwitch.isOn {
             let utterance = AVSpeechUtterance(string: trick)
             utterance.rate = 0.5
+            utterance.volume = 1.0
             
-            let synthesizer = AVSpeechSynthesizer()
             synthesizer.speak(utterance)
         }
     }
