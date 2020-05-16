@@ -150,7 +150,7 @@ class GameView: UIView{
         
         self.yesBtn.backgroundColor = UIColor(hex: "214FEF")
         self.yesBtn.layer.cornerRadius = 6
-        self.yesBtn.setTitle("Done", for: [])
+        self.yesBtn.setTitle("Yes", for: [])
         self.yesBtn.setTitleColor(.white, for: [])
         
         self.addSubview(self.noBtn)
@@ -162,7 +162,7 @@ class GameView: UIView{
         
         self.noBtn.backgroundColor = UIColor(hex: "214FEF")
         self.noBtn.layer.cornerRadius = 6
-        self.noBtn.setTitle("Fail", for: [])
+        self.noBtn.setTitle("No", for: [])
         self.noBtn.setTitleColor(.white, for: [])
         
         self.noBtn.addTarget(self, action: #selector(self.nextTrick(btn:)), for: .touchUpInside)
@@ -296,9 +296,9 @@ extension GameView: SFSpeechRecognizerDelegate {
                     lastWord = String(str[index...])
                 }
                 switch lastWord.capitalized {
-                case "Done":
+                case "Yes":
                     self.nextTrick(btn: self.yesBtn)
-                case "Fail":
+                case "No":
                     self.nextTrick(btn: self.noBtn)
                 default: break
                 }
