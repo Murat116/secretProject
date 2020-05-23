@@ -45,19 +45,19 @@ class DataManager: DataManagerProtocol {
     
     var allChallanges: [Challenge] {
         
-        guard let chalanges = self.realm?.objects(Challenge.self) else { return []}
-        let arrayOfChalenges = chalanges.filter{$0.isChallenge}.sorted{$0.startDate >  $1.startDate}
-        let arrayOfTurnament = chalanges.filter{!$0.isChallenge}.sorted{$0.startDate > $1.startDate}
+        guard let challenges = self.realm?.objects(Challenge.self) else { return [] }
+        let arrayOfChalenges = challenges.filter{$0.isChallenge ?? true}.sorted{$0.startDate >  $1.startDate}
+        let arrayOfTurnament = challenges.filter{!($0.isChallenge ?? true)}.sorted{$0.startDate > $1.startDate}
         let array = arrayOfChalenges + arrayOfTurnament
         return array
     }
     
     var actualChallenges: [Challenge] {
-        return self.allChallanges.filter{!$0.isDone}
+        return self.allChallanges.filter{!($0.isDone ?? false)}
     }
     
     var doneChallenges: [Challenge] {
-        return self.allChallanges.filter{$0.isDone}
+        return self.allChallanges.filter{$0.isDone ?? false}
     }
     
     var lastTenTrick: [Trick] {
@@ -126,7 +126,19 @@ class DataManager: DataManagerProtocol {
 
 extension DataManager {
     
-    func createUser(login: String?, password: String?, sportType: SportType) {
+    func createUser(_ user: User) {
+        
+        do {
+            guard let realm = self.realm else { return }
+            try realm.write {
+                realm.add(user)
+            }
+        } catch {
+            print(error.localizedDescription, "error in createUser")
+        }
+    }
+    
+    func createUser(login: String?, password: String?, sportType: SportType = .skate) {
         
         let tricks = List<Trick>()
         for trick in sportType.tricks {
@@ -162,14 +174,14 @@ extension DataManager {
         let trick = self.skateTricks.first{ $0.name == "KickFlip"}
         kickflipChalenge.trick = trick
         kickflipChalenge.boardShop = ""
-        kickflipChalenge.startDate = Date()
+        kickflipChalenge.startDate = Int(Date.now.ts)
         
         kickflipChalenge.descript = "It's welcome chalenge:)"
         kickflipChalenge.isChallenge = true
         
         let turnamentPreview = Challenge()
-        turnamentPreview.startDate = Date()
-        turnamentPreview.endDate = Date().addingDays(4)
+        turnamentPreview.startDate = Int(Date.now.ts)
+        turnamentPreview.endDate = Int(Date.now.addingDays(4).ts)
         turnamentPreview.isChallenge = false
         
         guard let realm = self.realm else { return }
@@ -308,7 +320,19 @@ extension DataManager {
                 challenge.isDone = true
             }
         } catch {
-            print(error.localizedDescription, "error in saving User image")
+            print(error.localizedDescription, "error in saving Challenge")
+        }
+    }
+    
+    func updateActualChallenges(_ challenges: List<Challenge>) {
+        do {
+            guard let realm = self.realm,
+                let user = self.user else { return }
+            try realm.write {
+                user.challenges = challenges
+            }
+        } catch {
+            print(error.localizedDescription, "error of updating challenges")
         }
     }
 }

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class RootViewController: UIViewController{
+class RootViewController: UIViewController {
     
     static var _shared: RootViewController = RootViewController()
     

@@ -10,7 +10,7 @@ import UIKit
 
 extension RootViewController:  UICollectionViewDelegate, UICollectionViewDataSource{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return self.challenges.filter{!$0.isDone}.count 
+        return self.challenges.filter{!($0.isDone ?? false)}.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -117,10 +117,10 @@ extension RootViewController{
             
             let formatter = DateFormatter()
             formatter.dateFormat = "dd:MM:yyyy"
-            let myStringafd = formatter.string(from: chalenge.startDate)
+            let myStringafd = formatter.string(from: Date(chalenge.startDate))
             
-            if chalenge.isChallenge{
-                self.mainLabel.text =  "Today's lucky trick - \n\(chalenge.trick!.name)"
+            if chalenge.isChallenge ?? true{
+                self.mainLabel.text =  "Today's lucky trick - \n\(chalenge.trick_name)"
                 self.sponspor.text = chalenge.boardShop
                 self.date.text = myStringafd
             }else{

@@ -8,40 +8,35 @@
 
 import Foundation
 import Alamofire
+import RealmSwift
 
 protocol NetworkManagerProtocol {
     
-    func getUser(id: String, completion: @escaping(User) -> Void)
+    func getUser(id: String, completion: @escaping(User?) -> Void)
     
     func saveUser(user: UserDTO)
     
     func checkOriginLogin(_ login: String, completion: @escaping(BoolRequest?) -> Void)
     
     func checkCorrectLoginAndPassword(_ login: String, _ password: String, completion: @escaping (BoolRequest?) -> Void)
+    
+    func getActualChallenges(_ idOfUser: String, completion: @escaping(List<Challenge>?) -> Void)
 }
 
 class NetworkManager: NetworkManagerProtocol {
     
-    
-    let domen = "http://localhost"
+    let domen = "http://winsbackend.us-east-2.elasticbeanstalk.com"
+//    let domen = "http://localhost"
     
     static var _shared = NetworkManager()
     
-    func getUser(id: String, completion: @escaping(User) -> Void) {
+    func getUser(id: String, completion: @escaping(User?) -> Void) {
         
         let urlString = domen + "/users/" + "\(id)"
         
         AF.request(urlString).responseDecodable(of: User.self) { response in
             
-            var user: User?
-            
-            switch response.result {
-            case .success(_):
-                user = response.value
-                completion(user!)
-            case .failure(_):
-                print("User is nil")
-            }
+            completion(response.value)
         }
     }
     
@@ -89,6 +84,25 @@ class NetworkManager: NetworkManagerProtocol {
                 completion(response.value)
             case .failure(_):
                 print("failure of checking originality of user")
+            }
+        }
+    }
+    
+    func getActualChallenges(_ idOfUser: String, completion: @escaping (List<Challenge>?) -> Void) {
+        
+        let urlString = domen + "/users/challenges"
+        
+        AF.request(urlString, parameters: ["user_id" : idOfUser]).responseDecodable(of: List<Challenge>.self) { response in
+            
+            var challenges: List<Challenge>?
+            
+            switch response.result {
+            case .success(_):
+                challenges = response.value
+                completion(challenges)
+            case .failure(_):
+                print("Challenges is nil")
+                completion(challenges)
             }
         }
     }

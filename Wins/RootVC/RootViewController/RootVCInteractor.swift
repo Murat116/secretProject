@@ -49,10 +49,20 @@ extension RootVCInteractor: RootInteractorInput{
         
         let user = DataManager._shared.user!
         
+        NetworkManager._shared.getActualChallenges(user.id) { challenges in
+            
+            guard let challenges = challenges else { return }
+            
+            DataManager._shared.updateActualChallenges(challenges)
+            
+            self.output.reload(with: Array(challenges))
+        }
+        
         return user
     }
     
     func getChallenges() -> [Challenge]{
+        
         let chalanges = DataManager._shared.actualChallenges
         return chalanges
     }

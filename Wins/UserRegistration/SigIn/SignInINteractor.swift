@@ -10,6 +10,8 @@ import Foundation
 
 class SignInInteractor: SignInInteractorInput {
     
+    weak var output: SignInInteractorOutput!
+    
     func signIn(login: String, password: String) {
         
         NetworkManager._shared.checkCorrectLoginAndPassword(login, password) { boolRequest in
@@ -23,16 +25,17 @@ class SignInInteractor: SignInInteractorInput {
             }
             
             NetworkManager._shared.getUser(id: id) { user in
-                //TODO: DataManager._shared.createUser(user: user)
-//                DataManager._shared.createUser(user: user)
+                
+                guard let user = user else { self.output.closeLoader(); return}
+                
+                DataManager._shared.createUser(user)
+                
                 self.output.closeLoader()
-//                self.output.nextVCAfterSignIn()
+                self.output.nextVCAfterSignIn()
             }
             
         }
     }
-    
-    weak var output: SignInInteractorOutput!
     
     func createUser(login: String, password: String) {
         
