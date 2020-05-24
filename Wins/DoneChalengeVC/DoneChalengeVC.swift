@@ -22,8 +22,6 @@ class DoneChallengeVC: UIViewController{
     
     override func viewDidLoad() {
         super.viewDidLoad()
-       
-        
         self.setUp()
     }
     
