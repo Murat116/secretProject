@@ -46,18 +46,18 @@ class DataManager: DataManagerProtocol {
     var allChallanges: [Challenge] {
         
         guard let challenges = self.realm?.objects(Challenge.self) else { return [] }
-        let arrayOfChalenges = challenges.filter{$0.isChallenge ?? true}.sorted{$0.startDate >  $1.startDate}
-        let arrayOfTurnament = challenges.filter{!($0.isChallenge ?? true)}.sorted{$0.startDate > $1.startDate}
+        let arrayOfChalenges = challenges.filter{$0.isChallenge}.sorted{$0.startDate >  $1.startDate}
+        let arrayOfTurnament = challenges.filter{!($0.isChallenge)}.sorted{$0.startDate > $1.startDate}
         let array = arrayOfChalenges + arrayOfTurnament
         return array
     }
     
     var actualChallenges: [Challenge] {
-        return self.allChallanges.filter{!($0.isDone ?? false)}
+        return self.allChallanges.filter{!($0.isDone)}
     }
     
     var doneChallenges: [Challenge] {
-        return self.allChallanges.filter{$0.isDone ?? false}
+        return self.allChallanges.filter{$0.isDone}
     }
     
     var lastTenTrick: [Trick] {
@@ -170,19 +170,26 @@ extension DataManager {
     
     func addDefaultChalenge() {
         
+        let image = UIImage(named: "Registration/Sports/Skate")
+        let imageData = image?.pngData()
+        
         let kickflipChalenge = Challenge()
         let trick = self.skateTricks.first{ $0.name == "KickFlip"}
+        kickflipChalenge.trick_name = trick?.name ?? "KickFlip"
         kickflipChalenge.trick = trick
         kickflipChalenge.boardShop = ""
         kickflipChalenge.startDate = Int(Date.now.ts)
         
-        kickflipChalenge.descript = "It's welcome chalenge:)"
+        kickflipChalenge.descript = "Welcome chalenge:)"
         kickflipChalenge.isChallenge = true
+        kickflipChalenge.sponsorImageData = imageData
         
         let turnamentPreview = Challenge()
         turnamentPreview.startDate = Int(Date.now.ts)
         turnamentPreview.endDate = Int(Date.now.addingDays(4).ts)
         turnamentPreview.isChallenge = false
+        
+        turnamentPreview.sponsorImageData = imageData
         
         guard let realm = self.realm else { return }
         do {
@@ -196,7 +203,6 @@ extension DataManager {
             print(error.localizedDescription, "error in create default chalenge")
         }
         
-        print("saving")
     }
 }
 
@@ -324,15 +330,20 @@ extension DataManager {
         }
     }
     
-    func updateActualChallenges(_ challenges: List<Challenge>) {
-        do {
-            guard let realm = self.realm,
-                let user = self.user else { return }
-            try realm.write {
-                user.challenges = challenges
+    func updateActualChallenges(_ challenges: [Challenge]) {
+        guard let realm = self.realm,
+        let user = self.user else { return }
+        let challengeIn = self.allChallanges
+        for challenge in challenges{
+            guard challengeIn.first(where: { $0.id == challenge.id }) == nil else { continue }
+            do{
+                try realm.write{
+                    realm.add(challenge)
+                    user.challenges.append(challenge)
+                }
+            }catch{
+                print(error.localizedDescription, "error of updating challenges")
             }
-        } catch {
-            print(error.localizedDescription, "error of updating challenges")
         }
     }
 }

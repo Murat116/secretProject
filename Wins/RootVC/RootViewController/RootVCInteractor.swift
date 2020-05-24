@@ -55,7 +55,7 @@ extension RootVCInteractor: RootInteractorInput{
             
             DataManager._shared.updateActualChallenges(challenges)
             
-            self.output.reload(with: Array(challenges))
+            self.output.reload(with: self.getChallenges())
         }
         
         return user

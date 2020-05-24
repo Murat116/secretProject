@@ -20,7 +20,7 @@ protocol NetworkManagerProtocol {
     
     func checkCorrectLoginAndPassword(_ login: String, _ password: String, completion: @escaping (BoolRequest?) -> Void)
     
-    func getActualChallenges(_ idOfUser: String, completion: @escaping(List<Challenge>?) -> Void)
+    func getActualChallenges(_ idOfUser: String, completion: @escaping([Challenge]?) -> Void)
 }
 
 class NetworkManager: NetworkManagerProtocol {
@@ -88,13 +88,13 @@ class NetworkManager: NetworkManagerProtocol {
         }
     }
     
-    func getActualChallenges(_ idOfUser: String, completion: @escaping (List<Challenge>?) -> Void) {
+    func getActualChallenges(_ idOfUser: String, completion: @escaping ([Challenge]?) -> Void) {
         
         let urlString = domen + "/users/challenges"
         
-        AF.request(urlString, parameters: ["user_id" : idOfUser]).responseDecodable(of: List<Challenge>.self) { response in
+        AF.request(urlString, parameters: ["user_id" : idOfUser]).responseDecodable(of: [Challenge].self) { response in
             
-            var challenges: List<Challenge>?
+            var challenges: [Challenge]?
             
             switch response.result {
             case .success(_):
