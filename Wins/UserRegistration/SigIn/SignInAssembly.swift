@@ -25,6 +25,8 @@ class SignInAssembly {
         
         router.view = view
         
+        interactor.output = presentor
+        
         presentor.setUpView()
         
         return view

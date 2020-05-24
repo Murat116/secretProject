@@ -92,14 +92,22 @@ class SignInVIewController: UIViewController {
             }
             if self.passwordField.text == self.confirmationField.text {
                 self.output.createUser(login: login, password: password)
+                return
             } else {
                 showSignAlert(text: "Password and confirmation not equal")
             }
         } else {
-            self.output.signIn()
+            
+            guard let login = self.loginField.text, let password = self.passwordField.text else {
+                showSignAlert(text: "Fill all fields")
+                return
+            }
+
+            self.output.signIn(login: login, password: password)
             return
         }
-        self.output.nextVC()
+        
+//        self.output.nextVC()
     }
     
     @objc func withoutRegAction() {

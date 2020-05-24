@@ -9,10 +9,10 @@
 import Foundation
 
 struct ChallengeDTO: Codable {
-    var trick: TrickDTO?
+    var trick_name: String
     var boardShop: String
-    var startDate: Date
-    var endDate: Date?
+    var startDate: Int
+    var endDate: Int?
     var sponsorImageData: Data?
     var descript: String?
 
