@@ -12,9 +12,9 @@ import RealmSwift
 
 protocol NetworkManagerProtocol {
     
-    func getUser(id: String, completion: @escaping(User?) -> Void)
+    func getUser(id: String, completion: @escaping(User?, AFError?) -> Void)
     
-    func saveUser(user: UserDTO)
+    func saveUser(user: User)
     
     func checkOriginLogin(_ login: String, completion: @escaping(BoolRequest?) -> Void)
     
@@ -30,21 +30,21 @@ class NetworkManager: NetworkManagerProtocol {
     
     static var _shared = NetworkManager()
     
-    func getUser(id: String, completion: @escaping(User?) -> Void) {
+    func getUser(id: String, completion: @escaping(User?, AFError?) -> Void) {
         
         let urlString = domen + "/users/" + "\(id)"
         
-        AF.request(urlString).responseDecodable(of: User.self) { response in
+        AF.request(urlString).responseDecodable(of: UserDTO.self) { response in
             
-            completion(response.value)
+            completion(response.value?.entity as? User, response.error)
         }
     }
     
-    func saveUser(user: UserDTO) {
+    func saveUser(user: User) {
+        
+        guard var user = user.dto as? UserDTO else { return }
         
         let urlString = domen + "/users"
-        
-        var user = user
         
         user.challenges = [ChallengeDTO]()
         

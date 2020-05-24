@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import RealmSwift
 
 struct TotalStatsDTO: Codable {
    var id: String
@@ -14,4 +15,19 @@ struct TotalStatsDTO: Codable {
    var technicality: Float
    var stability: Float
    var percentageTricksLearned: Float
+}
+
+extension TotalStatsDTO: EntityProtocol {
+    
+    var entity: Object {
+        
+        let ts = TotalStats()
+        
+        ts.id = self.id
+        ts.technicality = self.technicality
+        ts.stability = self.stability
+        ts.percentageTricksLearned = self.percentageTricksLearned
+        
+        return ts
+    }
 }
