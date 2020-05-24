@@ -65,6 +65,19 @@ class Challenge: Object, Codable {
     dynamic var id: String?
     
     var trick: Trick?
+    
+    enum CodingKeys: String, CodingKey {
+         case trick_name
+         case boardShop
+         case startDate
+         case endDate
+         case sponsorImageData
+         case descript
+         case promocode
+         case isDone = "done"
+         case isChallenge = "challenge"
+         case id
+    }
 }
 
 extension User: DTOProtocol {

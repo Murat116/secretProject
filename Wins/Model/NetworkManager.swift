@@ -34,9 +34,9 @@ class NetworkManager: NetworkManagerProtocol {
         
         let urlString = domen + "/users/" + "\(id)"
         
-        AF.request(urlString).responseDecodable(of: UserDTO.self) { response in
+        AF.request(urlString).responseDecodable(of: User.self) { response in
             
-            completion(response.value?.entity as? User, response.error)
+            completion(response.value, response.error)
         }
     }
     
