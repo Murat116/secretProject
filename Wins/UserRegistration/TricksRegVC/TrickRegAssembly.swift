@@ -9,7 +9,8 @@
 import UIKit
 
 class TrickRegAssembly {
-    class func configureModule() -> TricksRegVC{
+    class func configureModule() -> TricksRegVC {
+        
         let view = TricksRegVC()
         
         let presenter = TrickRegPresentor()

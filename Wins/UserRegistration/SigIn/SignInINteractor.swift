@@ -8,7 +8,7 @@
 
 import Foundation
 
-class SignInInteractor: SignInInteractorInput{
+class SignInInteractor: SignInInteractorInput {
     func createUser(login: String, password: String) {
         DataManager._shared.createUser(login: login, password: password, sportType: .none)
     }

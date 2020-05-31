@@ -8,7 +8,8 @@
 
 import UIKit
 
-class RegHeaderView: UIView{
+class RegHeaderView: UIView {
+    
     private var cross = UILabel()
     private var steps = UILabel()
     private var progressBar = UIProgressView()
@@ -30,8 +31,8 @@ class RegHeaderView: UIView{
         self.configure(step: step)
     }
     
-    internal var title: String = ""{
-        didSet{
+    internal var title: String = "" {
+        didSet {
             self.titleVC.text = self.title
         }
     }
@@ -40,7 +41,8 @@ class RegHeaderView: UIView{
         fatalError("init(coder:) has not been implemented")
     }
     
-    private func setUp(){
+    private func setUp() {
+        
         self.parentView.addSubview(self)
         self.translatesAutoresizingMaskIntoConstraints = false
         
@@ -98,7 +100,8 @@ class RegHeaderView: UIView{
 
     }
 
-    func configure(step: Steps){
+    func configure(step: Steps) {
+        
         self.steps.text = step.text
         self.progressBar.progress = step.rawValue
         self.titleVC.text = step.title
@@ -111,17 +114,18 @@ class RegHeaderView: UIView{
 }
 
 
-enum Steps: Float, CaseIterable{
+enum Steps: Float, CaseIterable {
+    
     case sighIn = 0
     case sport = 0.33
     case userInfo = 0.66
     case tricks = 1.0
 
-    var text: String{
+    var text: String {
         return "шаг \(Int(self.rawValue / 0.33))/3"
     }
 
-    var title: String{
+    var title: String {
         switch self {
         case .sighIn:
             return "Registration"//"Регистрация"

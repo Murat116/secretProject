@@ -11,11 +11,10 @@ import Foundation
 class UserInfoRegRouter{
     
     weak var view: UserInfoRegistrationVC!
-    
 }
 
 import UIKit
-extension UserInfoRegRouter: UserInfoRegRouterProtocolInput{
+extension UserInfoRegRouter: UserInfoRegRouterProtocolInput {
     func openAlert(alert: UIAlertController) {
         self.view.present(alert, animated: true, completion: nil)
     }
@@ -28,17 +27,22 @@ extension UserInfoRegRouter: UserInfoRegRouterProtocolInput{
         TricksRegVC.show(parent: self.view)
     }
     
-    func endRegistration(){
+    func endRegistration() {
         //        self.viewController.sportRegRouter?.endRegistration()
     }
     
     func openPhotoPicker() {
-        //
+        //UserInfoImagePickerVC.show(parent: self.view)
+        self.view.showImagePicker()
+    }
+    
+    func openCameraPicker() {
+        self.view.showCameraPicker()
     }
     
     func openSportVC() {
         SportsRegVC.show(parent: self.view)
     }
     
-    
 }
+

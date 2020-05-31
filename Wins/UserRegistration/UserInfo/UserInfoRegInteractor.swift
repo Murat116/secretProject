@@ -7,28 +7,35 @@
 //
 
 import Foundation
+import UIKit
 
-
-class UserInfoRegInteractor{
+class UserInfoRegInteractor {
     
     var user: User? = nil
     
     weak var output: UserInfoRegInteractorProtocolOutput!
     
-    func getUserData(){
-        self.user = DataManager._shared.getUser()
+    func getUserData() {
+        
+        self.user = DataManager._shared.user
         guard let user = self.user else { return }
         self.output.configureView(with: user)
     }
 }
 
-extension UserInfoRegInteractor: UserInfoRegInteractorProtocolInput{
+extension UserInfoRegInteractor: UserInfoRegInteractorProtocolInput {
     func saveUserData(with name: String, city: String, age: String, isReg: Bool) {
+        
         let dataMng = DataManager._shared
+        
         dataMng.saveName(name)
         dataMng.saveCity(city )
         dataMng.saveAge(Int(age) ?? 0)
         dataMng.saveStand(isReg)
+    }
+    
+    func setUserImage(image: UIImage) {
+        DataManager._shared.saveImage(image)
     }
 }
 
