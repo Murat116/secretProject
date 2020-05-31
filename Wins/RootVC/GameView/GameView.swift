@@ -60,7 +60,7 @@ class GameView: UIView{
             stab += 1
             dif -= 0.3
             
-            if let challenge = self.chalenges.first(where: {$0.trick?.name == oldTrick.name}){
+            if let challenge = self.chalenges.first(where: {$0.trick_name == oldTrick.name}){
                 self.output.isChallengeDone(challenge, done: true)
             }
         }else{

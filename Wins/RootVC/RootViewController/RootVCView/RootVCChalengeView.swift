@@ -10,7 +10,7 @@ import UIKit
 
 extension RootViewController:  UICollectionViewDelegate, UICollectionViewDataSource{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return self.challenges.filter{!$0.isDone}.count 
+        return self.challenges.filter{!($0.isDone)}.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -21,12 +21,12 @@ extension RootViewController:  UICollectionViewDelegate, UICollectionViewDataSou
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         //guard !(DataManager._shared.user?.chalenges[indexPath.row].isChalenge ?? true) else { return }
-        if !self.challenges[indexPath.row].isChallenge{
+        if !(self.challenges[indexPath.row].isChallenge){
             let view = TurnamentPreviewViewController()
             self.present(view, animated: true, completion: nil)
         }else{
             guard let cell = collectionView.cellForItem(at: indexPath) as? ChalendgeCell else { return }
-            cell.showDescript()
+//            cell.showDescpoript()
         }
     }
 }
@@ -148,11 +148,10 @@ extension RootViewController{
             
             let formatter = DateFormatter()
             formatter.dateFormat = "dd:MM:yyyy"
-            let myStringafd = formatter.string(from: chalenge.startDate)
-            self.isChallenge = chalenge.isChallenge
+            let myStringafd = formatter.string(from: Date(chalenge.startDate))
             
             if chalenge.isChallenge{
-                self.mainLabel.text =  "Today's lucky trick - \n\(chalenge.trick!.name)"
+                self.mainLabel.text =  "Today's lucky trick - \n\(chalenge.trick_name)"
                 self.sponspor.text = chalenge.boardShop
                 
                 self.sponspor.isHidden = self.sponspor.text == ""

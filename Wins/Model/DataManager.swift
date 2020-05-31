@@ -9,9 +9,12 @@
 import Foundation
 import RealmSwift
 
-protocol DataManagerProtocol{
-    
+protocol DataManagerProtocol {
     func createUser(login: String?, password: String?, sportType: SportType)
+}
+
+protocol DataManagerBindingWithNetworkManager {
+    func updateUserBackEnd()
 }
 
 
@@ -42,15 +45,15 @@ class DataManager: DataManagerProtocol {
     
     var allChallanges: [Challenge] {
         
-        guard let chalanges = self.realm?.objects(Challenge.self) else { return []}
-        let arrayOfChalenges = chalanges.filter{$0.isChallenge}.sorted{$0.startDate >  $1.startDate}
-        let arrayOfTurnament = chalanges.filter{!$0.isChallenge}.sorted{$0.startDate > $1.startDate}
+        guard let challenges = self.realm?.objects(Challenge.self) else { return [] }
+        let arrayOfChalenges = challenges.filter{$0.isChallenge}.sorted{$0.startDate >  $1.startDate}
+        let arrayOfTurnament = challenges.filter{!($0.isChallenge)}.sorted{$0.startDate > $1.startDate}
         let array = arrayOfChalenges + arrayOfTurnament
         return array
     }
     
     var actualChallenges: [Challenge] {
-        return self.allChallanges.filter{!$0.isDone}
+        return self.allChallanges.filter{!($0.isDone)}
     }
     
     var doneChallenges: [Challenge] {
@@ -123,7 +126,19 @@ class DataManager: DataManagerProtocol {
 
 extension DataManager {
     
-    func createUser(login: String?, password: String?, sportType: SportType) {
+    func createUser(_ user: User) {
+        
+        do {
+            guard let realm = self.realm else { return }
+            try realm.write {
+                realm.add(user)
+            }
+        } catch {
+            print(error.localizedDescription, "error in createUser")
+        }
+    }
+    
+    func createUser(login: String?, password: String?, sportType: SportType = .skate) {
         
         let tricks = List<Trick>()
         for trick in sportType.tricks {
@@ -151,7 +166,6 @@ extension DataManager {
         } catch {
             print(error.localizedDescription, "error in createUser")
         }
-        
     }
     
     func addDefaultChalenge() {
@@ -161,17 +175,18 @@ extension DataManager {
         
         let kickflipChalenge = Challenge()
         let trick = self.skateTricks.first{ $0.name == "KickFlip"}
+        kickflipChalenge.trick_name = trick?.name ?? "KickFlip"
         kickflipChalenge.trick = trick
         kickflipChalenge.boardShop = ""
-        kickflipChalenge.startDate = Date()
+        kickflipChalenge.startDate = Int(Date.now.ts)
         
         kickflipChalenge.descript = "Welcome chalenge:)"
         kickflipChalenge.isChallenge = true
         kickflipChalenge.sponsorImageData = imageData
         
         let turnamentPreview = Challenge()
-        turnamentPreview.startDate = Date()
-        turnamentPreview.endDate = Date().addingDays(4)
+        turnamentPreview.startDate = Int(Date.now.ts)
+        turnamentPreview.endDate = Int(Date.now.addingDays(4).ts)
         turnamentPreview.isChallenge = false
         
         turnamentPreview.sponsorImageData = imageData
@@ -188,7 +203,6 @@ extension DataManager {
             print(error.localizedDescription, "error in create default chalenge")
         }
         
-        print("saving")
     }
 }
 
@@ -312,7 +326,34 @@ extension DataManager {
                 challenge.isDone = true
             }
         } catch {
-            print(error.localizedDescription, "error in saving User image")
+            print(error.localizedDescription, "error in saving Challenge")
         }
+    }
+    
+    func updateActualChallenges(_ challenges: [Challenge]) {
+        guard let realm = self.realm,
+        let user = self.user else { return }
+        let challengeIn = self.allChallanges
+        for challenge in challenges{
+            guard challengeIn.first(where: { $0.id == challenge.id }) == nil else { continue }
+            do{
+                try realm.write{
+                    realm.add(challenge)
+                    user.challenges.append(challenge)
+                }
+            }catch{
+                print(error.localizedDescription, "error of updating challenges")
+            }
+        }
+    }
+}
+
+extension DataManager: DataManagerBindingWithNetworkManager {
+    
+    func updateUserBackEnd() {
+        
+        guard let userDTO = self.user?.dto as? UserDTO else { return }
+        
+        NetworkManager._shared.saveUser(user: userDTO)
     }
 }
