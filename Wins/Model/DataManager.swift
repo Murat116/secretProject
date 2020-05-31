@@ -352,8 +352,8 @@ extension DataManager: DataManagerBindingWithNetworkManager {
     
     func updateUserBackEnd() {
         
-        guard let userDTO = self.user?.dto as? UserDTO else { return }
+        guard let user = self.user else { return }
         
-        NetworkManager._shared.saveUser(user: userDTO)
+        NetworkManager._shared.saveUser(user: user)
     }
 }
