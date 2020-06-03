@@ -262,8 +262,8 @@ enum SkateTricks: Int, CaseIterable {
 
 enum SportType: String {
     case none = ""
-    case skate = "Skate"
-    case scoot = "Scoot"
+    case skate = "skate"
+    case scoot = "scoot"
     case bmx = "BMX"
     
     var image: UIImage? {
