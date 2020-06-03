@@ -32,7 +32,7 @@ class DoneChallengeVC: UIViewController{
     
     func setUp(){
         self.navigationController?.navigationBar.isHidden = false
-        self.title = "Your's done challange"
+        self.title = "Your's done challenges"
         self.navigationController?.navigationBar.prefersLargeTitles = true
         
         let backLabel = UIButton()
@@ -179,7 +179,7 @@ extension DoneChallengeVC{
             self.label.textColor = .lightGray
             self.label.font = UIFont.systemFont(ofSize: 12)
             
-            self.label.text = "Chalange"
+            self.label.text = "Challenge"
             
         }
     }

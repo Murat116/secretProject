@@ -36,7 +36,7 @@ class SignInRouter: SignInRouterInput {
     func showLoader() {
         
         self.loader.frame = self.view.view.frame
-        self.loader.backgroundColor = .white
+        self.loader.backgroundColor = UIColor(hex: "FEBB18")
         
         self.view.view.addSubview(loader)
     }

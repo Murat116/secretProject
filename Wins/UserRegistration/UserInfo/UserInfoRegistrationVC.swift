@@ -218,7 +218,7 @@ extension UserInfoRegistrationVC {
         self.avatarBtn.setImage(self.image, for: .normal)
         self.avatarBtn.imageView?.tintColor = UIColor(red: 0.314, green: 0.314, blue: 0.314, alpha: 1.0)
         
-        self.avatarBtn.contentEdgeInsets = UIEdgeInsets(top: 2, left: 2, bottom: 2, right: 8 )
+        self.avatarBtn.contentEdgeInsets = UIEdgeInsets(top: 2, left: 2, bottom: 2, right: 2 )
         
         self.view.addSubview(self.addAvatarBtn)
         self.addAvatarBtn.addTarget(self, action: #selector(self.addAvatarBtnIsSelected), for: .touchUpInside)
@@ -313,7 +313,7 @@ extension UserInfoRegistrationVC {
             }
         }))
         
-        alert.addAction(UIAlertAction(title: "Maybe later", style: .cancel, handler: nil))
+        alert.addAction(UIAlertAction(title: "May be later", style: .cancel, handler: nil))
         self.output.openAlert(alert: alert)
     }
     
