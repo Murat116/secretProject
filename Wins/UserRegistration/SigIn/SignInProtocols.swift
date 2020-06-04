@@ -25,12 +25,12 @@ internal protocol SignInRouterInput:class {
     func nextVc()
     func signIn()
     func showSignAlert(text: String)
-<<<<<<< HEAD
+
     func showPrivacyPolicy()
-=======
+
     func showLoader()
     func closeLoader()
->>>>>>> dev
+
 }
 
 internal protocol SignInInteractorInput:class {

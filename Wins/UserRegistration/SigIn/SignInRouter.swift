@@ -32,14 +32,14 @@ class SignInRouter: SignInRouterInput {
         view.present(alert, animated: true, completion: nil)
     }
     
-<<<<<<< HEAD
+
     func showPrivacyPolicy() {
         guard let url = URL(string: "http://winsbackend.us-east-2.elasticbeanstalk.com/privacy_policy.html") else { return }
         let view = WebViewController(url: url)
         self.view.present(view, animated: true, completion: nil)
     }
     
-=======
+
     var loader = UIView()
     
     func showLoader() {
@@ -53,5 +53,5 @@ class SignInRouter: SignInRouterInput {
     func closeLoader() {
         self.loader.removeFromSuperview()
     }
->>>>>>> dev
+
 }

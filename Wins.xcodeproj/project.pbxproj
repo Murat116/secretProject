@@ -71,6 +71,7 @@
 		5CFBDB3C2448C58300588978 /* PodFile in Resources */ = {isa = PBXBuildFile; fileRef = 5CFBDB3B2448C58300588978 /* PodFile */; };
 		76837F62DA2DC1F2098E549E /* Pods_Wins.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 63D750BBCBA4F1568B123A58 /* Pods_Wins.framework */; };
 		7D4DEF722489714A0020107B /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D4DEF712489714A0020107B /* WebViewController.swift */; };
+		7DB5C52C2489A9D40095BE18 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7DB5C52B2489A9D40095BE18 /* Default-568h@2x.png */; };
 		7DC4004E245ABFEE007301EC /* ScreenTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DC4004D245ABFEE007301EC /* ScreenTheme.swift */; };
 		83A13840246617160020090E /* BoolRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83A1383F246617160020090E /* BoolRequest.swift */; };
 		83CDAEF9247AF6F700F9ECDA /* EntityProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83CDAEF8247AF6F700F9ECDA /* EntityProtocol.swift */; };
@@ -151,6 +152,7 @@
 		5CFBDB3B2448C58300588978 /* PodFile */ = {isa = PBXFileReference; lastKnownFileType = text; path = PodFile; sourceTree = "<group>"; };
 		63D750BBCBA4F1568B123A58 /* Pods_Wins.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Wins.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7D4DEF712489714A0020107B /* WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
+		7DB5C52B2489A9D40095BE18 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		7DC4004D245ABFEE007301EC /* ScreenTheme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScreenTheme.swift; sourceTree = "<group>"; };
 		83A1383F246617160020090E /* BoolRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoolRequest.swift; sourceTree = "<group>"; };
 		83CDAEF8247AF6F700F9ECDA /* EntityProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntityProtocol.swift; sourceTree = "<group>"; };
@@ -177,6 +179,7 @@
 		45107DE9241FEC5F007A978D = {
 			isa = PBXGroup;
 			children = (
+				7DB5C52B2489A9D40095BE18 /* Default-568h@2x.png */,
 				5CFBDB3B2448C58300588978 /* PodFile */,
 				45107DF4241FEC5F007A978D /* Wins */,
 				45107DF3241FEC5F007A978D /* Products */,
@@ -470,6 +473,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5CFBDB3C2448C58300588978 /* PodFile in Resources */,
+				7DB5C52C2489A9D40095BE18 /* Default-568h@2x.png in Resources */,
 				45107E02241FEC64007A978D /* LaunchScreen.storyboard in Resources */,
 				45107DFF241FEC64007A978D /* Assets.xcassets in Resources */,
 			);
@@ -731,7 +735,7 @@
 			baseConfigurationReference = 580D8E3408BCDA387F5E4976 /* Pods-Wins.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_TEAM = P5ZY6F8UKU;
@@ -744,7 +748,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.hopeTo.Wins;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = Roman;
+				PROVISIONING_PROFILE_SPECIFIER = "Profile for Alexander";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -755,7 +759,7 @@
 			baseConfigurationReference = 42BDF2F513D222C6CE80DAD3 /* Pods-Wins.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_TEAM = P5ZY6F8UKU;
@@ -768,7 +772,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.hopeTo.Wins;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = Roman;
+				PROVISIONING_PROFILE_SPECIFIER = "Profile for Alexander";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
