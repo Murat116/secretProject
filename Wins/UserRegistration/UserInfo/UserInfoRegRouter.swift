@@ -16,8 +16,7 @@ class UserInfoRegRouter{
 import UIKit
 extension UserInfoRegRouter: UserInfoRegRouterProtocolInput {
     func showPrivacyPolicy() {
-        guard let url = URL(string: "http://winsbackend.us-east-2.elasticbeanstalk.com/support") else { return }
-        let view = WebViewController(url: url)
+        let view = WebViewController(urlType: .support)
         self.view.present(view, animated: true, completion: nil)
     }
     

@@ -34,8 +34,8 @@ class SignInRouter: SignInRouterInput {
     
 
     func showPrivacyPolicy() {
-        guard let url = URL(string: "http://winsbackend.us-east-2.elasticbeanstalk.com/privacy_policy.html") else { return }
-        let view = WebViewController(url: url)
+        
+        let view = WebViewController(urlType: .privacy)
         self.view.present(view, animated: true, completion: nil)
     }
     

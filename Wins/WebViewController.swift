@@ -17,9 +17,15 @@ class WebViewController: UIViewController {
     private var goBackButton = UIButton()
     private var bar: UIView!
     
-    init(url: URL) {
-        self.url = url
+    init(urlType: URLType) {
+        switch urlType {
+        case .privacy:
+            self.url = URL(string: "http://winsbackend.us-east-2.elasticbeanstalk.com/privacy_policy.html")
+        case .support:
+            self.url = URL(string: "http://winsbackend.us-east-2.elasticbeanstalk.com/support")
+        }
         super.init(nibName: nil, bundle: nil)
+        self.setupUI()
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -28,17 +34,15 @@ class WebViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        wKWebView = WKWebView(frame: createWKWebViewFrame(size: view.frame.size))
-        self.setupUI()
-        wKWebView.navigationDelegate = self
-        wKWebView.uiDelegate = self
+        
+        self.wKWebView = WKWebView(frame: createWKWebViewFrame(size: view.frame.size))
+        self.wKWebView.navigationDelegate = self
+        self.wKWebView.uiDelegate = self
+        
         let request = URLRequest(url: url)
-        wKWebView.load(request)
-        wKWebView.allowsBackForwardNavigationGestures = true
-    }
-
-    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
-        wKWebView.frame = createWKWebViewFrame(size: size)
+        self.wKWebView.load(request)
+        
+        self.wKWebView.allowsBackForwardNavigationGestures = true
     }
 
 }
@@ -68,8 +72,6 @@ extension WebViewController {
         self.goBackButton.titleLabel?.font = UIFont.systemFont(ofSize: 17)
         
         self.view.addSubview(wKWebView)
-        
-        wKWebView.scrollView.contentSize.width = 1.0
     }
     
     @objc func close() {
@@ -78,9 +80,6 @@ extension WebViewController {
 }
 
 extension WebViewController: WKNavigationDelegate {
-    func webView(_ webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!) {
-        // show indicator
-    }
 
     func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
         
@@ -88,6 +87,7 @@ extension WebViewController: WKNavigationDelegate {
     }
     
     func webView(_ webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation!, withError error: Error) {
+        print(error)
     }
 }
 
@@ -98,4 +98,8 @@ extension WebViewController: WKUIDelegate {
         }
         return nil
     }
+}
+
+enum URLType {
+    case support, privacy
 }
