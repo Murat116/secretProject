@@ -51,10 +51,10 @@ class TotalStats: Object, Codable {
 @objcMembers
 class Challenge: Object, Codable {
     
-    dynamic var trick: Trick? = Trick()
+    dynamic var trick_name: String = ""
     dynamic var boardShop: String = "Without sponsor("
-    dynamic var startDate: Date = Date()
-    dynamic var endDate: Date?
+    dynamic var startDate: Int = Int(Date.now.ts)
+    dynamic var endDate: Int?
     dynamic var sponsorImageData: Data? = nil
     dynamic var descript: String? = ""
 
@@ -63,6 +63,21 @@ class Challenge: Object, Codable {
     
     dynamic var isChallenge: Bool = true
     dynamic var id: String?
+    
+    var trick: Trick?
+    
+    enum CodingKeys: String, CodingKey {
+         case trick_name
+         case boardShop
+         case startDate
+         case endDate
+         case sponsorImageData
+         case descript
+         case promocode
+         case isDone = "done"
+         case isChallenge = "challenge"
+         case id
+    }
 }
 
 extension User: DTOProtocol {
@@ -125,10 +140,10 @@ extension Challenge: DTOProtocol {
     
     var dto: Any {
         
-        return ChallengeDTO( trick: self.trick?.dto as! TrickDTO,
+        return ChallengeDTO( trick_name: self.trick_name,
                              boardShop: self.boardShop,
                              startDate: self.startDate,
-                             isDone: self.isDone,
+                             isDone: self.isDone ,
                              isChallenge: self.isChallenge)
     }
 }

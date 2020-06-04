@@ -14,14 +14,15 @@ class GameViewAssembly{
         
         let presentor = GameViewPresentor()
         let interactor = GameViewInteractor()
-        
+        let router = GameViewRouter()
         
         view.output = presentor
         interactor.output = presentor
-        
+        router.view = view
         
         presentor.view = view
         presentor.interactor = interactor
+        presentor.router = router
         
         interactor.startConfigure()
         

@@ -2,6 +2,7 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+<<<<<<< HEAD
 	<key>NSMicrophoneUsageDescription</key>
 	<string>Allow this to use microphone</string>
 	<key>NSSpeechRecognitionUsageDescription</key>
@@ -29,6 +30,8 @@
 	<string>We need your location to get chalenge from your boardshoop</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>We want to know where you are</string>
+=======
+>>>>>>> dev
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleExecutable</key>
@@ -51,6 +54,40 @@
 	<dict/>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSAppTransportSecurity</key>
+	<dict>
+		<key>NSAllowsArbitraryLoads</key>
+		<true/>
+		<key>NSExceptionDomains</key>
+		<dict>
+			<key>http://localhost</key>
+			<dict>
+				<key>NSExceptionAllowsInsecureHTTPLoads</key>
+				<true/>
+				<key>NSIncludesSubdomains</key>
+				<true/>
+			</dict>
+			<key>http://winsbackend.us-east-2.elasticbeanstalk.com</key>
+			<dict>
+				<key>NSExceptionAllowsInsecureHTTPLoads</key>
+				<true/>
+				<key>NSIncludesSubdomains</key>
+				<true/>
+			</dict>
+		</dict>
+	</dict>
+	<key>NSCameraUsageDescription</key>
+	<string>Allow this to use camera</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>We need your location to get chalenge from your boardshoop</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>We want to know where you are</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>Allow this to use microphone</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Allow this to use Photo Album</string>
+	<key>NSSpeechRecognitionUsageDescription</key>
+	<string>Allow this to voice control</string>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>

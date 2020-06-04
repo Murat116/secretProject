@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import RealmSwift
 
 struct TrickDTO: Codable {
     
@@ -15,4 +16,20 @@ struct TrickDTO: Codable {
    var complexity: Float
    var stability: Int
    var tries: Int
+}
+
+extension TrickDTO: EntityProtocol {
+    
+    var entity: Object {
+        
+        let trick = Trick()
+        
+        trick.id = self.id
+        trick.name = self.name
+        trick.complexity = self.complexity
+        trick.stability = self.stability
+        trick.tries = self.tries
+        
+        return trick
+    }
 }

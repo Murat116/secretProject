@@ -10,7 +10,7 @@ import UIKit
 
 extension RootViewController:  UICollectionViewDelegate, UICollectionViewDataSource{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return self.challenges.filter{!$0.isDone}.count 
+        return self.challenges.filter{!($0.isDone)}.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -21,16 +21,18 @@ extension RootViewController:  UICollectionViewDelegate, UICollectionViewDataSou
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         //guard !(DataManager._shared.user?.chalenges[indexPath.row].isChalenge ?? true) else { return }
-        if indexPath.row == 1{
+        if !(self.challenges[indexPath.row].isChallenge){
             let view = TurnamentPreviewViewController()
             self.present(view, animated: true, completion: nil)
+        }else{
+            guard let cell = collectionView.cellForItem(at: indexPath) as? ChalendgeCell else { return }
+//            cell.showDescpoript()
         }
-        //открываем страицу с турнирами
     }
 }
 
 extension RootViewController: UICollectionViewDelegateFlowLayout{
-
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: 280, height: 135)
     }
@@ -42,8 +44,13 @@ extension RootViewController{
         private var backgoundImage = UIImageView()
         private var sponspor = UILabel()
         private var date = UILabel()
-        let sponsporLabel = UILabel()
-        let dateLabel = UILabel()
+        private let sponsporLabel = UILabel()
+        private let dateLabel = UILabel()
+        
+        private var isChallenge: Bool = false
+        
+        private let blur = UIVisualEffectView(effect: UIBlurEffect(style: .dark))
+        private var descriptionLabel = UILabel()
         
         override init(frame: CGRect) {
             super.init(frame: frame)
@@ -75,7 +82,7 @@ extension RootViewController{
             self.mainLabel.numberOfLines = 2
             self.mainLabel.minimumScaleFactor = 0.5
             
-           
+            
             self.addSubview(self.sponsporLabel)
             self.sponsporLabel.translatesAutoresizingMaskIntoConstraints = false
             self.sponsporLabel.leftAnchor.constraint(equalTo: self.mainLabel.leftAnchor).isActive = true
@@ -111,17 +118,45 @@ extension RootViewController{
             self.dateLabel.text = "Date"
             self.dateLabel.textColor = UIColor(red: 0.769, green: 0.769, blue: 0.769, alpha: 1)
             self.dateLabel.font = UIFont.systemFont(ofSize: 10)
+            
+            self.layoutIfNeeded()
+            
+           
+            self.blur.frame = self.frame
+            self.addSubview(blur)
+            self.blur.isHidden = true
+            
+            self.addSubview(self.descriptionLabel)
+            self.descriptionLabel.translatesAutoresizingMaskIntoConstraints = false
+            self.descriptionLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
+            self.descriptionLabel.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
+            self.descriptionLabel.heightAnchor.constraint(equalTo: self.heightAnchor, constant: -20).isActive = true
+            self.descriptionLabel.widthAnchor.constraint(equalTo: self.widthAnchor, constant: -20).isActive = true
+            
+            self.descriptionLabel.font = UIFont.systemFont(ofSize: 15)
+            self.descriptionLabel.lineBreakMode = .byWordWrapping
+            self.descriptionLabel.numberOfLines = 3
+            self.descriptionLabel.textColor = .white
+            
+            self.descriptionLabel.text = "Done this trick and u our freind give for u some gife"
+            
+            self.descriptionLabel.isHidden = true
+            
         }
         
         func configure(with chalenge: Challenge){
             
             let formatter = DateFormatter()
             formatter.dateFormat = "dd:MM:yyyy"
-            let myStringafd = formatter.string(from: chalenge.startDate)
+            let myStringafd = formatter.string(from: Date(chalenge.startDate))
             
             if chalenge.isChallenge{
-                self.mainLabel.text =  "Today's lucky trick - \n\(chalenge.trick!.name)"
+                self.mainLabel.text =  "Today's lucky trick - \n\(chalenge.trick_name)"
                 self.sponspor.text = chalenge.boardShop
+                
+                self.sponspor.isHidden = self.sponspor.text == ""
+                self.sponsporLabel.isHidden = self.sponspor.text == ""
+                
                 self.date.text = myStringafd
             }else{
                 self.mainLabel.text = "Turnament"
@@ -130,13 +165,22 @@ extension RootViewController{
                 self.sponsporLabel.isHidden = true
                 self.dateLabel.isHidden = true
             }
-        
+            
             if let imageData = chalenge.sponsorImageData, let image = UIImage(data: imageData){
                 self.backgoundImage.image = image
             }else{
                 self.backgoundImage.image = SportType.skate.image
             }
         }
+        
+        fileprivate func showDescript(){
+            guard self.isChallenge else { return }
+            UIView.animate(withDuration: 0.2) {
+                self.blur.isHidden = !self.blur.isHidden
+                self.descriptionLabel.isHidden = !self.descriptionLabel.isHidden
+            }
+        }
+        
     }
 }
 

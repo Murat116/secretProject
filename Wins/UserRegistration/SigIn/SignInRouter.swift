@@ -11,7 +11,6 @@ import WebKit
 
 class SignInRouter: SignInRouterInput {
     
-    
     func signIn() {
         
         let viewController = RootVCRegAssembly.configureModule()
@@ -33,10 +32,26 @@ class SignInRouter: SignInRouterInput {
         view.present(alert, animated: true, completion: nil)
     }
     
+<<<<<<< HEAD
     func showPrivacyPolicy() {
         guard let url = URL(string: "http://winsbackend.us-east-2.elasticbeanstalk.com/privacy_policy.html") else { return }
         let view = WebViewController(url: url)
         self.view.present(view, animated: true, completion: nil)
     }
     
+=======
+    var loader = UIView()
+    
+    func showLoader() {
+        
+        self.loader.frame = self.view.view.frame
+        self.loader.backgroundColor = .white
+        
+        self.view.view.addSubview(loader)
+    }
+    
+    func closeLoader() {
+        self.loader.removeFromSuperview()
+    }
+>>>>>>> dev
 }

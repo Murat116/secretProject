@@ -22,8 +22,6 @@ class DoneChallengeVC: UIViewController{
     
     override func viewDidLoad() {
         super.viewDidLoad()
-       
-        
         self.setUp()
     }
     
@@ -247,7 +245,7 @@ extension DoneChallengeVC{
         
         fileprivate func configure(with doneChallenge: Challenge){
             self.trickLabel.text = doneChallenge.trick?.name
-            self.dateLabel.text = doneChallenge.startDate.string
+            self.dateLabel.text = Date(doneChallenge.startDate).string
         }
         
         override init(frame: CGRect) {

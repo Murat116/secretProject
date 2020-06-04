@@ -30,3 +30,7 @@ protocol GameViewInteractorInput: class{
     func isChallengeDone(_ challenge: Challenge, done: Bool)
     func recountTechnocalSkill()
 }
+
+protocol GameViewRouterInput: class{
+    func showInfo()
+}

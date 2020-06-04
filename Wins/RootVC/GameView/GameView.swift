@@ -21,12 +21,14 @@ class GameView: UIView{
     private var recognitionTask: SFSpeechRecognitionTask?
     private let audioEngine = AVAudioEngine()
     
+    deinit {
+        print("GameView deinit")
+    }
+    
     private var yesBtn = UIButton()
     private var noBtn = UIButton()
     
-    weak var controller: RootViewController!
-    
-    private var infoBtn = UIButton()
+    internal var infoBtn = UIButton()
     private var speechSwitch = UISwitch()
     private var speechLabel = UILabel()
     
@@ -54,20 +56,20 @@ class GameView: UIView{
     @objc func nextTrick(btn: UIButton){
         
         let oldTrick = self.tricks[self.trickCount]
-                var stab = oldTrick.stability
-                var dif = oldTrick.complexity
-                if self.noBtn != btn {
-                    stab += 1
-                    dif -= 0.3
-                    
-                    if let challenge = self.chalenges.first(where: {$0.trick?.name == oldTrick.name}){
-                        self.output.isChallengeDone(challenge, done: true)
-                    }
-                }else{
-                    stab -= 1
-                    dif += 0.3
-                }
-                self.output.saveChanges(of: oldTrick, with: dif, and: stab)
+        var stab = oldTrick.stability
+        var dif = oldTrick.complexity
+        if self.noBtn != btn {
+            stab += 1
+            dif -= 0.3
+            
+            if let challenge = self.chalenges.first(where: {$0.trick_name == oldTrick.name}){
+                self.output.isChallengeDone(challenge, done: true)
+            }
+        }else{
+            stab -= 1
+            dif += 0.3
+        }
+        self.output.saveChanges(of: oldTrick, with: dif, and: stab)
         
         self.trickCount += 1
         guard self.trickCount < 10 else {
@@ -186,42 +188,46 @@ class GameView: UIView{
         self.progressBar.progressTintColor = UIColor(hex: "214FEF")
         self.progressBar.progress = 0.1
         self.progressBar.backgroundColor = UIColor(hex: "C4C4C4")
-    
+        
         self.addSubview(self.speechSwitch)
-        self.speechSwitch.onTintColor = UIColor(hex: "214FEF")
         self.speechSwitch.translatesAutoresizingMaskIntoConstraints = false
         self.speechSwitch.topAnchor.constraint(equalTo: self.noBtn.bottomAnchor, constant: 28).isActive = true
         self.speechSwitch.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -33).isActive = true
         self.speechSwitch.isOn = false
         self.speechSwitch.addTarget(self, action: #selector(self.changeSpeechState), for: .touchUpInside)
         
+        
         self.addSubview(self.infoBtn)
         self.infoBtn.translatesAutoresizingMaskIntoConstraints = false
-        self.infoBtn.addTarget(self, action: #selector(self.infoTapped), for: .touchUpInside)
         self.infoBtn.topAnchor.constraint(equalTo: self.noBtn.bottomAnchor, constant: 28).isActive = true
         self.infoBtn.rightAnchor.constraint(equalTo: self.speechSwitch.leftAnchor, constant: -13).isActive = true
+        self.infoBtn.heightAnchor.constraint(equalTo: self.speechSwitch.heightAnchor, constant: 0).isActive = true
+        self.infoBtn.widthAnchor.constraint(equalTo: self.speechSwitch.heightAnchor, constant: 0).isActive = true
+        
+        self.infoBtn.addTarget(self, action: #selector(self.infoTapped), for: .touchUpInside)
+        
+        self.infoBtn.tintColor = UIColor(hex: "FFFFFF")
         self.infoBtn.setTitle("?", for: .normal)
         self.infoBtn.setTitleColor(UIColor(hex: "909090"), for: .normal)
         self.infoBtn.setBackgroundImage(UIImage(systemName: "circle.fill"), for: .normal)
-        self.infoBtn.heightAnchor.constraint(equalTo: self.speechSwitch.heightAnchor, constant: 0).isActive = true
-        self.infoBtn.widthAnchor.constraint(equalTo: self.speechSwitch.heightAnchor, constant: 0).isActive = true
-        self.infoBtn.tintColor = UIColor(hex: "FFFFFF")
+        
         
         self.addSubview(self.speechLabel)
         self.speechLabel.translatesAutoresizingMaskIntoConstraints = false
         self.speechLabel.topAnchor.constraint(equalTo: self.speechSwitch.topAnchor, constant: 0).isActive = true
         self.speechLabel.rightAnchor.constraint(equalTo: self.infoBtn.leftAnchor, constant: -15).isActive = true
         self.speechLabel.centerYAnchor.constraint(equalTo: self.infoBtn.centerYAnchor, constant: 0).isActive = true
+        
         self.speechLabel.text = "Speech control"
         self.speechLabel.textColor = UIColor(hex: "909090")
         self.speechLabel.font = UIFont.systemFont(ofSize: 14)
         
         self.layoutIfNeeded()
-
-        let y = self.trickCountLabel.frame.origin.y
-        let height = self.yesBtn.frame.maxY - y
         
-        playView.frame = CGRect(x: 0, y: y - 20, width: self.frame.width, height: height + 20)
+        let y = self.progressBar.frame.origin.y
+        let height = self.speechLabel.frame.maxY
+        
+        playView.frame = CGRect(x: 0, y: y - 20, width: self.frame.width, height: height + 40 - y)
     }
 }
 
@@ -238,6 +244,10 @@ extension GameView: GameViewViewInput{
     
     @objc func infoTapped() {
         self.output.infoTapped()
+    }
+    
+    @objc func speechOn(){
+        
     }
 }
 
@@ -326,4 +336,21 @@ extension GameView: SFSpeechRecognizerDelegate {
         self.audioEngine.stop()
         self.audioEngine.inputNode.removeTap(onBus: 0)
     }
+}
+
+extension GameView: UIPopoverPresentationControllerDelegate{
+    //UIPopoverPresentationControllerDelegate inherits from UIAdaptivePresentationControllerDelegate, we will use this method to define the presentation style for popover presentation controller
+    func adaptivePresentationStyle(for controller: UIPresentationController) -> UIModalPresentationStyle {
+        return .none
+    }
+    
+    //UIPopoverPresentationControllerDelegate
+    func popoverPresentationControllerDidDismissPopover(_ popoverPresentationController: UIPopoverPresentationController) {
+        
+    }
+    
+    func popoverPresentationControllerShouldDismissPopover(_ popoverPresentationController: UIPopoverPresentationController) -> Bool {
+        return true
+    }
+    
 }
