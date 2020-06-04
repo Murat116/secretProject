@@ -20,6 +20,7 @@ class SignInPresentor {
 }
 
 extension SignInPresentor: SignInViewOutput {
+    
     func showSignAlert(text: String) {
         self.router.showSignAlert(text: text)
     }
@@ -34,5 +35,10 @@ extension SignInPresentor: SignInViewOutput {
     
     func nextVC() {
         self.router.nextVc()
+    }
+    
+    func privacyPolicyTapped() {
+        self.router.showPrivacyPolicy()
+        //self.view.showPolicy()
     }
 }

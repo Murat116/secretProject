@@ -150,6 +150,16 @@ extension UserInfoRegistrationVC {
             label.textColor = .white
             label.text = "Settings"
             
+            let privacyPolicyBtn = UIButton()
+            self.view.addSubview(privacyPolicyBtn)
+            privacyPolicyBtn.translatesAutoresizingMaskIntoConstraints = false
+            privacyPolicyBtn.centerYAnchor.constraint(equalTo: label.centerYAnchor).isActive = true
+            privacyPolicyBtn.rightAnchor.constraint(equalTo: self.view.rightAnchor, constant: -33).isActive = true
+            
+            privacyPolicyBtn.addTarget(self, action: #selector(self.privacyPolicyAction), for: .touchUpInside)
+            privacyPolicyBtn.setImage(UIImage(systemName: "info.circle.fill"), for: .normal)
+            privacyPolicyBtn.tintColor = .white
+            
             return label.bottomAnchor
         }
     }
@@ -218,7 +228,7 @@ extension UserInfoRegistrationVC {
         self.avatarBtn.setImage(self.image, for: .normal)
         self.avatarBtn.imageView?.tintColor = UIColor(red: 0.314, green: 0.314, blue: 0.314, alpha: 1.0)
         
-        self.avatarBtn.contentEdgeInsets = UIEdgeInsets(top: 2, left: 2, bottom: 2, right: 8 )
+        self.avatarBtn.contentEdgeInsets = UIEdgeInsets(top: 2, left: 2, bottom: 2, right: 2 )
         
         self.view.addSubview(self.addAvatarBtn)
         self.addAvatarBtn.addTarget(self, action: #selector(self.addAvatarBtnIsSelected), for: .touchUpInside)
@@ -315,6 +325,10 @@ extension UserInfoRegistrationVC {
         
         alert.addAction(UIAlertAction(title: "Maybe later", style: .cancel, handler: nil))
         self.output.openAlert(alert: alert)
+    }
+    
+    @objc func privacyPolicyAction() {
+        self.output.privacyPolicyTapped()
     }
     
     func addBtn() {

@@ -69,6 +69,7 @@
 		5CEA0DF92447BA760068A975 /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CEA0DF82447BA760068A975 /* UserModel.swift */; };
 		5CFBDB3C2448C58300588978 /* PodFile in Resources */ = {isa = PBXBuildFile; fileRef = 5CFBDB3B2448C58300588978 /* PodFile */; };
 		76837F62DA2DC1F2098E549E /* Pods_Wins.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 63D750BBCBA4F1568B123A58 /* Pods_Wins.framework */; };
+		7D4DEF722489714A0020107B /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D4DEF712489714A0020107B /* WebViewController.swift */; };
 		7DC4004E245ABFEE007301EC /* ScreenTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DC4004D245ABFEE007301EC /* ScreenTheme.swift */; };
 		83E8037A24613AA3004418A8 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83E8037924613AA3004418A8 /* NetworkManager.swift */; };
 		83E8037E2461B9C2004418A8 /* UserDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83E8037D2461B9C1004418A8 /* UserDTO.swift */; };
@@ -145,6 +146,7 @@
 		5CEA0DF82447BA760068A975 /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
 		5CFBDB3B2448C58300588978 /* PodFile */ = {isa = PBXFileReference; lastKnownFileType = text; path = PodFile; sourceTree = "<group>"; };
 		63D750BBCBA4F1568B123A58 /* Pods_Wins.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Wins.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		7D4DEF712489714A0020107B /* WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
 		7DC4004D245ABFEE007301EC /* ScreenTheme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScreenTheme.swift; sourceTree = "<group>"; };
 		83E8037924613AA3004418A8 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		83E8037D2461B9C1004418A8 /* UserDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDTO.swift; sourceTree = "<group>"; };
@@ -200,6 +202,7 @@
 				45107DFE241FEC64007A978D /* Assets.xcassets */,
 				45107E00241FEC64007A978D /* LaunchScreen.storyboard */,
 				45107E03241FEC64007A978D /* Info.plist */,
+				7D4DEF712489714A0020107B /* WebViewController.swift */,
 			);
 			path = Wins;
 			sourceTree = "<group>";
@@ -577,6 +580,7 @@
 				5C8B66F324601F67000AFAEE /* GameViewPresentor.swift in Sources */,
 				5C8B66E4245ECD96000AFAEE /* DoneChallengeProtocols.swift in Sources */,
 				83E803812461BA08004418A8 /* TrickDTO.swift in Sources */,
+				7D4DEF722489714A0020107B /* WebViewController.swift in Sources */,
 				5C87648E2454564E00040B28 /* SignInINteractor.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

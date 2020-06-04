@@ -10,6 +10,7 @@ import Foundation
 
 internal protocol SignInViewInput: class {
     func setUp()
+    
 }
 
 internal protocol SignInViewOutput:class {
@@ -17,12 +18,14 @@ internal protocol SignInViewOutput:class {
     func nextVC()
     func signIn()
     func showSignAlert(text: String)
+    func privacyPolicyTapped()
 }
 
 internal protocol SignInRouterInput:class {
     func nextVc()
     func signIn()
     func showSignAlert(text: String)
+    func showPrivacyPolicy()
 }
 
 internal protocol SignInInteractorInput:class {

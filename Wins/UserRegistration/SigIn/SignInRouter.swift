@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import WebKit
 
 class SignInRouter: SignInRouterInput {
     
@@ -31,4 +32,11 @@ class SignInRouter: SignInRouterInput {
         alert.addAction(UIAlertAction(title: "Try again", style: .default, handler: nil))
         view.present(alert, animated: true, completion: nil)
     }
+    
+    func showPrivacyPolicy() {
+        guard let url = URL(string: "http://winsbackend.us-east-2.elasticbeanstalk.com/privacy_policy.html") else { return }
+        let view = WebViewController(url: url)
+        self.view.present(view, animated: true, completion: nil)
+    }
+    
 }
