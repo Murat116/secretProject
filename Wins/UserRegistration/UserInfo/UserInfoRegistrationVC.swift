@@ -227,7 +227,7 @@ extension UserInfoRegistrationVC {
 
         self.avatarBtn.setImage(self.image, for: .normal)
         self.avatarBtn.imageView?.tintColor = UIColor(red: 0.314, green: 0.314, blue: 0.314, alpha: 1.0)
-        
+        self.avatarBtn.imageView?.layer.cornerRadius = ( self.avatarBtn.imageView?.frame.width ?? 0 ) / 2
         self.avatarBtn.contentEdgeInsets = UIEdgeInsets(top: 2, left: 2, bottom: 2, right: 2 )
         
         self.view.addSubview(self.addAvatarBtn)
