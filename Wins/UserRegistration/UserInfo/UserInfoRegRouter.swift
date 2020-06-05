@@ -15,6 +15,11 @@ class UserInfoRegRouter{
 
 import UIKit
 extension UserInfoRegRouter: UserInfoRegRouterProtocolInput {
+    func showPrivacyPolicy() {
+        let view = WebViewController(urlType: .support)
+        self.view.present(view, animated: true, completion: nil)
+    }
+    
     func openAlert(alert: UIAlertController) {
         self.view.present(alert, animated: true, completion: nil)
     }

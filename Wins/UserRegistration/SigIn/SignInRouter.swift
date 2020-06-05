@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import WebKit
 
 class SignInRouter: SignInRouterInput {
     
@@ -31,6 +32,14 @@ class SignInRouter: SignInRouterInput {
         view.present(alert, animated: true, completion: nil)
     }
     
+
+    func showPrivacyPolicy() {
+        
+        let view = WebViewController(urlType: .privacy)
+        self.view.present(view, animated: true, completion: nil)
+    }
+    
+
     var loader = UIView()
     
     func showLoader() {
@@ -44,4 +53,5 @@ class SignInRouter: SignInRouterInput {
     func closeLoader() {
         self.loader.removeFromSuperview()
     }
+
 }
