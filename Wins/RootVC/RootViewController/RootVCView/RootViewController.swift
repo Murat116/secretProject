@@ -204,6 +204,10 @@ extension RootViewController{
                 let image = UIImage(data: imageData) else { return }
             
             self.avatar.setImage(image, for: [])
+            self.avatar.contentEdgeInsets = .zero
+            self.avatar.layer.masksToBounds = true
+            self.layoutIfNeeded()
+            self.avatar.layer.cornerRadius = (self.avatar.frame.height) / 2
             
         }
         

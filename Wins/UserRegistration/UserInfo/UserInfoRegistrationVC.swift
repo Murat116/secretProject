@@ -87,7 +87,11 @@ extension UserInfoRegistrationVC: UserInfoRegViewProtocolInput {
         self.stand.selectedSegmentIndex = user.standIsRegular ? 0 : 1
         
         if let imageData = user.avatarImageData {
-            self.image = UIImage(data: imageData)?.withRenderingMode(.alwaysTemplate)
+            self.image = UIImage(data: imageData)
+            self.avatarBtn.contentEdgeInsets = .zero
+            self.avatarBtn.imageView?.contentMode = .scaleAspectFit
+            self.avatarBtn.layer.masksToBounds = true
+            self.avatarBtn.layer.cornerRadius = (self.avatarBtn.frame.height) / 2
         } else {
             self.image = UIImage(named: "Registration/avatar")?.withRenderingMode(.alwaysTemplate)
         }
