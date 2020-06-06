@@ -73,7 +73,7 @@ class GameView: UIView{
         
         self.trickCount += 1
         guard self.trickCount < 10 else {
-            self.output.recountTechnocalSkill()
+            self.output.recountTechnicalSkill()
             UIView.animate(withDuration: 0.3) {
                 self.removeFromSuperview()
             }
@@ -94,7 +94,7 @@ class GameView: UIView{
         
         recordAndRecognizeSpeech()
         
-        self.output.speekTrick()
+        self.output.speakTrick()
     }
     
     override func willMove(toSuperview newSuperview: UIView?) {
@@ -231,13 +231,14 @@ class GameView: UIView{
     }
 }
 
-extension GameView: GameViewViewInput{
+extension GameView: GameViewViewInput {
+    
     
     func configure(with tenTricks: [Trick], _ actualChallenges: [Challenge]) {
         self.tricks = tenTricks
         self.trickLabel.text = tenTricks[0].name
         self.chalenges = actualChallenges
-        self.output.speekTrick()
+        self.output.speakTrick()
         self.speechRecognizer?.delegate = self
         self.recordAndRecognizeSpeech()
     }
@@ -253,7 +254,7 @@ extension GameView: GameViewViewInput{
 
 extension GameView {
     
-    func speekTrick () {
+    func speakTrick () {
         guard let trick = trickLabel.text else { return }
         if speechSwitch.isOn {
             let utterance = AVSpeechUtterance(string: trick)
@@ -265,7 +266,7 @@ extension GameView {
     }
     @objc func changeSpeechState() {
         if self.speechSwitch.isOn {
-            self.speekTrick()
+            self.speakTrick()
             self.stopRecognition()
             self.recordAndRecognizeSpeech()
         } else {

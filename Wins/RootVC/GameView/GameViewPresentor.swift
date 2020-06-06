@@ -22,17 +22,18 @@ extension GameViewPresentor: GameViewInteractorOutput{
     }
 }
 
-extension GameViewPresentor: GameViewViewOutput{
-    func speekTrick() {
-        self.view.speekTrick()
+extension GameViewPresentor: GameViewViewOutput {
+    
+    func speakTrick() {
+        self.view.speakTrick()
     }
     
     func infoTapped() {
         self.router.showInfo()
     }
     
-    func recountTechnocalSkill() {
-        self.interactor.recountTechnocalSkill()
+    func recountTechnicalSkill() {
+        self.interactor.recountTechnicalSkill()
     }
     
     func saveChanges(of trick: Trick, with dif: Float, and stab: Int) {

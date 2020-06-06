@@ -21,7 +21,7 @@ extension TrickRegPresentor: TrickRegViewOutput {
         self.interactor.saveUserData(with: trick, newDif, newStab)
     }
     
-    func enRegistration() {
+    func endRegistration() {
         self.router.endRegistration()
     }
 }

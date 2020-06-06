@@ -16,12 +16,13 @@ class DoneChallengePresentor{
 
 import UIKit
 extension DoneChallengePresentor: DoneChallemgeViewOutput{
+    
     func goBack() {
         self.router.goBack()
     }
     
-    func showPromocode(with alert: UIAlertController) {
-        self.router.showPromocode(with: alert)
+    func showPromocode(with promocode: String?) {
+        self.router.showPromocode(with: promocode)
     }
 }
 

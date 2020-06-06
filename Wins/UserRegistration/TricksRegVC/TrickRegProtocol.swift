@@ -9,7 +9,7 @@
 import UIKit
 
 protocol TrickRegViewOutput: class {
-    func enRegistration()
+    func endRegistration()
     func saveChangedTrick(with trick: Trick,_ newDif: Float,_ newStab: Int)
 }
 

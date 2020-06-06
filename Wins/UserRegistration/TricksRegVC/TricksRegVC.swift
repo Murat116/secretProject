@@ -87,7 +87,7 @@ extension TricksRegVC: TrickRegViewInput {
     }
     
     @objc func nextVC() {
-        self.output.enRegistration()
+        self.output.endRegistration()
     }
 }
 

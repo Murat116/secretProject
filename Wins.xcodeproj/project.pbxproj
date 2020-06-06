@@ -73,6 +73,7 @@
 		7DC4004E245ABFEE007301EC /* ScreenTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DC4004D245ABFEE007301EC /* ScreenTheme.swift */; };
 		83A13840246617160020090E /* BoolRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83A1383F246617160020090E /* BoolRequest.swift */; };
 		83CDAEF9247AF6F700F9ECDA /* EntityProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83CDAEF8247AF6F700F9ECDA /* EntityProtocol.swift */; };
+		83D2DCC3248B109500441CEB /* PromocodeDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83D2DCC2248B109400441CEB /* PromocodeDTO.swift */; };
 		83E8037A24613AA3004418A8 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83E8037924613AA3004418A8 /* NetworkManager.swift */; };
 		83E8037E2461B9C2004418A8 /* UserDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83E8037D2461B9C1004418A8 /* UserDTO.swift */; };
 		83E803812461BA08004418A8 /* TrickDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83E803802461BA08004418A8 /* TrickDTO.swift */; };
@@ -152,6 +153,7 @@
 		7DC4004D245ABFEE007301EC /* ScreenTheme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScreenTheme.swift; sourceTree = "<group>"; };
 		83A1383F246617160020090E /* BoolRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoolRequest.swift; sourceTree = "<group>"; };
 		83CDAEF8247AF6F700F9ECDA /* EntityProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntityProtocol.swift; sourceTree = "<group>"; };
+		83D2DCC2248B109400441CEB /* PromocodeDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromocodeDTO.swift; sourceTree = "<group>"; };
 		83E8037924613AA3004418A8 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		83E8037D2461B9C1004418A8 /* UserDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDTO.swift; sourceTree = "<group>"; };
 		83E803802461BA08004418A8 /* TrickDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrickDTO.swift; sourceTree = "<group>"; };
@@ -384,6 +386,7 @@
 				83E803822461BA16004418A8 /* ChallengeDTO.swift */,
 				83E803842461BA29004418A8 /* TotalStatsDTO.swift */,
 				83E803862461C010004418A8 /* DTOProtocol.swift */,
+				83D2DCC2248B109400441CEB /* PromocodeDTO.swift */,
 				83A1383F246617160020090E /* BoolRequest.swift */,
 			);
 			path = DTO;
@@ -527,6 +530,7 @@
 				5C7895F9244BAEF600410A37 /* RootVCChalengeView.swift in Sources */,
 				5C8B66E6245ECEA2000AFAEE /* DoneChallengePresentor.swift in Sources */,
 				83E803832461BA16004418A8 /* ChallengeDTO.swift in Sources */,
+				83D2DCC3248B109500441CEB /* PromocodeDTO.swift in Sources */,
 				5C1C1D7F243D1D1C008BDC58 /* UserInfoRegInteractor.swift in Sources */,
 				5C8B66EA245ED205000AFAEE /* DoneChallengeRouter.swift in Sources */,
 				5C00217D244CBDED00E34793 /* UIColor.extension.swift in Sources */,

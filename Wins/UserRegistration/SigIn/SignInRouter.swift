@@ -28,7 +28,7 @@ class SignInRouter: SignInRouterInput {
     func showSignAlert(text: String) {
         let alert = UIAlertController(title: "Error", message: text, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Try again", style: .default, handler: nil))
-        view.present(alert, animated: true, completion: nil)
+        self.view.present(alert, animated: true, completion: nil)
     }
     
     var loader = UIView()

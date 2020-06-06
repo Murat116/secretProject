@@ -106,8 +106,6 @@ class SignInVIewController: UIViewController {
             self.output.signIn(login: login, password: password)
             return
         }
-        
-//        self.output.nextVC()
     }
     
     @objc func withoutRegAction() {
