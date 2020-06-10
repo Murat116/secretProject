@@ -200,7 +200,8 @@ extension RootViewController{
         
         fileprivate func configure(with user: User){
             self.nameLabel.text = user.login ?? "Guest"
-            self.technicalButton.setTitle("Technical skill: \(user.totalStats?.technicality ?? 0)", for: .normal)
+            let skill = user.totalStats?.technicality ?? 0
+            self.technicalButton.setTitle("Technical skill: \(skill.format(f: ".2"))", for: .normal)
             guard let imageData = user.avatarImageData,
                 let image = UIImage(data: imageData) else { return }
             
