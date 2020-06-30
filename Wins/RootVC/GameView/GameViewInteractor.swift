@@ -149,7 +149,7 @@ class GameViewInteractor{
     }
 }
 
-extension GameViewInteractor: GameViewInteractorInput{
+extension GameViewInteractor: GameViewInteractorInput {
     func saveChanges(of trick: Trick, with dif: Float, and stab: Int) {
         DataManager._shared.lastTenTrick.removeFirst()
         DataManager._shared.lastTenTrick.append(trick)
@@ -160,7 +160,7 @@ extension GameViewInteractor: GameViewInteractorInput{
         DataManager._shared.saveChallenge(challenge)
     }
     
-    func recountTechnocalSkill() {
+    func recountTechnicalSkill() {
         let allTricks = DataManager._shared.skateTricks
         let doneTrick = allTricks.filter{$0.tries >= 1}
         var donesDif: Float = 0

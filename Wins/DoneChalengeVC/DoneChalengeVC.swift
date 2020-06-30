@@ -93,7 +93,7 @@ extension DoneChallengeVC: UICollectionViewDataSource, UICollectionViewDelegate{
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        if !self.doneChallange.isEmpty, self.doneChallange.count - 1 >= indexPath.row{
+        if !self.doneChallange.isEmpty, self.doneChallange.count - 1 >= indexPath.row {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "DoneChallengeCell", for: indexPath) as? DoneChallengeCell
             cell!.configure(with: self.doneChallange[indexPath.row])
             return cell!
@@ -104,15 +104,10 @@ extension DoneChallengeVC: UICollectionViewDataSource, UICollectionViewDelegate{
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        //FIXME: VIPER
-        let alert = UIAlertController(title: "Promocode", message: nil, preferredStyle: .actionSheet)
-        alert.addAction(UIAlertAction(title: "Coppy", style: .default, handler: { (_) in
-            guard let cell = collectionView.cellForItem(at: indexPath) as? DoneChallengeCell,
-                let challenge = cell.challenge else { return }
-            UIPasteboard.general.string = challenge.promocode ?? "Without promocode("
-        }))
-        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-        self.present(alert, animated: true, completion: nil)
+        
+        guard self.doneChallange.count - 1 >= indexPath.row else { return }
+        
+        self.output.showPromocode(with: self.doneChallange[indexPath.row].promocode)
     }
 }
 

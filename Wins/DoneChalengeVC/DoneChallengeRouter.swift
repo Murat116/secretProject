@@ -8,10 +8,18 @@
 
 import UIKit
 
-class DoneChallengeRouter: DoneChallengeRouterInput{
+class DoneChallengeRouter: DoneChallengeRouterInput {
+    
     weak var view: UIViewController!
     
-    func showPromocode(with alert: UIAlertController) {
+    func showPromocode(with promocode: String?) {
+
+        let alert = UIAlertController(title: "Promocode:", message: promocode ?? "Without promocode(", preferredStyle: .actionSheet)
+        alert.addAction(UIAlertAction(title: "Coppy", style: .default, handler: { (_) in
+            UIPasteboard.general.string = promocode
+        }))
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        
         self.view.present(alert, animated: true)
     }
     

@@ -17,7 +17,7 @@ struct ChallengeDTO: Codable {
     var sponsorImageData: Data?
     var descript: String?
 
-    var promocode: String?
+    var promocodes = [PromocodeDTO]()
     var isDone: Bool?
     
     var isChallenge: Bool?
@@ -36,7 +36,7 @@ extension ChallengeDTO: EntityProtocol {
         challenge.endDate = self.endDate
         challenge.sponsorImageData = self.sponsorImageData
         challenge.descript = self.descript
-        challenge.promocode = self.promocode
+        challenge.promocode = self.promocodes.first?.code ?? ""
         challenge.isDone = self.isDone ?? false
         challenge.isChallenge = self.isChallenge ?? true
         challenge.id = self.id

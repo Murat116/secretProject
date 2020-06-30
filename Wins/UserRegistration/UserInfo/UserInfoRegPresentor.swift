@@ -6,6 +6,7 @@
 //  Copyright © 2020 Hope To. All rights reserved.
 //
 
+import UIKit
 
 class UserInfoRegPresentor {
     weak var view: UserInfoRegViewProtocolInput!
@@ -13,7 +14,7 @@ class UserInfoRegPresentor {
     var interactor: UserInfoRegInteractorProtocolInput!
 }
 
-import UIKit
+
 extension UserInfoRegPresentor: UserInfoRegViewProtocolOutput {
     func privacyPolicyTapped() {
         self.router.showPrivacyPolicy()

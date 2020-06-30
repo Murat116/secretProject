@@ -92,13 +92,21 @@ class NetworkManager: NetworkManagerProtocol {
         
         let urlString = domen + "/users/challenges"
         
-        AF.request(urlString, parameters: ["user_id" : idOfUser]).responseDecodable(of: [Challenge].self) { response in
+        AF.request(urlString, parameters: ["user_id" : idOfUser]).responseDecodable(of: [ChallengeDTO].self) { response in
             
             var challenges: [Challenge]?
             
             switch response.result {
             case .success(_):
-                challenges = response.value
+                
+                challenges = [Challenge]()
+                
+                if response.value != nil {
+                    for challengeDTO in response.value! {
+                        challenges?.append(challengeDTO.entity as! Challenge)
+                    }
+                }
+                
                 completion(challenges)
             case .failure(_):
                 print("Challenges is nil")
