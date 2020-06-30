@@ -8,28 +8,70 @@
 
 import Foundation
 
-class SignInPresentor{
+class SignInPresentor {
     weak var view: SignInViewInput!
     var router: SignInRouterInput!
     var interactor: SignInInteractorInput!
     
-    func setUpView(){
+    func setUpView() {
         self.view.setUp()
     }
+    
 }
 
-extension SignInPresentor: SignInViewOutput{
-    func signIn() {
-        self.router.signIn()
+extension SignInPresentor: SignInViewOutput {
+    
+
+    func signIn(login: String, password: String) {
+        
+        self.router.showLoader()
+        self.interactor.signIn(login: login, password: password)
+    }
+    
+
+    func showSignAlert(text: String) {
+        self.router.showSignAlert(text: text)
     }
     
     func createUser(login: String, password: String) {
+        
+        self.router.showLoader()
         self.interactor.createUser(login: login, password: password)
     }
     
     func nextVC() {
         self.router.nextVc()
     }
+
+}
+extension SignInPresentor: SignInInteractorOutput {
     
-  
+    func signIn() {
+        self.router.signIn()
+    }
+    
+    func closeLoader() {
+        self.router.closeLoader()
+    }
+    
+    func actionOfLoginNotOrigin() {
+        self.router.showSignAlert(text: "User with this Login already exists")
+    }
+    
+    func actionOfIncorrectLoginAndPassword() {
+        self.router.showSignAlert(text: "Incorrect login or password")
+    }
+    
+    func nextVCAfterRegistration() {
+        self.router.nextVc()
+    }
+    
+
+    func privacyPolicyTapped() {
+        self.router.showPrivacyPolicy()
+    }
+
+    func nextVCAfterSignIn() {
+        self.router.signIn()
+    }
 }

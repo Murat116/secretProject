@@ -8,21 +8,46 @@
 
 import Foundation
 
-internal protocol SignInViewInput: class{
+internal protocol SignInViewInput: class {
     func setUp()
+    
 }
 
-internal protocol SignInViewOutput:class{
+internal protocol SignInViewOutput: class {
+    func signIn(login: String, password: String)
     func createUser(login: String, password: String)
     func nextVC()
-    func signIn()
+    func showSignAlert(text: String)
+    func privacyPolicyTapped()
 }
 
-internal protocol SignInRouterInput:class{
+internal protocol SignInRouterInput:class {
     func nextVc()
     func signIn()
+    func showSignAlert(text: String)
+
+    func showPrivacyPolicy()
+
+    func showLoader()
+    func closeLoader()
+
 }
 
-internal protocol SignInInteractorInput:class{
+internal protocol SignInInteractorInput:class {
+    func signIn(login: String, password: String)
     func createUser(login: String, password: String)
+}
+
+internal protocol SignInInteractorOutput:class {
+    
+    func signIn()
+    
+    func closeLoader()
+    
+    func actionOfLoginNotOrigin()
+    
+    func actionOfIncorrectLoginAndPassword()
+    
+    func nextVCAfterRegistration()
+    func nextVCAfterSignIn()
 }

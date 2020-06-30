@@ -6,6 +6,7 @@
 //  Copyright © 2020 Hope To. All rights reserved.
 //
 
+import UIKit
 
 class UserInfoRegPresentor {
     weak var view: UserInfoRegViewProtocolInput!
@@ -13,8 +14,13 @@ class UserInfoRegPresentor {
     var interactor: UserInfoRegInteractorProtocolInput!
 }
 
-import UIKit
-extension UserInfoRegPresentor: UserInfoRegViewProtocolOutput{
+
+extension UserInfoRegPresentor: UserInfoRegViewProtocolOutput {
+    func privacyPolicyTapped() {
+        self.router.showPrivacyPolicy()
+    }
+    
+    
     func saveUserData(with name: String, city: String, age: String, isReg: Bool) {
         self.interactor.saveUserData(with: name, city: city, age: age, isReg: isReg)
     }
@@ -33,12 +39,21 @@ extension UserInfoRegPresentor: UserInfoRegViewProtocolOutput{
     }
     
     func openPhotoPicker() {
-        //открывать фото пикер
+        self.router.openPhotoPicker()
     }
 
+    func openCameraPicker() {
+        self.router.openCameraPicker()
+    }
+    
+    func setUserImage(image: UIImage) {
+        self.interactor.setUserImage(image: image)
+    }
+    
 }
 
 extension UserInfoRegPresentor: UserInfoRegInteractorProtocolOutput{
+    
     func configureView(with user: User) {
         self.view.configureView(with: user)
     }

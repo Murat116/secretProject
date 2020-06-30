@@ -8,21 +8,20 @@
 
 import Foundation
 
-class TrickRegPresentor{
+class TrickRegPresentor {
     
     var interactor: TrickRegInteractorlInput!
     var router: TrickRegRouterInput!
     weak var view: TrickRegViewInput!
-    
 }
 
-extension TrickRegPresentor: TrickRegViewOutput{
+extension TrickRegPresentor: TrickRegViewOutput { 
     
     func saveChangedTrick(with trick: Trick, _ newDif: Float, _ newStab: Int) {
         self.interactor.saveUserData(with: trick, newDif, newStab)
     }
     
-    func enRegistration() {
+    func endRegistration() {
         self.router.endRegistration()
     }
 }

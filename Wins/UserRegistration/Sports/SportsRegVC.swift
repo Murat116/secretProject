@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SportsRegVC: UIViewController{
+class SportsRegVC: UIViewController {
     
     //----------------------------------------------------------------------
     
@@ -24,7 +24,7 @@ class SportsRegVC: UIViewController{
     
     //----------------------------------------------------------------------
     
-    var isUser: Bool = false{
+    var isUser: Bool = false {
         didSet{
             self.header.isHidden = self.isUser
         }
@@ -32,7 +32,7 @@ class SportsRegVC: UIViewController{
     
     //----------------------------------------------------------------------
     
-    static func show(parent: UIViewController, and complition: (() -> ())? = nil){
+    static func show(parent: UIViewController, and complition: (() -> ())? = nil) {
         let vc = SportRegAssembly.configureModule()
         vc.complition = complition
         parent.present(vc, animated: true, completion: nil)
@@ -55,13 +55,15 @@ class SportsRegVC: UIViewController{
     
 }
 
-extension SportsRegVC: SportRegViewProtocolInput{
+extension SportsRegVC: SportRegViewProtocolInput {
     func configure(with type: SportType, and isUser: Bool) {
+        
         self.sportType = type
         self.isUser = isUser
     }
     
     func setUP() {
+        
         self.header = RegHeaderView(step: .sport, parentView: self.view)
         
         self.view.backgroundColor = UIColor(red: 0.11, green: 0.11, blue: 0.11, alpha: 1)
@@ -90,8 +92,8 @@ extension SportsRegVC: SportRegViewProtocolInput{
     }
 }
 
-extension SportsRegVC{
-    class SportBtn: UIView{
+extension SportsRegVC {
+    class SportBtn: UIView {
     
         var presentor: SportRegViewProtocolOutput!
         var type: SportType!
@@ -129,8 +131,8 @@ extension SportsRegVC{
             title.text = type.text
         }
         
-        @objc func sportIsSelected(){
-            guard self.type == .skate else{
+        @objc func sportIsSelected() {
+            guard self.type == .skate else {
                 let alert = UIAlertController(title: "In developing", message: "You can choose skateboarding", preferredStyle: .alert)
                 alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
                 self.presentor.showAlert(alert: alert)
@@ -148,30 +150,5 @@ extension SportsRegVC{
         }
         
         
-    }
-}
-
-import RealmSwift
-enum SportType: String{
-    case none = ""
-    case skate = "Skate"
-    case scoot = "Scoot"
-    case bmx = "BMX"
-    
-    var image: UIImage?{
-         return UIImage(named: "Registration/Sports/\(self.rawValue)")
-    }
-    
-    var text: String{
-        return self.rawValue
-    }
-    
-    var tricks: [Trick]{
-        switch self {
-        case .skate:
-            return SkateTricks.defaultSkateTrick
-        default:
-            return []
-        }
     }
 }

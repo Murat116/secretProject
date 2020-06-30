@@ -18,15 +18,16 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         window = UIWindow(frame: UIScreen.main.bounds)
         
-        let user = DataManager._shared.getUser()
+        let user = DataManager._shared.user
         
         let viewController: UIViewController
         
-        if user != nil{
+        if user != nil {
             viewController = RootVCRegAssembly.configureModule()
-        }else{
+        } else {
             viewController = SignInAssembly.configureModule()
         }
+        
         let navigationViewController = UINavigationController(rootViewController: viewController)
         window?.rootViewController = navigationViewController
         window?.makeKeyAndVisible()
@@ -50,6 +51,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func sceneWillResignActive(_ scene: UIScene) {
         // Called when the scene will move from an active state to an inactive state.
         // This may occur due to temporary interruptions (ex. an incoming phone call).
+        
+        DataManager._shared.updateUserBackEnd()
     }
 
     func sceneWillEnterForeground(_ scene: UIScene) {

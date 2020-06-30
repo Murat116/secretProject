@@ -37,12 +37,12 @@ class StatisticViewController: UITableViewController{
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-            return DataManager._shared.getUser()?.skateTrick.count ?? 0
-        }
+        return self.tricks.count
+    }
         
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
             let cell = tableView.dequeueReusableCell(withIdentifier: "StatTableViewCell", for: indexPath) as! StatTableViewCell
-            guard let trick = DataManager._shared.getUser()?.skateTrick[indexPath.row] else { return UITableViewCell()}
+        let trick = self.tricks[indexPath.row]
             cell.configure(with: trick, isSelect: self.selectedIndex.contains(indexPath))
             return cell
         }

@@ -7,9 +7,12 @@
 //
 
 import UIKit
+import WebKit
 
-class SignInRouter: SignInRouterInput{
+class SignInRouter: SignInRouterInput {
+    
     func signIn() {
+        
         let viewController = RootVCRegAssembly.configureModule()
         let navigationViewController = UINavigationController(rootViewController: viewController)
         
@@ -23,4 +26,32 @@ class SignInRouter: SignInRouterInput{
     
     weak var view: SignInVIewController!
     
+    func showSignAlert(text: String) {
+        let alert = UIAlertController(title: "Error", message: text, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Try again", style: .default, handler: nil))
+        self.view.present(alert, animated: true, completion: nil)
+    }
+    
+
+    func showPrivacyPolicy() {
+        
+        let view = WebViewController(urlType: .privacy)
+        self.view.present(view, animated: true, completion: nil)
+    }
+    
+
+    var loader = UIView()
+    
+    func showLoader() {
+        
+        self.loader.frame = self.view.view.frame
+        self.loader.backgroundColor = UIColor(hex: "FEBB18")
+        
+        self.view.view.addSubview(loader)
+    }
+    
+    func closeLoader() {
+        self.loader.removeFromSuperview()
+    }
+
 }
