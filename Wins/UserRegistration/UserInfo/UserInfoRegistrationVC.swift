@@ -69,6 +69,8 @@ class UserInfoRegistrationVC: UIViewController {
         let age = self.ageField.text ?? "0"
         let city = self.cityFiled.text ?? ""
         
+        
+        
         let isReg = self.stand.selectedSegmentIndex == 0
         
         self.output.saveUserData(with: name, city: city, age: age, isReg: isReg)
@@ -78,13 +80,18 @@ class UserInfoRegistrationVC: UIViewController {
 extension UserInfoRegistrationVC: UserInfoRegViewProtocolInput {
     
     func configureView(with user: User) {
-        self.user = user
         
+        self.user = user
+        let ageText = user.age != 0 ? String(user.age) : "Your age"
         self.nameField.text = user.login
-        self.ageField.text = String(user.age)
+        self.ageField.text = ageText
         self.cityFiled.text = user.city
         
-        self.stand.selectedSegmentIndex = user.standIsRegular ? 0 : 1
+        configureStand(with: user.standIsRegular)
+        
+        
+        
+        
         
         if let imageData = user.avatarImageData {
             self.image = UIImage(data: imageData)
@@ -98,6 +105,15 @@ extension UserInfoRegistrationVC: UserInfoRegViewProtocolInput {
         
     }
     
+    func configureStand(with isReg: Bool) {
+        
+        self.stand.insertSegment(withTitle: "Regular", at: 0, animated: true)
+        self.stand.insertSegment(withTitle: "Goofy", at: 1, animated: true)
+        
+        self.stand.selectedSegmentIndex = isReg ? 0 : 1
+        
+    }
+    
     func setUp() {
         self.setUpUI()
     }
@@ -106,6 +122,7 @@ extension UserInfoRegistrationVC: UserInfoRegViewProtocolInput {
 extension UserInfoRegistrationVC {
     
     func setUpUI(){
+        
         self.navigationController?.navigationBar.isHidden = true
         self.view.backgroundColor = UIColor(red: 0.11, green: 0.11, blue: 0.11, alpha: 1)
         
@@ -174,12 +191,8 @@ extension UserInfoRegistrationVC {
         self.textFiledSetUp(field: self.cityFiled, with: self.nameField.bottomAnchor, and: .city)
         self.textFiledSetUp(field: self.ageField, with: self.cityFiled.bottomAnchor, and: .age)
         
-        self.stand = UISegmentedControl(items: ["Regular","Goofy"])
         
         self.view.addSubview(self.stand)
-        
-        self.stand.setTitle("Regular", forSegmentAt: 0)
-        self.stand.setTitle("Goofy", forSegmentAt: 1)
         
         self.stand.setTitleTextAttributes([NSAttributedString.Key.foregroundColor : UIColor.white], for: .normal)
         
@@ -187,7 +200,6 @@ extension UserInfoRegistrationVC {
         self.stand.tintColor = .red
         
         self.stand.backgroundColor = UIColor(red: 0.314, green: 0.314, blue: 0.314, alpha: 1)
-        self.stand.selectedSegmentIndex = 0
         
         self.stand.translatesAutoresizingMaskIntoConstraints = false
         
