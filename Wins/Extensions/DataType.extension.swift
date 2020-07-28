@@ -13,3 +13,9 @@ extension Float {
         return String(format: "%\(f)f", self)
     }
 }
+
+extension Double{
+    var roundedTo100: Float{
+        return Float(self * 100 / 100)
+    }
+}

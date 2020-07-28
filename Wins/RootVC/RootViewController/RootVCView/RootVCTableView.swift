@@ -338,7 +338,7 @@ extension StatTableViewCell{
             let mainColor = UIColor(red: 0.11, green: 0.11, blue: 0.11, alpha: 1)
             switch self.type {
             case .difficulty:
-                self.valueLabel.text = String(trick.complexity)
+                self.valueLabel.text = String(trick.complexity.rounded())
                 self.pieChart.segments = [Segment(color: self.type.color, value: CGFloat(trick.complexity)),
                 Segment(color: mainColor, value: CGFloat( 10.0 - Double(trick.complexity)))]
             case .stability:
