@@ -14,7 +14,7 @@ class SignInInteractor: SignInInteractorInput {
     
     func signIn(login: String, password: String) {
         
-        NetworkManager._shared.checkCorrectLoginAndPassword(login, password) { boolRequest in
+        NetworkManager._shared.checkCorrectLoginAndPassword(login, password.hashString) { boolRequest in
             
             guard let check = boolRequest, check.value == true, let id = check.id else {
                 
@@ -48,7 +48,7 @@ class SignInInteractor: SignInInteractorInput {
                 return
             }
             
-            DataManager._shared.createUser(login: login, password: password, sportType: .none)
+            DataManager._shared.createUser(login: login, password: password.hashString, sportType: .none)
             DataManager._shared.updateUserBackEnd()
             self.output.nextVCAfterRegistration()
         }

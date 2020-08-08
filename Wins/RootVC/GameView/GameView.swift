@@ -74,7 +74,7 @@ class GameView: UIView{
         self.trickCount += 1
         guard self.trickCount < 10 else {
             self.stopRecognition()
-            self.output.recountTechnocalSkill()
+            self.output.recountTechnicalSkill()
             UIView.animate(withDuration: 0.3) {
                 self.removeFromSuperview()
             }
@@ -96,7 +96,7 @@ class GameView: UIView{
             recordAndRecognizeSpeech()
         }
         
-        self.output.speekTrick()
+        self.output.speakTrick()
     }
     
     override func willMove(toSuperview newSuperview: UIView?) {
