@@ -69,6 +69,8 @@ class UserInfoRegistrationVC: UIViewController {
         let age = self.ageField.text ?? "0"
         let city = self.cityFiled.text ?? ""
         
+        
+        
         let isReg = self.stand.selectedSegmentIndex == 0
         
         self.output.saveUserData(with: name, city: city, age: age, isReg: isReg)
@@ -78,19 +80,37 @@ class UserInfoRegistrationVC: UIViewController {
 extension UserInfoRegistrationVC: UserInfoRegViewProtocolInput {
     
     func configureView(with user: User) {
-        self.user = user
         
+        self.user = user
+        let ageText = user.age != 0 ? String(user.age) : "Your age"
         self.nameField.text = user.login
-        self.ageField.text = String(user.age)
+        self.ageField.text = ageText
         self.cityFiled.text = user.city
         
-        self.stand.selectedSegmentIndex = user.standIsRegular ? 0 : 1
+        configureStand(with: user.standIsRegular)
+        
+        
+        
+        
         
         if let imageData = user.avatarImageData {
-            self.image = UIImage(data: imageData)?.withRenderingMode(.alwaysTemplate)
+            self.image = UIImage(data: imageData)
+            self.avatarBtn.contentEdgeInsets = .zero
+            self.avatarBtn.imageView?.contentMode = .scaleAspectFit
+            self.avatarBtn.layer.masksToBounds = true
+            self.avatarBtn.layer.cornerRadius = (self.avatarBtn.frame.height) / 2
         } else {
             self.image = UIImage(named: "Registration/avatar")?.withRenderingMode(.alwaysTemplate)
         }
+        
+    }
+    
+    func configureStand(with isReg: Bool) {
+        
+        self.stand.insertSegment(withTitle: "Regular", at: 0, animated: true)
+        self.stand.insertSegment(withTitle: "Goofy", at: 1, animated: true)
+        
+        self.stand.selectedSegmentIndex = isReg ? 0 : 1
         
     }
     
@@ -102,6 +122,7 @@ extension UserInfoRegistrationVC: UserInfoRegViewProtocolInput {
 extension UserInfoRegistrationVC {
     
     func setUpUI(){
+        
         self.navigationController?.navigationBar.isHidden = true
         self.view.backgroundColor = UIColor(red: 0.11, green: 0.11, blue: 0.11, alpha: 1)
         
@@ -150,6 +171,16 @@ extension UserInfoRegistrationVC {
             label.textColor = .white
             label.text = "Settings"
             
+            let privacyPolicyBtn = UIButton()
+            self.view.addSubview(privacyPolicyBtn)
+            privacyPolicyBtn.translatesAutoresizingMaskIntoConstraints = false
+            privacyPolicyBtn.centerYAnchor.constraint(equalTo: label.centerYAnchor).isActive = true
+            privacyPolicyBtn.rightAnchor.constraint(equalTo: self.view.rightAnchor, constant: -33).isActive = true
+            
+            privacyPolicyBtn.addTarget(self, action: #selector(self.privacyPolicyAction), for: .touchUpInside)
+            privacyPolicyBtn.setImage(UIImage(systemName: "info.circle.fill"), for: .normal)
+            privacyPolicyBtn.tintColor = .white
+            
             return label.bottomAnchor
         }
     }
@@ -160,12 +191,8 @@ extension UserInfoRegistrationVC {
         self.textFiledSetUp(field: self.cityFiled, with: self.nameField.bottomAnchor, and: .city)
         self.textFiledSetUp(field: self.ageField, with: self.cityFiled.bottomAnchor, and: .age)
         
-        self.stand = UISegmentedControl(items: ["Regular","Goofy"])
         
         self.view.addSubview(self.stand)
-        
-        self.stand.setTitle("Regular", forSegmentAt: 0)
-        self.stand.setTitle("Goofy", forSegmentAt: 1)
         
         self.stand.setTitleTextAttributes([NSAttributedString.Key.foregroundColor : UIColor.white], for: .normal)
         
@@ -173,7 +200,6 @@ extension UserInfoRegistrationVC {
         self.stand.tintColor = .red
         
         self.stand.backgroundColor = UIColor(red: 0.314, green: 0.314, blue: 0.314, alpha: 1)
-        self.stand.selectedSegmentIndex = 0
         
         self.stand.translatesAutoresizingMaskIntoConstraints = false
         
@@ -217,6 +243,8 @@ extension UserInfoRegistrationVC {
 
         self.avatarBtn.setImage(self.image, for: .normal)
         self.avatarBtn.imageView?.tintColor = UIColor(red: 0.314, green: 0.314, blue: 0.314, alpha: 1.0)
+        self.avatarBtn.imageView?.layer.cornerRadius = ( self.avatarBtn.imageView?.frame.width ?? 0 ) / 2
+        self.avatarBtn.contentEdgeInsets = UIEdgeInsets(top: 2, left: 2, bottom: 2, right: 2 )
         
         self.avatarBtn.contentEdgeInsets = UIEdgeInsets(top: 2, left: 2, bottom: 2, right: 2 )
         
@@ -315,6 +343,10 @@ extension UserInfoRegistrationVC {
         
         alert.addAction(UIAlertAction(title: "May be later", style: .cancel, handler: nil))
         self.output.openAlert(alert: alert)
+    }
+    
+    @objc func privacyPolicyAction() {
+        self.output.privacyPolicyTapped()
     }
     
     func addBtn() {

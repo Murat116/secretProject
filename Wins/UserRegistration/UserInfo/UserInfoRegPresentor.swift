@@ -16,6 +16,10 @@ class UserInfoRegPresentor {
 
 
 extension UserInfoRegPresentor: UserInfoRegViewProtocolOutput {
+    func privacyPolicyTapped() {
+        self.router.showPrivacyPolicy()
+    }
+    
     
     func saveUserData(with name: String, city: String, age: String, isReg: Bool) {
         self.interactor.saveUserData(with: name, city: city, age: age, isReg: isReg)

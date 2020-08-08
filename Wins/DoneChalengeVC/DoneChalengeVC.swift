@@ -192,6 +192,8 @@ extension DoneChallengeVC{
         
         private var borderView = UIView()
         
+        fileprivate var challenge: Challenge? = nil
+        
         func setUp(){
             self.addSubview(self.backgroundImge)
             self.backgroundImge.translatesAutoresizingMaskIntoConstraints = false
@@ -208,7 +210,6 @@ extension DoneChallengeVC{
             self.boardShop.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 11).isActive = true
             self.boardShop.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
             
-            self.boardShop.text = "Nike sb"
             self.boardShop.font = UIFont.systemFont(ofSize: 12)
             
             self.addSubview(self.trickLabel)
@@ -218,7 +219,6 @@ extension DoneChallengeVC{
             
             self.trickLabel.textColor = .white
             self.trickLabel.font = UIFont.systemFont(ofSize: 14)
-            self.trickLabel.text = "Kickflip"
             
             self.addSubview(self.dateLabel)
             self.dateLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -241,7 +241,9 @@ extension DoneChallengeVC{
         }
         
         fileprivate func configure(with doneChallenge: Challenge){
-            self.trickLabel.text = doneChallenge.trick?.name
+            self.challenge = doneChallenge
+            self.trickLabel.text = doneChallenge.trick_name
+            self.boardShop.text = doneChallenge.boardShop
             self.dateLabel.text = Date(doneChallenge.startDate).string
         }
         

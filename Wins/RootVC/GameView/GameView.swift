@@ -73,7 +73,8 @@ class GameView: UIView{
         
         self.trickCount += 1
         guard self.trickCount < 10 else {
-            self.output.recountTechnicalSkill()
+            self.stopRecognition()
+            self.output.recountTechnocalSkill()
             UIView.animate(withDuration: 0.3) {
                 self.removeFromSuperview()
             }
@@ -91,10 +92,11 @@ class GameView: UIView{
         synthesizer.stopSpeaking(at: .immediate)
         
         self.stopRecognition()
+        if self.trickCount < 10 {
+            recordAndRecognizeSpeech()
+        }
         
-        recordAndRecognizeSpeech()
-        
-        self.output.speakTrick()
+        self.output.speekTrick()
     }
     
     override func willMove(toSuperview newSuperview: UIView?) {
@@ -331,10 +333,10 @@ extension GameView: SFSpeechRecognizerDelegate {
                
     }
     func stopRecognition() {
-        self.recognitionTask?.finish()
+        self.recognitionTask?.cancel()
         self.recognitionTask = nil
-        self.recognitionRequest?.endAudio()
         self.audioEngine.stop()
+        self.recognitionRequest?.endAudio()
         self.audioEngine.inputNode.removeTap(onBus: 0)
     }
 }

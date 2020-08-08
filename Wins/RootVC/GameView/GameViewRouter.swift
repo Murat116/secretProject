@@ -15,7 +15,7 @@ class GameViewRouter: GameViewRouterInput{
         let popover = UIViewController()
         let label = UILabel()
         label.frame = CGRect(x: 10, y: 10, width: 300, height: 60)
-        label.text = "Speak Done and Fail and control\nthe game without pressing a button"
+        label.text = "Say Yes or No and controll\nthe game without pressing buttons"
         label.lineBreakMode = .byWordWrapping
         label.numberOfLines = 2
         label.textColor = .white
