@@ -83,6 +83,7 @@
 		83E803832461BA16004418A8 /* ChallengeDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83E803822461BA16004418A8 /* ChallengeDTO.swift */; };
 		83E803852461BA29004418A8 /* TotalStatsDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83E803842461BA29004418A8 /* TotalStatsDTO.swift */; };
 		83E803872461C010004418A8 /* DTOProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83E803862461C010004418A8 /* DTOProtocol.swift */; };
+		83EB8A9624DF11A5005A9441 /* String.extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83EB8A9524DF11A4005A9441 /* String.extension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -166,6 +167,7 @@
 		83E803822461BA16004418A8 /* ChallengeDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChallengeDTO.swift; sourceTree = "<group>"; };
 		83E803842461BA29004418A8 /* TotalStatsDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TotalStatsDTO.swift; sourceTree = "<group>"; };
 		83E803862461C010004418A8 /* DTOProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DTOProtocol.swift; sourceTree = "<group>"; };
+		83EB8A9524DF11A4005A9441 /* String.extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.extension.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -239,6 +241,7 @@
 				5C00217C244CBDED00E34793 /* UIColor.extension.swift */,
 				5C8B66DF245CDC66000AFAEE /* Date.extension.swift */,
 				7DA1EEE724911F19007D076D /* DataType.extension.swift */,
+				83EB8A9524DF11A4005A9441 /* String.extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -569,6 +572,7 @@
 				5C7895F3244B599B00410A37 /* RootVCPresentor.swift in Sources */,
 				5C70DF1F243FD5A200C4A998 /* TrickRegProtocol.swift in Sources */,
 				5C6C0944243E7868007C2022 /* TricksRegVC.swift in Sources */,
+				83EB8A9624DF11A5005A9441 /* String.extension.swift in Sources */,
 				5CA092122442484D00D38C98 /* SportRegRouter.swift in Sources */,
 				5C8B66EF24601C26000AFAEE /* GameViewProtocols.swift in Sources */,
 				5C8B66F124601E89000AFAEE /* GameViewAssemly.swift in Sources */,
