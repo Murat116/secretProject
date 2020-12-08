@@ -8,7 +8,8 @@
 
 
 import UIKit
- internal protocol SportRegInteractorProtocolOutput:class {
+
+internal protocol SportRegInteractorProtocolOutput:class {
     func configure(with sportType: SportType, isUser: Bool)
 }
 

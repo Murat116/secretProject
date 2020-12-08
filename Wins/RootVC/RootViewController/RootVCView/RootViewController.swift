@@ -158,7 +158,8 @@ extension RootViewController{
             
             self.avatar.setImage(UIImage(named: "Registration/avatar"), for: .normal)
             self.avatar.layer.borderWidth  = 1
-            self.avatar.contentEdgeInsets =  UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 8 )
+            self.avatar.imageView?.layer.cornerRadius = ( self.avatar.imageView?.frame.width ?? 0 ) / 2
+            self.avatar.contentEdgeInsets =  UIEdgeInsets(top: 2, left: 2, bottom: 2, right: 2 )
             self.avatar.layer.borderColor = UIColor(red: 0.314, green: 0.314, blue: 0.314, alpha: 1).cgColor
             
             self.avatar.addTarget(self, action: #selector(self.openDoneChall), for: .touchUpInside)
@@ -199,11 +200,16 @@ extension RootViewController{
         
         fileprivate func configure(with user: User){
             self.nameLabel.text = user.login ?? "Guest"
-            self.technicalButton.setTitle("Technical skill: \(user.totalStats?.technicality ?? 0)", for: .normal)
+            let skill = user.totalStats?.technicality ?? 0
+            self.technicalButton.setTitle("Technical skill: \(skill.format(f: ".2"))", for: .normal)
             guard let imageData = user.avatarImageData,
                 let image = UIImage(data: imageData) else { return }
             
             self.avatar.setImage(image, for: [])
+            self.avatar.contentEdgeInsets = .zero
+            self.avatar.layer.masksToBounds = true
+            self.layoutIfNeeded()
+            self.avatar.layer.cornerRadius = (self.avatar.frame.height) / 2
             
         }
         

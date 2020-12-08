@@ -32,7 +32,7 @@ class DoneChallengeVC: UIViewController{
     
     func setUp(){
         self.navigationController?.navigationBar.isHidden = false
-        self.title = "Your's done challange"
+        self.title = "Your's done challenges"
         self.navigationController?.navigationBar.prefersLargeTitles = true
         
         let backLabel = UIButton()
@@ -93,7 +93,7 @@ extension DoneChallengeVC: UICollectionViewDataSource, UICollectionViewDelegate{
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        if !self.doneChallange.isEmpty, self.doneChallange.count - 1 >= indexPath.row{
+        if !self.doneChallange.isEmpty, self.doneChallange.count - 1 >= indexPath.row {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "DoneChallengeCell", for: indexPath) as? DoneChallengeCell
             cell!.configure(with: self.doneChallange[indexPath.row])
             return cell!
@@ -104,13 +104,10 @@ extension DoneChallengeVC: UICollectionViewDataSource, UICollectionViewDelegate{
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        //FIXME: VIPER
-        let alert = UIAlertController(title: "Promocode", message: nil, preferredStyle: .actionSheet)
-        alert.addAction(UIAlertAction(title: "Coppy", style: .default, handler: { (_) in
-            UIPasteboard.general.string = "Hello world"
-        }))
-        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-        self.present(alert, animated: true, completion: nil)
+        
+        guard self.doneChallange.count - 1 >= indexPath.row else { return }
+        
+        self.output.showPromocode(with: self.doneChallange[indexPath.row].promocode)
     }
 }
 
@@ -179,7 +176,7 @@ extension DoneChallengeVC{
             self.label.textColor = .lightGray
             self.label.font = UIFont.systemFont(ofSize: 12)
             
-            self.label.text = "Chalange"
+            self.label.text = "Challenge"
             
         }
     }
@@ -194,6 +191,8 @@ extension DoneChallengeVC{
         private var backgroundImge = UIImageView()
         
         private var borderView = UIView()
+        
+        fileprivate var challenge: Challenge? = nil
         
         func setUp(){
             self.addSubview(self.backgroundImge)
@@ -211,7 +210,6 @@ extension DoneChallengeVC{
             self.boardShop.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 11).isActive = true
             self.boardShop.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
             
-            self.boardShop.text = "Nike sb"
             self.boardShop.font = UIFont.systemFont(ofSize: 12)
             
             self.addSubview(self.trickLabel)
@@ -221,7 +219,6 @@ extension DoneChallengeVC{
             
             self.trickLabel.textColor = .white
             self.trickLabel.font = UIFont.systemFont(ofSize: 14)
-            self.trickLabel.text = "Kickflip"
             
             self.addSubview(self.dateLabel)
             self.dateLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -244,7 +241,9 @@ extension DoneChallengeVC{
         }
         
         fileprivate func configure(with doneChallenge: Challenge){
-            self.trickLabel.text = doneChallenge.trick?.name
+            self.challenge = doneChallenge
+            self.trickLabel.text = doneChallenge.trick_name
+            self.boardShop.text = doneChallenge.boardShop
             self.dateLabel.text = Date(doneChallenge.startDate).string
         }
         

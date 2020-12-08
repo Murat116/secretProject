@@ -13,7 +13,7 @@ protocol DoneChallengeViewInput: class{
 }
 
 protocol DoneChallemgeViewOutput: class{
-    func showPromocode(with alert: UIAlertController)
+    func showPromocode(with promocode: String?)
     
     func goBack()
 }
@@ -23,6 +23,6 @@ protocol DoneChallengeInteractorOutput: class{
 }
 
 protocol DoneChallengeRouterInput: class{
-    func showPromocode(with alert: UIAlertController)
+    func showPromocode(with promocode: String?)
     func goBack()
 }

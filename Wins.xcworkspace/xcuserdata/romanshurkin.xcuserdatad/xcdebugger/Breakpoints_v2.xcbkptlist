@@ -7,48 +7,64 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "5C65DAAD-3A82-401E-A0D8-31A52B56356D"
+            uuid = "1DB5F382-7282-454D-9BAC-8C3CE2B0219E"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Wins/Model/DataManager.swift"
+            filePath = "Wins/RootVC/RootViewController/RootVCInteractor.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "328"
-            endingLineNumber = "328"
-            landmarkName = "updateActualChallenges(_:)"
+            startingLineNumber = "54"
+            endingLineNumber = "54"
+            landmarkName = "getUser()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "EB547F33-8C78-4AD8-A166-C758D49BADFA"
+            uuid = "113CC4BD-BD92-41CF-92F3-AADE72BBE2CA"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Wins/Model/DataManager.swift"
+            filePath = "Wins/RootVC/RootViewController/RootVCInteractor.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "332"
-            endingLineNumber = "332"
-            landmarkName = "updateActualChallenges(_:)"
+            startingLineNumber = "58"
+            endingLineNumber = "58"
+            landmarkName = "getUser()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "E08D331B-607E-4527-8EDF-0CA9E915FAA8"
+            uuid = "10E4E9B8-CE4D-4437-9D47-3B00AB9B8A68"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Wins/Model/DataManager.swift"
+            filePath = "Wins/Model/NetworkManager.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "333"
-            endingLineNumber = "333"
-            landmarkName = "updateActualChallenges(_:)"
+            startingLineNumber = "106"
+            endingLineNumber = "106"
+            landmarkName = "getActualChallenges(_:completion:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "3670BFB3-FD44-4211-BE32-2353FF8CD47E"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Wins/Model/NetworkManager.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "110"
+            endingLineNumber = "110"
+            landmarkName = "getActualChallenges(_:completion:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

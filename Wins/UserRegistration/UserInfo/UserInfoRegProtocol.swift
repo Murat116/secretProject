@@ -37,6 +37,8 @@ protocol UserInfoRegViewProtocolOutput: class {
     func openAlert(alert: UIAlertController)
     
     func saveUserData(with name: String, city: String, age: String, isReg: Bool)
+    
+    func privacyPolicyTapped()
 }
 
 protocol UserInfoRegRouterProtocolInput: class {
@@ -50,6 +52,8 @@ protocol UserInfoRegRouterProtocolInput: class {
     func endRegistration()
     
     func openAlert(alert: UIAlertController)
+    
+    func showPrivacyPolicy()
 }
 
 

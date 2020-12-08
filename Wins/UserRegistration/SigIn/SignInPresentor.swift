@@ -21,12 +21,14 @@ class SignInPresentor {
 
 extension SignInPresentor: SignInViewOutput {
     
+
     func signIn(login: String, password: String) {
         
         self.router.showLoader()
         self.interactor.signIn(login: login, password: password)
     }
     
+
     func showSignAlert(text: String) {
         self.router.showSignAlert(text: text)
     }
@@ -64,6 +66,11 @@ extension SignInPresentor: SignInInteractorOutput {
         self.router.nextVc()
     }
     
+
+    func privacyPolicyTapped() {
+        self.router.showPrivacyPolicy()
+    }
+
     func nextVCAfterSignIn() {
         self.router.signIn()
     }

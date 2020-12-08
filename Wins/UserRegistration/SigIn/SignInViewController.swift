@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import WebKit
 
 class SignInVIewController: UIViewController {
     
@@ -33,6 +34,7 @@ class SignInVIewController: UIViewController {
     
     private var withoutReg = UIButton()
     private var sigInBtn = UIButton()
+    private var privacyPolicyBtn = UIButton()
     
     //----------------------------------------------------------------------
     
@@ -106,18 +108,21 @@ class SignInVIewController: UIViewController {
             self.output.signIn(login: login, password: password)
             return
         }
-        
-//        self.output.nextVC()
     }
     
     @objc func withoutRegAction() {
         self.output.nextVC()
     }
     
+    @objc func privacyPolicyAction() {
+        self.output.privacyPolicyTapped()
+    }
+    
 }
 
 
 extension SignInVIewController: SignInViewInput {
+    
     
     func setUp(){
         
@@ -189,9 +194,21 @@ extension SignInVIewController: SignInViewInput {
         self.withoutReg.translatesAutoresizingMaskIntoConstraints = false
         self.withoutReg.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
         
+        self.view.addSubview(self.privacyPolicyBtn)
+        
+        self.privacyPolicyBtn.translatesAutoresizingMaskIntoConstraints = false
+        self.privacyPolicyBtn.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: -5).isActive = true
+        self.privacyPolicyBtn.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
+        
+        self.privacyPolicyBtn.addTarget(self, action: #selector(self.privacyPolicyAction), for: .touchUpInside)
+        self.privacyPolicyBtn.setTitle("Privacy Policy", for: .normal)
+        self.privacyPolicyBtn.setTitleColor( UIColor(red: 0.287, green: 0.287, blue: 0.287, alpha: 1)
+        , for: .normal)
+        self.privacyPolicyBtn.titleLabel?.font = UIFont.systemFont(ofSize: 13)
+        
         self.view.addSubview(self.withoutReg)
         self.withoutReg.translatesAutoresizingMaskIntoConstraints = false
-        self.withoutReg.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor, constant: -5).isActive = true
+        self.withoutReg.bottomAnchor.constraint(equalTo: self.privacyPolicyBtn.topAnchor, constant: -5).isActive = true
         self.withoutReg.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
         
         self.withoutReg.addTarget(self, action: #selector(self.withoutRegAction), for: .touchUpInside)
@@ -199,6 +216,9 @@ extension SignInVIewController: SignInViewInput {
         self.withoutReg.setTitleColor( UIColor(red: 0.287, green: 0.287, blue: 0.287, alpha: 1)
             , for: .normal)
         self.withoutReg.titleLabel?.font = UIFont.systemFont(ofSize: 20)
+        
+        
+        
         
         let tapRec = UITapGestureRecognizer(target: self, action: #selector(self.hideKeyboard))
         self.view.addGestureRecognizer(tapRec)
@@ -413,3 +433,4 @@ extension SignInVIewController {
         self.output.showSignAlert(text: text)
     }
 }
+

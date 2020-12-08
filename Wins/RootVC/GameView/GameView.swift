@@ -12,12 +12,14 @@ import Speech
 
 class GameView: UIView{
     
-    var speechRecognitionIsAvialable = false
+    private var speechRecognitionIsAvialable = true
     
-    let speechRecognizer = SFSpeechRecognizer(locale: Locale.init(identifier: "en-US"))
-    var recognitionRequest: SFSpeechAudioBufferRecognitionRequest?
-    var recognitionTask: SFSpeechRecognitionTask?
-    let audioEngine = AVAudioEngine()
+    private let synthesizer = AVSpeechSynthesizer()
+    
+    private let speechRecognizer = SFSpeechRecognizer(locale: Locale.init(identifier: "en-US"))
+    private var recognitionRequest: SFSpeechAudioBufferRecognitionRequest?
+    private var recognitionTask: SFSpeechRecognitionTask?
+    private let audioEngine = AVAudioEngine()
     
     deinit {
         print("GameView deinit")
@@ -71,7 +73,8 @@ class GameView: UIView{
         
         self.trickCount += 1
         guard self.trickCount < 10 else {
-            self.output.recountTechnocalSkill()
+            self.stopRecognition()
+        
             UIView.animate(withDuration: 0.3) {
                 self.removeFromSuperview()
             }
@@ -86,13 +89,13 @@ class GameView: UIView{
         
         self.trickLabel.text = trick.name
         
-        
+        self.synthesizer.stopSpeaking(at: .immediate)
         
         self.stopRecognition()
+        if self.trickCount < 10 {
+            self.recordAndRecognizeSpeech()
+        }
         
-        recordAndRecognizeSpeech()
-        
-        self.output.speekTrick()
     }
     
     override func willMove(toSuperview newSuperview: UIView?) {
@@ -150,7 +153,7 @@ class GameView: UIView{
         
         self.yesBtn.backgroundColor = UIColor(hex: "214FEF")
         self.yesBtn.layer.cornerRadius = 6
-        self.yesBtn.setTitle("Done", for: [])
+        self.yesBtn.setTitle("Yes", for: [])
         self.yesBtn.setTitleColor(.white, for: [])
         
         self.addSubview(self.noBtn)
@@ -162,7 +165,7 @@ class GameView: UIView{
         
         self.noBtn.backgroundColor = UIColor(hex: "214FEF")
         self.noBtn.layer.cornerRadius = 6
-        self.noBtn.setTitle("Fail", for: [])
+        self.noBtn.setTitle("No", for: [])
         self.noBtn.setTitleColor(.white, for: [])
         
         self.noBtn.addTarget(self, action: #selector(self.nextTrick(btn:)), for: .touchUpInside)
@@ -191,10 +194,7 @@ class GameView: UIView{
         self.speechSwitch.translatesAutoresizingMaskIntoConstraints = false
         self.speechSwitch.topAnchor.constraint(equalTo: self.noBtn.bottomAnchor, constant: 28).isActive = true
         self.speechSwitch.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -33).isActive = true
-        
-        self.speechSwitch.addTarget(self, action: #selector(self.speechOn), for: .editingDidEnd)
-        self.speechSwitch.onTintColor = UIColor(hex: "214FEF")
-        self.speechSwitch.isOn = true
+        self.speechSwitch.isOn = false
         self.speechSwitch.addTarget(self, action: #selector(self.changeSpeechState), for: .touchUpInside)
         
         
@@ -232,13 +232,14 @@ class GameView: UIView{
     }
 }
 
-extension GameView: GameViewViewInput{
+extension GameView: GameViewViewInput {
+    
     
     func configure(with tenTricks: [Trick], _ actualChallenges: [Challenge]) {
         self.tricks = tenTricks
         self.trickLabel.text = tenTricks[0].name
         self.chalenges = actualChallenges
-        self.output.speekTrick()
+        self.output.speakTrick()
         self.speechRecognizer?.delegate = self
         self.recordAndRecognizeSpeech()
     }
@@ -254,19 +255,19 @@ extension GameView: GameViewViewInput{
 
 extension GameView {
     
-    func speekTrick () {
+    func speakTrick () {
         guard let trick = trickLabel.text else { return }
         if speechSwitch.isOn {
             let utterance = AVSpeechUtterance(string: trick)
             utterance.rate = 0.5
+            utterance.volume = 1.0
             
-            let synthesizer = AVSpeechSynthesizer()
             synthesizer.speak(utterance)
         }
     }
     @objc func changeSpeechState() {
         if self.speechSwitch.isOn {
-            self.speekTrick()
+            self.speakTrick()
             self.stopRecognition()
             self.recordAndRecognizeSpeech()
         } else {
@@ -307,9 +308,9 @@ extension GameView: SFSpeechRecognizerDelegate {
                     lastWord = String(str[index...])
                 }
                 switch lastWord.capitalized {
-                case "Done":
+                case "Yes":
                     self.nextTrick(btn: self.yesBtn)
-                case "Fail":
+                case "No":
                     self.nextTrick(btn: self.noBtn)
                 default: break
                 }
@@ -331,10 +332,10 @@ extension GameView: SFSpeechRecognizerDelegate {
                
     }
     func stopRecognition() {
-        self.recognitionTask?.finish()
+        self.recognitionTask?.cancel()
         self.recognitionTask = nil
-        self.recognitionRequest?.endAudio()
         self.audioEngine.stop()
+        self.recognitionRequest?.endAudio()
         self.audioEngine.inputNode.removeTap(onBus: 0)
     }
 }

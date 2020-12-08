@@ -24,9 +24,9 @@ class SignInInteractor: SignInInteractorInput {
                 return
             }
             
-            NetworkManager._shared.getUser(id: id) { user in
+            NetworkManager._shared.getUser(id: id) { (user, error) in
                 
-                guard let user = user else { self.output.closeLoader(); return}
+                guard let user = user else { self.output.closeLoader(); return }
                 
                 DataManager._shared.createUser(user)
                 

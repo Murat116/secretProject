@@ -10,15 +10,15 @@ import Foundation
 
 protocol GameViewViewInput: class{
     func configure(with tenTricks: [Trick],_ actualChallenges: [Challenge])
-    func speekTrick()
+    func speakTrick()
 }
 
 protocol GameViewViewOutput: class{
     func saveChanges(of trick: Trick, with dif: Float, and stab: Int)
     func isChallengeDone(_ challenge: Challenge, done: Bool)
-    func recountTechnocalSkill()
+    func recountTechnicalSkill()
     func infoTapped()
-    func speekTrick()
+    func speakTrick()
 }
 
 protocol GameViewInteractorOutput: class{
@@ -28,7 +28,7 @@ protocol GameViewInteractorOutput: class{
 protocol GameViewInteractorInput: class{
     func saveChanges(of trick: Trick, with dif: Float, and stab: Int)
     func isChallengeDone(_ challenge: Challenge, done: Bool)
-    func recountTechnocalSkill()
+    func recountTechnicalSkill()
 }
 
 protocol GameViewRouterInput: class{

@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import RealmSwift
 
 struct ChallengeDTO: Codable {
     var trick_name: String
@@ -16,9 +17,30 @@ struct ChallengeDTO: Codable {
     var sponsorImageData: Data?
     var descript: String?
 
-    var promocode: String?
-    var isDone: Bool
+    var promocodes = [PromocodeDTO]()
+    var isDone: Bool?
     
-    var isChallenge: Bool
+    var isChallenge: Bool?
     var id: String?
+}
+
+extension ChallengeDTO: EntityProtocol {
+    
+    var entity: Object {
+        
+        let challenge = Challenge()
+        
+        challenge.trick_name = self.trick_name
+        challenge.boardShop = self.boardShop
+        challenge.startDate = self.startDate
+        challenge.endDate = self.endDate
+        challenge.sponsorImageData = self.sponsorImageData
+        challenge.descript = self.descript
+        challenge.promocode = self.promocodes.first?.code ?? ""
+        challenge.isDone = self.isDone ?? false
+        challenge.isChallenge = self.isChallenge ?? true
+        challenge.id = self.id
+        
+        return challenge
+    }
 }

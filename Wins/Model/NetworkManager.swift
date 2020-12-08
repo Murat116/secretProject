@@ -12,9 +12,9 @@ import RealmSwift
 
 protocol NetworkManagerProtocol {
     
-    func getUser(id: String, completion: @escaping(User?) -> Void)
+    func getUser(id: String, completion: @escaping(User?, AFError?) -> Void)
     
-    func saveUser(user: UserDTO)
+    func saveUser(user: User)
     
     func checkOriginLogin(_ login: String, completion: @escaping(BoolRequest?) -> Void)
     
@@ -30,21 +30,21 @@ class NetworkManager: NetworkManagerProtocol {
     
     static var _shared = NetworkManager()
     
-    func getUser(id: String, completion: @escaping(User?) -> Void) {
+    func getUser(id: String, completion: @escaping(User?, AFError?) -> Void) {
         
         let urlString = domen + "/users/" + "\(id)"
         
         AF.request(urlString).responseDecodable(of: User.self) { response in
             
-            completion(response.value)
+            completion(response.value, response.error)
         }
     }
     
-    func saveUser(user: UserDTO) {
+    func saveUser(user: User) {
+        
+        guard var user = user.dto as? UserDTO else { return }
         
         let urlString = domen + "/users"
-        
-        var user = user
         
         user.challenges = [ChallengeDTO]()
         
@@ -92,13 +92,21 @@ class NetworkManager: NetworkManagerProtocol {
         
         let urlString = domen + "/users/challenges"
         
-        AF.request(urlString, parameters: ["user_id" : idOfUser]).responseDecodable(of: [Challenge].self) { response in
+        AF.request(urlString, parameters: ["user_id" : idOfUser]).responseDecodable(of: [ChallengeDTO].self) { response in
             
             var challenges: [Challenge]?
             
             switch response.result {
             case .success(_):
-                challenges = response.value
+                
+                challenges = [Challenge]()
+                
+                if response.value != nil {
+                    for challengeDTO in response.value! {
+                        challenges?.append(challengeDTO.entity as! Challenge)
+                    }
+                }
+                
                 completion(challenges)
             case .failure(_):
                 print("Challenges is nil")

@@ -21,6 +21,7 @@ extension Date {
     }
     
     
+    static let iso8601Calendar = Calendar.iso8601()
     // --------------------------------------
     
     static var ts:Int64 { return Date().ts }
@@ -105,6 +106,41 @@ extension Date {
         self = Date( Int64(ts) )
     }
     
+    init(_ ts:Int64 ){
+        
+        if( ts >= 10000000 && ts < 99999999 ){ // KEY
+            let key = ts
+            let year    = Int( key / 1_0000 )
+            let month   = Int( ( key % 1_0000 ) / 1_00 )
+            let day     = Int( ( key % 1_0000  ) % 1_00 )
+            
+            var components:DateComponents?
+            
+            if month != 0 {
+                components = DateComponents( year:year, month:month, day:day )
+            }
+            else{
+                components = DateComponents( year:year, weekday:Date.iso8601Calendar.firstWeekday, weekOfYear:day )
+            }
+            
+            guard
+                components != nil,
+                let date = Date.iso8601Calendar.date(from: components! )
+                else {self = Date.failDate; return}
+            
+            self = date
+            return
+        }
+        if( Int64(ts) > 90_000_000_000 ){    // timestamp in milisecounds
+            self =  Date(timeIntervalSince1970: TimeInterval(ts) / 1000 )
+            return
+        }
+        
+        // timestamp in secounds
+        self =  Date( timeIntervalSince1970: TimeInterval( ts ) )
+        
+    }
+    
     init(_ dayOffset:Int, in dayKey:Int ) {
         self = Date(dayKey).addingTimeInterval(TimeInterval(dayOffset))
     }
@@ -146,3 +182,12 @@ extension Date {
     
 }
 
+extension Calendar {
+    static func iso8601() -> Calendar {
+        var cal = Calendar( identifier: .iso8601 )
+        cal.timeZone    = TimeZone(secondsFromGMT: 0)!
+        cal.locale      = Locale(identifier: "en_US_POSIX")
+        return cal
+    }
+    
+}
